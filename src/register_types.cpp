@@ -1,4 +1,5 @@
 // DO NOT RENAME THIS FILE!
+// Automatically generated with "recompile_register_types_cpp.py".
 // This file registers all the classes contained in GDExtension's "custom" module with Godot.
 
 #include "register_types.h"
