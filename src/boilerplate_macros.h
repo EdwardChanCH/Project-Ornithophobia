@@ -16,8 +16,8 @@ protected:                                                          \
 /*--------------------------------------------------*/
 
 // Start of _get_property_list(). 
-#define _GDEXPORT_ADD_PREFIX \
-void GDExample1New::_get_property_list(List<PropertyInfo> *p_list) const {
+#define _GDEXPORT_ADD_PREFIX(ClassName) \
+void ClassName::_get_property_list(List<PropertyInfo> *p_list) const {
 
 // Add a variable to the list of exported properties. Used in _get_property_list(). 
 #define _GDEXPORT_ADD(PropertyInfo) \
@@ -30,8 +30,8 @@ p_list->push_back(PropertyInfo);
 /*--------------------------------------------------*/
 
 // Start of _get(). 
-#define _GDEXPORT_GET_PREFIX \
-bool GDExample1New::_get(const StringName &p_name, Variant &r_property) const {
+#define _GDEXPORT_GET_PREFIX(ClassName) \
+bool ClassName::_get(const StringName &p_name, Variant &r_property) const {
 
 // If the variable is exported, get its value and return true. Used in _get(). 
 #define _GDEXPORT_GET(variable) /********/ \
@@ -48,8 +48,8 @@ if (p_name.nocasecmp_to(#variable) == 0) { \
 /*--------------------------------------------------*/
 
 // Start of _set(). 
-#define _GDEXPORT_SET_PREFIX \
-bool GDExample1New::_set(const StringName &p_name, const Variant &p_property) {
+#define _GDEXPORT_SET_PREFIX(ClassName) \
+bool ClassName::_set(const StringName &p_name, const Variant &p_property) {
 
 // If the variable is exported, set its value and return true. Used in _set(). 
 #define _GDEXPORT_SET(variable) /********/ \
