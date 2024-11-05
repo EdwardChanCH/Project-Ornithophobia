@@ -1,28 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://t81mvpjh4g0i"]
+[gd_scene load_steps=5 format=3 uid="uid://t81mvpjh4g0i"]
 
-[ext_resource type="PackedScene" uid="uid://kj8eedm3xcvr" path="res://player.tscn" id="1_6yt6w"]
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_166wb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
 font_size = 24
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_dg4uw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_166wb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f34b"]
+
 [node name="Main" type="Node2D"]
 
-[node name="debug" type="Node" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
 
-[node name="speed" type="Label" parent="debug"]
-offset_left = -562.0
-offset_top = -304.0
-offset_right = -160.0
-offset_bottom = -246.0
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="debug" type="Node" parent="UI"]
+
+[node name="speed" type="Label" parent="UI/debug"]
+offset_right = 402.0
+offset_bottom = 145.0
 text = "Speed: 0
 axis: 0
 Velocity: 0
 input direction: 0
 "
 label_settings = SubResource("LabelSettings_qjkly")
+metadata/_edit_use_anchors_ = true
 
-[node name="Player" parent="." instance=ExtResource("1_6yt6w")]
+[node name="PlayerController" type="PlayerController" parent="."]
+groundDecel = 6.0
+position = Vector2(555, 395)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerController"]
+scale = Vector2(0.0311279, 0.0314003)
+sprite_frames = SubResource("SpriteFrames_dg4uw")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_2f34b")

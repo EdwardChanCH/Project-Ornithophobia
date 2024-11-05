@@ -17,24 +17,30 @@ PlayerController::~PlayerController() {
 
 }
 
-// // Export instance variables to the Godot Editor. 
-// _GDEXPORT_ADD_PREFIX
-// _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "speed", PROPERTY_HINT_RANGE, "0,20,0.01"))
-// _GDEXPORT_ADD_SUFFIX
+// Export instance variables to the Godot Editor. 
+_GDEXPORT_ADD_PREFIX(PlayerController)
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxGroundSpeed"))
+_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "groundAccel"))
+_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "groundDecel"))
+_GDEXPORT_ADD_SUFFIX
 
-// // Getter(s) for exported instance variables in Godot Editor. 
-// _GDEXPORT_GET_PREFIX
-// _GDEXPORT_GET(speed)
-// _GDEXPORT_GET_SUFFIX
+// Getter(s) for exported instance variables in Godot Editor. 
+_GDEXPORT_GET_PREFIX(PlayerController)
+_GDEXPORT_GET(maxGroundSpeed)
+_GDEXPORT_GET(groundAccel)
+_GDEXPORT_GET(groundDecel)
+_GDEXPORT_GET_SUFFIX
 
-// // Setter(s) for exported instance variables in Godot Editor. 
-// _GDEXPORT_SET_PREFIX
-// _GDEXPORT_SET(speed)
-// _GDEXPORT_SET_SUFFIX
+// Setter(s) for exported instance variables in Godot Editor. 
+_GDEXPORT_SET_PREFIX(PlayerController)
+_GDEXPORT_SET(maxGroundSpeed)
+_GDEXPORT_SET(groundAccel)
+_GDEXPORT_SET(groundDecel)
+_GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
     set_process(true);
-    debugNode = get_node<Label>("../../debug/speed");
+    debugNode = get_node<Label>("../UI/debug/speed");
 }
 
 void PlayerController::_process(double _delta) {

@@ -6,7 +6,7 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/classes/label.hpp>
-// #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code. 
+#include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 // #include "inputhandler.h"
 
 namespace godot {
@@ -14,7 +14,7 @@ namespace godot {
     class PlayerController : public CharacterBody2D {
         
         GDCLASS(PlayerController, CharacterBody2D)
-        // _GDEXPORT
+        _GDEXPORT
 
     private:
         // Debug variables
@@ -27,9 +27,9 @@ namespace godot {
         bool isAirborne;
 
         // Ground variables
-        const int maxGroundSpeed = 60;
-        const float groundAccel = 4;
-        const float groundDecel = 2;
+        int maxGroundSpeed = 60;
+        float groundAccel = 4;
+        float groundDecel = 2;
         const float groundFriction = 0.5;
 
         // Air variables
