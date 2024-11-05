@@ -23,19 +23,19 @@ GDExample1New::~GDExample1New() {
 }
 
 // Export instance variables to the Godot Editor. 
-_GDEXPORT_ADD_PREFIX
+_GDEXPORT_ADD_PREFIX(GDExample1New)
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "amplitude"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "speed", PROPERTY_HINT_RANGE, "0,20,0.01"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
-_GDEXPORT_GET_PREFIX
+_GDEXPORT_GET_PREFIX(GDExample1New)
 _GDEXPORT_GET(amplitude)
 _GDEXPORT_GET(speed)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
-_GDEXPORT_SET_PREFIX
+_GDEXPORT_SET_PREFIX(GDExample1New)
 _GDEXPORT_SET(amplitude)
 _GDEXPORT_SET(speed)
 _GDEXPORT_SET_SUFFIX
