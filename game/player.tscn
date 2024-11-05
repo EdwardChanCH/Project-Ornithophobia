@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://kj8eedm3xcvr"]
+
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_1o3s5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dbre"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1o3s5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p2bf"]
+
+[node name="Player" type="Node2D"]
+
+[node name="PlayerController" type="PlayerController" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerController"]
+scale = Vector2(0.0311279, 0.0314003)
+sprite_frames = SubResource("SpriteFrames_3dbre")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_7p2bf")
