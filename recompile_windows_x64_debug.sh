@@ -1,15 +1,31 @@
-#!/bin/sh
+#!/bin/bash
 
-# Author: Chun Ho Chan (Edward)
-# Last Modified: 2024-09-14
+<< 'COMMENT'
+Description:
+    This Bash script compiles GDExtension modules for 64-bit Windows, Debug mode.
+Author:
+    Chun Ho Chan (Edward)
+Version:
+    v1.1 (2024-11-04)
+License:
+    GNU Affero General Public License v3.0
+COMMENT
 
-# Auto-compile all the C++ classes with GDExtension
-echo "Compiling GDExtension modules for 64-bit Windows, Godot's Debug Mode..."
-echo ""
-scons platform=windows target=template_debug debug_symbols=yes
-echo ""
-echo "Done! You may open Godot and run/ edit your project."
-echo "Press [Enter] to close."
+printf "> Executing Bash script...\n"
+printf "> Setting: 64-bit Windows, Debug mode\n"
 
-# Keep terminal open and wait for input
-read input
+input='r'
+while [[ $input == [rR] ]]
+do
+    printf "\n> Generating 'register_types.cpp' with Python...\n"
+    python generate_register_types_cpp.py
+    printf "Done. (exit code: %d)\n" $?
+
+    printf "\n> Compiling GDExtension modules with SCon...\n"
+    scons platform=windows target=template_debug debug_symbols=yes
+    printf "Done. (exit code: %d)\n" $?
+
+    printf "\n> Compilation finished. You may open Godot and run/ edit your project.\n"
+    read -p "> Press 'q' to exit, 'r' to recompile: " -n 1 input
+    printf "\n"
+done
