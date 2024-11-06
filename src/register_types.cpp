@@ -14,9 +14,6 @@
 #include "gdexample_2_new.h"
 #include "gdexample_2_old.h"
 #include "playercontroller.h"
-// #include "gameaxis.h"
-// #include "gameinput.h"
-// #include "inputhandler.h"
 /*--------------------------------------------------*/
 
 // Everything in GDExtension is defined within the namespace "godot".
@@ -35,9 +32,6 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(GDExample2New);
     GDREGISTER_CLASS(GDExample2Old);
     GDREGISTER_CLASS(PlayerController);
-    // GDREGISTER_CLASS(GameAxis);
-    // GDREGISTER_CLASS(GameInput);
-    // GDREGISTER_CLASS(InputHandler);
     /*--------------------------------------------------*/
 }
 

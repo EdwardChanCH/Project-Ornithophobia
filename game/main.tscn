@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://t81mvpjh4g0i"]
+[gd_scene load_steps=8 format=4 uid="uid://t81mvpjh4g0i"]
 
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_166wb"]
+[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
 font_size = 24
@@ -20,6 +21,22 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f34b"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ktjqj"]
+resource_name = "tiles"
+texture = ExtResource("2_3tlab")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8rtbq"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_ktjqj")
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -35,15 +52,28 @@ offset_top = 16.0
 offset_right = 418.0
 offset_bottom = 161.0
 text = "Speed: 0
-axis: 0
-Velocity: 0
+VelocityX: 0
+VelocityY: 0
 input direction: 0
+isAirborne: false
+Blast Strength: 500
 "
 label_settings = SubResource("LabelSettings_qjkly")
 
 [node name="PlayerController" type="PlayerController" parent="."]
+maxGroundSpeed = 60
+groundAccel = 4.0
 groundDecel = 6.0
-position = Vector2(555, 395)
+groundFriction = 0.97
+gravity = 7.5
+maxAirSpeed = 1000
+maxFallSpeed = 750
+airFriction = 0.6
+blastStrength = 500.0
+initialBlastStrength = 250
+maxBlastStrength = 500
+position = Vector2(576, 417.994)
+collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerController"]
 scale = Vector2(0.0311279, 0.0314003)
@@ -53,3 +83,7 @@ animation = &"walk"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_2f34b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAANAA4AAAAAAAAAAAANAA8AAAAAAAAAAAAOAA4AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAA4AAAAAAAAAAAAQAA8AAAAAAAAAAAARAA4AAAAAAAAAAAARAA8AAAAAAAAAAAASAA4AAAAAAAAAAAASAA8AAAAAAAAAAAATAA4AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA4AAAAAAAAAAAAUAA8AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8rtbq")

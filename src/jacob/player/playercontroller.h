@@ -6,6 +6,8 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/classes/label.hpp>
+#include <godot_cpp/classes/viewport.hpp>
+#include <godot_cpp/classes/time.hpp>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 // #include "inputhandler.h"
 
@@ -27,20 +29,24 @@ namespace godot {
         bool isAirborne;
 
         // Ground variables
-        int maxGroundSpeed = 60;
-        float groundAccel = 4;
-        float groundDecel = 2;
-        const float groundFriction = 0.5;
+        int maxGroundSpeed;
+        float groundAccel;
+        float groundDecel;
+        float groundFriction;
 
         // Air variables
-        const float gravity = 5;
-        const int maxAirSpeed = 20;
-        const float airFriction = 0.2;
+        float gravity;
+        int maxAirSpeed;
+        float fallSpeed;
+        int maxFallSpeed;
+        float airFriction;
 
         // Blast variables
-        float blastStrength;
-        const int initialBlastStrength = 5;
-        const int maxBlastStrength = 20;
+        float blastStrength = 250;
+        int initialBlastStrength;
+        int maxBlastStrength;
+        long blastTime;
+        long lastBlastTime;
 
 
     protected:
