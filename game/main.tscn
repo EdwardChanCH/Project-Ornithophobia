@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
-font_size = 24
+font_size = 12
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
@@ -20,6 +20,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f34b"]
+size = Vector2(19.7531, 19.7062)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ktjqj"]
 resource_name = "tiles"
@@ -42,15 +43,24 @@ sources/0 = SubResource("TileSetAtlasSource_ktjqj")
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 
+[node name="Label" type="Label" parent="."]
+offset_left = 197.0
+offset_top = 101.0
+offset_right = 446.0
+offset_bottom = 160.0
+text = "Left click for small blast
+Right click for large blast"
+horizontal_alignment = 1
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="debug" type="Node" parent="UI"]
 
 [node name="speed" type="Label" parent="UI/debug"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 418.0
-offset_bottom = 161.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 185.0
 text = "Speed: 0
 VelocityX: 0
 VelocityY: 0
@@ -70,20 +80,21 @@ maxAirSpeed = 1000
 maxFallSpeed = 750
 airFriction = 0.6
 blastStrength = 500.0
-initialBlastStrength = 250
-maxBlastStrength = 500
-position = Vector2(576, 417.994)
+position = Vector2(528.937, 303.797)
+scale = Vector2(0.54, 0.54)
 collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerController"]
-scale = Vector2(0.0311279, 0.0314003)
+position = Vector2(-1.85181, 0.510936)
+scale = Vector2(0.0289352, 0.0289352)
 sprite_frames = SubResource("SpriteFrames_dg4uw")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
+position = Vector2(-1.85187, 0.440918)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_2f34b")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAANAA4AAAAAAAAAAAANAA8AAAAAAAAAAAAOAA4AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAA4AAAAAAAAAAAAQAA8AAAAAAAAAAAARAA4AAAAAAAAAAAARAA8AAAAAAAAAAAASAA4AAAAAAAAAAAASAA8AAAAAAAAAAAATAA4AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA4AAAAAAAAAAAAUAA8AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAATAAkAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAGAAsAAAAAAAAAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAAAAAAGAA4AAAAAAAAAAAANAAsAAAAAAAAAAAANAAwAAAAAAAAAAAANAA0AAAAAAAAAAAANAA4AAAAAAAAAAAAUAAcAAAAAAAAAAAAVAAcAAAAAAAAAAAAWAAcAAAAAAAAAAAAXAAcAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAAWAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAD//wcAAAAAAAAAAAD+/wcAAAAAAAAAAAD9/wcAAAAAAAAAAAD8/wcAAAAAAAAAAAAGAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP3/AAAAAAAAAAAGAPz/AAAAAAAAAAANAP//AAAAAAAAAAANAP7/AAAAAAAAAAANAP3/AAAAAAAAAAANAPz/AAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAANAAcAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_8rtbq")

@@ -49,8 +49,8 @@ _GDEXPORT_GET(maxFallSpeed)
 _GDEXPORT_GET(airFriction)
 
 _GDEXPORT_GET(blastStrength)
-_GDEXPORT_GET(initialBlastStrength)
-_GDEXPORT_GET(maxBlastStrength)
+_GDEXPORT_GET(smallBlastStrength)
+_GDEXPORT_GET(largeBlastStrength)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -67,14 +67,15 @@ _GDEXPORT_SET(maxFallSpeed)
 _GDEXPORT_SET(airFriction)
 
 _GDEXPORT_SET(blastStrength)
-_GDEXPORT_SET(initialBlastStrength)
-_GDEXPORT_SET(maxBlastStrength)
+_GDEXPORT_SET(smallBlastStrength)
+_GDEXPORT_SET(largeBlastStrength)
 _GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
     set_process(true);
     debugNode = get_node<Label>("../UI/debug/speed");
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
+    wasOnWall = false;
 }
 
 void PlayerController::_process(double _delta) {
@@ -93,19 +94,17 @@ void PlayerController::_process(double _delta) {
 
         // Smoothly accelerate and decelerate when attempting to move
         if ((get_velocity().x >= 0 && inputDirection.x == 1) || (get_velocity().x <= 0 && inputDirection.x == -1)) {
-            // speed = Math::clamp(speed + groundAccel, 0.f, (float) maxGroundSpeed);
             if (speed < maxGroundSpeed)
                 speed += groundAccel;
             else if (speed > maxGroundSpeed) {
-                speed -= groundAccel * airFriction;
+                speed -= isAirborne ? groundAccel * airFriction : groundAccel * groundFriction;
             }
         } else if ((get_velocity().x < 0 && inputDirection.x == 1) || (get_velocity().x > 0 && inputDirection.x == -1)) {
-            // speed = Math::max(speed - groundDecel, 0.f);
             speed -= groundDecel;
+            speed -= isAirborne ? groundDecel / airFriction : groundDecel / groundFriction;
         }
             
     } else {
-        // speed = Math::max(speed - groundDecel, 0.f);
         speed -= groundDecel;
         if (movementDirection.x == 0)
             movementDirection.x = 1;
@@ -134,7 +133,7 @@ void PlayerController::_process(double _delta) {
 
     // Set horizontal speed to 0 if touching wall
     if (is_on_wall()) {
-        speed = 0;
+        speed = Math::clamp(speed, -groundAccel, groundAccel);
     }
 
     // If the current velocity and input direction have different signs, decelerate and turn around
@@ -146,27 +145,47 @@ void PlayerController::_process(double _delta) {
     }
 
     // Start timer when blast button just pressed
-    if (input->is_action_just_pressed("blast")) {
-        blastTime = Time::get_singleton()->get_ticks_msec();
-        blastStrength = initialBlastStrength;
+    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
+        // blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
-    if (input->is_action_just_released("blast")) {
-        if (lastBlastTime >= 100) {
-            blastTime = (Time::get_singleton()->get_ticks_msec() - blastTime);
+    if (input->is_action_just_released("small_blast") || input->is_action_just_released("large_blast")) {
+        if (lastBlastTime >= 75) {
+            // blastTime = (Time::get_singleton()->get_ticks_msec() - blastTime);
 
-            // Different levels of strength depending on how long the blast button was held for
-            if (blastTime < 167)
-                blastStrength = initialBlastStrength;
-            else if (blastTime < 333)
-                blastStrength = blastStrength * 1.67;
-            else if (blastTime < 500)
-                blastStrength = blastStrength * 2.33;
+            // // Different levels of strength depending on how long the blast button was held for
+            // if (blastTime < 167)
+            //     blastStrength = smallBlastStrength;
+            // else if (blastTime < 333)
+            //     blastStrength = blastStrength * 1.67;
+            // else if (blastTime < 500)
+            //     blastStrength = blastStrength * 2.33;
+            // else
+            //     blastStrength = blastStrength * 3;
+            if (input->is_action_just_released("small_blast"))
+                blastStrength = smallBlastStrength;
             else
-                blastStrength = blastStrength * 3;
+                blastStrength = largeBlastStrength;
+            Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
+            blastDirection *= -1;
+            blastDirection.normalize();
+            vVelocity = blastDirection * blastStrength;
+            vVelocity = vVelocity.clampf(-750, 750);
+            speed = vVelocity.x > 0 ? vVelocity.x : vVelocity.x * -1;
+            speed = Math::clamp(speed, -750.f, 750.f);
+            
+            isAirborne = true;
+            blastTime = 0;
+            lastBlastTime = Time::get_singleton()->get_ticks_msec();
+        }
+    }
 
+    // When blast button released, blast player in direction opposite to the mouse cursor
+    if (input->is_action_just_released("large_blast")) {
+        if (lastBlastTime >= 200) {
+            blastStrength = 750;
             Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
             blastDirection *= -1;
             blastDirection.normalize();
@@ -189,16 +208,17 @@ void PlayerController::_process(double _delta) {
         vVelocity = vec2_zero;
     }
 
+    int screenWrapBuffer = 16;
     // Reset player position if they fall offscreen
     Vector2 screenSize = get_viewport_rect().get_size();
-    if (get_position().x < -64)
-        set_position(Vector2(screenSize.x + 64, get_position().y));
-    if (get_position().x > screenSize.x + 64)
-        set_position(Vector2(-64, get_position().y));
-    if (get_position().y < -64)
-        set_position(Vector2(get_position().x, screenSize.y + 64));
-    if (get_position().y > screenSize.y + 64)
-        set_position(Vector2(get_position().x, -64));
+    if (get_position().x < -screenWrapBuffer)
+        set_position(Vector2(screenSize.x + screenWrapBuffer, get_position().y));
+    if (get_position().x > screenSize.x + screenWrapBuffer)
+        set_position(Vector2(-screenWrapBuffer, get_position().y));
+    if (get_position().y < -screenWrapBuffer)
+        set_position(Vector2(get_position().x, screenSize.y + screenWrapBuffer));
+    if (get_position().y > screenSize.y + screenWrapBuffer)
+        set_position(Vector2(get_position().x, -screenWrapBuffer));
 
     // Update player velocity
     set_velocity(hVelocity + vVelocity);
@@ -213,6 +233,6 @@ void PlayerController::_process(double _delta) {
     debugText += "isAirborne: " + isAirborneStr + "\n";
     debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
     debugNode->set_text(debugText);
-
+    
     move_and_slide();
 }

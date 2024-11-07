@@ -9,6 +9,7 @@
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
+#include "globals.h"
 // #include "inputhandler.h"
 
 namespace godot {
@@ -27,6 +28,7 @@ namespace godot {
         Vector2 inputDirection;
         Vector2 movementDirection;
         bool isAirborne;
+        bool wasOnWall;
 
         // Ground variables
         int maxGroundSpeed;
@@ -43,8 +45,8 @@ namespace godot {
 
         // Blast variables
         float blastStrength = 250;
-        int initialBlastStrength;
-        int maxBlastStrength;
+        int smallBlastStrength = 250;
+        int largeBlastStrength = 750;
         long blastTime;
         long lastBlastTime;
 
