@@ -153,17 +153,6 @@ void PlayerController::_process(double _delta) {
     // When blast button released, blast player in direction opposite to the mouse cursor
     if (input->is_action_just_released("small_blast") || input->is_action_just_released("large_blast")) {
         if (lastBlastTime >= 75) {
-            // blastTime = (Time::get_singleton()->get_ticks_msec() - blastTime);
-
-            // // Different levels of strength depending on how long the blast button was held for
-            // if (blastTime < 167)
-            //     blastStrength = smallBlastStrength;
-            // else if (blastTime < 333)
-            //     blastStrength = blastStrength * 1.67;
-            // else if (blastTime < 500)
-            //     blastStrength = blastStrength * 2.33;
-            // else
-            //     blastStrength = blastStrength * 3;
             if (input->is_action_just_released("small_blast"))
                 blastStrength = smallBlastStrength;
             else
@@ -200,7 +189,7 @@ void PlayerController::_process(double _delta) {
     
     // Apply gravity
     if (isAirborne) {
-        vVelocity.y += gravity;
+        vVelocity.y -= gravity * -1 * delta;
         if (vVelocity.y > maxFallSpeed)
             vVelocity.y = maxFallSpeed;
     } else {
