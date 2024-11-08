@@ -18,8 +18,8 @@ def list_subdirectories(directory):
     return [os.path.relpath(root).replace("\\", "/") + "/" for (root, dirs, files) in os.walk(directory)]
 
 # Tweaked this to allow storing source code in sub-directories; original code (non-recursive):
-#   env.Append(CPPPATH=["src/"])
-#   sources = Glob("src/*.cpp")
+#env.Append(CPPPATH=["src/"])
+#sources = Glob("src/*.cpp")
 
 subdirectories = list_subdirectories(".\\src")
 env.Append(CPPPATH=subdirectories)
