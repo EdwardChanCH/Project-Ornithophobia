@@ -47,6 +47,7 @@ namespace godot {
         float blastStrength = 250;
         int smallBlastStrength = 250;
         int largeBlastStrength = 750;
+        int maxSmallBlastSpeed = 375;
         long blastTime;
         long lastBlastTime;
 

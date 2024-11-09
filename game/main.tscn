@@ -67,20 +67,22 @@ VelocityY: 0
 input direction: 0
 isAirborne: false
 Blast Strength: 500
+Air Decel: 0
 "
 label_settings = SubResource("LabelSettings_qjkly")
 
 [node name="PlayerController" type="PlayerController" parent="."]
 maxGroundSpeed = 60
 groundAccel = 4.0
-groundDecel = 6.0
+groundDecel = 4.0
 groundFriction = 0.97
 gravity = 425.0
-maxAirSpeed = 1000
+maxAirSpeed = 100
 maxFallSpeed = 750
 airFriction = 0.6
 blastStrength = 500.0
-position = Vector2(528.937, 303.797)
+maxSmallBlastSpeed = 100
+position = Vector2(365.049, 207.779)
 scale = Vector2(0.54, 0.54)
 collision_layer = 2
 

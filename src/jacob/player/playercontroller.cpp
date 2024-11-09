@@ -33,6 +33,7 @@ _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "airFriction"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "blastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "initialBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxBlastStrength"))
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -51,6 +52,7 @@ _GDEXPORT_GET(airFriction)
 _GDEXPORT_GET(blastStrength)
 _GDEXPORT_GET(smallBlastStrength)
 _GDEXPORT_GET(largeBlastStrength)
+_GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -69,6 +71,7 @@ _GDEXPORT_SET(airFriction)
 _GDEXPORT_SET(blastStrength)
 _GDEXPORT_SET(smallBlastStrength)
 _GDEXPORT_SET(largeBlastStrength)
+_GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
@@ -83,6 +86,7 @@ void PlayerController::_process(double _delta) {
     float delta = (float) _delta;
     Input *input = Input::get_singleton();
     float axis = input->get_axis("move_left", "move_right");
+    float airDecel = 0;
 
     isAirborne = !is_on_floor();
 
@@ -94,25 +98,39 @@ void PlayerController::_process(double _delta) {
 
         // Smoothly accelerate and decelerate when attempting to move
         if ((get_velocity().x >= 0 && inputDirection.x == 1) || (get_velocity().x <= 0 && inputDirection.x == -1)) {
-            if (speed < maxGroundSpeed)
-                speed += groundAccel;
-            else if (speed > maxGroundSpeed) {
-                speed -= isAirborne ? groundAccel * airFriction : groundAccel * groundFriction;
-            }
+            if (isAirborne) {
+                if (speed > maxGroundSpeed)
+                    speed -= groundAccel * airFriction;
+                else {
+                    speed += groundAccel;
+                    if (speed > maxGroundSpeed)
+                        speed = maxGroundSpeed;
+                }
+            } else
+                speed -= speed > maxGroundSpeed ? groundAccel * groundFriction : groundAccel * -1;
         } else if ((get_velocity().x < 0 && inputDirection.x == 1) || (get_velocity().x > 0 && inputDirection.x == -1)) {
             speed -= groundDecel;
             speed -= isAirborne ? groundDecel / airFriction : groundDecel / groundFriction;
         }
             
     } else {
-        speed -= groundDecel;
+        // If moving faster than the max air speed, increase strength of deceleration
+        if (isAirborne && speed > maxAirSpeed) {
+            airDecel = (speed / maxAirSpeed) * airFriction;
+            if (airDecel < 1) airDecel = 1;
+            speed -= groundAccel * airDecel;
+            // UtilityFunctions::print("Speed: " + String::num(speed) + "\nAir Decel: " + String::num(airDecel));
+        } else if (!isAirborne) {
+            speed -= groundDecel;
+        }
+
         if (movementDirection.x == 0)
             movementDirection.x = 1;
     }
 
     // Clamp speed
     if (speed < 0)
-            speed = 0;
+        speed = 0;
 
     // Normalize input direction vector
     float _inputDirLen = inputDirection.length();
@@ -123,8 +141,7 @@ void PlayerController::_process(double _delta) {
     }
 
     // Velocities
-    Vector2 hVelocity = Vector2(get_velocity().x, 0);
-    Vector2 vVelocity = Vector2(0, get_velocity().y);
+    Vector2 velocity = Vector2(get_velocity().x, get_velocity().y);
 
     // If on ground and above max speed, apply ground friction
     if (!isAirborne && speed > maxGroundSpeed) {
@@ -138,10 +155,10 @@ void PlayerController::_process(double _delta) {
 
     // If the current velocity and input direction have different signs, decelerate and turn around
     if (movementDirection.x == 1 && get_velocity().x < 0 || movementDirection.x == -1 && get_velocity().x > 0)
-        hVelocity = (movementDirection * -1) * speed;
+        velocity.x = (movementDirection.x * -1) * speed;
     // Update velocity normally
     else { 
-        hVelocity = movementDirection * speed;
+        velocity.x = movementDirection.x * speed;
     }
 
     // Start timer when blast button just pressed
@@ -160,9 +177,48 @@ void PlayerController::_process(double _delta) {
             Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
             blastDirection *= -1;
             blastDirection.normalize();
-            vVelocity = blastDirection * blastStrength;
-            vVelocity = vVelocity.clampf(-750, 750);
-            speed = vVelocity.x > 0 ? vVelocity.x : vVelocity.x * -1;
+            // UtilityFunctions::print("blastDirX: " + String::num(blastDirection.x) + "\nblastDirY: " + String::num(blastDirection.y));
+
+            // Update horizontal speed correctly
+            if (blastDirection.x < 0 && velocity.x >= 0) {              // blasting from right when moving right
+                velocity.x += blastDirection.x * blastStrength;
+            } else if (blastDirection.x > 0 && velocity.x > 0) {       // blasting from left while moving right
+                if (velocity.x > maxSmallBlastSpeed)
+                    velocity.x += (blastDirection.x * blastStrength) / (velocity.x / maxSmallBlastSpeed);
+                else
+                    velocity.x += blastDirection.x * blastStrength;
+            } else if (blastDirection.x < 0 && velocity.x < 0) {       // blasting from right while moving left
+                if (velocity.x < maxSmallBlastSpeed * -1)
+                    velocity.x += (blastDirection.x * blastStrength) / (velocity.x / (maxSmallBlastSpeed * -1));
+                else
+                    velocity.x += blastDirection.x * blastStrength;
+            } else if (blastDirection.x > 0 && velocity.x <= 0) {       // blasting from left while moving left
+                velocity.x += blastDirection.x * blastStrength;
+            }
+            
+            // Update vertical speed correctly
+            if (blastDirection.y < 0 && velocity.y >= 0) {              // blasting from below when moving down
+                velocity.y = 0;
+                velocity.y = blastDirection.y * blastStrength;
+            } else if (blastDirection.y > 0 && velocity.y > 0) {       // blasting from above while moving down
+                if (velocity.y > maxSmallBlastSpeed)
+                    velocity.y += (blastDirection.y * blastStrength) / (velocity.y / maxSmallBlastSpeed);
+                else
+                    velocity.y += blastDirection.y * blastStrength;
+            } else if (blastDirection.y < 0 && velocity.y < 0) {       // blasting from below while moving up
+                if (velocity.y < maxSmallBlastSpeed * -1)
+                    velocity.y += (blastDirection.y * blastStrength) / (velocity.y / (maxSmallBlastSpeed * -1));
+                else
+                    velocity.y += blastDirection.y * blastStrength;
+            } else if (blastDirection.y > 0 && velocity.y <= 0) {       // blasting from above while moving up
+                velocity.y = 0;
+                velocity.y = blastDirection.y * blastStrength;
+            }
+            
+            // UtilityFunctions::print("hVel: " + String::num(velocity.x) + "\nvVel: " + String::num(velocity.y));
+            velocity.x = Math::clamp(velocity.x, -750.f, 750.f);
+            velocity.y = Math::clamp(velocity.y, -750.f, 750.f);
+            speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
             speed = Math::clamp(speed, -750.f, 750.f);
             
             isAirborne = true;
@@ -178,8 +234,8 @@ void PlayerController::_process(double _delta) {
             Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
             blastDirection *= -1;
             blastDirection.normalize();
-            vVelocity = blastDirection * blastStrength;
-            speed = vVelocity.x > 0 ? vVelocity.x : vVelocity.x * -1;
+            velocity = blastDirection * blastStrength;
+            speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
             
             isAirborne = true;
             blastTime = 0;
@@ -189,12 +245,19 @@ void PlayerController::_process(double _delta) {
     
     // Apply gravity
     if (isAirborne) {
-        vVelocity.y -= gravity * -1 * delta;
-        if (vVelocity.y > maxFallSpeed)
-            vVelocity.y = maxFallSpeed;
+        // If moving faster than the max air speed, increase strength of gravity
+        if (velocity.y < (maxAirSpeed * -1)) {
+            float vAirDecel = (velocity.y / (maxAirSpeed * -1)) * airFriction;
+            if (vAirDecel < 1) vAirDecel = 1;
+            velocity.y -= gravity * vAirDecel * delta * -1;
+        } else {
+            velocity.y -= gravity * delta * -1;
+        }
+        if (velocity.y > maxFallSpeed)
+            velocity.y = maxFallSpeed;
     } else {
         fallSpeed = 0;
-        vVelocity = vec2_zero;
+        velocity.y = 0;
     }
 
     int screenWrapBuffer = 16;
@@ -210,17 +273,20 @@ void PlayerController::_process(double _delta) {
         set_position(Vector2(get_position().x, -screenWrapBuffer));
 
     // Update player velocity
-    set_velocity(hVelocity + vVelocity);
+    set_velocity(velocity);
     
     // Debug log
     String debugText = "";
     debugText += "Speed: " + String::num(speed) + "\n";
     debugText += "VelocityX: " + String::num(get_velocity().x) + "\n";
-    debugText += "VelocityY: " + String::num(vVelocity.y) + "\n";
+    debugText += "VelocityY: " + String::num(velocity.y) + "\n";
     debugText += "input direction: " + String::num(inputDirection.x) + "\n";
     String isAirborneStr = isAirborne ? "true" : "false";
     debugText += "isAirborne: " + isAirborneStr + "\n";
     debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
+    debugText += "Air Decel: " + String::num(airDecel) + "\n";
+    
+    // Set debug label text
     debugNode->set_text(debugText);
     
     move_and_slide();
