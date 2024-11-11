@@ -82,6 +82,7 @@ groundDecel = 4.0
 groundFriction = 0.97
 gravity = 425.0
 maxAirSpeed = 100
+fallSpeed = 0.0
 maxFallSpeed = 750
 airFriction = 0.6
 blastStrength = 500.0

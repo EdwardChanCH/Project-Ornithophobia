@@ -54,6 +54,7 @@ namespace godot {
 
         // Misc.
         float timeSlowValue;
+        bool canSlowTime;
 
 
     protected:
@@ -68,6 +69,7 @@ namespace godot {
 
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
+        void updateSmallBlastVelocity(float *blastDir, float *vel, String direction="");
 
         // getters/setters
 

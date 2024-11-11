@@ -87,6 +87,7 @@ void PlayerController::_ready() {
     debugNode = get_node<Label>("../UI/debug/speed");
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
+    canSlowTime = true;
 }
 
 void PlayerController::_process(double _delta) {
@@ -171,59 +172,41 @@ void PlayerController::_process(double _delta) {
 
     // Start timer when blast button just pressed
     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
-        if (input->is_action_just_pressed("large_blast"))
+        blastTime = Time::get_singleton()->get_ticks_msec();
+        lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
+        canSlowTime = true;
+    }
+
+    // Buffer for activating slow motion on large blasts
+    if (input->is_action_pressed("large_blast")) {
+        long curTime = Time::get_singleton()->get_ticks_msec();
+        if (input->is_action_just_pressed("small_blast")) {
+            blastTime = -curTime;
+        }
+        if (curTime - blastTime >= 100 && canSlowTime && isAirborne) {
             set_game_speed(timeSlowValue);
             // timeController->set_game_speed(0.5);
-        lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
+        } else if (!canSlowTime || !isAirborne) {
+            set_game_speed(1);
+        }
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
-    if (input->is_action_just_released("small_blast") || input->is_action_just_released("large_blast")) {
+    if (input->is_action_just_released("small_blast")) {
         if (lastBlastTime >= 75) {
             if (input->is_action_just_released("small_blast"))
                 blastStrength = smallBlastStrength;
             else
                 blastStrength = largeBlastStrength;
+            
             Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
             blastDirection *= -1;
             blastDirection.normalize();
             // UtilityFunctions::print("blastDirX: " + String::num(blastDirection.x) + "\nblastDirY: " + String::num(blastDirection.y));
-
-            // Update horizontal speed correctly
-            if (blastDirection.x < 0 && velocity.x >= 0) {              // blasting from right when moving right
-                velocity.x += blastDirection.x * blastStrength;
-            } else if (blastDirection.x > 0 && velocity.x > 0) {       // blasting from left while moving right
-                if (velocity.x > maxSmallBlastSpeed)
-                    velocity.x += (blastDirection.x * blastStrength) / (velocity.x / maxSmallBlastSpeed);
-                else
-                    velocity.x += blastDirection.x * blastStrength;
-            } else if (blastDirection.x < 0 && velocity.x < 0) {       // blasting from right while moving left
-                if (velocity.x < maxSmallBlastSpeed * -1)
-                    velocity.x += (blastDirection.x * blastStrength) / (velocity.x / (maxSmallBlastSpeed * -1));
-                else
-                    velocity.x += blastDirection.x * blastStrength;
-            } else if (blastDirection.x > 0 && velocity.x <= 0) {       // blasting from left while moving left
-                velocity.x += blastDirection.x * blastStrength;
-            }
             
-            // Update vertical speed correctly
-            if (blastDirection.y < 0 && velocity.y >= 0) {              // blasting from below when moving down
-                velocity.y = 0;
-                velocity.y = blastDirection.y * blastStrength;
-            } else if (blastDirection.y > 0 && velocity.y > 0) {       // blasting from above while moving down
-                if (velocity.y > maxSmallBlastSpeed)
-                    velocity.y += (blastDirection.y * blastStrength) / (velocity.y / maxSmallBlastSpeed);
-                else
-                    velocity.y += blastDirection.y * blastStrength;
-            } else if (blastDirection.y < 0 && velocity.y < 0) {       // blasting from below while moving up
-                if (velocity.y < maxSmallBlastSpeed * -1)
-                    velocity.y += (blastDirection.y * blastStrength) / (velocity.y / (maxSmallBlastSpeed * -1));
-                else
-                    velocity.y += blastDirection.y * blastStrength;
-            } else if (blastDirection.y > 0 && velocity.y <= 0) {       // blasting from above while moving up
-                velocity.y = 0;
-                velocity.y = blastDirection.y * blastStrength;
-            }
+            // Update velocities based on direction of the blast and the current direction the player is moving
+            updateSmallBlastVelocity(&blastDirection.x, &velocity.x);
+            updateSmallBlastVelocity(&blastDirection.y, &velocity.y, "vertical");
             
             // UtilityFunctions::print("hVel: " + String::num(velocity.x) + "\nvVel: " + String::num(velocity.y));
             velocity.x = Math::clamp(velocity.x, -750.f, 750.f);
@@ -234,6 +217,8 @@ void PlayerController::_process(double _delta) {
             isAirborne = true;
             blastTime = 0;
             lastBlastTime = Time::get_singleton()->get_ticks_msec();
+            canSlowTime = false;
+            set_game_speed(1);
         }
     }
 
@@ -307,4 +292,24 @@ void PlayerController::_process(double _delta) {
 
 void PlayerController::set_game_speed(float gameSpeed) {
     Engine::get_singleton()->set_time_scale(gameSpeed);
+}
+
+void PlayerController::updateSmallBlastVelocity(float *blastDir, float *vel, String direction) {
+    if ((*blastDir < 0 && *vel >= 0) ) {          // blasting from right when moving right
+        if (direction == "vertical")
+            *vel = 0;
+        *vel += *blastDir * blastStrength;
+    } else if (*blastDir > 0 && *vel > 0) {       // blasting from left while moving right
+        if (*vel > maxSmallBlastSpeed)
+            *vel += (*blastDir * blastStrength) / (*vel / maxSmallBlastSpeed);
+        else
+            *vel += *blastDir * blastStrength;
+    } else if (*blastDir < 0 && *vel < 0) {       // blasting from right while moving left
+        if (*vel < maxSmallBlastSpeed * -1)
+            *vel += (*blastDir * blastStrength) / (*vel / (maxSmallBlastSpeed * -1));
+        else
+            *vel += *blastDir * blastStrength;
+    } else if (*blastDir > 0 && *vel <= 0) {      // blasting from left while moving left
+        *vel += *blastDir * blastStrength;
+    }
 }
