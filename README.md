@@ -12,7 +12,7 @@
 * Jacob Couture  
   * jcoutur9@uwo.ca  
 * Chun Ho Chan (Edward)  
-  * ccha232.uwo.ca  
+  * ccha232@uwo.ca  
 * Sameer Mehboob Bugti  
   * sbugti@uwo.ca  
 
