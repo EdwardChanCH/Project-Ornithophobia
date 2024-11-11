@@ -6,6 +6,6 @@
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,110,142,151,140,146,238,105"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="175,163,362,189"/>
 <area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="271,107,271,147,266,147,266,107"/>
-<area shape="rect" id="Node000005" href="$boilerplate__macros_8h_source.html" title=" " alt="" coords="386,163,527,189"/>
+<area shape="rect" id="Node000005" href="$boilerplate__macros_8h.html" title="This header file contains all custom macros for GDExtension&#39;s boilerplate code. The purpose is to min..." alt="" coords="386,163,527,189"/>
 <area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="299,105,415,154,413,159,297,110"/>
 </map>

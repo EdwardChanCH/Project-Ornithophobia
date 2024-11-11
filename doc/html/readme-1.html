@@ -110,7 +110,7 @@ Important Notes</h2>
 <ul>
 <li>When coding a new Godot class, be sure to add *# include "classname.h"* and <em>GDREGISTER_CLASS(ClassName);</em> in the ".../3307GroupProject/src/*register_types.cpp*" file. <br  />
 </li>
-<li>When renaming the <em>cs3307_library_init()</em> function, be sure to also update its name stored in the ".../3307GroupProject/game/bin/*cs3307.gdextension*" file. <br  />
+<li>When renaming the <em><a class="el" href="register__types_8cpp.html#addd9c5f1d7fdfe2c99efa425bdb0a131" title="Entry function for initializing GDExtension. DO NOT RENAME THIS FUNCTION!">cs3307_library_init()</a></em> function, be sure to also update its name stored in the ".../3307GroupProject/game/bin/*cs3307.gdextension*" file. <br  />
 </li>
 <li>Renaming any class names would break the corresponding nodes used in Godot scene files (.tscn).</li>
 <li>To fix a broken scene file, open it in a text editor, and manually update all the old class names/ signal names inside. <br  />

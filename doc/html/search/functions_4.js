@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['set_5famplitude_0',['set_amplitude',['../classgodot_1_1_g_d_example1_old.html#abd349ab05fd3c0da71d28cf57116e9c9',1,'godot::GDExample1Old']]],
-  ['set_5fspeed_1',['set_speed',['../classgodot_1_1_g_d_example1_old.html#a998303a3e676b78f0c16700ad143f562',1,'godot::GDExample1Old']]]
+  ['initialize_5fcustom_5fmodule_0',['initialize_custom_module',['../register__types_8cpp.html#aa6f95bfdc015348fbfdd52d49b9f662b',1,'initialize_custom_module(ModuleInitializationLevel p_level):&#160;register_types.cpp'],['../register__types_8h.html#aa6f95bfdc015348fbfdd52d49b9f662b',1,'initialize_custom_module(ModuleInitializationLevel p_level):&#160;register_types.cpp']]]
 ];
