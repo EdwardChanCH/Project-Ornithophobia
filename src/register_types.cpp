@@ -13,6 +13,7 @@
 #include "gdexample_1_old.h"
 #include "gdexample_2_new.h"
 #include "gdexample_2_old.h"
+#include "timecontroller.h"
 #include "playercontroller.h"
 /*--------------------------------------------------*/
 
@@ -31,6 +32,7 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);
     GDREGISTER_CLASS(GDExample2Old);
+    GDREGISTER_CLASS(TimeController);
     GDREGISTER_CLASS(PlayerController);
     /*--------------------------------------------------*/
 }

@@ -8,6 +8,7 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
+// #include <../timecontroller.h>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
@@ -51,6 +52,9 @@ namespace godot {
         long blastTime;
         long lastBlastTime;
 
+        // Misc.
+        float timeSlowValue;
+
 
     protected:
         // this function must be declared.
@@ -63,6 +67,7 @@ namespace godot {
         ~PlayerController();
 
         void _process(double delta) override;
+        void set_game_speed(float gameSpeed);
 
         // getters/setters
 

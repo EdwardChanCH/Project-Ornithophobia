@@ -34,6 +34,8 @@ _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "blastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "initialBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
+
+_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -53,6 +55,8 @@ _GDEXPORT_GET(blastStrength)
 _GDEXPORT_GET(smallBlastStrength)
 _GDEXPORT_GET(largeBlastStrength)
 _GDEXPORT_GET(maxSmallBlastSpeed)
+
+_GDEXPORT_GET(timeSlowValue)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -72,7 +76,11 @@ _GDEXPORT_SET(blastStrength)
 _GDEXPORT_SET(smallBlastStrength)
 _GDEXPORT_SET(largeBlastStrength)
 _GDEXPORT_SET(maxSmallBlastSpeed)
+
+_GDEXPORT_SET(timeSlowValue)
 _GDEXPORT_SET_SUFFIX
+
+// Ref<TimeController> timeController = Ref<TimeController>(Engine::get_singleton()->get_singleton("TimeController"));
 
 void PlayerController::_ready() {
     set_process(true);
@@ -163,7 +171,9 @@ void PlayerController::_process(double _delta) {
 
     // Start timer when blast button just pressed
     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
-        // blastTime = Time::get_singleton()->get_ticks_msec();
+        if (input->is_action_just_pressed("large_blast"))
+            set_game_speed(timeSlowValue);
+            // timeController->set_game_speed(0.5);
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
     }
 
@@ -240,6 +250,9 @@ void PlayerController::_process(double _delta) {
             isAirborne = true;
             blastTime = 0;
             lastBlastTime = Time::get_singleton()->get_ticks_msec();
+            set_game_speed(1);
+            // timeController->set_game_speed(1);
+            
         }
     }
     
@@ -290,4 +303,8 @@ void PlayerController::_process(double _delta) {
     debugNode->set_text(debugText);
     
     move_and_slide();
+}
+
+void PlayerController::set_game_speed(float gameSpeed) {
+    Engine::get_singleton()->set_time_scale(gameSpeed);
 }
