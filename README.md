@@ -54,6 +54,9 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * SCons  
   * version 4.8.1+ (PyPI)  
   * Note: This is GDExtension's suggested build tool.  
+* Doxygen (optional)  
+  * version 1.12.0  
+  * Note: This is used to generate the HTML, XML doc files.  
 
 ## 3. How To Compile (step-by-step guide)
 
@@ -128,7 +131,7 @@ This Godot project was created with these settings:
   * (Note: The renderer can be changed later, but scenes may need to be adjusted.)  
 * Version Control Metadata: Git  
 
-Generating Doc Files For Custom C++ Classes:  
+Generating Godot Docs XML Templates (Empty XML):  
 Steps:  
 1. Open a terminal in the ".../3307GroupProject/game/" directory, and then:  
   * Run the command "<path_to_godot> --doctool ../ --gdextension-docs"  
@@ -139,6 +142,12 @@ Steps:
   * (Note: This does not delete/ overwrite any existing doc files.)  
 3. Manually edit the new .XML doc files are located in the ".../3307GroupProject/doc_classes/" directory.  
 4. Recompile the game as a debug build (see Section 3). This links the doc files to the Godot Editor.  
+
+Generating C++ Doc By Doxygen (HTML):  
+Steps:  
+1. Document the code files in Doxygen syntax (put file description at the top)  
+2. Open a terminal in the ".../3307GroupProject/game/" directory, and then:  
+  * Run the command "doxygen"  
 
 Fixing Undetected C++ Header Files In VSCode:  
 Steps:  
