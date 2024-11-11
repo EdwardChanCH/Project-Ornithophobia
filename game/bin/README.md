@@ -1,6 +1,6 @@
 /**
-* \page readme-2 README (game/bin/)
-*/
+ * \page readme-2 README (game/bin/)
+ */
 # README File
 
 * Author:  

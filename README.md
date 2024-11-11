@@ -1,6 +1,6 @@
 /**
-* \mainpage Home Page
-*/
+ * \mainpage Home Page
+ */
 # README File
 
 ## 0. Copyright & Credits
