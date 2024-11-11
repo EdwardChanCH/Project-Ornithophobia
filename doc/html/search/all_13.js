@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['libraries_203rd_20party_20tools_0',['2. Required Libraries &amp; 3rd Party Tools',['../index.html#autotoc_md9',1,'']]]
+  ['important_20notes_0',['Important Notes',['../readme-1.html#autotoc_md1',1,'']]],
+  ['info_3a_1',['c. Course Info:',['../index.html#autotoc_md6',1,'']]]
 ];
