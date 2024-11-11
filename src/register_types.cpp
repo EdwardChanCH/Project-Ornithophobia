@@ -15,6 +15,7 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 #include "edward_tester.h"
+#include "level_editor.h"
 #include "gdexample_1_new.h"
 #include "gdexample_1_old.h"
 #include "gdexample_2_new.h"
@@ -37,6 +38,7 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     GDREGISTER_CLASS(EdwardTester);
+    GDREGISTER_CLASS(LevelEditor);
     GDREGISTER_CLASS(GDExample1New);
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);

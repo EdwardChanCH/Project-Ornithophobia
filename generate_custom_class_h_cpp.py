@@ -99,7 +99,6 @@ def main():
     generate_file(input_name, ".cpp")
     
     # Program successfully finished
-    print("Done!")
 
 # Entry Point
 if __name__ == "__main__":
