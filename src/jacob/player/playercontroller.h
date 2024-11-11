@@ -55,6 +55,7 @@ namespace godot {
         // Misc.
         float timeSlowValue;
         bool canSlowTime;
+        Input *input = Input::get_singleton();
 
 
     protected:

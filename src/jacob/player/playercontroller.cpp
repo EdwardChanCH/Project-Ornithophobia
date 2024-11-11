@@ -93,7 +93,6 @@ void PlayerController::_ready() {
 void PlayerController::_process(double _delta) {
     Vector2 vec2_zero = Vector2(0, 0);
     float delta = (float) _delta;
-    Input *input = Input::get_singleton();
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
 
