@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['b_20course_20term_3a_0',['b. Course Term:',['../index.html#autotoc_md5',1,'']]],
-  ['by_20step_20guide_1',['by step guide',['../index.html#autotoc_md10',1,'3. How To Compile (step-by-step guide)'],['../index.html#autotoc_md11',1,'4. How To Run (step-by-step guide)']]]
+  ['a_20team_20members_3a_0',['a. Team Members:',['../index.html#autotoc_md4',1,'']]],
+  ['account_20usernames_20passwords_1',['6. Account Usernames &amp; Passwords',['../index.html#autotoc_md13',1,'']]],
+  ['activation_2',['Activation',['../index.html#autotoc_md14',1,'7. Cheat Mode Activation'],['../index.html#autotoc_md15',1,'8. Developer Mode Activation']]]
 ];
