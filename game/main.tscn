@@ -1,22 +1,80 @@
-[gd_scene load_steps=8 format=4 uid="uid://t81mvpjh4g0i"]
+[gd_scene load_steps=17 format=4 uid="uid://t81mvpjh4g0i"]
 
-[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_166wb"]
+[ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://assets/sprites/idle.png" id="1_r5rym"]
 [ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
+[ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://assets/sprites/idleAir.png" id="2_mr3gu"]
+[ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://assets/sprites/run.png" id="2_u38up"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
 font_size = 12
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uij6s"]
+atlas = ExtResource("1_r5rym")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti3pq"]
+atlas = ExtResource("1_r5rym")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d50ub"]
+atlas = ExtResource("2_mr3gu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i4ca"]
+atlas = ExtResource("2_u38up")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh6go"]
+atlas = ExtResource("2_u38up")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq0k2"]
+atlas = ExtResource("2_u38up")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tatop"]
+atlas = ExtResource("2_u38up")
+region = Rect2(0, 32, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_dg4uw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_166wb")
+"texture": SubResource("AtlasTexture_uij6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti3pq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d50ub")
+}],
+"loop": true,
+"name": &"idleAir",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i4ca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh6go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tq0k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tatop")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f34b"]
@@ -62,33 +120,25 @@ offset_top = 40.0
 offset_right = 240.0
 offset_bottom = 185.0
 text = "Speed: 0
-VelocityX: 0
-VelocityY: 0
+axis: 0
+Velocity: 0
 input direction: 0
-isAirborne: false
-Blast Strength: 500
 "
 label_settings = SubResource("LabelSettings_qjkly")
 
 [node name="PlayerController" type="PlayerController" parent="."]
-maxGroundSpeed = 60
-groundAccel = 4.0
 groundDecel = 6.0
-groundFriction = 0.97
-gravity = 7.5
-maxAirSpeed = 1000
-maxFallSpeed = 750
-airFriction = 0.6
-blastStrength = 500.0
 position = Vector2(528.937, 303.797)
 scale = Vector2(0.54, 0.54)
 collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerController"]
-position = Vector2(-1.85181, 0.510936)
-scale = Vector2(0.0289352, 0.0289352)
+position = Vector2(-1.85181, -1.34094)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_dg4uw")
-animation = &"walk"
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.251023
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
 position = Vector2(-1.85187, 0.440918)
