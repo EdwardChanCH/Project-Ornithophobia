@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://vkvs2gtr8dpu"]
+
+[ext_resource type="Texture2D" uid="uid://p54crqw1ykai" path="res://assets/sprites/test_logo.png" id="1_eka1x"]
+[ext_resource type="Texture2D" uid="uid://bdoph3cvti204" path="res://assets/sprites/bird.png" id="2_b5gw1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 200.0
+offset_right = 201.0
+offset_bottom = 336.0
+
+[node name="PlayButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+text = "Play"
+
+[node name="WorkshopButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Workshop"
+
+[node name="SettingsButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../PlayButton")
+text = "Exit"
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 280.0
+offset_bottom = 104.0
+texture = ExtResource("1_eka1x")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Bird" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 287.0
+offset_right = 640.0
+offset_bottom = 352.0
+texture = ExtResource("2_b5gw1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MainMenuController" type="MainMenuController" parent="."]
+
+[connection signal="pressed" from="ButtonContainer/PlayButton" to="MainMenuController" method="on_play_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/WorkshopButton" to="MainMenuController" method="on_workshop_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/SettingsButton" to="MainMenuController" method="on_settings_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/ExitButton" to="MainMenuController" method="on_exit_button_pressed"]

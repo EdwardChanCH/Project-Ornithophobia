@@ -15,7 +15,7 @@ gradient = SubResource("Gradient_bryre")
 [node name="Example" type="Node2D"]
 
 [node name="GDExample1Old" type="GDExample1Old" parent="."]
-position = Vector2(7.63599, 15.6992)
+position = Vector2(0.771387, 19.9538)
 texture = SubResource("GradientTexture2D_gklm2")
 centered = false
 
@@ -24,13 +24,13 @@ offset_left = 100.0
 offset_right = 304.0
 offset_bottom = 23.0
 text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-visible_characters = 20
-visible_ratio = 0.807692
+visible_characters = 3
+visible_ratio = 0.115385
 
 [node name="GDExample1New" type="GDExample1New" parent="."]
 amplitude = 2.5
 speed = 5.0
-position = Vector2(0.176023, 2.7734)
+position = Vector2(3.48725, 4.71641)
 texture = SubResource("GradientTexture2D_a1dmo")
 centered = false
 offset = Vector2(0, 100)
@@ -41,8 +41,8 @@ offset_top = 100.0
 offset_right = 192.0
 offset_bottom = 123.0
 text = "0123456789"
-visible_characters = 1
-visible_ratio = 0.1
+visible_characters = 7
+visible_ratio = 0.7
 
 [connection signal="position_changed_signal" from="GDExample1Old" to="GDExample2Old" method="_on_gd_example_1_old_position_changed_signal"]
 [connection signal="position_changed_signal" from="GDExample1New" to="GDExample2New" method="print_received_signal"]

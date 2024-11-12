@@ -8,6 +8,7 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
+// #include <../timecontroller.h>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
@@ -44,11 +45,18 @@ namespace godot {
         float airFriction;
 
         // Blast variables
-        float blastStrength = 250;
+        float blastStrength;
         int smallBlastStrength = 250;
         int largeBlastStrength = 750;
+        int maxSmallBlastSpeed = 375;
+        int maxLargeBlastSpeed = 500;
         long blastTime;
         long lastBlastTime;
+
+        // Misc.
+        float timeSlowValue;
+        bool canSlowTime;
+        Input *input = Input::get_singleton();
 
 
     protected:
@@ -62,6 +70,8 @@ namespace godot {
         ~PlayerController();
 
         void _process(double delta) override;
+        void set_game_speed(float gameSpeed);
+        void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
 
         // getters/setters
 
