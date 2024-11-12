@@ -45,10 +45,11 @@ namespace godot {
         float airFriction;
 
         // Blast variables
-        float blastStrength = 250;
+        float blastStrength;
         int smallBlastStrength = 250;
         int largeBlastStrength = 750;
         int maxSmallBlastSpeed = 375;
+        int maxLargeBlastSpeed = 500;
         long blastTime;
         long lastBlastTime;
 
@@ -70,7 +71,7 @@ namespace godot {
 
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
-        void updateSmallBlastVelocity(float *blastDir, float *vel, String direction="");
+        void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
 
         // getters/setters
 
