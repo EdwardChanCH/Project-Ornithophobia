@@ -17,6 +17,10 @@ using namespace godot;
  * 
  */
 void LevelEditor::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("_on_file_button_pressed"), &LevelEditor::_on_file_button_pressed);
+    ClassDB::bind_method(D_METHOD("_on_edit_button_pressed"), &LevelEditor::_on_edit_button_pressed);
+    ClassDB::bind_method(D_METHOD("_on_tile_button_pressed"), &LevelEditor::_on_tile_button_pressed);
+    ClassDB::bind_method(D_METHOD("_on_entity_button_pressed"), &LevelEditor::_on_entity_button_pressed);
 }
 
 /**
@@ -51,4 +55,20 @@ _GDEXPORT_SET_SUFFIX
  * @param delta Delta time
  */
 void LevelEditor::_process(double delta) {
+}
+
+void LevelEditor::_on_file_button_pressed() {
+    godot::UtilityFunctions::print("File button pressed.");
+}
+
+void LevelEditor::_on_edit_button_pressed() {
+    godot::UtilityFunctions::print("Edit button pressed.");
+}
+
+void LevelEditor::_on_tile_button_pressed() {
+    godot::UtilityFunctions::print("Tile button pressed.");
+}
+
+void LevelEditor::_on_entity_button_pressed() {
+    godot::UtilityFunctions::print("Entity button pressed.");
 }

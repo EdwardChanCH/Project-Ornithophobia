@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://d4hbtib40lb67"]
+
+[node name="LevelEditor" type="LevelEditor"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopMenuBar" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FileButton" type="Button" parent="CanvasLayer/TopMenuBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "File"
+
+[node name="EditButton" type="Button" parent="CanvasLayer/TopMenuBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit"
+
+[node name="TileButton" type="Button" parent="CanvasLayer/TopMenuBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile"
+
+[node name="EntityButton" type="Button" parent="CanvasLayer/TopMenuBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Entity"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TopMenuBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[connection signal="pressed" from="CanvasLayer/TopMenuBar/FileButton" to="." method="_on_file_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopMenuBar/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopMenuBar/TileButton" to="." method="_on_tile_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TopMenuBar/EntityButton" to="." method="_on_entity_button_pressed"]
