@@ -9,6 +9,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("exit_temp"):
-		get_tree().quit()
+		get_tree().change_scene_to_file("res://main_menu.tscn")
 	pass
 	

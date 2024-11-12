@@ -158,7 +158,13 @@ void PlayerController::_process(double _delta) {
 
     // Set horizontal speed to 0 if touching wall
     if (is_on_wall()) {
-        speed = Math::clamp(speed, -groundAccel, groundAccel);
+        if (input->is_action_pressed("move_left"))
+            speed = groundAccel;
+        else if (input->is_action_pressed("move_right"))
+            speed = -groundAccel;
+        else
+            speed = 0;
+        // speed = Math::clamp(speed, -groundAccel, groundAccel);
     }
 
     // If the current velocity and input direction have different signs, decelerate and turn around
@@ -169,11 +175,16 @@ void PlayerController::_process(double _delta) {
         velocity.x = movementDirection.x * speed;
     }
 
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+
+
     // Start timer when blast button just pressed
     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
         blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
-        canSlowTime = true;
+        canSlowTime = input->is_action_just_pressed("large_blast");
+        set_game_speed(1);
     }
 
     // Buffer for activating slow motion on large blasts
@@ -185,8 +196,6 @@ void PlayerController::_process(double _delta) {
         if (curTime - blastTime >= 100 && canSlowTime && isAirborne) {
             set_game_speed(timeSlowValue);
             // timeController->set_game_speed(0.5);
-        } else if (!canSlowTime || !isAirborne) {
-            set_game_speed(1);
         }
     }
 
@@ -216,8 +225,8 @@ void PlayerController::_process(double _delta) {
             isAirborne = true;
             blastTime = 0;
             lastBlastTime = Time::get_singleton()->get_ticks_msec();
-            canSlowTime = false;
-            set_game_speed(1);
+            // canSlowTime = false;
+            // set_game_speed(1);
         }
     }
 
@@ -239,6 +248,10 @@ void PlayerController::_process(double _delta) {
             
         }
     }
+
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    
     
     // Apply gravity
     if (isAirborne) {
@@ -255,6 +268,10 @@ void PlayerController::_process(double _delta) {
     } else {
         fallSpeed = 0;
         velocity.y = 0;
+    }
+
+    if (!input->is_action_pressed("large_blast") || !canSlowTime || !isAirborne) {
+        set_game_speed(1);
     }
 
     int screenWrapBuffer = 16;
@@ -287,6 +304,7 @@ void PlayerController::_process(double _delta) {
     debugNode->set_text(debugText);
     
     move_and_slide();
+    
 }
 
 void PlayerController::set_game_speed(float gameSpeed) {
