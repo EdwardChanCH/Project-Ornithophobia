@@ -17,9 +17,7 @@ printf "> Setting: 64-bit Windows, Debug mode\n"
 input='r'
 while [[ $input == [rR] ]]
 do
-    printf "\n> Generating 'register_types.cpp' with Python...\n"
-    python generate_register_types_cpp.py
-    printf "Done. (exit code: %d)\n" $?
+    
 
     printf "\n> Compiling GDExtension modules with SCon...\n"
     scons platform=windows target=template_debug debug_symbols=yes

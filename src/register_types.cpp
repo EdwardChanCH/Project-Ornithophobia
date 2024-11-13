@@ -13,6 +13,7 @@
 #include "gdexample_1_old.h"
 #include "gdexample_2_new.h"
 #include "gdexample_2_old.h"
+#include "debug.h"
 #include "debug_controller.h"
 #include "level_controller.h"
 #include "timecontroller.h"
@@ -22,6 +23,8 @@
 
 // Everything in GDExtension is defined within the namespace "godot".
 using namespace godot;
+
+static Debug *_debug;
 
 // Load GDExtension's "custom" module, called by Godot.
 void initialize_custom_module(ModuleInitializationLevel p_level) {
@@ -35,12 +38,15 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);
     GDREGISTER_CLASS(GDExample2Old);
+    GDREGISTER_CLASS(Debug)
     GDREGISTER_CLASS(DebugController);
     GDREGISTER_CLASS(LevelController);
     GDREGISTER_CLASS(TimeController);
     GDREGISTER_CLASS(MainMenuController);
     GDREGISTER_CLASS(PlayerController);
     /*--------------------------------------------------*/
+
+    Engine::get_singleton()->register_singleton("Debug", Debug::get_singleton());
 }
 
 // Unload GDExtension's "custom" module, called by Godot.
@@ -48,6 +54,9 @@ void uninitialize_custom_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+    Engine::get_singleton()->unregister_singleton("Debug");
+    memfree(_debug);
 }
 
 // This specifies that the function is defined elsewhere and uses the C-language calling convention.

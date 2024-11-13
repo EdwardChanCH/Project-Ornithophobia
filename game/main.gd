@@ -1,11 +1,16 @@
 extends Node2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#var scene = load("res://debug.tscn")
 	#var instance = scene.instantiate()
 	#add_child(instance)
+	pass
+
+
+func _exit_tree() -> void:
+	#var debug = find_child("DebugController", true, false)
+	#debug.queue_free()
 	pass
 
 

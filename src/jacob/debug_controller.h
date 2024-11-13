@@ -23,6 +23,7 @@ namespace godot {
 		~DebugController();
 
 		virtual void _ready() override;
+		virtual void _exit_tree() override;
 
 		void add_debug_property(String name, Variant value);
 

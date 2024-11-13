@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=4 uid="uid://t81mvpjh4g0i"]
+[gd_scene load_steps=5 format=4 uid="uid://t81mvpjh4g0i"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_fg7lr"]
 [ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://player_controller.tscn" id="2_jduqa"]
 
@@ -21,7 +20,6 @@ physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_ktjqj")
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_fg7lr")
 
 [node name="LevelController" type="LevelController" parent="."]
 

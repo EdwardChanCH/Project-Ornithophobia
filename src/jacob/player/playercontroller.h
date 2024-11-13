@@ -9,10 +9,11 @@
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
 // #include <../timecontroller.h>
-#include <../debug_controller.h>
+#include "debug_controller.h"
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
+#include "debug.h"
 
 namespace godot {
 
@@ -24,7 +25,7 @@ namespace godot {
     private:
         // Debug variables
         Ref<PackedScene> debugScene;
-        DebugController* debugInstance;
+        DebugController *debugInstance;
 
         // Ref<Debug> debug = Ref<Debug>(Engine::get_singleton()->get_singleton("Debug"));
 
@@ -69,6 +70,7 @@ namespace godot {
 
     public:
         virtual void _ready() override;
+        virtual void _exit_tree() override;
 
         PlayerController();
         ~PlayerController();

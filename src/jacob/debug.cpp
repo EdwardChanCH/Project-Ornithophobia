@@ -25,9 +25,9 @@ Debug::~Debug() {
 }
 
 void Debug::add_debug_property(String name, String value, int order) {
-    Label *target;
+    // Label *target;
 
-    // UtilityFunctions::print("working!!!!");
+    UtilityFunctions::print("working!!!!");
 
     // target.set_name(name);
     // target.set_text(name + ": " + value);

@@ -29,6 +29,6 @@ void LevelController::_ready() {
 }
 
 void LevelController::_exit_tree() {
-    remove_child(debugInstance);
-    debugInstance->queue_free();
+    // remove_child(debugInstance);
+    // debugInstance->queue_free();
 }
