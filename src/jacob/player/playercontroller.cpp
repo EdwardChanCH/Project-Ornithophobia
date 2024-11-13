@@ -80,11 +80,20 @@ _GDEXPORT_SET(maxLargeBlastSpeed)
 _GDEXPORT_SET(timeSlowValue)
 _GDEXPORT_SET_SUFFIX
 
-// Ref<TimeController> timeController = Ref<TimeController>(Engine::get_singleton()->get_singleton("TimeController"));
-
 void PlayerController::_ready() {
-    set_process(true);
-    debugNode = get_node<Label>("../UI/debug/speed");
+    if (Engine::get_singleton()->is_editor_hint())
+        set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
+    else
+        set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
+    // debugNode = get_node<DebugController>("../CanvasLayer/DebugContainer/DebugContainer");
+    // debugScene = ResourceLoader::get_singleton()->load("res://debug.tscn");
+    // debugInstance = debugScene->instantiate();
+    // Debug::get_singleton()->add_debug_property("Speed", "test", 0);
+    debugScene = ResourceLoader::get_singleton()->load("res://debug.tscn");
+    debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
+    
+    get_parent()->call_deferred("add_child", debugInstance);
+
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
     canSlowTime = true;
@@ -259,19 +268,28 @@ void PlayerController::_process(double _delta) {
     set_velocity(velocity);
     
     // Debug log
-    String debugText = "";
-    debugText += "Speed: " + String::num(speed) + "\n";
-    debugText += "VelocityX: " + String::num(get_velocity().x) + "\n";
-    debugText += "VelocityY: " + String::num(velocity.y) + "\n";
-    debugText += "input direction: " + String::num(inputDirection.x) + "\n";
-    debugText += "movement direction: " + String::num(movementDirection.x) + "\n";
-    String isAirborneStr = isAirborne ? "true" : "false";
-    debugText += "isAirborne: " + isAirborneStr + "\n";
-    debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
-    debugText += "Air Decel: " + String::num(airDecel) + "\n";
+    debugInstance->add_debug_property("speed", speed);
+    debugInstance->add_debug_property("velocityX", get_velocity().x);
+    debugInstance->add_debug_property("velocityY", velocity.y);
+    debugInstance->add_debug_property("inputDirection", inputDirection.x);
+    debugInstance->add_debug_property("movementDirection", movementDirection.x);
+    debugInstance->add_debug_property("isAirborne", isAirborne);
+    debugInstance->add_debug_property("blastStrength", blastStrength);
+    debugInstance->add_debug_property("airDecel", airDecel);
+
+    // String debugText = "";
+    // debugText += "Speed: " + String::num(speed) + "\n";
+    // debugText += "VelocityX: " + String::num(get_velocity().x) + "\n";
+    // debugText += "VelocityY: " + String::num(velocity.y) + "\n";
+    // debugText += "input direction: " + String::num(inputDirection.x) + "\n";
+    // debugText += "movement direction: " + String::num(movementDirection.x) + "\n";
+    // String isAirborneStr = isAirborne ? "true" : "false";
+    // debugText += "isAirborne: " + isAirborneStr + "\n";
+    // debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
+    // debugText += "Air Decel: " + String::num(airDecel) + "\n";
     
-    // Set debug label text
-    debugNode->set_text(debugText);
+    // // Set debug label text
+    // debugNode->set_text(debugText);
     
     // Move the player
     move_and_slide();

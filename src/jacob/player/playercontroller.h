@@ -9,6 +9,7 @@
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
 // #include <../timecontroller.h>
+#include <../debug_controller.h>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
@@ -22,7 +23,10 @@ namespace godot {
 
     private:
         // Debug variables
-        Label *debugNode;
+        Ref<PackedScene> debugScene;
+        DebugController* debugInstance;
+
+        // Ref<Debug> debug = Ref<Debug>(Engine::get_singleton()->get_singleton("Debug"));
 
         // General movement variables
         float speed;
