@@ -36,13 +36,13 @@ def generate_file(class_name, file_extension):
     # Find the template file
     file_extension = file_extension.lower()
     if file_extension in [".h", ".cpp"]:
-        format_file = "custom_class_format" + file_extension
-        output_file = ".\\src\\" + names[0] + file_extension
+        FORMAT_FILE = "custom_class_format" + file_extension
+        OUTPUT_FILE = ".\\src\\" + names[0] + file_extension
     else:
         return # Invalid file extension
 
     # Read/ Copy from the format file. Write to the header file
-    with open(format_file, mode="r", encoding="utf-8") as formatter, open(output_file, mode="w", encoding="utf-8") as output:
+    with open(FORMAT_FILE, mode="r", encoding="utf-8") as formatter, open(OUTPUT_FILE, mode="w", encoding="utf-8") as output:
         for line in formatter:
             # Reset head to start of the line
             head = 0
