@@ -89,10 +89,6 @@ void PlayerController::_ready() {
         debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
         get_parent()->call_deferred("add_sibling", debugInstance);
     }
-    // debugNode = get_node<DebugController>("../CanvasLayer/DebugContainer/DebugContainer");
-    // debugScene = ResourceLoader::get_singleton()->load("res://debug.tscn");
-    // debugInstance = debugScene->instantiate();
-    // Debug::get_singleton()->add_debug_property("Speed", "test", 0);
 
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
@@ -101,22 +97,9 @@ void PlayerController::_ready() {
 }
 
 void PlayerController::_exit_tree() {
-    // ResourceLoader::get_singleton()->free()
-    // get_parent()->remove_child(debugInstance);
-    // get_tree()->get_root()->find_child("DebugController2")->queue_free();
-    // debugInstance->queue_free();
-    // debugScene->unreference();
 }
 
 void PlayerController::_process(double _delta) {
-
-    if (input->is_action_just_pressed("exit_temp")) {
-        debugInstance->queue_free();
-        // debugScene->;
-        
-        get_tree()->change_scene_to_file("res://main_menu.tscn");
-    }
-
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
@@ -140,8 +123,8 @@ void PlayerController::_process(double _delta) {
         }
         // If inputting the opposite direction the player is moving in, decelerate smoothly
         else if ((get_velocity().x < 0 && inputDirection.x == 1) || (get_velocity().x > 0 && inputDirection.x == -1)) {
-            speed -= groundDecel;
-            speed -= isAirborne ? groundAccel + groundDecel / airFriction : groundAccel + groundDecel / groundFriction;
+            // speed -= groundDecel;
+            speed -= isAirborne ? groundDecel / airFriction : groundAccel + groundDecel / groundFriction;
         }
             
     }
@@ -215,12 +198,7 @@ void PlayerController::_process(double _delta) {
 
 
     // Start timer when blast button just pressed
-    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
-        // debugInstance->queue_free();
-        // debugScene->unreference();
-        
-        Debug::get_singleton()->add_debug_property("test", "1", 0);
-        
+    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {        
         blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
         canSlowTime = input->is_action_just_pressed("large_blast");
@@ -290,6 +268,7 @@ void PlayerController::_process(double _delta) {
     
     // Debug log
     if (!debugInstance->is_queued_for_deletion()) {
+        debugInstance->add_debug_property("FPS", UtilityFunctions::snappedf((1.0 / delta), 0.01));
         debugInstance->add_debug_property("speed", speed);
         debugInstance->add_debug_property("velocityX", get_velocity().x);
         debugInstance->add_debug_property("velocityY", velocity.y);
@@ -318,6 +297,13 @@ void PlayerController::_process(double _delta) {
     // Move the player
     move_and_slide();
     
+    if (input->is_action_just_pressed("exit_temp")) {
+        debugInstance->queue_free();
+        // debugScene->;
+        
+        get_tree()->change_scene_to_file("res://main_menu.tscn");
+    }
+
 }
 
 void PlayerController::set_game_speed(float gameSpeed) {

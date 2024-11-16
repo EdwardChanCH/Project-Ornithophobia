@@ -7,7 +7,7 @@ using namespace godot;
 
 // Binding function for exposing methods/ properties to Godot. 
 void DebugController::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("add_debug_property"), &DebugController::add_debug_property);
+	ClassDB::bind_method(D_METHOD("add_debug_property", "name", "value"), &DebugController::add_debug_property);
 }
 
 // Constructor. 
@@ -16,7 +16,6 @@ DebugController::DebugController() {
 
 // Destructor. 
 DebugController::~DebugController() {
-	// memfree(debugText);
 }
 
 void DebugController::_ready() {
@@ -43,10 +42,4 @@ void DebugController::add_debug_property(String name, Variant value) {
 }
 
 void DebugController::_exit_tree() {
-	// for (int i = 0; i < property_container->get_child_count(); i++) {
-	// 	property_container->get_child(i)->queue_free();
-	// 	property_container->remove_child(property_container->get_child(i));
-	// }
-	// property_container->queue_free();
-	// debugText->queue_free();
 }

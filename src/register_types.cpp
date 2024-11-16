@@ -38,7 +38,7 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);
     GDREGISTER_CLASS(GDExample2Old);
-    GDREGISTER_CLASS(Debug)
+    GDREGISTER_CLASS(Debug);
     GDREGISTER_CLASS(DebugController);
     GDREGISTER_CLASS(LevelController);
     GDREGISTER_CLASS(TimeController);

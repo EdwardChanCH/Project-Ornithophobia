@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcypmvbf3y6rg"]
+[gd_scene load_steps=3 format=3 uid="uid://bcypmvbf3y6rg"]
 
 [ext_resource type="Theme" uid="uid://cqpv5wh24ymef" path="res://ui/themes/debug.tres" id="1_dm2dt"]
+[ext_resource type="Script" path="res://debug.gd" id="2_diooc"]
 
-[node name="DebugController2" type="DebugController"]
+[node name="DebugController" type="DebugController"]
 
 [node name="DebugContainer" type="PanelContainer" parent="."]
 offset_left = 40.0
@@ -10,6 +11,7 @@ offset_top = 40.0
 offset_right = 192.0
 offset_bottom = 217.0
 theme = ExtResource("1_dm2dt")
+script = ExtResource("2_diooc")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugContainer"]
 layout_mode = 2

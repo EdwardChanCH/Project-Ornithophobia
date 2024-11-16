@@ -5,6 +5,7 @@ func _ready() -> void:
 	#var scene = load("res://debug.tscn")
 	#var instance = scene.instantiate()
 	#add_child(instance)
+	#Debug.add_debug_property("test", "test", 1)
 	pass
 
 

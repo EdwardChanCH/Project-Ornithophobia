@@ -21,7 +21,7 @@ namespace godot {
     public:
         static Debug *get_singleton();
 
-        PanelContainer debugContainer;
+        Dictionary *debugProperties = memnew(Dictionary());
 
         Debug();
         ~Debug();

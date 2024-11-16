@@ -13,7 +13,7 @@
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
-#include "debug.h"
+// #include "debug.h"
 
 namespace godot {
 
