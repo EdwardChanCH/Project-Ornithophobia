@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 
-env = SConscript("./godot-cpp/SConstruct")
+env = SConscript("godot-cpp/SConstruct")
 
 # For reference:
 # - CCFLAGS are compilation flags shared between C and C++
@@ -11,25 +11,30 @@ env = SConscript("./godot-cpp/SConstruct")
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
 
-def list_subdirectories(directory):
-    """
-    Return a list of sub-directories, including the input directory. 
-    """
-    return [os.path.relpath(root).replace("\\", "/") + "/" for (root, dirs, files) in os.walk(directory)]
+# Tweak this if you want to use different folders, or more folders, to store your source code in.
+# env.Append(CPPPATH=["src/"])
+# sources = Glob("src/*.cpp")
 
-# Tweaked this to allow storing source code in sub-directories; original code (non-recursive):
-#   env.Append(CPPPATH=["src/"])
-#   sources = Glob("src/*.cpp")
+# Recursive search for subfolders in "src".
+subfolders = [os.path.relpath(root).replace("\\", "/") + "/" for (root, dirs, files) in os.walk("src")]
+if "src/gen/" in subfolders:
+    subfolders.remove("src/gen/") # exclude the folder of "doc_data.gen.cpp", or else SCons would crash
 
-subdirectories = list_subdirectories(".\\src")
-env.Append(CPPPATH=subdirectories)
-sources = [Glob(d + "*.cpp") for d in subdirectories]
+env.Append(CPPPATH=subfolders)
 
-# This code creates linking errors, for unknown reasons. 
-#if env["target"] in ["editor", "template_debug"]:
-#    doc_data = env.GodotCPPDocData("src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
-#    sources.append(doc_data)
+sources = []
+for d in subfolders:
+    sources.extend(Glob(d + "*.cpp"))
 
+# Link custom doc files to the Godot Editor.
+if env["target"] in ["editor", "template_debug"]:
+    try:
+        doc_data = env.GodotCPPDocData("src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
+        sources.extend(doc_data)
+    except AttributeError:
+        print("Not including class reference as we're targeting a pre-4.3 baseline.")
+
+# Library formats.
 if env["platform"] == "macos":
     library = env.SharedLibrary(
         "game/bin/libcs3307.{}.{}.framework/libcs3307.{}.{}".format(

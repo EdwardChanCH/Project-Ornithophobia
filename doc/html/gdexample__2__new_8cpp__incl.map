@@ -1,0 +1,9 @@
+<map id="src/gdexample/gdexample_2_new.cpp" name="src/gdexample/gdexample_2_new.cpp">
+<area shape="rect" id="Node000001" title="This example class receives a signal from a GDExampleNode and output some text to the terminal." alt="" coords="86,5,259,48"/>
+<area shape="rect" id="Node000002" href="$gdexample__2__new_8h.html" title="Header file." alt="" coords="103,96,242,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,49,175,80,170,80,170,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,171,151,213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="160,125,115,163,112,159,156,121"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="174,179,360,205"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="189,121,243,167,240,171,186,125"/>
+</map>
