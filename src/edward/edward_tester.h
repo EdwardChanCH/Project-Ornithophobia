@@ -13,6 +13,7 @@
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
+#include "globals.h" // Godot's built-in classes
 
 namespace godot {
 
