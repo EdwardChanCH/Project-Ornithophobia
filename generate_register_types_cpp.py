@@ -10,6 +10,7 @@ License:
 """
 
 import os
+import shutil
 
 def list_subdirectories(directory):
     """
@@ -23,11 +24,17 @@ def list_files(directory, file_extension):
     """
     return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f.endswith(file_extension)]
 
-def main():
+def backup_file(original_file, backup_file):
     """
-    Main method.
+    Creates a backup file.
     """
-        # List of files that should not be included/ registered
+    shutil.copyfile(os.path.abspath(original_file), os.path.abspath(backup_file))
+
+def generate_file(format_file, output_file):
+    """
+    Update the output file based on template. Include headers and registers classes (with a _bind_methods() declaration in .cpp file).
+    """
+    # List of files that should not be included/ registered
     BLACKLIST = [
             "register_types.h", 
             "register_types.cpp", 
@@ -39,6 +46,9 @@ def main():
     # Special token to indicate where to generating code
     # Tokens must be in a single-line comment, starting with "// " at the corrent indentation
     TOKEN = ">_<" # i.e. the face you make when you have to write boilerplate code
+
+    # Special boundary to look for existing included headers and registered classes
+    BOUNDARY = "/*--------------------------------------------------*/"
 
     # List of valid commands
     COMMANDS = [
@@ -68,14 +78,66 @@ def main():
             with open(os.path.join(d, f), mode="r", encoding="utf-8") as source:
                 # Extract the class name from the namespace of the static void _bind_methods() function, since it must be defined
                 for line in source:
-                    end = line.find("::_bind_methods()")
-                    start = line.find("void")
-                    if (end != -1) and (start != -1):
-                        classes.append(line[start + 4 : end].strip())
+                    tail = line.find("::_bind_methods()")
+                    head = line.find("void")
+                    if (tail != -1) and (head != -1):
+                        classes.append(line[head + 4 : tail].strip())
                         break
 
+    # Scan the format file for existing included headers and registered classes
+    with open(format_file, mode="r", encoding="utf-8") as formatter:
+        within_boundary = False
+        for line in formatter:
+            # Check for boundary
+            if (line.strip() == BOUNDARY):
+                within_boundary = not within_boundary
+
+            if within_boundary:
+                # Skip over any comment
+                pos = line.strip().find("//")
+                if (pos == 0):
+                    continue
+
+                # Find existing included headers
+                pos = line.find("#include")
+                if (pos != -1):
+                    # Extract header
+                    head = line.find("<", pos + len("#include"))
+                    if (head != -1):
+                        tail = line.find(">", head + 1)
+                    else:
+                        head = line.find("\"", pos + len("#include"))
+                        tail = line.find("\"", head + 1)
+
+                    # Exclude this header from being added (again)
+                    temp = line[head + 1 : tail].strip()
+                    print(">>" + temp + "<<")
+                    if temp in headers:
+                        headers.remove(temp)
+                    print(headers)
+                    continue
+                    
+                # Find existing registered classes
+                pos = line.find("GDREGISTER")
+                if (pos != -1):
+                    # Extract class
+                    head = line.find("(", pos + len("GDREGISTER"))
+                    tail = line.find(")", head + 1)
+                    
+                    # Exclude this class from being registered (again)
+                    temp = line[head + 1 : tail].strip()
+                    print(">>" + temp + "<<")
+                    if temp in classes:
+                        classes.remove(temp)
+                    print(classes)
+                    continue
+    
+    if (len(headers) == 0) and (len(classes) == 0):
+        # Nothing to update
+        return
+
     # Read/ Copy from the format file. Write to the header file
-    with open(".\\register_types_format.cpp", mode="r", encoding="utf-8") as formatter, open(".\\src\\register_types.cpp", mode="w", encoding="utf-8") as output:
+    with open(format_file, mode="r", encoding="utf-8") as formatter, open(output_file, mode="w", encoding="utf-8") as output:            
         for line in formatter:
             # Find the first token
             first = line.find(TOKEN)
@@ -111,11 +173,19 @@ def main():
 
             # Execute the command in this line
             if text == COMMANDS[0]:
+                output.write(line)
                 for t in headers:
                     output.write(prefix + t + suffix)
             elif text == COMMANDS[1]:
+                output.write(line)
                 for t in classes:
                     output.write(prefix + t + suffix)
+
+def main():
+    # generate_file(".\\register_types_format.cpp", ".\\src\\register_types.cpp")
+    
+    backup_file(".\\src\\register_types.cpp", ".\\_backup_register_types.cpp")
+    generate_file(".\\_backup_register_types.cpp", ".\\src\\register_types.cpp")
 
     # Program successfully finished
 
