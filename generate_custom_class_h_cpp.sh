@@ -15,4 +15,4 @@ printf "> Generating 'custom_class.h', 'custom_class.cpp' with Python...\n"
 python generate_custom_class_h_cpp.py
 printf "Done. (exit code: %d)\n" $?
 
-read -p "\n> Press 'Enter' to exit." -n 1 input
+read -p "> Press 'Enter' to exit." -n 1 input

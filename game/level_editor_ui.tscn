@@ -10,4 +10,11 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "Useless Button"
 
+[node name="DebugSceneManager" type="Button" parent="."]
+offset_top = 40.0
+offset_right = 181.0
+offset_bottom = 71.0
+text = "Debug Scene Manager"
+
 [connection signal="pressed" from="OpenEdwardMainButton" to="." method="_on_open_edward_main_button_pressed"]
+[connection signal="pressed" from="DebugSceneManager" to="." method="_on_debug_scene_manager_pressed"]
