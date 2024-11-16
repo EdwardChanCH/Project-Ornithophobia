@@ -1,25 +1,25 @@
 /**
- * @file edward_tester.h
- * @author Chun Ho Chan
- * @brief Header file.
- * @version 0.1.0
- * @date 2024-11-10
+ * @file edward_main.h
+ * @author
+ * @brief
+ * @version
+ * @date
  * 
  */
 
-#ifndef EDWARD_TESTER_H
-#define EDWARD_TESTER_H
+#ifndef EDWARD_MAIN_H
+#define EDWARD_MAIN_H
 
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes
-#include <godot_cpp/classes/node.hpp> // Bindings to the parent class
+#include <godot_cpp/classes/node2d.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
 
 namespace godot {
 
-	class EdwardTester : public Node {
+	class EdwardMain : public Node2D {
 		
-		GDCLASS(EdwardTester, Node) // A Godot macro for class inheritance
+		GDCLASS(EdwardMain, Node2D) // A Godot macro for class inheritance
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
@@ -28,10 +28,12 @@ namespace godot {
 		static void _bind_methods(); // Must be declared
 
 	public:
-		EdwardTester();
-		~EdwardTester();
+		EdwardMain();
+		~EdwardMain();
 
 		void _process(double delta) override;
+		
+		void _on_open_level_editor_button_pressed();
 	};
 
 } // namespace godot
