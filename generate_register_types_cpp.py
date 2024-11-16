@@ -111,10 +111,8 @@ def generate_file(format_file, output_file):
 
                     # Exclude this header from being added (again)
                     temp = line[head + 1 : tail].strip()
-                    print(">>" + temp + "<<")
                     if temp in headers:
                         headers.remove(temp)
-                    print(headers)
                     continue
                     
                 # Find existing registered classes
@@ -126,14 +124,13 @@ def generate_file(format_file, output_file):
                     
                     # Exclude this class from being registered (again)
                     temp = line[head + 1 : tail].strip()
-                    print(">>" + temp + "<<")
                     if temp in classes:
                         classes.remove(temp)
-                    print(classes)
                     continue
     
     if (len(headers) == 0) and (len(classes) == 0):
         # Nothing to update
+        print("No update needed.")
         return
 
     # Read/ Copy from the format file. Write to the header file
@@ -180,12 +177,25 @@ def generate_file(format_file, output_file):
                 output.write(line)
                 for t in classes:
                     output.write(prefix + t + suffix)
+    
+    if len(headers) > 0:
+        print("Included new headers:\n- " + "\n- ".join(headers) + "\n")
+    if len(classes):
+        print("Registered new classes:\n- " + "\n- ".join(classes) + "\n")
 
 def main():
-    # generate_file(".\\register_types_format.cpp", ".\\src\\register_types.cpp")
+    FORMAT_FILE = ".\\register_types_format.cpp"
+    OUTPUT_FILE = ".\\src\\register_types.cpp"
+    BACKUP_FILE = ".\\_backup_register_types.cpp"
     
-    backup_file(".\\src\\register_types.cpp", ".\\_backup_register_types.cpp")
-    generate_file(".\\_backup_register_types.cpp", ".\\src\\register_types.cpp")
+    if os.path.isfile(OUTPUT_FILE):
+        print("Backing up '" + OUTPUT_FILE + "' to '" + BACKUP_FILE + "' ...")
+        backup_file(OUTPUT_FILE, BACKUP_FILE)
+        print("Updating " + OUTPUT_FILE + " ...")
+        generate_file(BACKUP_FILE, OUTPUT_FILE)
+    else:
+        print("Creating '" + OUTPUT_FILE + "' using '" + FORMAT_FILE + "' ...")
+        generate_file(FORMAT_FILE, OUTPUT_FILE)
 
     # Program successfully finished
 
