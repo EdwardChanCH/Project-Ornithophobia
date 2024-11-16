@@ -1,9 +1,9 @@
 /**
  * @file scene_manager.cpp
- * @author
+ * @author Chun Ho Chan
  * @brief [Singleton Pattern --- Creational Design Patterns]
  * This class solely manages the transition between scenes in Godot.
- * @version 0.1.0
+ * @version 0.2.0
  * @date 2024-11-16
  * 
  */
@@ -71,6 +71,7 @@ SceneManager * SceneManager::get_instance() {
 }
 
 bool SceneManager::load_new_scene(SceneTree &sceneTree, const String &filepath) {
+    /*
     try {
         sceneStack->push_back(filepath);
         sceneTree.change_scene_to_file(filepath);
@@ -79,9 +80,11 @@ bool SceneManager::load_new_scene(SceneTree &sceneTree, const String &filepath) 
         UtilityFunctions::print("Error: Failed to load new scene from filepath.");
         return false;
     }
+    */
 }
 
 bool SceneManager::load_previous_scene(SceneTree &sceneTree) {
+    /*
     try {
         if (sceneStack->size() <= 0) {
             UtilityFunctions::print("Warning: No previous scene in stack.");
@@ -94,6 +97,7 @@ bool SceneManager::load_previous_scene(SceneTree &sceneTree) {
         UtilityFunctions::print("Error: Failed to load previous scene from filepath.");
         return false;
     }
+    */
 }
 
 void SceneManager::debug() {
