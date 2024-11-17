@@ -1,6 +1,6 @@
 /**
  * @file edward_main.cpp
- * @author
+ * @author Chun Ho Chan (Edward)
  * @brief
  * @version
  * @date
@@ -8,6 +8,7 @@
  */
 
 #include "edward_main.h"
+#include "scene_manager.h"
 
 // Everything in GDExtension is defined within the namespace "godot"
 using namespace godot;
@@ -34,18 +35,6 @@ EdwardMain::EdwardMain() {
 EdwardMain::~EdwardMain() {
 }
 
-// Export instance variables to the Godot Editor
-_GDEXPORT_ADD_PREFIX(EdwardMain)
-_GDEXPORT_ADD_SUFFIX
-
-// Getter(s) for exported instance variables in Godot Editor
-_GDEXPORT_GET_PREFIX(EdwardMain)
-_GDEXPORT_GET_SUFFIX
-
-// Setter(s) for exported instance variables in Godot Editor
-_GDEXPORT_SET_PREFIX(EdwardMain)
-_GDEXPORT_SET_SUFFIX
-
 /**
  * @brief Same as _process() in GDScript.
  * 
@@ -56,5 +45,6 @@ void EdwardMain::_process(double delta) {
 
 void EdwardMain::_on_open_level_editor_button_pressed() {
     UtilityFunctions::print("Changing scene to LevelEditor...");
-    get_tree()->change_scene_to_file("res://level_editor_ui.tscn");
+    SceneManager::get_instance()->load_new_scene(this->get_tree(), "res://level_editor_ui.tscn");
+    // get_tree()->change_scene_to_file("res://level_editor_ui.tscn");
 }

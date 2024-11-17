@@ -11,13 +11,16 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_open_edward_main_button_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	print("Changing scene to EdwardMain...")
-	get_tree().change_scene_to_file("res://edward_main.tscn")
+	SceneManager.get_instance().load_previous_scene(get_tree())
+	# get_tree().change_scene_to_file("res://edward_main.tscn")
 
 
 func _on_debug_scene_manager_pressed() -> void:
-	print(Engine.get_singleton_list())
-	SceneManager.get_instance().debug()
-	print(Engine.get_singleton_list())
-	print("Button pressed.")
+	SceneManager.get_instance()._debug()
+
+
+func _on_test_add_scene_pressed() -> void:
+	print("Adding scene to stack...")
+	SceneManager.get_instance().load_new_scene(get_tree(), "res://level_editor_ui.tscn")

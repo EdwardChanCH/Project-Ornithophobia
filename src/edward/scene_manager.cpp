@@ -1,7 +1,7 @@
 /**
  * @file scene_manager.cpp
- * @author Chun Ho Chan
- * @brief [Singleton Pattern --- Creational Design Patterns]
+ * @author Chun Ho Chan (Edward)
+ * @brief Singleton Pattern.
  * This class solely manages the transition between scenes in Godot.
  * @version 0.2.0
  * @date 2024-11-16
@@ -9,7 +9,6 @@
  */
 
 #include "scene_manager.h"
-#include <iostream>
 
 namespace godot {
     // Define static variables
@@ -26,9 +25,9 @@ using namespace godot;
  */
 void SceneManager::_bind_methods() {
     ClassDB::bind_static_method("SceneManager", D_METHOD("get_instance"), &SceneManager::get_instance);
-    //ClassDB::bind_method(D_METHOD("load_new_scene", "scene_tree", "filepath"), &SceneManager::load_new_scene);
-    //ClassDB::bind_method(D_METHOD("load_previous_scene", "scene_tree"), &SceneManager::load_previous_scene);
-    ClassDB::bind_method(D_METHOD("debug"), &SceneManager::debug);
+    ClassDB::bind_method(D_METHOD("load_new_scene", "scene_tree", "filepath"), &SceneManager::load_new_scene);
+    ClassDB::bind_method(D_METHOD("load_previous_scene", "scene_tree"), &SceneManager::load_previous_scene);
+    ClassDB::bind_method(D_METHOD("_debug"), &SceneManager::_debug);
 }
 
 /**
@@ -36,7 +35,7 @@ void SceneManager::_bind_methods() {
  * 
  */
 SceneManager::SceneManager() {
-    sceneStack = memnew(TypedArray<String>);
+    scene_stack = memnew(TypedArray<String>);
 }
 
 /**
@@ -50,7 +49,7 @@ SceneManager::~SceneManager() {
         singleton = nullptr;
     }
 
-    memdelete(sceneStack);
+    memdelete(scene_stack);
 }
 
 /**
@@ -70,42 +69,60 @@ SceneManager * SceneManager::get_instance() {
     return singleton;
 }
 
-bool SceneManager::load_new_scene(SceneTree &sceneTree, const String &filepath) {
-    /*
+bool SceneManager::load_new_scene(SceneTree *scene_tree, String filepath) {
     try {
-        sceneStack->push_back(filepath);
-        sceneTree.change_scene_to_file(filepath);
-        return true;
-    } catch (Error e) {
-        UtilityFunctions::print("Error: Failed to load new scene from filepath.");
-        return false;
-    }
-    */
-}
-
-bool SceneManager::load_previous_scene(SceneTree &sceneTree) {
-    /*
-    try {
-        if (sceneStack->size() <= 0) {
-            UtilityFunctions::print("Warning: No previous scene in stack.");
+        // Validate input
+        if (scene_tree == nullptr) {
+            UtilityFunctions::print("Error: Scene Tree cannot be null.");
             return false;
         }
-        String filepath = sceneStack->pop_back();
-        sceneTree.change_scene_to_file(filepath);
+
+        // Store current scene in stack
+        scene_stack->push_back(scene_tree->get_current_scene()->get_scene_file_path());
+
+        // Switch to new scene
+        scene_tree->change_scene_to_file(filepath);
         return true;
+
     } catch (Error e) {
-        UtilityFunctions::print("Error: Failed to load previous scene from filepath.");
+        UtilityFunctions::print("Error: Failed to load scene from filepath.");
         return false;
     }
-    */
 }
 
-void SceneManager::debug() {
-    UtilityFunctions::print("> Debugging SceneManager ... v1");
-    // for (int i = 0; i < sceneStack->size(); ++i) {
-    //     UtilityFunctions::print(sceneStack[i]);
-    // }
-    auto p = get_instance();
+bool SceneManager::load_previous_scene(SceneTree *scene_tree) {
+    String filepath;
 
+    try {
+        // Validate input
+        if (scene_tree == nullptr) {
+            UtilityFunctions::print("Error: Scene Tree cannot be null.");
+            return false;
+        }
+
+        if (scene_stack->size() > 0) {
+            // Pop previous scene
+            filepath = scene_stack->pop_back();
+        } else {
+            // No previous scene
+            return false;
+        }
+
+        // Switch to previus scene
+        scene_tree->change_scene_to_file(filepath);
+        return true;
+
+    } catch (Error e) {
+        UtilityFunctions::print("Error: Failed to load scene from filepath.");
+        return false;
+    }
+}
+
+void SceneManager::_debug() {
+    String output;
+
+    UtilityFunctions::print("> Debugging SceneManager ... v1");
+    for (int i = 0; i < scene_stack->size(); ++i)
+        UtilityFunctions::print((*scene_stack)[i]);
     UtilityFunctions::print("> End of debugging.");
 }

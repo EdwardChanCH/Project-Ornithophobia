@@ -1,10 +1,9 @@
 /**
  * @file scene_manager.h
- * @author
- * @brief [Singleton --- Creational Design Patterns]
- * This class solely manages the transition between scenes.
- * @version
- * @date
+ * @author Chun Ho Chan (Edward)
+ * @brief Header file.
+ * @version 0.2.0
+ * @date 2024-11-16
  * 
  */
 
@@ -24,7 +23,7 @@ namespace godot {
 
 	private:
 		static SceneManager * singleton;
-		TypedArray<String> * sceneStack;
+		TypedArray<String> * scene_stack;
 
 		SceneManager(); // Private Constructor
 		~SceneManager(); // Private Destructor
@@ -37,9 +36,9 @@ namespace godot {
 		// void operator=(const SceneManager &) = delete; // No assigning (keep this for Godot to work)
 		
 		static SceneManager * get_instance();
-		bool load_new_scene(SceneTree &sceneTree, const String &filepath);
-		bool load_previous_scene(SceneTree &sceneTree);
-		void debug();
+		bool load_new_scene(SceneTree *scene_tree, String filepath);
+		bool load_previous_scene(SceneTree *scene_tree);
+		void _debug();
 	};
 
 } // namespace godot
