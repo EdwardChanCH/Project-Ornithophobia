@@ -119,10 +119,11 @@ bool SceneManager::load_previous_scene(SceneTree *scene_tree) {
 }
 
 void SceneManager::_debug() {
-    String output;
+    UtilityFunctions::print("> Debug start.");
 
-    UtilityFunctions::print("> Debugging SceneManager ... v1");
+    UtilityFunctions::print("> Printing 'scene_stack':");
     for (int i = 0; i < scene_stack->size(); ++i)
         UtilityFunctions::print((*scene_stack)[i]);
-    UtilityFunctions::print("> End of debugging.");
+
+    UtilityFunctions::print("> Debug end.");
 }

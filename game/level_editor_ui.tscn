@@ -22,6 +22,48 @@ offset_right = 125.0
 offset_bottom = 111.0
 text = "Test Add Scene"
 
+[node name="TestAction1" type="Button" parent="."]
+offset_top = 120.0
+offset_right = 108.0
+offset_bottom = 151.0
+text = "Test Action 1"
+
+[node name="TestAction2" type="Button" parent="."]
+offset_top = 160.0
+offset_right = 108.0
+offset_bottom = 191.0
+text = "Test Action 2"
+
+[node name="TestAction3" type="Button" parent="."]
+offset_top = 200.0
+offset_right = 108.0
+offset_bottom = 231.0
+text = "Test Action 3"
+
+[node name="UndoButton" type="Button" parent="."]
+offset_top = 240.0
+offset_right = 108.0
+offset_bottom = 271.0
+text = "Undo Button"
+
+[node name="RedoButton" type="Button" parent="."]
+offset_top = 280.0
+offset_right = 105.0
+offset_bottom = 311.0
+text = "Redo Button"
+
+[node name="DebugLevelEditorController" type="Button" parent="."]
+offset_top = 320.0
+offset_right = 236.0
+offset_bottom = 351.0
+text = "Debug Level Editor Controller"
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="DebugSceneManager" to="." method="_on_debug_scene_manager_pressed"]
 [connection signal="pressed" from="TestAddScene" to="." method="_on_test_add_scene_pressed"]
+[connection signal="pressed" from="TestAction1" to="." method="_on_test_action_1_pressed"]
+[connection signal="pressed" from="TestAction2" to="." method="_on_test_action_2_pressed"]
+[connection signal="pressed" from="TestAction3" to="." method="_on_test_action_3_pressed"]
+[connection signal="pressed" from="UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="DebugLevelEditorController" to="." method="_on_debug_level_editor_controller_pressed"]

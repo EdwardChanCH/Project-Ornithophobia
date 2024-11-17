@@ -1,9 +1,9 @@
 /**
  * @file edward_main.cpp
  * @author Chun Ho Chan (Edward)
- * @brief
- * @version
- * @date
+ * @brief This main class is for testing Edward's systems.
+ * @version 0.1.0
+ * @date 2024-11-16
  * 
  */
 
