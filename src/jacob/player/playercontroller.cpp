@@ -85,9 +85,6 @@ void PlayerController::_ready() {
         set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
     else {
         set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
-        debugScene = ResourceLoader::get_singleton()->load("res://debug.tscn");
-        debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
-        get_parent()->call_deferred("add_sibling", debugInstance);
     }
 
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
@@ -267,42 +264,18 @@ void PlayerController::_process(double _delta) {
     set_velocity(velocity);
     
     // Debug log
-    if (!debugInstance->is_queued_for_deletion()) {
-        debugInstance->add_debug_property("FPS", UtilityFunctions::snappedf((1.0 / delta), 0.01));
-        debugInstance->add_debug_property("speed", speed);
-        debugInstance->add_debug_property("velocityX", get_velocity().x);
-        debugInstance->add_debug_property("velocityY", velocity.y);
-        debugInstance->add_debug_property("inputDirection", inputDirection.x);
-        debugInstance->add_debug_property("movementDirection", movementDirection.x);
-        debugInstance->add_debug_property("isAirborne", isAirborne);
-        debugInstance->add_debug_property("blastStrength", blastStrength);
-        debugInstance->add_debug_property("airDecel", airDecel);
-    }
-    
-
-    // String debugText = "";
-    // debugText += "Speed: " + String::num(speed) + "\n";
-    // debugText += "VelocityX: " + String::num(get_velocity().x) + "\n";
-    // debugText += "VelocityY: " + String::num(velocity.y) + "\n";
-    // debugText += "input direction: " + String::num(inputDirection.x) + "\n";
-    // debugText += "movement direction: " + String::num(movementDirection.x) + "\n";
-    // String isAirborneStr = isAirborne ? "true" : "false";
-    // debugText += "isAirborne: " + isAirborneStr + "\n";
-    // debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
-    // debugText += "Air Decel: " + String::num(airDecel) + "\n";
-    
-    // // Set debug label text
-    // debugNode->set_text(debugText);
+    Debug::get_singleton()->add_debug_property("FPS", UtilityFunctions::snappedf((1.0 / delta), 0.01));
+    Debug::get_singleton()->add_debug_property("speed", speed);
+    Debug::get_singleton()->add_debug_property("velocityX", get_velocity().x);
+    Debug::get_singleton()->add_debug_property("velocityY", velocity.y);
+    Debug::get_singleton()->add_debug_property("inputDirection", inputDirection.x);
+    Debug::get_singleton()->add_debug_property("movementDirection", movementDirection.x);
+    Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
+    Debug::get_singleton()->add_debug_property("blastStrength", blastStrength);
+    Debug::get_singleton()->add_debug_property("airDecel", airDecel);
     
     // Move the player
     move_and_slide();
-    
-    if (input->is_action_just_pressed("exit_temp")) {
-        debugInstance->queue_free();
-        // debugScene->;
-        
-        get_tree()->change_scene_to_file("res://main_menu.tscn");
-    }
 
 }
 

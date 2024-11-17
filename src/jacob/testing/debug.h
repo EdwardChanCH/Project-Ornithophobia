@@ -17,16 +17,19 @@ namespace godot {
     protected:
         // this function must be declared.
         static void _bind_methods();
-
-    public:
-        static Debug *get_singleton();
-
-        Dictionary *debugProperties = memnew(Dictionary());
+    
+    private:
+        Dictionary *debugProperties;
 
         Debug();
         ~Debug();
 
-        void add_debug_property(String name, String value, int order);
+    public:
+        Debug(Debug &other) = delete;
+
+        static Debug *get_singleton();
+        void add_debug_property(String name, Variant value);
+        Dictionary *get_debug_properties();
     };
 
 }

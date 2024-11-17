@@ -4,6 +4,7 @@
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes. 
 #include "globals.h"
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code. 
+#include "debug.h"
 
 namespace godot {
 
@@ -17,6 +18,7 @@ namespace godot {
     private:
         VBoxContainer *property_container;
 		Label *debugText;
+		Dictionary *properties;
 
 	public:
 		DebugController();
@@ -25,7 +27,7 @@ namespace godot {
 		virtual void _ready() override;
 		virtual void _exit_tree() override;
 
-		void add_debug_property(String name, Variant value);
+		void _process(double delta) override;
 
 	};
 

@@ -30,18 +30,14 @@ maxSmallBlastSpeed = 100
 maxLargeBlastSpeed = 400
 timeSlowValue = 0.25
 process_mode = 4
-position = Vector2(166, 670.658)
-scale = Vector2(0.54, 0.54)
-collision_layer = 2
-velocity = Vector2(0, 750)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.85181, 0.510936)
-scale = Vector2(0.0289352, 0.0289352)
+position = Vector2(9.53674e-06, 9.53674e-06)
+scale = Vector2(0.015625, 0.015625)
 sprite_frames = SubResource("SpriteFrames_2dk60")
 animation = &"walk"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-1.85187, 0.440918)
-scale = Vector2(3, 3)
+position = Vector2(-5.78165e-06, -0.0377104)
+scale = Vector2(1.62, 1.62)
 shape = SubResource("RectangleShape2D_tvttb")
