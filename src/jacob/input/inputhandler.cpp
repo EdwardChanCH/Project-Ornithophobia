@@ -18,6 +18,7 @@ InputHandler::InputHandler() {
     MOVE_HORIZONTAL = memnew(GameAxis("move_left", "move_right"));
     SMALL_BLAST = memnew(GameInput("small_blast"));
     LARGE_BLAST = memnew(GameInput("large_blast"));
+    ESCAPE = memnew(GameInput("escape"));
 }
 
 InputHandler::~InputHandler() {
@@ -32,6 +33,7 @@ InputHandler::~InputHandler() {
     memdelete(MOVE_HORIZONTAL);
     memdelete(SMALL_BLAST);
     memdelete(LARGE_BLAST);
+    memdelete(ESCAPE);
 }
 
 InputHandler *InputHandler::get_singleton() {
@@ -45,7 +47,6 @@ InputHandler *InputHandler::get_singleton() {
 }
 
 bool InputHandler::is_move_input_pressed() {
-    UtilityFunctions::print("test");
     return MOVE_HORIZONTAL->get_value() != 0;
 }
 
@@ -55,4 +56,5 @@ void InputHandler::update_last_values() {
     MOVE_HORIZONTAL->update_last();
     SMALL_BLAST->update_last();
     LARGE_BLAST->update_last();
+    ESCAPE->update_last();
 }

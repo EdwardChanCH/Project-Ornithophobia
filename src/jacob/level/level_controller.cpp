@@ -25,11 +25,11 @@ void LevelController::_ready() {
     }
 }
 
-// void LevelController::_input(const Ref<InputEvent> &event) {
-//     if (event->is_action_pressed("exit_temp")) {
-//         get_tree()->change_scene_to_file("res://main_menu.tscn");
-//     }
-// }
+void LevelController::_input(const Ref<InputEvent> &event) {
+    if (event->is_action_pressed("escape")) {
+        get_tree()->change_scene_to_file("res://main_menu.tscn");
+    }
+}
 
 void LevelController::_exit_tree() {
     if (!Engine::get_singleton()->is_editor_hint())

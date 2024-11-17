@@ -30,6 +30,7 @@ namespace godot {
             GameAxis *MOVE_HORIZONTAL;
             GameInput *SMALL_BLAST;
             GameInput *LARGE_BLAST;
+            GameInput *ESCAPE;
 
             static InputHandler *get_singleton();
             bool is_move_input_pressed();
