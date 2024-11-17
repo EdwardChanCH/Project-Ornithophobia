@@ -25,7 +25,7 @@ namespace godot {
 
 		virtual void _ready() override;
 		virtual void _exit_tree() override;
-		virtual void _input(const Ref<InputEvent> &event) override;
+		// virtual void _input(const Ref<InputEvent> &event) override;
 
 	};
 

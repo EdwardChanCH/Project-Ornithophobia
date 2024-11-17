@@ -16,15 +16,15 @@ namespace godot {
         public:
             String id;
 
-            // GameInput();
+            GameInput();
             GameInput(String id);
             ~GameInput();
 
-            bool isJustPressed() const;
-            bool isJustReleased() const;
-            bool wasPressed() const;
-            bool isPressed() const;
-            void updateLast();
+            bool is_just_pressed() const;
+            bool is_just_released() const;
+            bool was_pressed() const;
+            bool is_pressed() const;
+            void update_last();
 
         private:
             bool lastValue = false;

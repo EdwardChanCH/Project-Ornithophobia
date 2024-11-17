@@ -15,6 +15,9 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 // #include ">_< headers_here >_<"
+#include "gameaxis.h"
+#include "gameinput.h"
+#include "inputhandler.h"
 #include "edward_tester.h"
 #include "level_editor.h"
 #include "gdexample_1_new.h"
@@ -24,7 +27,6 @@
 #include "debug.h"
 #include "debug_controller.h"
 #include "level_controller.h"
-#include "timecontroller.h"
 #include "mainmenu_controller.h"
 #include "playercontroller.h"
 /*--------------------------------------------------*/
@@ -45,6 +47,9 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
+    GDREGISTER_CLASS(GameAxis);
+    GDREGISTER_CLASS(GameInput);
+    GDREGISTER_CLASS(InputHandler);
     GDREGISTER_CLASS(EdwardTester);
     GDREGISTER_CLASS(LevelEditor);
     GDREGISTER_CLASS(GDExample1New);
@@ -54,7 +59,6 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(Debug);
     GDREGISTER_CLASS(DebugController);
     GDREGISTER_CLASS(LevelController);
-    GDREGISTER_CLASS(TimeController);
     GDREGISTER_CLASS(MainMenuController);
     GDREGISTER_CLASS(PlayerController);
     /*--------------------------------------------------*/

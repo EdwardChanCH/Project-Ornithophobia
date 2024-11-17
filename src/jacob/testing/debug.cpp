@@ -35,11 +35,12 @@ Debug *Debug::get_singleton() {
     return singleton;
 }
 
+/**
+ * 
+ */
 void Debug::add_debug_property(String name, Variant value) {
-    // UtilityFunctions::print(debugProperties);
     if (!debugProperties->has(name)) {
         debugProperties->get_or_add(name, value);
-        UtilityFunctions::print(name);
     } else {
         debugProperties->operator[](name) = value;
     }

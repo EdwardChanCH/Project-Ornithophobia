@@ -12,7 +12,7 @@
 // #include "debug_controller.h"
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
-// #include "inputhandler.h"
+#include "inputhandler.h"
 #include "debug.h"
 
 namespace godot {
@@ -55,7 +55,7 @@ namespace godot {
         // Misc.
         float timeSlowValue;
         bool canSlowTime;
-        Input *input = Input::get_singleton();
+        InputHandler *input = InputHandler::get_singleton();
 
 
     protected:

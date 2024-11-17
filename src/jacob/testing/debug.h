@@ -4,7 +4,6 @@
 #include <godot_cpp/core/class_db.hpp>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
-// #include "inputhandler.h"
 
 namespace godot {
 

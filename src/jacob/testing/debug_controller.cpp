@@ -18,11 +18,6 @@ DebugController::~DebugController() {
 }
 
 void DebugController::_ready() {
-	// if (Engine::get_singleton()->is_editor_hint())
-    //     set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
-    // else
-    //     set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
-	
 	properties = Debug::get_singleton()->get_debug_properties();
 	property_container = Node::cast_to<VBoxContainer>(find_child("VBoxContainer", true, false));
 	
@@ -52,9 +47,4 @@ void DebugController::_process(double _delta) {
 }
 
 void DebugController::_exit_tree() {
-	// for (int i = 0; i < property_container->get_child_count(); i++) {
-	// 	property_container->get_child(i)->queue_free();
-	// 	property_container->remove_child(property_container->get_child(i));
-	// }
-	// memdelete(debugText);
 }
