@@ -1,6 +1,7 @@
-extends Node2D
+extends Control
 
-var editor: LevelEditorController = LevelEditorController.new()
+
+static var editor: LevelEditorController = LevelEditorController.new()
 
 
 func test_print(s: String) -> void:
@@ -48,11 +49,14 @@ func _on_test_action_3_pressed() -> void:
 
 func _on_undo_button_pressed() -> void:
 	editor.undo_action()
+	pass
 
 
 func _on_redo_button_pressed() -> void:
 	editor.redo_action()
+	pass
 
 
 func _on_debug_level_editor_controller_pressed() -> void:
 	editor._debug()
+	pass

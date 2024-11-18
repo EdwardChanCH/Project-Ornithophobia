@@ -50,6 +50,7 @@ SceneManager::~SceneManager() {
     }
 
     memdelete(scene_stack);
+    scene_stack = nullptr;
 }
 
 /**

@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://level_editor_ui.gd" id="1_tfg5g"]
 
-[node name="LevelEditorUI" type="Node2D"]
+[node name="LevelEditorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_tfg5g")
 
 [node name="BackButton" type="Button" parent="."]
