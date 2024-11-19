@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ckwr3h0a031t8"]
+
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="1_ge1pn"]
+
+[resource]
+font = ExtResource("1_ge1pn")
+font_size = 8
+font_color = Color(0, 0, 0, 1)

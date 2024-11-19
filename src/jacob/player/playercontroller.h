@@ -8,8 +8,6 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
-// #include <../timecontroller.h>
-// #include "debug_controller.h"
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 #include "inputhandler.h"
@@ -72,8 +70,6 @@ namespace godot {
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
         void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
-
-        // getters/setters
 
     };
 

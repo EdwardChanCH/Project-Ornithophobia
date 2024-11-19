@@ -22,7 +22,7 @@ MainMenuController::~MainMenuController() {
 }
 
 void MainMenuController::on_play_button_pressed() {
-	get_tree()->change_scene_to_file("res://main.tscn");
+	get_tree()->change_scene_to_file("res://level_select.tscn");
 }
 
 void MainMenuController::on_workshop_button_pressed() {

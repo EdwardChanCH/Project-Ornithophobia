@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://5q6uva2ujhs"]
+
+[ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://ui/themes/level_icon_stylebox.tres" id="1_0hj0i"]
+[ext_resource type="Script" path="res://level_icon_collision.gd" id="2_al7c0"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="2_mh4rs"]
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="3_tykfs"]
+[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="5_xd555"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo5w1"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 4
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ovy3"]
+font = ExtResource("3_tykfs")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cxw3"]
+size = Vector2(120, 91)
+
+[node name="LevelIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 91.0
+mouse_filter = 2
+
+[node name="Border" type="Panel" parent="."]
+unique_name_in_owner = true
+clip_children = 2
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 91.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_0hj0i")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 116.0
+offset_bottom = 87.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mo5w1")
+
+[node name="LevelIcon" type="TextureRect" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_mh4rs")
+expand_mode = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(116, 24, 4, 24)
+width = 2.0
+default_color = Color(0.281187, 0.281187, 0.281187, 1)
+
+[node name="LevelTitle" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 26.0
+text = "LEVEL NAME"
+label_settings = SubResource("LabelSettings_6ovy3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rank" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 89.0
+offset_top = 60.0
+offset_right = 121.0
+offset_bottom = 92.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_xd555")
+stretch_mode = 4
+
+[node name="Area2D" type="Area2D" parent="." groups=["level_select"]]
+collision_layer = 2
+script = ExtResource("2_al7c0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(60, 45.5)
+shape = SubResource("RectangleShape2D_7cxw3")
+
+[connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_mouse_exited"]
