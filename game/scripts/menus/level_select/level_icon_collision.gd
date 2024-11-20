@@ -1,7 +1,7 @@
 extends Area2D
 
 
-var levelPopupScene = load("res://level_menu_popup.tscn")
+var levelPopupScene = load("res://scenes/level_menu_popup.tscn")
 var levelPopupInstance: Control
 
 
@@ -17,7 +17,7 @@ func _on_mouse_exited() -> void:
 	change_border_color(Color.BLACK)
 
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
 	if (event is InputEventMouseButton and event.is_action("left_click") and event.is_pressed()):
 		set_process_input(true)
 

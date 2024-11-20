@@ -45,3 +45,18 @@ func _on_last_level_button_pressed() -> void:
 	else:
 		Global.data_index -= 1
 	load_level(DIR_PATH + Global.level_data[Global.data_index])
+
+
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("ui_right")):
+		if (Global.data_index == len(Global.level_data) - 1):
+			Global.data_index = 0
+		else:
+			Global.data_index += 1
+		load_level(DIR_PATH + Global.level_data[Global.data_index])
+	elif (event.is_action_pressed("ui_left")):
+		if (Global.data_index == 0):
+			Global.data_index = len(Global.level_data) - 1
+		else:
+			Global.data_index -= 1
+		load_level(DIR_PATH + Global.level_data[Global.data_index])

@@ -4,9 +4,9 @@ const DIR_PATH = "user://levels/"
 
 var cur_level_popup_path = ""
 var temp_level_data = [
-	["Test Level 1", ["00:30.00", "00:45.00", "01:00.00"], "00:32.87", "res://assets/sprites/menu/test/test_level_icon.png", "res://main.tscn"],
-	["Test Level 2", ["00:23.00", "00:27.00", "00:30.00"], "00:16.31", "res://assets/sprites/menu/test/test_level_icon.png", "res://main.tscn"],
-	["Test Level 3", ["00:51.00", "01:15.00", "01:46.00"], "01:45.42", "res://assets/sprites/menu/test/test_level_icon.png", "res://main.tscn"]
+	["Test Level 1", ["00:30.00", "00:45.00", "01:00.00"], "00:32.87", "res://assets/sprites/menu/test/test_level_icon.png", "res://scenes/main.tscn"],
+	["Test Level 2", ["00:23.00", "00:27.00", "00:30.00"], "00:16.31", "res://assets/sprites/menu/test/test_level_icon.png", "res://scenes/main.tscn"],
+	["Test Level 3", ["00:51.00", "01:15.00", "01:46.00"], "01:45.42", "res://assets/sprites/menu/test/test_level_icon.png", "res://scenes/main.tscn"]
 ]
 var level_data = []
 var data_index = 0

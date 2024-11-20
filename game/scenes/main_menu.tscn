@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://vkvs2gtr8dpu"]
 
-[ext_resource type="Texture2D" uid="uid://p54crqw1ykai" path="res://assets/sprites/test_logo.png" id="1_eka1x"]
-[ext_resource type="Texture2D" uid="uid://bdoph3cvti204" path="res://assets/sprites/bird.png" id="2_b5gw1"]
+[ext_resource type="Texture2D" uid="uid://p54crqw1ykai" path="res://assets/sprites/test_logo.png" id="1_wwo21"]
+[ext_resource type="Texture2D" uid="uid://bdoph3cvti204" path="res://assets/sprites/bird.png" id="2_u64jl"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 352.0
 
@@ -46,7 +47,7 @@ offset_left = 16.0
 offset_top = 16.0
 offset_right = 280.0
 offset_bottom = 104.0
-texture = ExtResource("1_eka1x")
+texture = ExtResource("1_wwo21")
 expand_mode = 1
 stretch_mode = 4
 
@@ -55,7 +56,7 @@ layout_mode = 0
 offset_left = 287.0
 offset_right = 640.0
 offset_bottom = 352.0
-texture = ExtResource("2_b5gw1")
+texture = ExtResource("2_u64jl")
 expand_mode = 1
 stretch_mode = 4
 

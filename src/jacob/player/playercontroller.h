@@ -52,7 +52,7 @@ namespace godot {
 
         // Misc.
         float timeSlowValue;
-        bool canSlowTime;
+        // bool canSlowTime;
         InputHandler *input = InputHandler::get_singleton();
 
 
@@ -67,9 +67,12 @@ namespace godot {
         PlayerController();
         ~PlayerController();
 
+        bool canSlowTime;
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
         void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
+        bool can_slow_time();
+        void set_can_slow_time(bool value);
 
     };
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://5q6uva2ujhs"]
 
-[ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://ui/themes/level_icon_stylebox.tres" id="1_0hj0i"]
-[ext_resource type="Script" path="res://level_icon_collision.gd" id="2_al7c0"]
-[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="2_mh4rs"]
-[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="3_tykfs"]
-[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="5_xd555"]
+[ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://ui/themes/level_icon_stylebox.tres" id="1_5kc1e"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="2_2w5g6"]
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="3_vt7lt"]
+[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="4_f5hha"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/level_icon_collision.gd" id="5_vrg2v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo5w1"]
 bg_color = Color(1, 1, 1, 1)
@@ -15,7 +15,7 @@ corner_detail = 4
 anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_6ovy3"]
-font = ExtResource("3_tykfs")
+font = ExtResource("3_vt7lt")
 font_size = 8
 font_color = Color(0, 0, 0, 1)
 
@@ -23,6 +23,7 @@ font_color = Color(0, 0, 0, 1)
 size = Vector2(120, 91)
 
 [node name="LevelIcon" type="Control"]
+custom_minimum_size = Vector2(120, 91)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 120.0
@@ -36,7 +37,7 @@ layout_mode = 0
 offset_right = 120.0
 offset_bottom = 91.0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_0hj0i")
+theme_override_styles/panel = ExtResource("1_5kc1e")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 clip_children = 2
@@ -52,7 +53,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mo5w1")
 [node name="LevelIcon" type="TextureRect" parent="PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_mh4rs")
+texture = ExtResource("2_2w5g6")
 expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -80,12 +81,12 @@ offset_top = 60.0
 offset_right = 121.0
 offset_bottom = 92.0
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_xd555")
+texture = ExtResource("4_f5hha")
 stretch_mode = 4
 
 [node name="Area2D" type="Area2D" parent="." groups=["level_select"]]
 collision_layer = 2
-script = ExtResource("2_al7c0")
+script = ExtResource("5_vrg2v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(60, 45.5)

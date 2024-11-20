@@ -5,6 +5,8 @@
 using namespace godot;
 
 void PlayerController::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("can_slow_time"), &PlayerController::can_slow_time);
+    ClassDB::bind_method(D_METHOD("set_can_slow_time"), &PlayerController::set_can_slow_time);
 }
 
 PlayerController::PlayerController() {
@@ -35,6 +37,7 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
 
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
+_GDEXPORT_ADD(PropertyInfo(Variant::BOOL, "canSlowTime"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -56,6 +59,7 @@ _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
 
 _GDEXPORT_GET(timeSlowValue)
+_GDEXPORT_GET(canSlowTime)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -77,6 +81,7 @@ _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
 _GDEXPORT_SET(timeSlowValue)
+_GDEXPORT_SET(canSlowTime)
 _GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
@@ -201,13 +206,15 @@ void PlayerController::_process(double _delta) {
     }
 
     // Buffer for activating slow motion on large blasts
-    if (input->LARGE_BLAST->is_just_pressed()) {
+    if (input->LARGE_BLAST->is_pressed()) {
         long curTime = Time::get_singleton()->get_ticks_msec();
         if (input->SMALL_BLAST->is_just_pressed()) {
             blastTime = -curTime;
         }
         if (curTime - blastTime >= 100 && canSlowTime && isAirborne && lastBlastTime >= 150) {
             set_game_speed(timeSlowValue);
+        } else {
+            set_game_speed(1);
         }
     }
 
@@ -265,8 +272,6 @@ void PlayerController::_process(double _delta) {
     Debug::get_singleton()->add_debug_property("speed", UtilityFunctions::snappedf(speed, 0.01));
     Debug::get_singleton()->add_debug_property("velocityX", UtilityFunctions::snappedf(get_velocity().x, 0.01));
     Debug::get_singleton()->add_debug_property("velocityY", UtilityFunctions::snappedf(velocity.y, 0.01));
-    Debug::get_singleton()->add_debug_property("inputDirection", UtilityFunctions::snappedf(inputDirection.x, 0.01));
-    Debug::get_singleton()->add_debug_property("movementDirection", UtilityFunctions::snappedf(movementDirection.x, 0.01));
     Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
     Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
     
@@ -298,4 +303,12 @@ void PlayerController::updateBlastVelocity(float *blastDir, float *vel, int maxB
     } else if (*blastDir > 0 && *vel <= 0) {      // blasting from left while moving left
         *vel += *blastDir * blastStrength;
     }
+}
+
+bool PlayerController::can_slow_time() {
+    return canSlowTime;
+}
+
+void PlayerController::set_can_slow_time(bool value) {
+    canSlowTime = value;
 }

@@ -1,20 +1,20 @@
 [gd_scene load_steps=28 format=3 uid="uid://dhe042povcfpw"]
 
-[ext_resource type="LabelSettings" uid="uid://dunuwvsi1kmc6" path="res://ui/themes/header_text_settings.tres" id="1_8lupt"]
-[ext_resource type="Script" path="res://level_menu_popup.gd" id="1_jrtuj"]
-[ext_resource type="StyleBox" uid="uid://dr2iaypy1hsw3" path="res://ui/themes/level_popup_stylebox.tres" id="2_4454o"]
-[ext_resource type="Script" path="res://background.gd" id="2_c4jw5"]
-[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="3_vavas"]
-[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="4_7sgcg"]
-[ext_resource type="Texture2D" uid="uid://b2f4wnc8usx7v" path="res://assets/sprites/menu/bronze_rank_icon.png" id="5_t1avl"]
-[ext_resource type="Texture2D" uid="uid://0abcltecxu6a" path="res://assets/sprites/menu/silver_rank_icon.png" id="6_oj7rc"]
-[ext_resource type="Texture2D" uid="uid://bf2h5wok2tb46" path="res://assets/sprites/menu/gold_rank_icon.png" id="7_k10rc"]
-[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://assets/sprites/menu/crown icon.png" id="8_qw2en"]
-[ext_resource type="LabelSettings" uid="uid://ckwr3h0a031t8" path="res://ui/themes/normal_text_settings.tres" id="9_3b7la"]
-[ext_resource type="Texture2D" uid="uid://dr42g55xg7cdb" path="res://assets/sprites/menu/play_icon.png" id="10_lrl7y"]
-[ext_resource type="Texture2D" uid="uid://cuba3x777dgdh" path="res://assets/sprites/menu/arrow_icon.png" id="11_eq5q4"]
-[ext_resource type="Texture2D" uid="uid://cri34kg1sjmsd" path="res://assets/sprites/menu/arrow_icon_hover.png" id="11_nju3b"]
-[ext_resource type="Texture2D" uid="uid://dyiqda6lkwiur" path="res://assets/sprites/menu/arrow_icon_pressed.png" id="13_yni26"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/level_menu_popup.gd" id="1_wdgv1"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/background.gd" id="2_ucca1"]
+[ext_resource type="LabelSettings" uid="uid://dunuwvsi1kmc6" path="res://ui/themes/header_text_settings.tres" id="3_unh56"]
+[ext_resource type="StyleBox" uid="uid://dr2iaypy1hsw3" path="res://ui/themes/level_popup_stylebox.tres" id="4_fbwh8"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="5_cqeil"]
+[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="6_efxe4"]
+[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://assets/sprites/menu/crown icon.png" id="7_afwj2"]
+[ext_resource type="LabelSettings" uid="uid://ckwr3h0a031t8" path="res://ui/themes/normal_text_settings.tres" id="8_54hv4"]
+[ext_resource type="Texture2D" uid="uid://bf2h5wok2tb46" path="res://assets/sprites/menu/gold_rank_icon.png" id="9_2adpa"]
+[ext_resource type="Texture2D" uid="uid://0abcltecxu6a" path="res://assets/sprites/menu/silver_rank_icon.png" id="10_qwing"]
+[ext_resource type="Texture2D" uid="uid://b2f4wnc8usx7v" path="res://assets/sprites/menu/bronze_rank_icon.png" id="11_pa6gl"]
+[ext_resource type="Texture2D" uid="uid://dr42g55xg7cdb" path="res://assets/sprites/menu/play_icon.png" id="12_y3si7"]
+[ext_resource type="Texture2D" uid="uid://cri34kg1sjmsd" path="res://assets/sprites/menu/arrow_icon_hover.png" id="13_ssjs2"]
+[ext_resource type="Texture2D" uid="uid://cuba3x777dgdh" path="res://assets/sprites/menu/arrow_icon.png" id="14_xgrck"]
+[ext_resource type="Texture2D" uid="uid://dyiqda6lkwiur" path="res://assets/sprites/menu/arrow_icon_pressed.png" id="15_tytln"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgins"]
 bg_color = Color(0, 0, 0, 0.490196)
@@ -78,13 +78,13 @@ Button/styles/normal = SubResource("StyleBoxFlat_jkjid")
 Button/styles/pressed = SubResource("StyleBoxFlat_32fcp")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f6ci0"]
-texture = ExtResource("11_nju3b")
+texture = ExtResource("13_ssjs2")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3y0c3"]
-texture = ExtResource("11_eq5q4")
+texture = ExtResource("14_xgrck")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ofgj"]
-texture = ExtResource("13_yni26")
+texture = ExtResource("15_tytln")
 
 [sub_resource type="Theme" id="Theme_hbvdm"]
 Button/styles/disabled = null
@@ -100,7 +100,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_jrtuj")
+script = ExtResource("1_wdgv1")
 
 [node name="Background" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -108,7 +108,7 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 352.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dgins")
-script = ExtResource("2_c4jw5")
+script = ExtResource("2_ucca1")
 
 [node name="Popup" type="Panel" parent="Background"]
 layout_mode = 0
@@ -126,7 +126,7 @@ offset_top = 24.0
 offset_right = 192.0
 offset_bottom = 47.0
 text = "Level Name"
-label_settings = ExtResource("1_8lupt")
+label_settings = ExtResource("3_unh56")
 vertical_alignment = 1
 
 [node name="Line2D" type="Line2D" parent="Background/Popup"]
@@ -139,12 +139,13 @@ end_cap_mode = 2
 
 [node name="IconBorder" type="Panel" parent="Background/Popup"]
 clip_children = 2
+layout_mode = 0
 offset_left = 30.0
 offset_top = 60.0
 offset_right = 192.0
 offset_bottom = 151.0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_4454o")
+theme_override_styles/panel = ExtResource("4_fbwh8")
 
 [node name="PanelContainer" type="PanelContainer" parent="Background/Popup"]
 clip_children = 2
@@ -158,21 +159,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_smy2j")
 [node name="LevelIcon" type="TextureRect" parent="Background/Popup/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_vavas")
+texture = ExtResource("5_cqeil")
 expand_mode = 1
 
 [node name="Rank" type="TextureRect" parent="Background/Popup"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 168.0
 offset_top = 124.0
 offset_right = 216.0
 offset_bottom = 172.0
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_7sgcg")
+texture = ExtResource("6_efxe4")
 stretch_mode = 4
 
 [node name="RankingBorder" type="Panel" parent="Background/Popup"]
 clip_children = 2
+layout_mode = 0
 offset_left = 312.0
 offset_top = 60.0
 offset_right = 418.0
@@ -187,7 +190,7 @@ offset_top = 3.0
 offset_right = 39.0
 offset_bottom = 35.0
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("8_qw2en")
+texture = ExtResource("7_afwj2")
 expand_mode = 1
 stretch_mode = 4
 
@@ -199,7 +202,7 @@ offset_top = 11.0
 offset_right = 99.0
 offset_bottom = 18.0
 text = "00:00.00"
-label_settings = ExtResource("9_3b7la")
+label_settings = ExtResource("8_54hv4")
 horizontal_alignment = 2
 
 [node name="GoldRank" type="TextureRect" parent="Background/Popup/RankingBorder"]
@@ -209,28 +212,31 @@ offset_top = 33.0
 offset_right = 40.0
 offset_bottom = 65.0
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_k10rc")
+texture = ExtResource("9_2adpa")
 stretch_mode = 4
 
 [node name="SilverRank" type="TextureRect" parent="Background/Popup/RankingBorder"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 62.0
 offset_right = 40.0
 offset_bottom = 94.0
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("6_oj7rc")
+texture = ExtResource("10_qwing")
 stretch_mode = 4
 
 [node name="BronzeRank" type="TextureRect" parent="Background/Popup/RankingBorder"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 91.0
 offset_right = 40.0
 offset_bottom = 123.0
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("5_t1avl")
+texture = ExtResource("11_pa6gl")
 stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/Popup/RankingBorder"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 39.0
 offset_right = 99.0
@@ -241,21 +247,21 @@ theme_override_constants/separation = 22
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00.00"
-label_settings = ExtResource("9_3b7la")
+label_settings = ExtResource("8_54hv4")
 horizontal_alignment = 2
 
 [node name="SilverTime" type="Label" parent="Background/Popup/RankingBorder/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00.00"
-label_settings = ExtResource("9_3b7la")
+label_settings = ExtResource("8_54hv4")
 horizontal_alignment = 2
 
 [node name="BronzeTime" type="Label" parent="Background/Popup/RankingBorder/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "00:00.00"
-label_settings = ExtResource("9_3b7la")
+label_settings = ExtResource("8_54hv4")
 horizontal_alignment = 2
 
 [node name="Line2D2" type="Line2D" parent="Background/Popup/RankingBorder"]
@@ -275,7 +281,7 @@ offset_right = 514.0
 offset_bottom = 284.0
 focus_mode = 0
 theme = SubResource("Theme_vt4i6")
-icon = ExtResource("10_lrl7y")
+icon = ExtResource("12_y3si7")
 icon_alignment = 1
 
 [node name="NextLevelButton" type="Button" parent="."]

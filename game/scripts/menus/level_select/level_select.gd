@@ -4,7 +4,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for level_path in DirAccess.get_files_at("user://levels/"):
-		var levelIconScene = load("res://level_icon.tscn")
+		var levelIconScene = load("res://scenes/level_icon.tscn")
 		var levelIconInstance: Control = levelIconScene.instantiate()
 		%LevelContainer.call_deferred("add_child", levelIconInstance)
 		var test_level = ResourceLoader.load("user://levels/" + level_path)

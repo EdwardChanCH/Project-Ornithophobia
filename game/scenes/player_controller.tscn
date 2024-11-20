@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmcgj8vwugx0i"]
+
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
+[ext_resource type="Script" path="res://scenes/slow_motion_meter.gd" id="2_8nh8l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2dk60"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yn0ee")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvttb"]
+size = Vector2(19.7531, 19.7062)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubpvb"]
+bg_color = Color(0.151768, 0.244903, 0.474082, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.145098, 0.0666667, 0.341176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gxiy"]
+bg_color = Color(0.341371, 0.681631, 0.383795, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14396, 0.0679035, 0.341407, 1)
+
+[sub_resource type="Animation" id="Animation_21yt5"]
+resource_name = "fade_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f5sbt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0lbtu"]
+resource_name = "fade_in"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mpx6"]
+_data = {
+"RESET": SubResource("Animation_f5sbt"),
+"fade_in": SubResource("Animation_0lbtu"),
+"fade_out": SubResource("Animation_21yt5")
+}
+
+[node name="PlayerController" type="PlayerController"]
+maxGroundSpeed = 60
+groundAccel = 4.0
+groundDecel = 4.0
+groundFriction = 0.95
+gravity = 425.0
+maxAirSpeed = 100
+maxFallSpeed = 750
+airFriction = 0.7
+largeBlastStrength = 650
+maxSmallBlastSpeed = 100
+maxLargeBlastSpeed = 400
+timeSlowValue = 0.25
+canSlowTime = true
+process_mode = 4
+z_index = 1
+velocity = Vector2(0, 750)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(9.53674e-06, 9.53674e-06)
+scale = Vector2(0.015625, 0.015625)
+sprite_frames = SubResource("SpriteFrames_2dk60")
+animation = &"walk"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-5.78165e-06, -0.0377104)
+scale = Vector2(1.62, 1.62)
+shape = SubResource("RectangleShape2D_tvttb")
+
+[node name="SlowMotionMeter" type="ProgressBar" parent="."]
+process_mode = 3
+self_modulate = Color(1, 1, 1, 0)
+visibility_layer = 2
+z_index = 2
+offset_left = 20.0
+offset_top = -29.0
+offset_right = 24.0
+offset_bottom = -2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ubpvb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0gxiy")
+step = 0.5
+value = 98.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("2_8nh8l")
+
+[node name="CooldownTimer" type="Timer" parent="SlowMotionMeter"]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlowMotionMeter"]
+libraries = {
+"": SubResource("AnimationLibrary_2mpx6")
+}
+
+[connection signal="timeout" from="SlowMotionMeter/CooldownTimer" to="SlowMotionMeter" method="_on_cooldown_timer_timeout"]
