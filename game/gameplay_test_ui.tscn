@@ -10,6 +10,7 @@ offset_bottom = 40.0
 script = ExtResource("1_hu6fl")
 
 [node name="SceneName" type="Label" parent="."]
+layout_mode = 0
 offset_left = 600.0
 offset_right = 821.0
 offset_bottom = 49.0

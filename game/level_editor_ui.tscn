@@ -8,6 +8,7 @@ anchors_preset = 0
 script = ExtResource("1_tfg5g")
 
 [node name="SceneName" type="Label" parent="."]
+layout_mode = 0
 offset_left = 600.0
 offset_right = 755.0
 offset_bottom = 23.0

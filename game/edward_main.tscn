@@ -9,12 +9,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SceneName" type="Label" parent="EdwardMainUI"]
+layout_mode = 0
 offset_left = 600.0
 offset_right = 742.0
 offset_bottom = 23.0
 text = "edward_main.tscn"
 
 [node name="OpenLevelEditorButton" type="Button" parent="EdwardMainUI"]
+layout_mode = 0
 offset_right = 141.0
 offset_bottom = 31.0
 text = "Open LevelEditor"
