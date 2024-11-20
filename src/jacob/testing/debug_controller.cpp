@@ -47,4 +47,8 @@ void DebugController::_process(double _delta) {
 }
 
 void DebugController::_exit_tree() {
+	for (int i = 0; i < property_container->get_child_count(); i++) {
+		property_container->get_child(i)->queue_free();
+		property_container->remove_child(property_container->get_child(i));
+	}
 }

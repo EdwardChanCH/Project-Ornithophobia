@@ -13,6 +13,7 @@ PlayerController::PlayerController() {
     speed = 0;
     isAirborne = false;
     blastStrength = 0;
+    input = Input::get_singleton();
 }
 
 PlayerController::~PlayerController() {
@@ -102,9 +103,9 @@ void PlayerController::_exit_tree() {
 
 void PlayerController::_process(double _delta) {
     float delta = (float) _delta;
-    float axis = input->MOVE_HORIZONTAL->get_value();
+    float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
-    bool wantToMove = input->is_move_input_pressed();
+    bool wantToMove = axis != 0 ? true : false;
     isAirborne = !is_on_floor();
 
     // If an input is being pressed, update speed according
@@ -198,17 +199,17 @@ void PlayerController::_process(double _delta) {
 
 
     // Start timer when blast button just pressed
-    if (input->SMALL_BLAST->is_just_pressed() || input->LARGE_BLAST->is_just_pressed()) {        
+    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {        
         blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
-        canSlowTime = input->LARGE_BLAST->is_just_pressed();
+        canSlowTime = input->is_action_just_pressed("large_blast");
         set_game_speed(1);
     }
 
     // Buffer for activating slow motion on large blasts
-    if (input->LARGE_BLAST->is_pressed()) {
+    if (input->is_action_pressed("large_blast")) {
         long curTime = Time::get_singleton()->get_ticks_msec();
-        if (input->SMALL_BLAST->is_just_pressed()) {
+        if (input->is_action_just_pressed("small_blast")) {
             blastTime = -curTime;
         }
         if (curTime - blastTime >= 100 && canSlowTime && isAirborne && lastBlastTime >= 150) {
@@ -219,13 +220,13 @@ void PlayerController::_process(double _delta) {
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
-    if ((input->SMALL_BLAST->is_just_released() && lastBlastTime >= 75) || (input->LARGE_BLAST->is_just_released() && lastBlastTime >= 150)) {
+    if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
         // Get the direction the player will move from the blast based on the position of the mouse
         Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
         blastDirection *= -1;
         blastDirection.normalize();
 
-        if (input->SMALL_BLAST->is_just_released()) {
+        if (input->is_action_just_released("small_blast")) {
             blastStrength = smallBlastStrength;
             // Update velocities based on direction of the blast and the current direction the player is moving
             updateBlastVelocity(&blastDirection.x, &velocity.x, maxSmallBlastSpeed);

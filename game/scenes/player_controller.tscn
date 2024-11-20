@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cmcgj8vwugx0i"]
 
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
-[ext_resource type="Script" path="res://scenes/slow_motion_meter.gd" id="2_8nh8l"]
+[ext_resource type="Script" path="res://scripts/player/slow_motion_meter.gd" id="2_8nh8l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2dk60"]
 animations = [{
@@ -93,6 +93,7 @@ groundDecel = 4.0
 groundFriction = 0.95
 gravity = 425.0
 maxAirSpeed = 100
+fallSpeed = 0.0
 maxFallSpeed = 750
 airFriction = 0.7
 largeBlastStrength = 650
