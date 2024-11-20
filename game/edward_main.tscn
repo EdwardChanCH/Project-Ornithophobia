@@ -2,9 +2,21 @@
 
 [node name="EdwardMain" type="EdwardMain"]
 
-[node name="OpenLevelEditorButton" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="EdwardMainUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SceneName" type="Label" parent="EdwardMainUI"]
+offset_left = 600.0
+offset_right = 742.0
+offset_bottom = 23.0
+text = "edward_main.tscn"
+
+[node name="OpenLevelEditorButton" type="Button" parent="EdwardMainUI"]
+offset_right = 141.0
+offset_bottom = 31.0
 text = "Open LevelEditor"
 
-[connection signal="pressed" from="OpenLevelEditorButton" to="." method="_on_open_level_editor_button_pressed"]
+[connection signal="pressed" from="EdwardMainUI/OpenLevelEditorButton" to="." method="_on_open_level_editor_button_pressed"]

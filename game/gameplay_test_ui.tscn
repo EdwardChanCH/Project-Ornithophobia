@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://chieycg7xwrst"]
+
+[ext_resource type="Script" path="res://gameplay_test_ui.gd" id="1_hu6fl"]
+
+[node name="GameplayTestUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hu6fl")
+
+[node name="SceneName" type="Label" parent="."]
+offset_left = 600.0
+offset_right = 821.0
+offset_bottom = 49.0
+text = "gameplay_test.tscn
+(child) gameplay_test_ui.tscn"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back Button"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
