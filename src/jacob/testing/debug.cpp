@@ -9,6 +9,8 @@ Debug *Debug::singleton = nullptr;
 void Debug::_bind_methods() {
     ClassDB::bind_static_method("Debug", D_METHOD("get_singleton"), &Debug::get_singleton);
     ClassDB::bind_method(D_METHOD("add_debug_property", "name", "value"), &Debug::add_debug_property);
+    //TODO: Make this bind properly
+    // ClassDB::bind_method(D_METHOD("get_debug_properties"), &Debug::get_debug_properties);
 }
 
 Debug::Debug() {

@@ -38,6 +38,12 @@ func _process(delta: float) -> void:
 
 	update_meter()
 	
+	if (get_parent().was_on_floor()):
+		print(get_parent().was_on_floor())
+	
+	if (animation_player.current_animation == "fade_in"):
+		print(self_modulate.a)
+	
 	# If the meter can regenerate, start regenerating
 	if (can_regenerate and (value < max_value)):
 		value += regen_rate * delta
@@ -45,14 +51,16 @@ func _process(delta: float) -> void:
 			value = soft_max_value
 			can_regenerate = false
 	
-	Debug.get_singleton().add_debug_property("slowMeterValue", value)
-	Debug.get_singleton().add_debug_property("canRegenerate", can_regenerate)
-	Debug.get_singleton().add_debug_property("can_fade_out", can_fade_out)
-	Debug.get_singleton().add_debug_property("can_fade_in", can_fade_in)
+	#Debug.get_singleton().add_debug_property("slowMeterValue", value)
+	#Debug.get_singleton().add_debug_property("can_fade_in", can_fade_in)
+	#Debug.get_singleton().add_debug_property("can_fade_out", can_fade_out)
+	#Debug.get_singleton().add_debug_property("can_slow_time", get_parent().can_slow_time())
+	#Debug.get_singleton().add_debug_property("max_slow_time", max_slow_time)
 
 
 func update_meter():
 	if (!get_parent().is_on_floor()):
+		var time_pressed = 0
 		if (Input.is_action_just_pressed("large_blast")):
 			# Stop all currently playing animations
 			if (animation_player.is_playing()):
@@ -64,18 +72,20 @@ func update_meter():
 			
 			start_press_time = Time.get_ticks_msec()
 			can_regenerate = false
-			
-		var time_pressed = 0
-		if (Input.is_action_pressed("large_blast") and get_parent().can_slow_time()):
+		
+		# If
+		if (Input.is_action_pressed("large_blast") and get_parent().can_slow_time() and Engine.time_scale != 1):
+			if (get_parent().was_on_floor()):
+				start_press_time = Time.get_ticks_msec()
+				max_slow_time = value * 20
+			# Update the amount of time the large blast button has been held down for
+			time_pressed = Time.get_ticks_msec() - start_press_time
 			# Stop regen cooldown timer if large blast button is pressed again
 			cooldown.stop()
 			# Play fade in animation if the slow motion bar isnt visible
 			if (value < soft_max_value and self_modulate.a == 0 and can_fade_in):
-				#can_fade_in = false
-				animation_player.play("fade_in", 1 - self_modulate.a, 1 / Engine.time_scale)
-			
-			# Update the amount of time the large blast button has been held down for
-			time_pressed = Time.get_ticks_msec() - start_press_time
+				
+				animation_player.play("fade_in", -1, 1 / Engine.time_scale)
 			
 			# If the large blast button is held down and there is meter remaining, lower the meter
 			if (time_pressed <= max_slow_time):
@@ -88,6 +98,10 @@ func update_meter():
 				get_parent().set_can_slow_time(false)
 				cooldown.stop()
 				cooldown.start(cooldown.wait_time)
+		
+		#Debug.get_singleton().add_debug_property("time_pressed", time_pressed)
+	#
+	#Debug.get_singleton().add_debug_property("start_press_time", start_press_time)
 	
 	# If the large blast button is released or cancelled, start the regen cooldown timer
 	if ((Input.is_action_just_released("large_blast") or Input.is_action_just_pressed("small_blast") or get_parent().is_on_floor()) and cooldown.is_stopped() and !can_regenerate and value < soft_max_value):

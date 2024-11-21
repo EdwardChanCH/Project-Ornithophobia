@@ -1,13 +1,6 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
-#include <godot_cpp/classes/character_body2d.hpp>
-#include <godot_cpp/classes/input.hpp>
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/core/math.hpp>
-#include <godot_cpp/classes/label.hpp>
-#include <godot_cpp/classes/viewport.hpp>
-#include <godot_cpp/classes/time.hpp>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
@@ -27,6 +20,8 @@ namespace godot {
         Vector2 movementDirection;
         bool isAirborne;
         bool wasOnWall;
+        bool wasOnFloor;
+        bool onFloor;
 
         // Ground variables
         int maxGroundSpeed;
@@ -40,6 +35,7 @@ namespace godot {
         float fallSpeed;
         int maxFallSpeed;
         float airFriction;
+        int trueMaxSpeed;
 
         // Blast variables
         float blastStrength;
@@ -52,7 +48,7 @@ namespace godot {
 
         // Misc.
         float timeSlowValue;
-        // bool canSlowTime;
+        bool canSlowTime;
         Input *input;
 
 
@@ -67,12 +63,12 @@ namespace godot {
         PlayerController();
         ~PlayerController();
 
-        bool canSlowTime;
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
-        void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
+        float update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction="");
         bool can_slow_time();
         void set_can_slow_time(bool value);
+        bool was_on_floor();
 
     };
 

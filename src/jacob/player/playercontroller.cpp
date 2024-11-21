@@ -5,8 +5,11 @@
 using namespace godot;
 
 void PlayerController::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("set_game_speed", "gameSpeed"), &PlayerController::set_game_speed);
+    ClassDB::bind_method(D_METHOD("update_blast_velocity", "blastDir", "vel", "maxBlastSpeed", "direction"), &PlayerController::update_blast_velocity);
     ClassDB::bind_method(D_METHOD("can_slow_time"), &PlayerController::can_slow_time);
-    ClassDB::bind_method(D_METHOD("set_can_slow_time"), &PlayerController::set_can_slow_time);
+    ClassDB::bind_method(D_METHOD("set_can_slow_time", "value"), &PlayerController::set_can_slow_time);
+    ClassDB::bind_method(D_METHOD("was_on_floor"), &PlayerController::was_on_floor);
 }
 
 PlayerController::PlayerController() {
@@ -31,6 +34,7 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxAirSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "fallSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "maxFallSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "airFriction"))
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "trueMaxSpeed"))
 
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "smallBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "largeBlastStrength"))
@@ -38,7 +42,6 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
 
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
-_GDEXPORT_ADD(PropertyInfo(Variant::BOOL, "canSlowTime"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -53,6 +56,7 @@ _GDEXPORT_GET(maxAirSpeed)
 _GDEXPORT_GET(fallSpeed)
 _GDEXPORT_GET(maxFallSpeed)
 _GDEXPORT_GET(airFriction)
+_GDEXPORT_GET(trueMaxSpeed)
 
 _GDEXPORT_GET(smallBlastStrength)
 _GDEXPORT_GET(largeBlastStrength)
@@ -60,7 +64,6 @@ _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
 
 _GDEXPORT_GET(timeSlowValue)
-_GDEXPORT_GET(canSlowTime)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -75,6 +78,7 @@ _GDEXPORT_SET(maxAirSpeed)
 _GDEXPORT_SET(fallSpeed)
 _GDEXPORT_SET(maxFallSpeed)
 _GDEXPORT_SET(airFriction)
+_GDEXPORT_SET(trueMaxSpeed)
 
 _GDEXPORT_SET(smallBlastStrength)
 _GDEXPORT_SET(largeBlastStrength)
@@ -82,7 +86,6 @@ _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
 _GDEXPORT_SET(timeSlowValue)
-_GDEXPORT_SET(canSlowTime)
 _GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
@@ -94,6 +97,7 @@ void PlayerController::_ready() {
 
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
+    wasOnFloor = false;
     canSlowTime = true;
     movementDirection.x = 1;
 }
@@ -170,6 +174,15 @@ void PlayerController::_process(double _delta) {
             speed = 0;
     }
 
+    // Check if player just left the floor
+    if (onFloor != is_on_floor()) {
+        if (onFloor)
+            wasOnFloor = true;
+    } else {
+        wasOnFloor = false;
+    }
+    onFloor = is_on_floor();
+
     // If the current velocity and input direction have different signs, decelerate and turn around
     if (movementDirection.x == 1 && get_velocity().x < 0 || movementDirection.x == -1 && get_velocity().x > 0)
         velocity.x = (movementDirection.x * -1) * speed;
@@ -222,27 +235,28 @@ void PlayerController::_process(double _delta) {
     // When blast button released, blast player in direction opposite to the mouse cursor
     if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
         // Get the direction the player will move from the blast based on the position of the mouse
-        Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
+        Vector2 blastDirection = get_viewport()->get_mouse_position() - get_global_position();
+        UtilityFunctions::print(UtilityFunctions::str(get_viewport()->get_mouse_position()));
         blastDirection *= -1;
         blastDirection.normalize();
 
         if (input->is_action_just_released("small_blast")) {
             blastStrength = smallBlastStrength;
             // Update velocities based on direction of the blast and the current direction the player is moving
-            updateBlastVelocity(&blastDirection.x, &velocity.x, maxSmallBlastSpeed);
-            updateBlastVelocity(&blastDirection.y, &velocity.y, maxSmallBlastSpeed, "vertical");
+            velocity.x = update_blast_velocity(blastDirection.x, velocity.x, maxSmallBlastSpeed);
+            velocity.y = update_blast_velocity(blastDirection.y, velocity.y, maxSmallBlastSpeed, "vertical");
         } else {
             blastStrength = largeBlastStrength;
-            updateBlastVelocity(&blastDirection.x, &velocity.x, maxLargeBlastSpeed);
-            updateBlastVelocity(&blastDirection.y, &velocity.y, maxLargeBlastSpeed, "vertical");
+            velocity.x = update_blast_velocity(blastDirection.x, velocity.x, maxLargeBlastSpeed);
+            velocity.y = update_blast_velocity(blastDirection.y, velocity.y, maxLargeBlastSpeed, "vertical");
             set_game_speed(1);      // Turn off slow motion
         }
 
         // Clamp velocity and speed
-        velocity.x = Math::clamp(velocity.x, -750.f, 750.f);
-        velocity.y = Math::clamp(velocity.y, -750.f, 750.f);
+        velocity.x = Math::clamp(velocity.x, float(-trueMaxSpeed), float(trueMaxSpeed));
+        velocity.y = Math::clamp(velocity.y, float(-trueMaxSpeed), float(trueMaxSpeed));
         speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
-        speed = Math::clamp(speed, -750.f, 750.f);
+        speed = Math::clamp(speed, float(-trueMaxSpeed), float(trueMaxSpeed));
         
         isAirborne = true;
         blastTime = 0;
@@ -275,10 +289,10 @@ void PlayerController::_process(double _delta) {
     Debug::get_singleton()->add_debug_property("velocityY", UtilityFunctions::snappedf(velocity.y, 0.01));
     Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
     Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
-    
+
     // Move the player
     move_and_slide();
-
+    
 }
 
 void PlayerController::set_game_speed(float gameSpeed) {
@@ -286,24 +300,26 @@ void PlayerController::set_game_speed(float gameSpeed) {
 }
 
 // Calculates the correct velocity based on the direction of a blast and the current velocity of the player
-void PlayerController::updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction) {
-    if ((*blastDir < 0 && *vel >= 0) ) {          // blasting from right when moving right
+float PlayerController::update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction) {
+    if ((blastDir < 0 && vel >= 0) ) {          // blasting from right when moving right
         if (direction == "vertical")
-            *vel = 0;
-        *vel += *blastDir * blastStrength;
-    } else if (*blastDir > 0 && *vel > 0) {       // blasting from left while moving right
-        if (*vel > maxBlastSpeed)
-            *vel += (*blastDir * blastStrength) / (*vel / maxBlastSpeed);
+            vel = 0;
+        vel += blastDir * blastStrength;
+    } else if (blastDir > 0 && vel > 0) {       // blasting from left while moving right
+        if (vel > maxBlastSpeed)
+            vel += (blastDir * blastStrength) / (vel / maxBlastSpeed);
         else
-            *vel += *blastDir * blastStrength;
-    } else if (*blastDir < 0 && *vel < 0) {       // blasting from right while moving left
-        if (*vel < maxBlastSpeed * -1)
-            *vel += (*blastDir * blastStrength) / (*vel / (maxBlastSpeed * -1));
+            vel += blastDir * blastStrength;
+    } else if (blastDir < 0 && vel < 0) {       // blasting from right while moving left
+        if (vel < maxBlastSpeed * -1)
+            vel += (blastDir * blastStrength) / (vel / (maxBlastSpeed * -1));
         else
-            *vel += *blastDir * blastStrength;
-    } else if (*blastDir > 0 && *vel <= 0) {      // blasting from left while moving left
-        *vel += *blastDir * blastStrength;
+            vel += blastDir * blastStrength;
+    } else if (blastDir > 0 && vel <= 0) {      // blasting from left while moving left
+        vel += blastDir * blastStrength;
     }
+
+    return vel;
 }
 
 bool PlayerController::can_slow_time() {
@@ -312,4 +328,8 @@ bool PlayerController::can_slow_time() {
 
 void PlayerController::set_can_slow_time(bool value) {
     canSlowTime = value;
+}
+
+bool PlayerController::was_on_floor() {
+    return wasOnFloor;
 }

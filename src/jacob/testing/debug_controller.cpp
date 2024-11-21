@@ -25,25 +25,30 @@ void DebugController::_ready() {
 		property_container->get_child(i)->queue_free();
 		property_container->remove_child(property_container->get_child(i));
 	}
+	
+	UtilityFunctions::print("tree");
 }
 
 void DebugController::_process(double _delta) {
-	for (int i = 0; i < properties->size(); i++) {
-		String name = UtilityFunctions::str(properties->keys().operator[](i));
-		String value = UtilityFunctions::str(properties->operator[](name));
+	if (properties != nullptr) {
+		for (int i = 0; i < properties->size(); i++) {
+			String name = UtilityFunctions::str(properties->keys().operator[](i));
+			String value = UtilityFunctions::str(properties->operator[](name));
 
-		debugText = Node::cast_to<Label>(property_container->find_child(name, true, false));
+			debugText = Node::cast_to<Label>(property_container->find_child(name, true, false));
 
-		if (!debugText) {
-			debugText = memnew(Label());
+			if (!debugText) {
+				debugText = memnew(Label());
 
-			debugText->set_name(name);
-			debugText->set_text(name + ": " + value);
-			property_container->add_child(debugText);
-		} else {
-			debugText->set_text(name + ": " + value);
+				debugText->set_name(name);
+				debugText->set_text(name + ": " + value);
+				property_container->add_child(debugText);
+			} else {
+				debugText->set_text(name + ": " + value);
+			}
 		}
 	}
+	
 }
 
 void DebugController::_exit_tree() {

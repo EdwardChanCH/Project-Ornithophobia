@@ -98,6 +98,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -704.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wdgv1")
@@ -185,9 +187,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h0vlo")
 
 [node name="BestTimeIcon" type="TextureRect" parent="Background/Popup/RankingBorder"]
 layout_mode = 2
-offset_left = 7.0
+offset_left = 8.0
 offset_top = 3.0
-offset_right = 39.0
+offset_right = 40.0
 offset_bottom = 35.0
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_afwj2")
@@ -272,19 +274,19 @@ default_color = Color(0.317647, 0.317647, 0.317647, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="Background/Popup"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 126.0
-offset_top = 236.0
-offset_right = 514.0
-offset_bottom = 284.0
+offset_left = 30.0
+offset_top = 188.0
+offset_right = 418.0
+offset_bottom = 236.0
 focus_mode = 0
 theme = SubResource("Theme_vt4i6")
 icon = ExtResource("12_y3si7")
 icon_alignment = 1
 
-[node name="NextLevelButton" type="Button" parent="."]
+[node name="NextLevelButton" type="Button" parent="Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 568.0
@@ -294,7 +296,7 @@ offset_bottom = 200.0
 focus_mode = 0
 theme = SubResource("Theme_hbvdm")
 
-[node name="LastLevelButton" type="Button" parent="."]
+[node name="LastLevelButton" type="Button" parent="Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 24.0
@@ -306,6 +308,6 @@ pivot_offset = Vector2(24, 24)
 focus_mode = 0
 theme = SubResource("Theme_hbvdm")
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="NextLevelButton" to="." method="_on_next_level_button_pressed"]
-[connection signal="pressed" from="LastLevelButton" to="." method="_on_last_level_button_pressed"]
+[connection signal="pressed" from="Background/Popup/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Background/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="Background/LastLevelButton" to="." method="_on_last_level_button_pressed"]

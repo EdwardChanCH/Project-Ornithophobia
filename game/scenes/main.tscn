@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=4 uid="uid://t81mvpjh4g0i"]
+[gd_scene load_steps=6 format=4 uid="uid://t81mvpjh4g0i"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_7rkkl"]
 [ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://scenes/player_controller.tscn" id="2_jduqa"]
 
@@ -20,16 +21,28 @@ physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_ktjqj")
 
 [node name="Node2D" type="Node2D"]
-
-[node name="LevelController" type="LevelController" parent="."]
+script = ExtResource("1_7rkkl")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="LevelController" type="LevelController" parent="."]
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 
 [node name="PlayerController" parent="." instance=ExtResource("2_jduqa")]
+maxGroundSpeed = 180
+groundAccel = 12.0
+groundDecel = 12.0
+gravity = 1275.0
+maxAirSpeed = 300
 fallSpeed = nan
+maxFallSpeed = 2250
+trueMaxSpeed = 2250
+smallBlastStrength = 750
+largeBlastStrength = 1950
+maxSmallBlastSpeed = 300
+maxLargeBlastSpeed = 1200
 position = Vector2(112, 304)
 
 [node name="TutorialText" type="Label" parent="."]
