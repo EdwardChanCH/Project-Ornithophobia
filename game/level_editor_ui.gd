@@ -1,7 +1,17 @@
 extends Control
 
 
-static var editor: LevelEditorController = LevelEditorController.new()
+var editor: LevelEditorController = null
+
+
+func _enter_tree() -> void:
+	editor = LevelEditorController.new()
+	pass
+
+func _exit_tree() -> void:
+	if editor != null:
+		editor.queue_free()
+	pass
 
 
 func test_print(s: String) -> void:

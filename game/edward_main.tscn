@@ -1,24 +1,36 @@
-[gd_scene format=3 uid="uid://beak5jovysipc"]
+[gd_scene load_steps=2 format=3 uid="uid://beak5jovysipc"]
+
+[ext_resource type="Script" path="res://edward_main_ui.gd" id="1_hs4w0"]
 
 [node name="EdwardMain" type="EdwardMain"]
 
 [node name="EdwardMainUI" type="Control" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_hs4w0")
+
+[node name="SceneName" type="Label" parent="EdwardMainUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -142.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "edward_main.tscn"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EdwardMainUI"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SceneName" type="Label" parent="EdwardMainUI"]
-layout_mode = 0
-offset_left = 600.0
-offset_right = 742.0
-offset_bottom = 23.0
-text = "edward_main.tscn"
-
-[node name="OpenLevelEditorButton" type="Button" parent="EdwardMainUI"]
-layout_mode = 0
-offset_right = 141.0
-offset_bottom = 31.0
+[node name="OpenLevelEditorButton" type="Button" parent="EdwardMainUI/VBoxContainer"]
+layout_mode = 2
 text = "Open LevelEditor"
 
-[connection signal="pressed" from="EdwardMainUI/OpenLevelEditorButton" to="." method="_on_open_level_editor_button_pressed"]
+[connection signal="open_level_editor" from="EdwardMainUI" to="." method="_on_edward_main_ui_open_level_editor"]
+[connection signal="pressed" from="EdwardMainUI/VBoxContainer/OpenLevelEditorButton" to="EdwardMainUI" method="_on_open_level_editor_button_pressed"]

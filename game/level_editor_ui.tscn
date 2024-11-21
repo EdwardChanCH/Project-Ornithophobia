@@ -1,95 +1,85 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjncw3frswbwg"]
+[gd_scene load_steps=2 format=3 uid="uid://db00fhsn58v7m"]
 
-[ext_resource type="Script" path="res://level_editor_ui.gd" id="1_tfg5g"]
+[ext_resource type="Script" path="res://level_editor_ui.gd" id="1_f5a73"]
 
 [node name="LevelEditorUI" type="Control"]
+z_index = 1
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_tfg5g")
+script = ExtResource("1_f5a73")
 
 [node name="SceneName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 600.0
-offset_right = 755.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
 offset_bottom = 23.0
+grow_horizontal = 0
 text = "level_editor_ui.tscn"
 
-[node name="BackButton" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer1"]
+layout_mode = 2
 text = "Back Button"
 
-[node name="DebugSceneManager" type="Button" parent="."]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 181.0
-offset_bottom = 71.0
-text = "Debug Scene Manager"
-
-[node name="TestAddScene" type="Button" parent="."]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 125.0
-offset_bottom = 111.0
-text = "Test Add Scene"
-
-[node name="TestAction1" type="Button" parent="."]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 108.0
-offset_bottom = 151.0
-text = "Test Action 1"
-
-[node name="TestAction2" type="Button" parent="."]
-layout_mode = 0
-offset_top = 160.0
-offset_right = 108.0
-offset_bottom = 191.0
-text = "Test Action 2"
-
-[node name="TestAction3" type="Button" parent="."]
-layout_mode = 0
-offset_top = 200.0
-offset_right = 108.0
-offset_bottom = 231.0
-text = "Test Action 3"
-
-[node name="UndoButton" type="Button" parent="."]
-layout_mode = 0
-offset_top = 240.0
-offset_right = 108.0
-offset_bottom = 271.0
-text = "Undo Button"
-
-[node name="RedoButton" type="Button" parent="."]
-layout_mode = 0
-offset_top = 280.0
-offset_right = 105.0
-offset_bottom = 311.0
-text = "Redo Button"
-
-[node name="DebugLevelEditorController" type="Button" parent="."]
-layout_mode = 0
-offset_top = 320.0
-offset_right = 236.0
-offset_bottom = 351.0
-text = "Debug Level Editor Controller"
-
-[node name="LoadGameplayTestScene" type="Button" parent="."]
-layout_mode = 0
-offset_top = 360.0
-offset_right = 214.0
-offset_bottom = 391.0
+[node name="LoadGameplayTestScene" type="Button" parent="HBoxContainer/VBoxContainer1"]
+layout_mode = 2
 text = "Load Gameplay Test Scene"
 
-[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="DebugSceneManager" to="." method="_on_debug_scene_manager_pressed"]
-[connection signal="pressed" from="TestAddScene" to="." method="_on_test_add_scene_pressed"]
-[connection signal="pressed" from="TestAction1" to="." method="_on_test_action_1_pressed"]
-[connection signal="pressed" from="TestAction2" to="." method="_on_test_action_2_pressed"]
-[connection signal="pressed" from="TestAction3" to="." method="_on_test_action_3_pressed"]
-[connection signal="pressed" from="UndoButton" to="." method="_on_undo_button_pressed"]
-[connection signal="pressed" from="RedoButton" to="." method="_on_redo_button_pressed"]
-[connection signal="pressed" from="DebugLevelEditorController" to="." method="_on_debug_level_editor_controller_pressed"]
-[connection signal="pressed" from="LoadGameplayTestScene" to="." method="_on_load_gameplay_test_scene_pressed"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="DebugSceneManager" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Debug Scene Manager"
+
+[node name="TestAddScene" type="Button" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Test Add Scene"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="DebugLevelEditorController" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Debug Level Editor Controller"
+
+[node name="UndoButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Undo Button"
+
+[node name="RedoButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Redo Button"
+
+[node name="TestAction1" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Test Action 1"
+
+[node name="TestAction2" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Test Action 2"
+
+[node name="TestAction3" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Test Action 3"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer1/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer1/LoadGameplayTestScene" to="." method="_on_load_gameplay_test_scene_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/DebugSceneManager" to="." method="_on_debug_scene_manager_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/TestAddScene" to="." method="_on_test_add_scene_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/DebugLevelEditorController" to="." method="_on_debug_level_editor_controller_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction1" to="." method="_on_test_action_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction2" to="." method="_on_test_action_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction3" to="." method="_on_test_action_3_pressed"]

@@ -7,3 +7,12 @@
 script = ExtResource("1_3ikcx")
 
 [node name="GameplayTestUI" parent="." instance=ExtResource("2_cj8fl")]
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="back_button_pressed" from="GameplayTestUI" to="." method="_on_gameplay_test_ui_back_button_pressed"]
+[connection signal="load_button_pressed" from="GameplayTestUI" to="." method="_on_gameplay_test_ui_load_button_pressed"]
+[connection signal="reload_button_pressed" from="GameplayTestUI" to="." method="_on_gameplay_test_ui_reload_button_pressed"]
+[connection signal="save_button_pressed" from="GameplayTestUI" to="." method="_on_gameplay_test_ui_save_button_pressed"]
+[connection signal="unload_button_pressed" from="GameplayTestUI" to="." method="_on_gameplay_test_ui_unload_button_pressed"]

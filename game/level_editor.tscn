@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjncw3frswbwg"]
+
+[ext_resource type="PackedScene" uid="uid://db00fhsn58v7m" path="res://level_editor_ui.tscn" id="1_ayy75"]
+
+[node name="LevelEditor_" type="Node"]
+
+[node name="LevelEditorUI" parent="." instance=ExtResource("1_ayy75")]

@@ -29,10 +29,8 @@ namespace godot {
 	public:
 		EdwardMain();
 		~EdwardMain();
-
-		void _process(double delta) override;
 		
-		void _on_open_level_editor_button_pressed();
+		void _on_edward_main_ui_open_level_editor();
 	};
 
 } // namespace godot
