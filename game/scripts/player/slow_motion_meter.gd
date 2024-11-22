@@ -1,6 +1,6 @@
 extends ProgressBar
 
-@export var max_slow_time = 2000
+@export var max_slow_time: float = 3000
 @export var regen_rate = 50
 @export var soft_max_value = 98
 
@@ -13,6 +13,7 @@ var start_press_time = 0
 var can_regenerate = false
 var can_drain = false
 var can_slow_time
+var time_slow_factor = max_slow_time / 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,7 +67,7 @@ func update_meter():
 			animation_player.clear_queue()
 		
 		# Set the max slow motion time to be dependent on how full the slow motion meter is
-		max_slow_time = value * 20
+		max_slow_time = value * time_slow_factor
 		
 		start_press_time = Time.get_ticks_msec()
 		can_regenerate = false
@@ -74,17 +75,17 @@ func update_meter():
 	
 	# If the action button is being held down, slow time
 	if (Input.is_action_pressed("action_button") and can_slow_time and Engine.time_scale != 1 and can_drain):
-		# Update the amount of time the large blast button has been held down for
+		# Update the amount of time the action button has been held down for
 		time_pressed = Time.get_ticks_msec() - start_press_time
-		# Stop regen cooldown timer if large blast button is pressed again
+		# Stop regen cooldown timer if action button is pressed again
 		cooldown.stop()
 		# Play fade in animation if the slow motion bar isnt visible
 		if (value < soft_max_value and self_modulate.a == 0 and can_fade_in):
 			animation_player.play("fade_in", -1, 1 / Engine.time_scale)
 		
-		# If the large blast button is held down and there is meter remaining, lower the meter
+		# If the action button is held down and there is meter remaining, lower the meter
 		if (time_pressed <= max_slow_time):
-			var new_value = ((max_slow_time) - time_pressed) / 20
+			var new_value = ((max_slow_time) - time_pressed) / time_slow_factor
 			clamp(new_value, 0, soft_max_value)
 			value = new_value
 		else:
@@ -98,7 +99,7 @@ func update_meter():
 	# If the large blast button is released or cancelled, start the regen cooldown timer
 	if ((Input.is_action_just_released("action_button")) and cooldown.is_stopped() and !can_regenerate and value < soft_max_value):
 		cooldown.start(cooldown.wait_time)
-
+	Debug.get_singleton().add_debug_property("time_pressed", time_pressed)
 
 # Allow the meter to regenerate when the regen cooldown timer finishes
 func _on_cooldown_timer_timeout() -> void:

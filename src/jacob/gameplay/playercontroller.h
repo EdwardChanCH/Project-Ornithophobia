@@ -47,7 +47,8 @@ namespace godot {
         long lastBlastTime;
 
         // Misc.
-        float timeSlowValue;
+        float maxTimeSlowValue;
+        float timeSlowFactor;
         bool canSlowTime;
         Input *input;
 

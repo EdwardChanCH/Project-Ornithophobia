@@ -41,7 +41,8 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "largeBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
 
-_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
+_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "maxTimeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
+_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowFactor"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -63,7 +64,8 @@ _GDEXPORT_GET(largeBlastStrength)
 _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
 
-_GDEXPORT_GET(timeSlowValue)
+_GDEXPORT_GET(maxTimeSlowValue)
+_GDEXPORT_GET(timeSlowFactor)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -85,7 +87,8 @@ _GDEXPORT_SET(largeBlastStrength)
 _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
-_GDEXPORT_SET(timeSlowValue)
+_GDEXPORT_SET(maxTimeSlowValue)
+_GDEXPORT_SET(timeSlowFactor)
 _GDEXPORT_SET_SUFFIX
 
 void PlayerController::_ready() {
@@ -219,11 +222,13 @@ void PlayerController::_process(double _delta) {
 
     // Slow motion code
     if (input->is_action_pressed("action_button") && canSlowTime) {
-        set_game_speed(timeSlowValue);
-    }
-
-    if (input->is_action_just_released("action_button") || !canSlowTime) {
-        set_game_speed(1);
+        float newTimeValue = Engine::get_singleton()->get_time_scale() - delta * timeSlowFactor;
+        newTimeValue = Math::clamp(newTimeValue, maxTimeSlowValue, 1.f);
+        set_game_speed(newTimeValue);
+    } else {
+        float newTimeValue = Engine::get_singleton()->get_time_scale() + delta * timeSlowFactor;
+        newTimeValue = Math::clamp(newTimeValue, maxTimeSlowValue, 1.f);
+        set_game_speed(newTimeValue);
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
@@ -267,6 +272,7 @@ void PlayerController::_process(double _delta) {
     Debug::get_singleton()->add_debug_property("speed", UtilityFunctions::snappedf(speed, 0.01));
     Debug::get_singleton()->add_debug_property("velocityX", UtilityFunctions::snappedf(get_velocity().x, 0.01));
     Debug::get_singleton()->add_debug_property("velocityY", UtilityFunctions::snappedf(velocity.y, 0.01));
+    Debug::get_singleton()->add_debug_property("axis", axis);
     Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
     Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
 

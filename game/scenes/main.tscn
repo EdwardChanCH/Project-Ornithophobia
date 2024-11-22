@@ -117,6 +117,7 @@ smallBlastStrength = 750
 largeBlastStrength = 1950
 maxSmallBlastSpeed = 300
 maxLargeBlastSpeed = 1200
+timeSlowFactor = 6.0
 unique_name_in_owner = true
 position = Vector2(112, 304)
 

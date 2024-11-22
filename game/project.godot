@@ -30,6 +30,7 @@ window/size/mode=4
 window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="res://assets/sprites/mouse_reticle.png"
 window/canvas_textures/default_texture_filter=1
 
 [global_group]

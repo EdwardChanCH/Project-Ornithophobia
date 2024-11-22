@@ -7,14 +7,16 @@
  * 
  */
 
-#ifndef _ENEMYCONTROLLER__H
-#define _ENEMYCONTROLLER__H
+#ifndef ENEMYCONTROLLER_H
+#define ENEMYCONTROLLER_H
 
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
 #include <godot_cpp/classes/audio_stream_player.hpp>
+#include "playercontroller.h"
+#include "debug.h"
 
 namespace godot {
 
@@ -25,6 +27,7 @@ namespace godot {
 
 	private:
 		AnimatedSprite2D *deathAnim;
+		const int minKillSpeed = 600;
 
 	protected:
 		static void _bind_methods(); // Must be declared
