@@ -21,9 +21,9 @@ namespace godot {
             GameAxis(String positiveId, String negativeId);
             ~GameAxis();
 
-            float getValue() const;
-            float getLastValue() const;
-            void updateLast();
+            float get_value() const;
+            float get_last_value() const;
+            void update_last();
 
         private:
             float lastValue = 0;

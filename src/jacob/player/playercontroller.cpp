@@ -5,16 +5,18 @@
 using namespace godot;
 
 void PlayerController::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("can_slow_time"), &PlayerController::can_slow_time);
+    ClassDB::bind_method(D_METHOD("set_can_slow_time"), &PlayerController::set_can_slow_time);
 }
 
 PlayerController::PlayerController() {
     speed = 0;
     isAirborne = false;
     blastStrength = 0;
+    input = Input::get_singleton();
 }
 
 PlayerController::~PlayerController() {
-    // delete debugNode;
 }
 
 // Export instance variables to the Godot Editor. 
@@ -36,6 +38,7 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
 
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
+_GDEXPORT_ADD(PropertyInfo(Variant::BOOL, "canSlowTime"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -57,6 +60,7 @@ _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
 
 _GDEXPORT_GET(timeSlowValue)
+_GDEXPORT_GET(canSlowTime)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -78,24 +82,30 @@ _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
 _GDEXPORT_SET(timeSlowValue)
+_GDEXPORT_SET(canSlowTime)
 _GDEXPORT_SET_SUFFIX
 
-// Ref<TimeController> timeController = Ref<TimeController>(Engine::get_singleton()->get_singleton("TimeController"));
-
 void PlayerController::_ready() {
-    set_process(true);
-    debugNode = get_node<Label>("../UI/debug/speed");
+    if (Engine::get_singleton()->is_editor_hint())
+        set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
+    else {
+        set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
+    }
+
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
     canSlowTime = true;
     movementDirection.x = 1;
 }
 
+void PlayerController::_exit_tree() {
+}
+
 void PlayerController::_process(double _delta) {
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
-    bool wantToMove = axis != 0;
+    bool wantToMove = axis != 0 ? true : false;
     isAirborne = !is_on_floor();
 
     // If an input is being pressed, update speed according
@@ -115,8 +125,7 @@ void PlayerController::_process(double _delta) {
         }
         // If inputting the opposite direction the player is moving in, decelerate smoothly
         else if ((get_velocity().x < 0 && inputDirection.x == 1) || (get_velocity().x > 0 && inputDirection.x == -1)) {
-            speed -= groundDecel;
-            speed -= isAirborne ? groundAccel + groundDecel / airFriction : groundAccel + groundDecel / groundFriction;
+            speed -= isAirborne ? groundDecel / airFriction : groundAccel + groundDecel / groundFriction;
         }
             
     }
@@ -190,7 +199,7 @@ void PlayerController::_process(double _delta) {
 
 
     // Start timer when blast button just pressed
-    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
+    if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {        
         blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
         canSlowTime = input->is_action_just_pressed("large_blast");
@@ -203,14 +212,15 @@ void PlayerController::_process(double _delta) {
         if (input->is_action_just_pressed("small_blast")) {
             blastTime = -curTime;
         }
-        if (curTime - blastTime >= 100 && canSlowTime && isAirborne && lastBlastTime >= 200) {
+        if (curTime - blastTime >= 100 && canSlowTime && isAirborne && lastBlastTime >= 150) {
             set_game_speed(timeSlowValue);
-            // timeController->set_game_speed(timeSlowValue);
+        } else {
+            set_game_speed(1);
         }
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
-    if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 200)) {
+    if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
         // Get the direction the player will move from the blast based on the position of the mouse
         Vector2 blastDirection = get_viewport()->get_mouse_position() - get_position();
         blastDirection *= -1;
@@ -259,23 +269,16 @@ void PlayerController::_process(double _delta) {
     set_velocity(velocity);
     
     // Debug log
-    String debugText = "";
-    debugText += "Speed: " + String::num(speed) + "\n";
-    debugText += "VelocityX: " + String::num(get_velocity().x) + "\n";
-    debugText += "VelocityY: " + String::num(velocity.y) + "\n";
-    debugText += "input direction: " + String::num(inputDirection.x) + "\n";
-    debugText += "movement direction: " + String::num(movementDirection.x) + "\n";
-    String isAirborneStr = isAirborne ? "true" : "false";
-    debugText += "isAirborne: " + isAirborneStr + "\n";
-    debugText += "Blast Strength: " + String::num(blastStrength) + "\n";
-    debugText += "Air Decel: " + String::num(airDecel) + "\n";
-    
-    // Set debug label text
-    debugNode->set_text(debugText);
+    Debug::get_singleton()->add_debug_property("FPS", UtilityFunctions::snappedf((1.0 / delta), 0.01));
+    Debug::get_singleton()->add_debug_property("speed", UtilityFunctions::snappedf(speed, 0.01));
+    Debug::get_singleton()->add_debug_property("velocityX", UtilityFunctions::snappedf(get_velocity().x, 0.01));
+    Debug::get_singleton()->add_debug_property("velocityY", UtilityFunctions::snappedf(velocity.y, 0.01));
+    Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
+    Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
     
     // Move the player
     move_and_slide();
-    
+
 }
 
 void PlayerController::set_game_speed(float gameSpeed) {
@@ -301,4 +304,12 @@ void PlayerController::updateBlastVelocity(float *blastDir, float *vel, int maxB
     } else if (*blastDir > 0 && *vel <= 0) {      // blasting from left while moving left
         *vel += *blastDir * blastStrength;
     }
+}
+
+bool PlayerController::can_slow_time() {
+    return canSlowTime;
+}
+
+void PlayerController::set_can_slow_time(bool value) {
+    canSlowTime = value;
 }

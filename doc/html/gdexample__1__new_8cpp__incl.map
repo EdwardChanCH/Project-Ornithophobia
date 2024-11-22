@@ -1,0 +1,11 @@
+<map id="src/gdexample/gdexample_1_new.cpp" name="src/gdexample/gdexample_1_new.cpp">
+<area shape="rect" id="Node000001" title="This example class moves an image sprite around in a scene." alt="" coords="191,5,365,48"/>
+<area shape="rect" id="Node000002" href="$gdexample__1__new_8h.html" title="Header file." alt="" coords="208,96,348,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,49,281,80,275,80,275,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,171,151,213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="248,126,145,167,143,162,246,121"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="175,179,381,205"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="281,123,281,163,275,163,275,123"/>
+<area shape="rect" id="Node000005" href="$boilerplate__macros_8h.html" title="This header file contains all custom macros for GDExtension&#39;s boilerplate code. The purpose is to min..." alt="" coords="405,179,546,205"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="310,121,432,170,430,175,308,126"/>
+</map>

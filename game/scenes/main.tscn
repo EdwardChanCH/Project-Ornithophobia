@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=4 uid="uid://t81mvpjh4g0i"]
+
+[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://scenes/player_controller.tscn" id="2_jduqa"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ktjqj"]
+resource_name = "tiles"
+texture = ExtResource("2_3tlab")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8rtbq"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_ktjqj")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="LevelController" type="LevelController" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="PlayerController" parent="." instance=ExtResource("2_jduqa")]
+fallSpeed = nan
+position = Vector2(112, 304)
+
+[node name="TutorialText" type="Label" parent="."]
+offset_left = 197.0
+offset_top = 77.0
+offset_right = 446.0
+offset_bottom = 178.0
+text = "Walk: A/D
+Small Blast: M1
+Large Blast: M2
+Return to Menu: Esc"
+horizontal_alignment = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAgAAAAAAAAAAAATAAkAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAGAAsAAAAAAAAAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAAAAAAGAA4AAAAAAAAAAAANAAsAAAAAAAAAAAANAAwAAAAAAAAAAAANAA0AAAAAAAAAAAANAA4AAAAAAAAAAAAGAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP3/AAAAAAAAAAAGAPz/AAAAAAAAAAANAP//AAAAAAAAAAANAP7/AAAAAAAAAAANAP3/AAAAAAAAAAANAPz/AAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAVAAgAAAAAAAAAAAAWAAgAAAAAAAAAAAAXAAgAAAAAAAAAAAAUAAIAAAAAAAAAAAAVAAIAAAAAAAAAAAAWAAIAAAAAAAAAAAAXAAIAAAAAAAAAAAD8/wgAAAAAAAAAAAD9/wgAAAAAAAAAAAD+/wgAAAAAAAAAAAD//wgAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8rtbq")
+
+[node name="Enemy" type="Node2D" parent="."]

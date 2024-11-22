@@ -1,0 +1,7 @@
+<map id="src/gdexample/gdexample_2_old.h" name="src/gdexample/gdexample_2_old.h">
+<area shape="rect" id="Node000001" title="Header file." alt="" coords="97,5,271,48"/>
+<area shape="rect" id="Node000002" href="$gdexample__2__old_8cpp.html" title="This example class receives a signal from a GDExampleNode and output some text to the terminal." alt="" coords="5,96,179,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,61,115,98,111,94,150,57"/>
+<area shape="rect" id="Node000003" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="202,104,352,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,57,266,102,262,106,215,61"/>
+</map>

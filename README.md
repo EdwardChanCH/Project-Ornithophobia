@@ -1,3 +1,6 @@
+/**
+ * \mainpage Home Page
+ */
 # README File
 
 ## 0. Copyright & Credits
@@ -9,7 +12,7 @@
 * Jacob Couture  
   * jcoutur9@uwo.ca  
 * Chun Ho Chan (Edward)  
-  * ccha232.uwo.ca  
+  * ccha232@uwo.ca  
 * Sameer Mehboob Bugti  
   * sbugti@uwo.ca  
 
@@ -51,6 +54,9 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * SCons  
   * version 4.8.1+ (PyPI)  
   * Note: This is GDExtension's suggested build tool.  
+* Doxygen (optional)  
+  * version 1.12.0  
+  * Note: This is used to generate the HTML, XML doc files.  
 
 ## 3. How To Compile (step-by-step guide)
 
@@ -125,16 +131,26 @@ This Godot project was created with these settings:
   * (Note: The renderer can be changed later, but scenes may need to be adjusted.)  
 * Version Control Metadata: Git  
 
-Documenting Custom C++ Classes:  
+Generating Godot Docs XML Templates (Empty XML):  
+Steps:  
 1. Open a terminal in the ".../3307GroupProject/game/" directory, and then:  
   * Run the command "<path_to_godot> --doctool ../ --gdextension-docs"  
   * Example: "C:/Program Files/Godot/Godot_v4.3-stable/Godot_v4.3-stable_win64.exe" --doctool ../ --gdextension-docs  
   * (Note: For PowerShell users, add an & character at the front if your path to godot is surrounded by "".)  
   * (Full Documentation: https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_docs_system.html)  
 2. Press Enter when the message "Deleting docs cache..." appears.  
-3. Check if new .XML documentation files are located in the ".../3307GroupProject/doc_classes/" directory.  
+  * (Note: This does not delete/ overwrite any existing doc files.)  
+3. Manually edit the new .XML doc files are located in the ".../3307GroupProject/doc_classes/" directory.  
+4. Recompile the game as a debug build (see Section 3). This links the doc files to the Godot Editor.  
 
-Fixing VSCode C++ Undetected Header Files:  
+Generating C++ Doc By Doxygen (HTML):  
+Steps:  
+1. Document the code files in Doxygen syntax (put file description at the top)  
+2. Open a terminal in the ".../3307GroupProject/game/" directory, and then:  
+  * Run the command "doxygen"  
+
+Fixing Undetected C++ Header Files In VSCode:  
+Steps:  
 1. Open VSCode and open the Extension Settings page of "C/C++".  
 2. Search for the "Include Path" setting, and then add item:  
         ${workspaceFolder}/**  

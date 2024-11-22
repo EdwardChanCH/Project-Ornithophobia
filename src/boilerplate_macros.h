@@ -1,5 +1,12 @@
-// This header file contains all custom macros for GDExtension's boilerplate code.
-// The purpose is to minimize typos from copying these boilerplate code.
+/**
+ * @file boilerplate_macros.h
+ * @author Chun Ho Chan
+ * @brief This header file contains all custom macros for GDExtension's boilerplate code.
+ * The purpose is to minimize typos from copying these boilerplate code.
+ * @version 1.0.0
+ * @date 2024-11-10
+ * 
+ */
 
 #ifndef BOILERPLATE_MACROS_H
 #define BOILERPLATE_MACROS_H

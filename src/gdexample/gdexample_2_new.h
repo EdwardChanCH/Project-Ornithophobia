@@ -1,8 +1,17 @@
+/**
+ * @file gdexample_2_new.h
+ * @author Chun Ho Chan
+ * @brief Header file.
+ * @version 0.1.0
+ * @date 2024-11-10
+ * 
+ */
+
 #ifndef GDEXAMPLE_2_NEW_H
 #define GDEXAMPLE_2_NEW_H
 
-#include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes. 
-#include <godot_cpp/classes/label.hpp> // Bindings to the parent class. 
+#include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes
+#include <godot_cpp/classes/label.hpp> // Bindings to the parent class
 
 namespace godot {
 
@@ -13,7 +22,7 @@ namespace godot {
         int counter;
 
     protected:
-        static void _bind_methods(); // Must be declared. 
+        static void _bind_methods(); // Must be declared
 
     public:
         GDExample2New();

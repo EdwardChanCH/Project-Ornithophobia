@@ -9,18 +9,32 @@
 
 namespace godot {
 
-    class InputHandler {
+    class InputHandler : public Object{
+
+        GDCLASS(InputHandler, Object)
+        
+        static InputHandler *singleton;
+        
+        protected:
+            static void _bind_methods();
+        
+        private:
+            InputHandler();
+            ~InputHandler();
+
         public:
-            InputHandler() = delete;
+            InputHandler(InputHandler &other) = delete;
 
-            static inline GameInput MOVE_LEFT = GameInput("move_left");
-            static inline GameInput MOVE_RIGHT = GameInput("move_right");
-            static inline GameAxis MOVE_HORIZONTAL = GameAxis("move_left", "move_right");
-            static inline GameInput SMALL_BLAST = GameInput("small_blast");
-            static inline GameInput LARGE_BLAST = GameInput("large_blast");
+            GameInput *MOVE_LEFT;
+            GameInput *MOVE_RIGHT;
+            GameAxis *MOVE_HORIZONTAL;
+            GameInput *SMALL_BLAST;
+            GameInput *LARGE_BLAST;
+            GameInput *ESCAPE;
 
-            static bool isMoveInputPressed();
-            static void updateLastValues();
+            static InputHandler *get_singleton();
+            bool is_move_input_pressed();
+            void update_last_values();
 
     };
 

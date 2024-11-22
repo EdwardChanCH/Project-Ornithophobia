@@ -22,18 +22,18 @@ MainMenuController::~MainMenuController() {
 }
 
 void MainMenuController::on_play_button_pressed() {
-	get_tree()->change_scene_to_file("res://main.tscn");
+	get_tree()->change_scene_to_file("res://scenes/level_select.tscn");
 }
 
 void MainMenuController::on_workshop_button_pressed() {
 	UtilityFunctions::print("i wish there was a shop i could work in");
-	// get_tree()->change_scene_to_file("res://workshop.tscn");
+	// get_tree()->change_scene_to_file("res://scenes/workshop.tscn");
 }
 
 void MainMenuController::on_settings_button_pressed() {
 	UtilityFunctions::print("no settings yet teehee");
 	// No settings menu yet
-	// get_tree()->change_scene_to_file("res://settings.tscn");
+	// get_tree()->change_scene_to_file("res://scenes/settings.tscn");
 }
 
 void MainMenuController::on_exit_button_pressed() {

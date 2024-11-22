@@ -8,10 +8,10 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/time.hpp>
-// #include <../timecontroller.h>
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
 #include "globals.h"
 // #include "inputhandler.h"
+#include "debug.h"
 
 namespace godot {
 
@@ -21,9 +21,6 @@ namespace godot {
         _GDEXPORT
 
     private:
-        // Debug variables
-        Label *debugNode;
-
         // General movement variables
         float speed;
         Vector2 inputDirection;
@@ -55,8 +52,8 @@ namespace godot {
 
         // Misc.
         float timeSlowValue;
-        bool canSlowTime;
-        Input *input = Input::get_singleton();
+        // bool canSlowTime;
+        Input *input;
 
 
     protected:
@@ -65,15 +62,17 @@ namespace godot {
 
     public:
         virtual void _ready() override;
+        virtual void _exit_tree() override;
 
         PlayerController();
         ~PlayerController();
 
+        bool canSlowTime;
         void _process(double delta) override;
         void set_game_speed(float gameSpeed);
         void updateBlastVelocity(float *blastDir, float *vel, int maxBlastSpeed, String direction="");
-
-        // getters/setters
+        bool can_slow_time();
+        void set_can_slow_time(bool value);
 
     };
 

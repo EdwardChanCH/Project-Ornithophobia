@@ -17,14 +17,14 @@ GameAxis::~GameAxis() {
 
 }
 
-float GameAxis::getValue() const {
-    return Input::get_singleton() -> get_axis(positiveId, negativeId);
+float GameAxis::get_value() const {
+    return Input::get_singleton()->get_axis(positiveId, negativeId);
 }
 
-float GameAxis::getLastValue() const {
+float GameAxis::get_last_value() const {
     return lastValue;
 }
 
-void GameAxis::updateLast() {
-    lastValue = getValue();
+void GameAxis::update_last() {
+    lastValue = get_last_value();
 }
