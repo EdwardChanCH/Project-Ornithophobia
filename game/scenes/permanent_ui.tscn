@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://lqvyaistlnvq"]
-
-[ext_resource type="Script" path="res://scenes/version_text.gd" id="1_jj1na"]
+[gd_scene load_steps=2 format=3 uid="uid://lqvyaistlnvq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cc0l7"]
 line_spacing = 0.0
@@ -23,8 +21,7 @@ offset_top = 976.0
 offset_right = 1912.0
 offset_bottom = 1048.0
 text = "UntitledShotgunGame
-Pre-Alpha - v0.3.0.1"
+Pre-Alpha - v0.3.0.2"
 label_settings = SubResource("LabelSettings_cc0l7")
 horizontal_alignment = 2
 vertical_alignment = 2
-script = ExtResource("1_jj1na")

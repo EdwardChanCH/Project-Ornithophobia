@@ -11,6 +11,7 @@ var can_fade_in
 var can_fade_out
 var start_press_time = 0
 var can_regenerate = false
+var can_drain = false
 var can_slow_time
 
 # Called when the node enters the scene tree for the first time.
@@ -41,7 +42,8 @@ func _process(delta: float) -> void:
 		can_slow_time = true
 	else:
 		can_slow_time = false
-	get_parent().set_can_slow_time(can_slow_time)
+	
+	get_parent().set_can_slow_time(can_drain)
 	
 	update_meter()
 	
@@ -51,6 +53,8 @@ func _process(delta: float) -> void:
 		if (value >= soft_max_value):
 			value = soft_max_value
 			can_regenerate = false
+			
+	Debug.get_singleton().add_debug_property("can_drain", can_drain)
 
 
 func update_meter():
@@ -66,12 +70,10 @@ func update_meter():
 		
 		start_press_time = Time.get_ticks_msec()
 		can_regenerate = false
+		can_drain = true
 	
 	# If the action button is being held down, slow time
-	if (Input.is_action_pressed("action_button") and can_slow_time and Engine.time_scale != 1):
-		if (get_parent().was_on_floor()):
-			start_press_time = Time.get_ticks_msec()
-			max_slow_time = value * 20
+	if (Input.is_action_pressed("action_button") and can_slow_time and Engine.time_scale != 1 and can_drain):
 		# Update the amount of time the large blast button has been held down for
 		time_pressed = Time.get_ticks_msec() - start_press_time
 		# Stop regen cooldown timer if large blast button is pressed again
@@ -89,6 +91,7 @@ func update_meter():
 			value = min_value
 			time_pressed = 0
 			can_slow_time = false
+			can_drain = false
 			cooldown.stop()
 			cooldown.start(cooldown.wait_time)
 	

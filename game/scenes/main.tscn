@@ -121,13 +121,14 @@ unique_name_in_owner = true
 position = Vector2(112, 304)
 
 [node name="TutorialText" type="Label" parent="."]
-offset_left = 197.0
-offset_top = 77.0
-offset_right = 446.0
-offset_bottom = 178.0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 191.0
 text = "Walk: A/D
 Small Blast: M1
 Large Blast: M2
+Slow Motion: Space
 Return to Menu: Esc"
 label_settings = SubResource("LabelSettings_76ula")
 horizontal_alignment = 1

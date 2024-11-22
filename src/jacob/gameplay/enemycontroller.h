@@ -14,6 +14,7 @@
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
+#include <godot_cpp/classes/audio_stream_player.hpp>
 
 namespace godot {
 

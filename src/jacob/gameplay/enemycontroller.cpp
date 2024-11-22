@@ -18,6 +18,7 @@ using namespace godot;
  */
 void EnemyController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_player_controller_entered", "body"), &EnemyController::_on_player_controller_entered);
+    ADD_SIGNAL(MethodInfo("enemy_died"));
 }
 
 /**
@@ -54,9 +55,10 @@ void EnemyController::_ready() {
 
 
 void EnemyController::_on_player_controller_entered(Node2D *body) {
-    if (body->get_name() == UtilityFunctions::str("PlayerController")) {
+    if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
         deathAnim->set_visible(true);
         deathAnim->play("death");
+        emit_signal("enemy_died");
     }
 }
 
