@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://beak5jovysipc"]
+
+[ext_resource type="PackedScene" uid="uid://c0rd0tprf4yfs" path="res://screen/edward_main_ui.tscn" id="1_thguo"]
+
+[node name="EdwardMain" type="EdwardMain"]
+
+[node name="EdwardMainUI" parent="." instance=ExtResource("1_thguo")]
+
+[connection signal="open_level_editor" from="EdwardMainUI" to="." method="_on_edward_main_ui_open_level_editor"]

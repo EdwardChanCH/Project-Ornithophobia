@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://chieycg7xwrst"]
 
-[ext_resource type="Script" path="res://gameplay_test_ui.gd" id="1_hu6fl"]
+[ext_resource type="Script" path="res://gdscript/gameplay_test_ui.gd" id="1_hu6fl"]
 
 [node name="GameplayTestUI" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 script = ExtResource("1_hu6fl")
 
 [node name="SceneName" type="Label" parent="."]

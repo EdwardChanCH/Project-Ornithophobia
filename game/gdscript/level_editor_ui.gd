@@ -40,7 +40,7 @@ func _on_debug_scene_manager_pressed() -> void:
 
 func _on_test_add_scene_pressed() -> void:
 	print("Adding scene to stack...")
-	SceneManager.get_instance().load_new_scene(get_tree(), "res://level_editor_ui.tscn")
+	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor_ui.tscn")
 	pass
 
 
@@ -81,5 +81,5 @@ func _on_debug_level_editor_controller_pressed() -> void:
 
 
 func _on_load_gameplay_test_scene_pressed() -> void:
-	SceneManager.get_instance().load_new_scene(get_tree(), "res://gameplay_test.tscn")
+	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/gameplay_test.tscn")
 	pass

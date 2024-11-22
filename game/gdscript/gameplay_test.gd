@@ -22,9 +22,12 @@ func unload_level() -> void:
 
 
 func load_level(filepath: String) -> void:
-	unload_level()
-	level_node = ResourceLoader.load(filepath, "PackedScene", ResourceLoader.CACHE_MODE_REUSE).instantiate()
-	add_child(level_node)
+	if ResourceLoader.exists(filepath, "PackedScene"):
+		unload_level()
+		level_node = ResourceLoader.load(filepath, "PackedScene", ResourceLoader.CACHE_MODE_REUSE).instantiate()
+		add_child(level_node)
+	else:
+		print("Error: File not found in '", filepath, "' !")
 	pass
 
 
@@ -35,6 +38,8 @@ func save_level(filepath: String) -> void:
 		scene = PackedScene.new()
 		scene.pack(level_node)
 		ResourceSaver.save(scene, filepath, 0)
+	else:
+		print("Error: Nothing to save!")
 	pass
 
 
@@ -49,15 +54,25 @@ func _on_gameplay_test_ui_unload_button_pressed() -> void:
 	
 
 func _on_gameplay_test_ui_reload_button_pressed() -> void:
-	load_level("res://level_test.tscn")
+	load_level("res://level/level_test.tscn")
 	pass
 
 
 func _on_gameplay_test_ui_load_button_pressed() -> void:
-	load_level("res://test_scene_001.tscn")
+	load_level("res://level/level_test_quicksave.tscn")
 	pass
 
 
 func _on_gameplay_test_ui_save_button_pressed() -> void:
-	save_level("res://test_scene_001.tscn")
+	save_level("res://level/level_test_quicksave.tscn")
+	pass
+
+
+func _on_gameplay_test_ui_screen_left_clicked() -> void:
+	print("Left click: ", get_viewport().get_mouse_position())
+	pass
+
+
+func _on_gameplay_test_ui_screen_right_clicked() -> void:
+	print("Right click: ", get_viewport().get_mouse_position())
 	pass

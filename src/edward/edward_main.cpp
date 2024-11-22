@@ -37,6 +37,6 @@ EdwardMain::~EdwardMain() {
 
 void EdwardMain::_on_edward_main_ui_open_level_editor() {
     UtilityFunctions::print("Changing scene to LevelEditor...");
-    SceneManager::get_instance()->load_new_scene(this->get_tree(), "res://level_editor_ui.tscn");
+    SceneManager::get_instance()->load_new_scene(this->get_tree(), "res://screen/level_editor_ui.tscn");
     // get_tree()->change_scene_to_file("res://level_editor_ui.tscn");
 }
