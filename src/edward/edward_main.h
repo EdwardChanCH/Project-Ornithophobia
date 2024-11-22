@@ -22,6 +22,8 @@ namespace godot {
 		GDCLASS(EdwardMain, Node2D) // A Godot macro for class inheritance
 
 	private:
+		const String ui_filepath = "res://screen/edward_main_ui.tscn";
+		const String level_editor_filepath = "res://screen/level_editor_ui.tscn";
 
 	protected:
 		static void _bind_methods(); // Must be declared
@@ -29,6 +31,10 @@ namespace godot {
 	public:
 		EdwardMain();
 		~EdwardMain();
+
+		void _ready();
+		void _enter_tree();
+		void _exit_tree();
 		
 		void _on_edward_main_ui_open_level_editor();
 	};

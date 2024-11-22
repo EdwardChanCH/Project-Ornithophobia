@@ -5,3 +5,8 @@
 [node name="LevelEditor_" type="Node"]
 
 [node name="LevelEditorUI" parent="." instance=ExtResource("1_5g2im")]
+process_mode = 3
+z_index = 1
+custom_minimum_size = Vector2(640, 360)
+offset_right = 1920.0
+offset_bottom = 1080.0

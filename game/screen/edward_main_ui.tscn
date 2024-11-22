@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://gdscript/edward_main_ui.gd" id="1_57e4d"]
 
 [node name="EdwardMainUI" type="Control"]
-z_index = 1
-custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -19,7 +17,9 @@ anchor_right = 1.0
 offset_left = -142.0
 offset_bottom = 23.0
 grow_horizontal = 0
-text = "edward_main.tscn"
+text = "edward_main.tscn
+edward_main_ui.tscn"
+horizontal_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0

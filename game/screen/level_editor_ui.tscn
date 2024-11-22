@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
 
 [node name="LevelEditorUI" type="Control"]
-z_index = 1
-custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_f5a73")
 
 [node name="SceneName" type="Label" parent="."]
@@ -17,7 +19,9 @@ anchor_right = 1.0
 offset_left = -155.0
 offset_bottom = 23.0
 grow_horizontal = 0
-text = "level_editor_ui.tscn"
+text = "level_editor.tscn
+level_editor_ui.tscn"
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
