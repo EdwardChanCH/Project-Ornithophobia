@@ -2,8 +2,8 @@
  * @file edward_main.h
  * @author Chun Ho Chan (Edward)
  * @brief Header file.
- * @version 0.1.0
- * @date 2024-11-16
+ * @version 0.2.0
+ * @date 2024-11-22
  * 
  */
 

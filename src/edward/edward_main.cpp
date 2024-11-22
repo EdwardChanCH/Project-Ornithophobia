@@ -1,9 +1,9 @@
 /**
  * @file edward_main.cpp
  * @author Chun Ho Chan (Edward)
- * @brief This main class is for testing Edward's systems.
- * @version 0.1.0
- * @date 2024-11-16
+ * @brief This main class is for loading Edward's level editor subsystem.
+ * @version 0.2.0
+ * @date 2024-11-22
  * 
  */
 
