@@ -15,7 +15,6 @@ func _ready() -> void:
 	# Register levels
 	for data in temp_level_data:
 		save_level(TestIO.new(), data[0], data[1], data[2], data[3], data[4])
-		print("wee")
 
 
 func save_level(level, level_name, rank_times, best_time, icon_path, level_path):

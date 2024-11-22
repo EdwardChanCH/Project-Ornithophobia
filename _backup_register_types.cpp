@@ -15,6 +15,7 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 // #include ">_< headers_here >_<"
+#include "enemycontroller.h"
 #include "gdexample_1_new.h"
 #include "gdexample_1_old.h"
 #include "gdexample_2_new.h"
@@ -42,6 +43,7 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
+    GDREGISTER_CLASS(EnemyController);
     GDREGISTER_CLASS(GDExample1New);
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);

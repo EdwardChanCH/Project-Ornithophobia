@@ -215,28 +215,21 @@ void PlayerController::_process(double _delta) {
     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {        
         blastTime = Time::get_singleton()->get_ticks_msec();
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
-        canSlowTime = input->is_action_just_pressed("large_blast");
-        set_game_speed(1);
     }
 
-    // Buffer for activating slow motion on large blasts
-    if (input->is_action_pressed("large_blast")) {
-        long curTime = Time::get_singleton()->get_ticks_msec();
-        if (input->is_action_just_pressed("small_blast")) {
-            blastTime = -curTime;
-        }
-        if (curTime - blastTime >= 100 && canSlowTime && isAirborne && lastBlastTime >= 150) {
-            set_game_speed(timeSlowValue);
-        } else {
-            set_game_speed(1);
-        }
+    // Slow motion code
+    if (input->is_action_pressed("action_button") && canSlowTime) {
+        set_game_speed(timeSlowValue);
+    }
+
+    if (input->is_action_just_released("action_button") || !canSlowTime) {
+        set_game_speed(1);
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
     if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
         // Get the direction the player will move from the blast based on the position of the mouse
         Vector2 blastDirection = get_viewport()->get_mouse_position() - get_global_position();
-        UtilityFunctions::print(UtilityFunctions::str(get_viewport()->get_mouse_position()));
         blastDirection *= -1;
         blastDirection.normalize();
 
@@ -249,7 +242,6 @@ void PlayerController::_process(double _delta) {
             blastStrength = largeBlastStrength;
             velocity.x = update_blast_velocity(blastDirection.x, velocity.x, maxLargeBlastSpeed);
             velocity.y = update_blast_velocity(blastDirection.y, velocity.y, maxLargeBlastSpeed, "vertical");
-            set_game_speed(1);      // Turn off slow motion
         }
 
         // Clamp velocity and speed
@@ -266,18 +258,6 @@ void PlayerController::_process(double _delta) {
 
     /*-------------------------------------------------------------------------------------------------------------*/
 
-
-    // Reset player position if they fall offscreen
-    Vector2 screenSize = get_viewport_rect().get_size();
-    int screenWrapBuffer = 16;
-    if (get_position().x < -screenWrapBuffer)
-        set_position(Vector2(screenSize.x + screenWrapBuffer, get_position().y));
-    if (get_position().x > screenSize.x + screenWrapBuffer)
-        set_position(Vector2(-screenWrapBuffer, get_position().y));
-    if (get_position().y < -screenWrapBuffer)
-        set_position(Vector2(get_position().x, screenSize.y + screenWrapBuffer));
-    if (get_position().y > screenSize.y + screenWrapBuffer)
-        set_position(Vector2(get_position().x, -screenWrapBuffer));
 
     // Update player velocity
     set_velocity(velocity);

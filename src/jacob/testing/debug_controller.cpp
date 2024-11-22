@@ -25,12 +25,11 @@ void DebugController::_ready() {
 		property_container->get_child(i)->queue_free();
 		property_container->remove_child(property_container->get_child(i));
 	}
-	
-	UtilityFunctions::print("tree");
+
 }
 
 void DebugController::_process(double _delta) {
-	if (properties != nullptr) {
+	if (!properties->is_empty()) {
 		for (int i = 0; i < properties->size(); i++) {
 			String name = UtilityFunctions::str(properties->keys().operator[](i));
 			String value = UtilityFunctions::str(properties->operator[](name));
@@ -48,7 +47,6 @@ void DebugController::_process(double _delta) {
 			}
 		}
 	}
-	
 }
 
 void DebugController::_exit_tree() {

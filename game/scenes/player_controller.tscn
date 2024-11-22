@@ -93,9 +93,10 @@ groundDecel = 4.0
 groundFriction = 0.95
 gravity = 425.0
 maxAirSpeed = 100
+fallSpeed = nan
 maxFallSpeed = 750
 airFriction = 0.7
-trueMaxSpeed = 0
+trueMaxSpeed = 405
 largeBlastStrength = 650
 maxSmallBlastSpeed = 100
 maxLargeBlastSpeed = 400
@@ -111,6 +112,7 @@ sprite_frames = SubResource("SpriteFrames_2dk60")
 animation = &"walk"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-5.78165e-06, -0.0377104)
 scale = Vector2(1.62, 1.62)
 shape = SubResource("RectangleShape2D_tvttb")
