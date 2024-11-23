@@ -1,0 +1,11 @@
+<map id="src/edward/scene_manager.h" name="src/edward/scene_manager.h">
+<area shape="rect" id="Node000001" title="Header file." alt="" coords="305,5,497,32"/>
+<area shape="rect" id="Node000002" href="$edward__main_8cpp.html" title="This main class is for loading Edward&#39;s level editor subsystem." alt="" coords="5,88,197,115"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="340,39,149,90,147,85,339,34"/>
+<area shape="rect" id="Node000003" href="$level__editor__controller_8cpp.html" title="Mediator Pattern (also MVC Pattern). This class controlls all communication between Godot UI (view) a..." alt="" coords="221,80,376,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="375,44,326,82,323,77,372,40"/>
+<area shape="rect" id="Node000004" href="$scene__manager_8cpp.html" title="Singleton Pattern. This class solely manages the transition between scenes in Godot." alt="" coords="400,88,607,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="431,40,489,85,486,90,427,44"/>
+<area shape="rect" id="Node000005" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="631,88,782,115"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="464,34,659,85,657,90,463,39"/>
+</map>

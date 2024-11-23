@@ -198,6 +198,14 @@ d. 3rd Party Resources</h3>
 </li>
 </ul>
 </li>
+<li>Doxygen (optional) <br  />
+<ul>
+<li>version 1.12.0 <br  />
+</li>
+<li>Note: This is used to generate the HTML, XML doc files. <br  />
+</li>
+</ul>
+</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md10"></a>
 3. How To Compile (step-by-step guide)</h2>
@@ -321,7 +329,7 @@ d. 3rd Party Resources</h3>
 <li>Version Control Metadata: Git <br  />
 </li>
 </ul>
-<p>Generating Doc Files For Custom C++ Classes: <br  />
+<p>Generating Godot Docs XML Templates (Empty XML): <br  />
  Steps: <br  />
 </p><ol type="1">
 <li>Open a terminal in the ".../3307GroupProject/game/" directory, and then: <br  />
@@ -345,6 +353,18 @@ d. 3rd Party Resources</h3>
 <li>Manually edit the new .XML doc files are located in the ".../3307GroupProject/doc_classes/" directory. <br  />
 </li>
 <li>Recompile the game as a debug build (see Section 3). This links the doc files to the Godot Editor. <br  />
+</li>
+</ol>
+<p>Generating C++ Doc By Doxygen (HTML): <br  />
+ Steps: <br  />
+</p><ol type="1">
+<li>Document the code files in Doxygen syntax (put file description at the top) <br  />
+</li>
+<li>Open a terminal in the ".../3307GroupProject/game/" directory, and then: <br  />
+<ul>
+<li>Run the command "doxygen" <br  />
+</li>
+</ul>
 </li>
 </ol>
 <p>Fixing Undetected C++ Header Files In VSCode: <br  />
