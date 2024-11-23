@@ -1,5 +1,5 @@
 /**
- * @file level.h
+ * @file iprototype.h
  * @author Chun Ho Chan (Edward)
  * @brief Header file.
  * @version 0.1.0
@@ -7,20 +7,19 @@
  * 
  */
 
-#ifndef LEVEL_H
-#define LEVEL_H
+#ifndef IPROTOTYPE_H
+#define IPROTOTYPE_H
 
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
-#include "iprototype.h"
 
 namespace godot {
 
-	class Level : public IPrototype {
+	class IPrototype : public Node {
 		
-		GDCLASS(Level, IPrototype) // A Godot macro for class inheritance
+		GDCLASS(IPrototype, Node) // A Godot macro for class inheritance
 
 	private:
 
@@ -28,10 +27,7 @@ namespace godot {
 		static void _bind_methods(); // Must be declared
 
 	public:
-		Level();
-		~Level();
-
-		virtual IPrototype * clone() override;
+		virtual IPrototype * clone() = 0;
 	};
 
 } // namespace godot

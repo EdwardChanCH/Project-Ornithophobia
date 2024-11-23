@@ -3,9 +3,7 @@
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_bdb5u"]
 [ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_0fmaw"]
 
-[node name="Level_" type="Node"]
-
-[node name="LevelStats_" type="Node" parent="."]
+[node name="Level" type="Level"]
 
 [node name="Terrain" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)

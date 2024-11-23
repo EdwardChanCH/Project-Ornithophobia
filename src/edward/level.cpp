@@ -19,6 +19,7 @@ using namespace godot;
  * 
  */
 void Level::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("clone"), &Level::clone);
 }
 
 /**
@@ -33,4 +34,9 @@ Level::Level() {
  * 
  */
 Level::~Level() {
+}
+
+IPrototype * Level::clone() {
+    UtilityFunctions::print("Go to sleep!");
+    return nullptr;
 }
