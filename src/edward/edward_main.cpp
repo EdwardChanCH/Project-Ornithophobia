@@ -18,7 +18,7 @@ using namespace godot;
  * 
  */
 void EdwardMain::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("_on_edward_main_ui_open_level_editor"), &EdwardMain::_on_edward_main_ui_open_level_editor);
+    ClassDB::bind_method(D_METHOD("_on_edward_main_ui_open_level_editor_screen"), &EdwardMain::_on_edward_main_ui_open_level_editor_screen);
 }
 
 /**
@@ -26,8 +26,7 @@ void EdwardMain::_bind_methods() {
  * 
  */
 EdwardMain::EdwardMain() {
-    UtilityFunctions::print("EdwardMain constructor."); // TODO debug message
-    
+    UtilityFunctions::print("Debug: EdwardMain constructor."); // TODO debug message
 }
 
 /**
@@ -35,8 +34,11 @@ EdwardMain::EdwardMain() {
  * 
  */
 EdwardMain::~EdwardMain() {
-    UtilityFunctions::print("EdwardMain destructor."); // TODO debug message
-    
+    UtilityFunctions::print("Debug: EdwardMain destructor."); // TODO debug message
+    if (ui_node) {
+        ui_scene.unref();
+        ui_node = nullptr;
+    }
 }
 
 /**
@@ -44,16 +46,16 @@ EdwardMain::~EdwardMain() {
  * 
  */
 void EdwardMain::_ready() {
-    UtilityFunctions::print("EdwardMain ready."); // TODO debug message
+    UtilityFunctions::print("Debug: EdwardMain ready."); // TODO debug message
 
+    // Load Godot UI
     if (ResourceLoader::get_singleton()->exists(ui_filepath, "PackedScene")) {
-        // Load UI node to scene tree
-        Ref<PackedScene> ui_scene = ResourceLoader::get_singleton()->load(ui_filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
-        Node * ui_node = ui_scene.ptr()->instantiate();
+        ui_scene = ResourceLoader::get_singleton()->load(ui_filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
+        ui_node = ui_scene.ptr()->instantiate();
         add_child(ui_node);
 
-        // Connect UI node signals
-        ui_node->connect("open_level_editor", Callable(this, "_on_edward_main_ui_open_level_editor"));
+        // Connect Godot UI signals
+        ui_node->connect("open_level_editor_screen", Callable(this, "_on_edward_main_ui_open_level_editor_screen"));
     }
 }
 
@@ -62,7 +64,7 @@ void EdwardMain::_ready() {
  * 
  */
 void EdwardMain::_enter_tree() {
-    UtilityFunctions::print("EdwardMain enter tree."); // TODO debug message
+    UtilityFunctions::print("Debug: EdwardMain enter tree."); // TODO debug message
 }
 
 /**
@@ -70,13 +72,11 @@ void EdwardMain::_enter_tree() {
  * 
  */
 void EdwardMain::_exit_tree() {
-    UtilityFunctions::print("EdwardMain exit tree."); // TODO debug message
+    UtilityFunctions::print("Debug: EdwardMain exit tree."); // TODO debug message
 }
 
-/**
- * @brief Signal receiver.
- * 
- */
-void EdwardMain::_on_edward_main_ui_open_level_editor() {
+// - - - Godot UI Signal Receivers - - -
+
+void EdwardMain::_on_edward_main_ui_open_level_editor_screen() {
     SceneManager::get_instance()->load_new_scene(this->get_tree(), level_editor_filepath);
 }

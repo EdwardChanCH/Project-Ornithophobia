@@ -1,15 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://db00fhsn58v7m"]
+[gd_scene load_steps=3 format=3 uid="uid://db00fhsn58v7m"]
 
 [ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
 
-[node name="LevelEditorUI" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
+
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 script = ExtResource("1_f5a73")
+load_level_popup_node = NodePath("LoadLevelPopup")
+save_level_popup_node = NodePath("SaveLevelPopup")
+
+[node name="LoadLevelPopup" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+root_subfolder = "res://level"
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
+
+[node name="SaveLevelPopup" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Save Level File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Save"
+dialog_hide_on_ok = true
+root_subfolder = "res://level"
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
 
 [node name="SceneName" type="Label" parent="."]
 layout_mode = 1
@@ -23,67 +52,94 @@ text = "level_editor.tscn
 level_editor_ui.tscn"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cupx8")
 
-[node name="VBoxContainer1" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="HBoxContainer/VBoxContainer1"]
+[node name="VBoxContainer1" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer1"]
 layout_mode = 2
 text = "Back Button"
 
-[node name="LoadGameplayTestScene" type="Button" parent="HBoxContainer/VBoxContainer1"]
+[node name="PlaytestButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer1"]
 layout_mode = 2
-text = "Load Gameplay Test Scene"
+toggle_mode = true
+text = "Playtest (Toggle Physics)"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="DebugSceneManager" type="Button" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Debug Scene Manager"
-
-[node name="TestAddScene" type="Button" parent="HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Test Add Scene"
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="DebugLevelEditorController" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="DebugLevelEditorControllerButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer1"]
 layout_mode = 2
 text = "Debug Level Editor Controller"
 
-[node name="UndoButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="DebugSceneManagerButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer1"]
+layout_mode = 2
+text = "Debug Scene Manager"
+
+[node name="TestAddSceneButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer1"]
+layout_mode = 2
+text = "Test Add Scene"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="UndoButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Undo Button"
 
-[node name="RedoButton" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="RedoButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Redo Button"
 
-[node name="TestAction1" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="TestAction1Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Test Action 1"
 
-[node name="TestAction2" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="TestAction2Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Test Action 2"
 
-[node name="TestAction3" type="Button" parent="HBoxContainer/VBoxContainer3"]
+[node name="TestAction3Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Test Action 3"
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer1/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer1/LoadGameplayTestScene" to="." method="_on_load_gameplay_test_scene_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/DebugSceneManager" to="." method="_on_debug_scene_manager_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/TestAddScene" to="." method="_on_test_add_scene_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/DebugLevelEditorController" to="." method="_on_debug_level_editor_controller_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/UndoButton" to="." method="_on_undo_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/RedoButton" to="." method="_on_redo_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction1" to="." method="_on_test_action_1_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction2" to="." method="_on_test_action_2_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/TestAction3" to="." method="_on_test_action_3_pressed"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LoadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Load Level"
+
+[node name="SaveLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Save Level"
+
+[node name="ReloadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Reload Level"
+
+[node name="UnloadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Unload Level"
+
+[connection signal="file_selected" from="LoadLevelPopup" to="." method="_on_load_level_popup_file_selected"]
+[connection signal="file_selected" from="SaveLevelPopup" to="." method="_on_save_level_popup_file_selected"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer1/PlaytestButton" to="." method="_on_playtest_button_toggled"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/SaveLevelButton" to="." method="_on_save_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]

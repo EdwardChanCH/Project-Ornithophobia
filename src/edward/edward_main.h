@@ -23,7 +23,10 @@ namespace godot {
 
 	private:
 		const String ui_filepath = "res://screen/edward_main_ui.tscn";
-		const String level_editor_filepath = "res://screen/level_editor_ui.tscn";
+		const String level_editor_filepath = "res://screen/level_editor.tscn";
+
+		Ref<PackedScene> ui_scene;
+		Node * ui_node;
 
 	protected:
 		static void _bind_methods(); // Must be declared
@@ -36,7 +39,7 @@ namespace godot {
 		void _enter_tree();
 		void _exit_tree();
 		
-		void _on_edward_main_ui_open_level_editor();
+		void _on_edward_main_ui_open_level_editor_screen();
 	};
 
 } // namespace godot

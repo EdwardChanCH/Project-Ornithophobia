@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=4 uid="uid://envlr1j2mmp3"]
+[gd_scene load_steps=4 format=4]
 
-[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_bdb5u"]
-[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_0fmaw"]
+[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_bdb5u"]
+[ext_resource type="PackedScene" path="res://entity/yinyang_orb.tscn" id="2_0fmaw"]
 
-[node name="Level_" type="Node"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
+bounce = 1.0
+
+[node name="@Node@198" type="Node"]
+process_mode = 4
 
 [node name="LevelStats_" type="Node" parent="."]
 
@@ -16,17 +20,42 @@ navigation_enabled = false
 
 [node name="EntityList_" type="Node" parent="."]
 
-[node name="YinyangOrb1" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb1" type="RigidBody2D" parent="EntityList_" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 232)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
 
-[node name="YinyangOrb2" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb2" type="RigidBody2D" parent="EntityList_" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 182)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
 
-[node name="YinyangOrb3" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb3" type="RigidBody2D" parent="EntityList_" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 132)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
 
-[node name="YinyangOrb4" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb4" type="RigidBody2D" parent="EntityList_" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 82)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
 
-[node name="YinyangOrb5" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb5" type="RigidBody2D" parent="EntityList_" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 32)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
