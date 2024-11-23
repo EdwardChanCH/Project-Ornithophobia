@@ -27,8 +27,8 @@ namespace godot {
 		const String playtest_filepath = "res://screen/playtest.tscn";
 
 		Ref<PackedScene> ui_scene;
-		Node * ui_node;
 		Ref<PackedScene> level_scene;
+		Node * ui_node;
 		Node * level_node;
 
 		const int default_undo_limit = 500;
@@ -57,8 +57,13 @@ namespace godot {
 
 		void load_level(String filepath);
 		void save_level(String filepath);
+		void quick_load_level();
+		void quick_save_level();
 		void unload_level();
 		void reload_level();
+
+		Vector2i world_pos_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size);
+		Vector2 tile_pos_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size);
 
 		void _test_print(String s, int n);
 		void _debug();
@@ -71,6 +76,8 @@ namespace godot {
 		void _on_level_editor_ui_redo_button_pressed();
 		void _on_level_editor_ui_load_level_path_selected(String filepath);
 		void _on_level_editor_ui_save_level_path_selected(String filepath);
+		void _on_level_editor_ui_quick_load_level_button_pressed();
+		void _on_level_editor_ui_quick_save_level_button_pressed();
 		void _on_level_editor_ui_reload_level_button_pressed();
 		void _on_level_editor_ui_unload_level_button_pressed();
 		void _on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos);

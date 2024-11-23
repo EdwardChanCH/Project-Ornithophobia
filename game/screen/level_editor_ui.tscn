@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
-[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node")]
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("camera", "load_level_popup_node", "save_level_popup_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -13,8 +13,16 @@ offset_bottom = 1080.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("1_f5a73")
+camera = NodePath("Camera")
 load_level_popup_node = NodePath("LoadLevelPopup")
 save_level_popup_node = NodePath("SaveLevelPopup")
+camera_movement_scale = 2500.0
+camera_movement_multiplier = 5.0
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="LoadLevelPopup" type="FileDialog" parent="."]
 title = "Open a File"
@@ -119,6 +127,14 @@ text = "Load Level"
 layout_mode = 2
 text = "Save Level"
 
+[node name="QuickLoadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Quick Load Level"
+
+[node name="QuickSaveLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Quick Save Level"
+
 [node name="ReloadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 text = "Reload Level"
@@ -126,6 +142,10 @@ text = "Reload Level"
 [node name="UnloadLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 text = "Unload Level"
+
+[node name="CenterLevelButton" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Center Level"
 
 [connection signal="file_selected" from="LoadLevelPopup" to="." method="_on_load_level_popup_file_selected"]
 [connection signal="file_selected" from="SaveLevelPopup" to="." method="_on_save_level_popup_file_selected"]
@@ -141,5 +161,8 @@ text = "Unload Level"
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer2/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/SaveLevelButton" to="." method="_on_save_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/QuickLoadLevelButton" to="." method="_on_quick_load_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/QuickSaveLevelButton" to="." method="_on_quick_save_level_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer3/CenterLevelButton" to="." method="_on_center_level_button_pressed"]

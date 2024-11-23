@@ -1,8 +1,8 @@
 /**
  * @file level_editor_controller.cpp
  * @author Chun Ho Chan (Edward)
- * @brief Mediator Pattern (also MVC Pattern).
- * This class controlls all communication between Godot UI (view) and Level objects (model).
+ * @brief Mediator Pattern (MVC).
+ * This class controlls all communication between Godot UI (view) and Level data (model).
  * @version 0.3.0
  * @date 2024-11-22
  * 
@@ -57,6 +57,8 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_redo_button_pressed"), &LevelEditorController::_on_level_editor_ui_redo_button_pressed);
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_load_level_path_selected", "filepath"), &LevelEditorController::_on_level_editor_ui_load_level_path_selected);
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_save_level_path_selected", "filepath"), &LevelEditorController::_on_level_editor_ui_save_level_path_selected);
+    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_quick_load_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_quick_load_level_button_pressed);
+    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_quick_save_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_quick_save_level_button_pressed);
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_unload_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_unload_level_button_pressed);
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_reload_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_reload_level_button_pressed);
     ClassDB::bind_method(D_METHOD("_on_level_editor_ui_screen_left_clicked", "mouse_pos"), &LevelEditorController::_on_level_editor_ui_screen_left_clicked);
@@ -117,6 +119,8 @@ void LevelEditorController::_ready() {
         ui_node->connect("redo_button_pressed", Callable(this, "_on_level_editor_ui_redo_button_pressed"));
         ui_node->connect("load_level_path_selected", Callable(this, "_on_level_editor_ui_load_level_path_selected"));
         ui_node->connect("save_level_path_selected", Callable(this, "_on_level_editor_ui_save_level_path_selected"));
+        ui_node->connect("quick_load_level_button_pressed", Callable(this, "_on_level_editor_ui_quick_load_level_button_pressed"));
+        ui_node->connect("quick_save_level_button_pressed", Callable(this, "_on_level_editor_ui_quick_save_level_button_pressed"));
         ui_node->connect("unload_level_button_pressed", Callable(this, "_on_level_editor_ui_unload_level_button_pressed"));
         ui_node->connect("reload_level_button_pressed", Callable(this, "_on_level_editor_ui_reload_level_button_pressed"));
         ui_node->connect("screen_left_clicked", Callable(this, "_on_level_editor_ui_screen_left_clicked"));
@@ -245,14 +249,31 @@ void LevelEditorController::load_level(String filepath) {
 
 void LevelEditorController::save_level(String filepath) {
     if ((level_node) && (filepath.length() > 0)) {
+        // Recursively set children as 'owned' for packing
+        TypedArray<Node> family = level_node->get_children(false);
+        Node * child;
+        while (!family.is_empty()) {
+            child = (Node *)(Object *)family.pop_front();
+            child->set_owner(level_node);
+            family.append_array(child->get_children());
+        }
+
         level_filepath = filepath;
         level_scene.reference_ptr(memnew(PackedScene));
-        level_scene.ptr()->pack(level_node); // Only packs 'owned' children!
+        level_scene.ptr()->pack(level_node);
         ResourceSaver::get_singleton()->save(level_scene, level_filepath, 0);
     } else {
         UtilityFunctions::print("Warning: Nothing to save!");
     }
 
+}
+
+void LevelEditorController::quick_load_level() {
+    load_level(level_filepath.get_basename().replace("_quicksave", "") + "_quicksave" + "." + level_filepath.get_extension());
+}
+
+void LevelEditorController::quick_save_level() {
+    save_level(level_filepath.get_basename().replace("_quicksave", "") + "_quicksave" + "." + level_filepath.get_extension());
 }
 
 void LevelEditorController::unload_level() {
@@ -266,6 +287,24 @@ void LevelEditorController::reload_level() {
     if (ResourceLoader::get_singleton()->exists(level_filepath, "PackedScene")) {
         load_level(level_filepath);
     }
+}
+
+// - - - Tile Editing Functions - - -
+
+Vector2i LevelEditorController::world_pos_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size) {
+    Vector2i result;
+
+    result.x = floor(world_pos.x / tile_map_scale.x / (real_t)tile_size.x);
+    result.y = floor(world_pos.y / tile_map_scale.y / (real_t)tile_size.y);
+    return result;
+}
+
+Vector2 LevelEditorController::tile_pos_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size) {
+    Vector2 result;
+
+    result.x = ((real_t)tile_pos.x * tile_map_scale.x * tile_size.x);
+    result.y = ((real_t)tile_pos.y * tile_map_scale.y * tile_size.y);
+    return result;
 }
 	
 // - - - Test Functions - - -
@@ -315,10 +354,10 @@ void LevelEditorController::_on_level_editor_ui_open_previous_screen() {
 void LevelEditorController::_on_level_editor_ui_playtest_button_toggled(bool active) {
     if (level_node) {
         if (active) {
-            save_level(level_filepath);
+            quick_save_level();
             level_node->set_process_mode(PROCESS_MODE_ALWAYS);
         } else {
-            reload_level();
+            quick_load_level();
         }
     }
 }
@@ -342,27 +381,61 @@ void LevelEditorController::_on_level_editor_ui_redo_button_pressed() {
 }
 
 void LevelEditorController::_on_level_editor_ui_load_level_path_selected(String filepath) {
-    load_level(filepath); // TODO use do()
+    load_level(filepath);
 }
 
 void LevelEditorController::_on_level_editor_ui_save_level_path_selected(String filepath) {
-    save_level(filepath); // TODO use do()
+    save_level(filepath);
+}
+
+void LevelEditorController::_on_level_editor_ui_quick_load_level_button_pressed() {
+    quick_load_level();
+}
+
+void LevelEditorController::_on_level_editor_ui_quick_save_level_button_pressed() {
+    quick_save_level();
 }
 
 void LevelEditorController::_on_level_editor_ui_unload_level_button_pressed() {
-    unload_level(); // TODO use do()
+    unload_level();
 }
 
 void LevelEditorController::_on_level_editor_ui_reload_level_button_pressed() {
-    reload_level(); // TODO use do()
+    reload_level();
 }
 
 void LevelEditorController::_on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos) {
-    UtilityFunctions::print("Left click pos:", mouse_pos);
+    if (level_node) {
+        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_child(1));
+        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
+
+        Vector2i tile_pos = world_pos_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2 world_pos = tile_pos_to_world_pos(tile_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+
+        UtilityFunctions::print(mouse_pos);
+        UtilityFunctions::print(tile_pos);
+        UtilityFunctions::print(world_pos);
+        UtilityFunctions::print("----------");
+
+        tile_map_layer->set_cell(tile_pos, 0, Vector2(0, 0), 0);
+    }
     // TODO
 }
 
 void LevelEditorController::_on_level_editor_ui_screen_right_clicked(Vector2 mouse_pos) {
-    UtilityFunctions::print("Right click pos:", mouse_pos);
+    if (level_node) {
+        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_child(1));
+        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
+
+
+        Vector2i world_pos1 = world_pos_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2 world_pos2 = tile_pos_to_world_pos(world_pos1, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+
+        Ref<PackedScene> reimu_scene = ResourceLoader::get_singleton()->load("res://entity/yinyang_orb.tscn", "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
+        RigidBody2D * reimu_node = (RigidBody2D *)reimu_scene.ptr()->instantiate();
+        reimu_node->set_position(world_pos2 + Vector2(8, 8));
+        level_node->get_child(2)->add_child(reimu_node);
+        reimu_node->set_owner(reimu_node->get_parent()->get_parent());
+    }
     // TODO
 }

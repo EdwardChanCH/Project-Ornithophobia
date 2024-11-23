@@ -1,9 +1,9 @@
 /**
  * @file level.h
- * @author
- * @brief
- * @version
- * @date
+ * @author Chun Ho Chan (Edward)
+ * @brief Header file.
+ * @version 0.1.0
+ * @date 2024-11-13
  * 
  */
 
@@ -20,7 +20,6 @@ namespace godot {
 	class Level : public Node {
 		
 		GDCLASS(Level, Node) // A Godot macro for class inheritance
-		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
 
@@ -30,8 +29,6 @@ namespace godot {
 	public:
 		Level();
 		~Level();
-
-		void _process(double delta) override;
 	};
 
 } // namespace godot

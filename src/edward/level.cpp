@@ -1,9 +1,11 @@
 /**
  * @file level.cpp
- * @author
- * @brief
- * @version
- * @date
+ * @author Chun Ho Chan (Edward)
+ * @brief Prototype Pattern + Mediator Pattern (MVC).
+ * This class handles all data storage of a level.
+ * Custom user levels are cloned from a default level object instead of constructed.
+ * @version 0.1.0
+ * @date 2024-11-23
  * 
  */
 
@@ -31,24 +33,4 @@ Level::Level() {
  * 
  */
 Level::~Level() {
-}
-
-// Export instance variables to the Godot Editor
-_GDEXPORT_ADD_PREFIX(Level)
-_GDEXPORT_ADD_SUFFIX
-
-// Getter(s) for exported instance variables in Godot Editor
-_GDEXPORT_GET_PREFIX(Level)
-_GDEXPORT_GET_SUFFIX
-
-// Setter(s) for exported instance variables in Godot Editor
-_GDEXPORT_SET_PREFIX(Level)
-_GDEXPORT_SET_SUFFIX
-
-/**
- * @brief Same as _process() in GDScript.
- * 
- * @param delta Delta time
- */
-void Level::_process(double delta) {
 }
