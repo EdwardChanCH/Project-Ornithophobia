@@ -14,7 +14,7 @@
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
-#include "iprototype.h" // Interface for clonable objects
+#include "iprototype.h"
 
 namespace godot {
 
@@ -34,6 +34,8 @@ namespace godot {
 		Level(Level * level);
 		~Level();
 
+		void _ready();
+
 		virtual Level * clone() override;
 
 		static Level * import_level_tscn(String filepath);
@@ -42,8 +44,10 @@ namespace godot {
 		Dictionary get_level_info();
 		void set_level_info(Dictionary value);
 		Node * get_list(String list_name);
+		void add_list(String list_name);
 		void clear_list(String list_name);
-		bool add_node_to_list(String list_name, Node * new_node);
+		Node * get_node_in_list(String list_name, String node_name);
+		bool add_node(Node * parent_node, Node * child_node);
 
 		// List name constants
 		const String tile_list_name = "TileList";

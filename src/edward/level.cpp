@@ -34,14 +34,16 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void Level::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("clone"), &Level::clone);
+    //ClassDB::bind_method(D_METHOD("clone"), &Level::clone);
     ClassDB::bind_static_method("Level", D_METHOD("import_level_tscn", "filepath"), &Level::import_level_tscn);
     ClassDB::bind_static_method("Level", D_METHOD("export_level_tscn", "filepath", "level_node"), &Level::export_level_tscn);
     ClassDB::bind_method(D_METHOD("get_level_info"), &Level::get_level_info);
     ClassDB::bind_method(D_METHOD("set_level_info", "value"), &Level::set_level_info);
     ClassDB::bind_method(D_METHOD("get_list", "list_name"), &Level::get_list);
+    ClassDB::bind_method(D_METHOD("add_list", "list_name"), &Level::get_list);
     ClassDB::bind_method(D_METHOD("clear_list", "list_name"), &Level::clear_list);
-    ClassDB::bind_method(D_METHOD("add_node_to_list", "list_name", "new_node"), &Level::add_node_to_list);
+    ClassDB::bind_method(D_METHOD("get_node_in_list", "list_name", "node_name"), &Level::get_node_in_list);
+    ClassDB::bind_method(D_METHOD("add_node", "parent_node", "child_node"), &Level::add_node);
 }
 
 /**
@@ -69,6 +71,17 @@ Level::~Level() {
 }
 
 /**
+ * @brief Called when this node is ready in Godot's scene tree.
+ * 
+ */
+void Level::_ready() {
+    add_list(tile_list_name);
+    add_list(player_list_name);
+    add_list(enemy_list_name);
+    add_list(entity_list_name);
+}
+
+/**
  * @brief Clones a level node and all of its children.
  * 
  * @return Level* Cloned Level
@@ -89,7 +102,7 @@ Level * Level::clone() {
  */
 Level * Level::import_level_tscn(String filepath) {
     Ref<PackedScene> level_scene = ResourceLoader::get_singleton()->load(filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
-    return (Level *)level_scene.ptr()->instantiate();
+    return (Level *)(level_scene.ptr()->instantiate());
 }
 
 /**
@@ -128,25 +141,30 @@ void Level::set_level_info(Dictionary value) {
 
 /**
  * @brief Get the list.
- * Make the list if the list is missing.
- * Note: Use add_node_to_list() to add child node to this list safely!
+ * Return nullptr if list does not exist.
+ * Note: Use add_node() to add child node to this list safely!
  * 
  * @param list_name List Name (constant)
  * @return Node* List Node
  */
 Node * Level::get_list(String list_name) {
+    if (has_node(list_name)) {
+        return get_node_or_null(list_name);
+    } else {
+        return nullptr;
+    }
+}
+
+void Level::add_list(String list_name) {
     Node * list;
 
     if (has_node(list_name)) {
-        list = get_node_or_null(list_name);
-    } else {
-        list = memnew(Node);
-        list->set_name(list_name);
-        add_child(list, true);
-        list->set_owner(this);
+        return;
     }
 
-    return list;
+    list = memnew(Node);
+    list->set_name(list_name);
+    add_node(this, list);
 }
 
 /**
@@ -155,35 +173,58 @@ Node * Level::get_list(String list_name) {
  * @param list_name List Name (constant)
  */
 void Level::clear_list(String list_name) {
-    Node * list = get_list(list_name);
-    int count = list->get_child_count(); 
+    Node * list, * child;
+    
+    list = get_list(list_name);
+    if (!list) {
+        return;
+    }
 
-    for (int32_t i = 0; i < count; ++i) {
-        list->get_child(i)->queue_free();
+    while (list->get_child_count() > 0) {
+        child = list->get_child(0);
+        list->remove_child(child);
+        child->queue_free();
+    }
+}
+
+/**
+ * @brief Get the node in the list.
+ * Return nullptr if list or node does not exist.
+ * 
+ * @param list_name List Name (constant)
+ * @param node_name Node Name
+ * @return Node* List Node
+ */
+Node * Level::get_node_in_list(String list_name, String node_name) {
+    Node * list, * node;
+
+    list = get_list(list_name);
+    if (!list) {
+        return nullptr;
+    }
+
+    if (list->has_node(node_name)) {
+        return list->get_node_or_null(NodePath(node_name));
+    } else {
+        return nullptr;
     }
 }
 
 /**
  * @brief Add a node to a list.
- * Make the list if the list is missing.
- * Note: The player list and tile list can only hold 1 child.
+ * Return false if list or node is missing.
  * 
  * @param list_name List Name (constant)
  * @param new_node New Node
  * @return true 
  * @return false 
  */
-bool Level::add_node_to_list(String list_name, Node * new_node) {
-    if (!new_node) {
+bool Level::add_node(Node * parent_node, Node * child_node) {
+    if ((!parent_node) || (!child_node)) {
         return false;
     }
-
-    if ((list_name.nocasecmp_to(player_list_name) == 0) || (list_name.nocasecmp_to(tile_list_name) == 0)) {
-        clear_list(list_name);
-    }
     
-    get_list(list_name)->add_child(new_node);
-    new_node->set_owner(this);
-
+    parent_node->add_child(child_node);
+    child_node->set_owner(this);
     return true;
 }

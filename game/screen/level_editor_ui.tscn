@@ -150,7 +150,7 @@ text = "Center Level"
 [connection signal="file_selected" from="LoadLevelPopup" to="." method="_on_load_level_popup_file_selected"]
 [connection signal="file_selected" from="SaveLevelPopup" to="." method="_on_save_level_popup_file_selected"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="toggled" from="PanelContainer/HBoxContainer/VBoxContainer1/PlaytestButton" to="." method="_on_playtest_button_toggled"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/PlaytestButton" to="." method="_on_playtest_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer1/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]

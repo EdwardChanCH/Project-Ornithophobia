@@ -1,19 +1,24 @@
 extends Control
 
 
-signal physics_toggled(active: bool)
-signal debug_level_editor_controller
+signal playtest_button_pressed
+
+signal debug_button_pressed
 signal test_action_button_pressed(n: int)
 signal undo_button_pressed
 signal redo_button_pressed
+
 signal load_level_path_selected(filepath: String)
 signal save_level_path_selected(filepath: String)
 signal quick_load_level_button_pressed
 signal quick_save_level_button_pressed
 signal reload_level_button_pressed
 signal unload_level_button_pressed
-signal screen_left_clicked(mouse_pos: Vector2)
-signal screen_right_clicked(mouse_pos: Vector2)
+
+signal add_tile_button_pressed(mouse_pos: Vector2)
+signal add_player_button_pressed(mouse_pos: Vector2)
+signal add_enemy_button_pressed(mouse_pos: Vector2)
+signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 @export var camera: Camera2D
@@ -34,7 +39,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug"):
 		print("DEBUG")
 		SceneManager.get_instance()._debug()
-		debug_level_editor_controller.emit()
+		debug_button_pressed.emit()
 	
 	if event.is_action_pressed("editor_camera_up"):
 		camera_movement += Vector2(0, -1) * camera_movement_scale
@@ -76,10 +81,10 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
-	if event.is_action_pressed("left_click"):
-		screen_left_clicked.emit(self.get_global_mouse_position() + camera.get_position())
-	if event.is_action_pressed("right_click"):
-		screen_right_clicked.emit(self.get_global_mouse_position() + camera.get_position())
+	if event.is_action_pressed("editor_left_click"):
+		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera.get_position())
+	if event.is_action_pressed("editor_right_click"):
+		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera.get_position())
 	pass
 
 
@@ -88,11 +93,8 @@ func _on_back_button_pressed() -> void:
 	pass
 
 
-func _on_playtest_button_toggled(toggled_on: bool) -> void:
-	if (toggled_on):
-		physics_toggled.emit(true)
-	else:
-		physics_toggled.emit(false)
+func _on_playtest_button_pressed() -> void:
+	playtest_button_pressed.emit()
 	pass
 
 
@@ -101,8 +103,8 @@ func _on_debug_scene_manager_button_pressed() -> void:
 	pass
 
 
-func _on_debug_level_editor_controller_button_pressed() -> void:
-	debug_level_editor_controller.emit()
+func _on_debug_button_pressed_button_pressed() -> void:
+	debug_button_pressed.emit()
 	pass
 
 
