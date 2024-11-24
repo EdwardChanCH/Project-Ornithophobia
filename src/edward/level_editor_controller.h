@@ -14,6 +14,7 @@
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
+#include "level.h"
 
 namespace godot {
 
@@ -27,9 +28,8 @@ namespace godot {
 		const String playtest_filepath = "res://screen/playtest.tscn";
 
 		Ref<PackedScene> ui_scene;
-		Ref<PackedScene> level_scene;
 		Node * ui_node;
-		Node * level_node;
+		Level * level_node;
 
 		const int default_undo_limit = 500;
 
@@ -69,6 +69,9 @@ namespace godot {
 
 		void _test_action(int n);
 		void _debug();
+
+		void _on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos); // TODO
+		void _on_level_editor_ui_screen_right_clicked(Vector2 mouse_pos); // TODO
 	};
 
 } // namespace godot

@@ -31,6 +31,11 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug"):
+		print("DEBUG")
+		SceneManager.get_instance()._debug()
+		debug_level_editor_controller.emit()
+	
 	if event.is_action_pressed("editor_camera_up"):
 		camera_movement += Vector2(0, -1) * camera_movement_scale
 	if event.is_action_pressed("editor_camera_down"):
@@ -85,10 +90,8 @@ func _on_back_button_pressed() -> void:
 
 func _on_playtest_button_toggled(toggled_on: bool) -> void:
 	if (toggled_on):
-		quick_save_level_button_pressed.emit()
 		physics_toggled.emit(true)
 	else:
-		quick_load_level_button_pressed.emit()
 		physics_toggled.emit(false)
 	pass
 

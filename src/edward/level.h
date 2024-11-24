@@ -24,30 +24,32 @@ namespace godot {
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
-		Dictionary level_stats; // Any non-node level data
-		Node * player_list_node;
-		Node * entity_list_node;
-		Node * ally_list_node;
-		Node * enemy_list_node;
+		Dictionary level_info; // Dictionary of any text/ numerical level data
 
 	protected:
 		static void _bind_methods(); // Must be declared
 
 	public:
-		const String player_list_node_name = "PlayerList";
-		const String entity_list_node_name = "EntityList";
-		const String ally_list_node_name = "AllyList";
-		const String enemy_list_node_name = "EnemyList";
-
 		Level();
+		Level(Level * level);
 		~Level();
-
-		void _ready();
 
 		virtual Level * clone() override;
 
-		Node * setup_list_node(String list_node_name);
-		bool add_node(Node * new_child_node, Node * parent_node);
+		static Level * import_level_tscn(String filepath);
+		static void export_level_tscn(String filepath, Level * level_node);
+
+		Dictionary get_level_info();
+		void set_level_info(Dictionary value);
+		Node * get_list(String list_name);
+		void clear_list(String list_name);
+		bool add_node_to_list(String list_name, Node * new_node);
+
+		// List name constants
+		const String tile_list_name = "TileList";
+		const String player_list_name = "PlayerList";
+		const String enemy_list_name = "EnemyList";
+		const String entity_list_name = "EntityList";
 	};
 
 } // namespace godot

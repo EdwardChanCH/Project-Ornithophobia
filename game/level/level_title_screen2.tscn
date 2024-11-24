@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_34713"]
+[ext_resource type="PackedScene" path="res://entity/yinyang_orb.tscn" id="2_ahxyo"]
+[ext_resource type="Texture2D" path="res://asset/image/yinyang_orb.png" id="3_qojqf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbgt3"]
+radius = 8.0
+
+[node name="Level" type="Node2D"]
+process_mode = 4
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAAABYAAAAAAAAAAAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAARABYAAAAAAAAAAAASABYAAAAAAAAAAAATABYAAAAAAAAAAAAUABYAAAAAAAAAAAAVABYAAAAAAAAAAAAWABYAAAAAAAAAAAAXABYAAAAAAAAAAAAYABYAAAAAAAAAAAAZABYAAAAAAAAAAAAaABYAAAAAAAAAAAAbABYAAAAAAAAAAAAcABYAAAAAAAAAAAAdABYAAAAAAAAAAAAeABYAAAAAAAAAAAAfABYAAAAAAAAAAAAgABYAAAAAAAAAAAAhABYAAAAAAAAAAAAiABYAAAAAAAAAAAAjABYAAAAAAAAAAAAkABYAAAAAAAAAAAAlABYAAAAAAAAAAAAnABYAAAAAAAAAAAAmABYAAAAAAAAAAAAAABUAAAAAAAAAAAAAABQAAAAAAAAAAAAAABMAAAAAAAAAAAAAABIAAAAAAAAAAAAAABEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAnABUAAAAAAAAAAAAnABQAAAAAAAAAAAAnABMAAAAAAAAAAAAnABIAAAAAAAAAAAAnABEAAAAAAAAAAAAnABAAAAAAAAAAAAAnAA8AAAAAAAAAAAACABUAAAABAAAAAAADABQAAAABAAAAAAAFABMAAAABAAAAABAGABQAAAABAAAAABAHABUAAAABAAAAABAEABMAAAABAAAAAAADABUAAAAAAAAAAAAEABUAAAAAAAAAAAAFABUAAAAAAAAAAAAGABUAAAAAAAAAAAAFABQAAAAAAAAAAAAEABQAAAAAAAAAAAAnAA4AAAAAAAAAAAAnAA0AAAAAAAAAAAAnAAwAAAAAAAAAAAAnAAsAAAAAAAAAAAAnAAoAAAAAAAAAAAAnAAkAAAAAAAAAAAAnAAgAAAAAAAAAAAAnAAcAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAADAAAAAGAAAAEAAAADAAAAAGAAAAIAAAADAAAAAGAAAAMAAAADAAAAAGAAAAQAAAACAAAAAGABAAAAAAADAAAAAGABAAEAAAADAAAAAGABAAIAAAADAAAAAGABAAMAAAADAAAAAGABAAQAAAAAAAAAAAACAAAAAAADAAAAAGACAAEAAAADAAAAAGACAAIAAAADAAAAAGACAAMAAAADAAAAAGACAAQAAAADAAAAAGADAAAAAAAEAAAAAFADAAEAAAADAAAAAGADAAIAAAADAAAAAGADAAMAAAADAAAAAGADAAQAAAADAAAAAGAGAAAAAAADAAAAAGAGAAQAAAADAAAAAGAHAAAAAAAAAAAAAAAHAAEAAAADAAAAAFAHAAIAAAADAAAAAFAHAAMAAAADAAAAAFAHAAQAAAAAAAAAAAAIAAAAAAADAAAAAGAJAAAAAAAAAAAAAAAJAAEAAAADAAAAAFAJAAIAAAADAAAAAFAJAAMAAAADAAAAAFAJAAQAAAADAAAAAFAKAAAAAAADAAAAAGAKAAEAAAADAAAAAGAKAAIAAAADAAAAAGAKAAMAAAADAAAAAGAKAAQAAAADAAAAAGALAAQAAAAAAAAAAAAMAAAAAAADAAAAAGAMAAEAAAADAAAAAGAMAAIAAAADAAAAAGAMAAMAAAADAAAAAGAMAAQAAAADAAAAAGANAAAAAAAAAAAAAAANAAIAAAADAAAAAFANAAQAAAAAAAAAAAAOAAAAAAADAAAAAGAOAAEAAAADAAAAAGAOAAIAAAADAAAAAGAOAAMAAAADAAAAAGAOAAQAAAADAAAAAGAPAAAAAAAEAAAAAFAPAAEAAAADAAAAAGAPAAIAAAADAAAAAGAPAAMAAAADAAAAAGAPAAQAAAAEAAAAAHAgAAAAAAACAAAAAEAgAAEAAAADAAAAAGAgAAIAAAADAAAAAGAgAAMAAAADAAAAAGAgAAQAAAACAAAAAGAhAAAAAAAAAAAAAAAhAAMAAAADAAAAAGAhAAQAAAAAAAAAAAAiAAAAAAACAAAAAEAiAAEAAAADAAAAAGAiAAIAAAADAAAAAGAiAAMAAAADAAAAAGAiAAQAAAADAAAAAGAjAAAAAAAEAAAAAFAjAAEAAAADAAAAAGAjAAIAAAAAAAAAAAAjAAMAAAADAAAAAGAjAAQAAAADAAAAAGAkAAAAAAADAAAAAGAkAAEAAAADAAAAAGAkAAIAAAADAAAAAGAkAAMAAAADAAAAAGAkAAQAAAADAAAAAGAlAAAAAAADAAAAAGAlAAEAAAAAAAAAAAAlAAIAAAAAAAAAAAAlAAMAAAADAAAAAGAlAAQAAAADAAAAAGAmAAAAAAADAAAAAGAmAAEAAAADAAAAAGAmAAIAAAADAAAAAGAmAAMAAAADAAAAAGAmAAQAAAADAAAAAGAnAAAAAAAAAAAAAAAnAAIAAAADAAAAAFAnAAQAAAAAAAAAAAARAAAAAAACAAAAAEARAAEAAAADAAAAAGARAAIAAAACAAAAAGARAAQAAAACAAAAAEASAAAAAAAEAAAAAHASAAIAAAAEAAAAAFASAAMAAAADAAAAAGASAAQAAAAEAAAAAHATAAAAAAADAAAAAGATAAEAAAADAAAAAGATAAIAAAADAAAAAGATAAMAAAADAAAAAGATAAQAAAADAAAAAGAUAAAAAAADAAAAAGAUAAEAAAADAAAAAGAUAAIAAAAAAAAAAAAUAAMAAAADAAAAAGAUAAQAAAADAAAAAGAVAAAAAAACAAAAAEAVAAEAAAADAAAAAEAVAAIAAAADAAAAAEAVAAMAAAADAAAAAEAVAAQAAAACAAAAAGAWAAAAAAAEAAAAAFAWAAEAAAADAAAAAEAWAAIAAAADAAAAAEAWAAMAAAADAAAAAEAWAAQAAAAEAAAAAHAXAAAAAAADAAAAAGAYAAAAAAAAAAAAAAAYAAEAAAADAAAAAFAYAAIAAAADAAAAAFAYAAMAAAADAAAAAFAYAAQAAAADAAAAAFAZAAAAAAACAAAAAEAZAAEAAAADAAAAAGAZAAIAAAADAAAAAGAZAAMAAAADAAAAAGAZAAQAAAACAAAAAGAaAAAAAAAAAAAAAAAaAAMAAAADAAAAAGAaAAQAAAAAAAAAAAAbAAAAAAADAAAAAGAbAAEAAAADAAAAAGAbAAIAAAADAAAAAGAbAAMAAAADAAAAAGAbAAQAAAACAAAAAGAcAAAAAAADAAAAAGAcAAEAAAADAAAAAGAcAAIAAAADAAAAAGAcAAMAAAADAAAAAGAcAAQAAAAAAAAAAAAdAAAAAAADAAAAAGAdAAEAAAADAAAAAGAdAAIAAAADAAAAAGAdAAMAAAADAAAAAGAdAAQAAAADAAAAAGAeAAAAAAAEAAAAAFAeAAEAAAADAAAAAGAeAAIAAAADAAAAAGAeAAMAAAADAAAAAGAeAAQAAAADAAAAAGAPAAoAAAAAAAAAAAASAAoAAAAAAAAAAAAOAAwAAAAAAAAAAAAPAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA0AAAAAAAAAAAATAAwAAAAAAAAAAAA=")
+tile_set = ExtResource("1_34713")
+collision_visibility_mode = 1
+navigation_enabled = false
+
+[node name="EntityList" type="Node2D" parent="."]
+
+[node name="YinyangOrb1" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(256, 232)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangOrb1"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangOrb1"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="YinyangOrb2" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(256, 182)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangOrb2"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangOrb2"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="YinyangOrb3" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(256, 132)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangOrb3"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangOrb3"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="YinyangOrb4" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(256, 82)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangOrb4"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangOrb4"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="YinyangOrb5" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(256, 32)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangOrb5"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangOrb5"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="YinyangBall" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(776, 584)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/YinyangBall"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/YinyangBall"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="@RigidBody2D@200" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(824, 584)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/@RigidBody2D@200"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/@RigidBody2D@200"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
+
+[node name="@RigidBody2D@201" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_ahxyo")]
+position = Vector2(872, 584)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityList/@RigidBody2D@201"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_qojqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityList/@RigidBody2D@201"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")
