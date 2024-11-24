@@ -12,19 +12,19 @@ tile_set = ExtResource("1_bdb5u")
 collision_visibility_mode = 1
 navigation_enabled = false
 
-[node name="EntityList_" type="Node" parent="."]
+[node name="Entity" type="Node" parent="."]
 
-[node name="YinyangOrb1" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb1" parent="Entity" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 232)
 
-[node name="YinyangOrb2" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb2" parent="Entity" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 182)
 
-[node name="YinyangOrb3" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb3" parent="Entity" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 132)
 
-[node name="YinyangOrb4" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb4" parent="Entity" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 82)
 
-[node name="YinyangOrb5" parent="EntityList_" instance=ExtResource("2_0fmaw")]
+[node name="YinyangOrb5" parent="Entity" instance=ExtResource("2_0fmaw")]
 position = Vector2(256, 32)

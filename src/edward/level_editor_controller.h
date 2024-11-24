@@ -48,7 +48,7 @@ namespace godot {
 
 		void _ready();
 
-		Variant do_action(Callable new_action, Callable reverse_action);
+		Variant track_action(Callable new_action, Callable reverse_action);
 		Variant undo_action();
 		Variant redo_action();
 		void clear_action();
@@ -61,27 +61,14 @@ namespace godot {
 		void quick_save_level();
 		void unload_level();
 		void reload_level();
+		bool is_level_loaded();
 
-		Vector2i world_pos_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size);
-		Vector2 tile_pos_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size);
+		void toggle_physics(bool enable);
+		Vector2i world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size);
+		Vector2 tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size);
 
-		void _test_print(String s, int n);
+		void _test_action(int n);
 		void _debug();
-
-		void _on_level_editor_ui_open_previous_screen();
-		void _on_level_editor_ui_playtest_button_toggled(bool active);
-		void _on_level_editor_ui_debug_level_editor_controller();
-		void _on_level_editor_ui_test_action_button_pressed(int n);
-		void _on_level_editor_ui_undo_button_pressed();
-		void _on_level_editor_ui_redo_button_pressed();
-		void _on_level_editor_ui_load_level_path_selected(String filepath);
-		void _on_level_editor_ui_save_level_path_selected(String filepath);
-		void _on_level_editor_ui_quick_load_level_button_pressed();
-		void _on_level_editor_ui_quick_save_level_button_pressed();
-		void _on_level_editor_ui_reload_level_button_pressed();
-		void _on_level_editor_ui_unload_level_button_pressed();
-		void _on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos);
-		void _on_level_editor_ui_screen_right_clicked(Vector2 mouse_pos);
 	};
 
 } // namespace godot

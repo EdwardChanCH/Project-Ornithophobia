@@ -14,24 +14,40 @@
 #include <godot_cpp/classes/node.hpp> // Bindings to the parent class
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code
 #include "globals.h" // Godot's built-in classes
-#include "iprototype.h"
+#include "iprototype.h" // Interface for clonable objects
 
 namespace godot {
 
 	class Level : public IPrototype {
 		
 		GDCLASS(Level, IPrototype) // A Godot macro for class inheritance
+		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
+		Dictionary level_stats; // Any non-node level data
+		Node * player_list_node;
+		Node * entity_list_node;
+		Node * ally_list_node;
+		Node * enemy_list_node;
 
 	protected:
 		static void _bind_methods(); // Must be declared
 
 	public:
+		const String player_list_node_name = "PlayerList";
+		const String entity_list_node_name = "EntityList";
+		const String ally_list_node_name = "AllyList";
+		const String enemy_list_node_name = "EnemyList";
+
 		Level();
 		~Level();
 
-		virtual IPrototype * clone() override;
+		void _ready();
+
+		virtual Level * clone() override;
+
+		Node * setup_list_node(String list_node_name);
+		bool add_node(Node * new_child_node, Node * parent_node);
 	};
 
 } // namespace godot

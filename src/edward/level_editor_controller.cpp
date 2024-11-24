@@ -34,7 +34,7 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void LevelEditorController::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("do_action", "new_action", "reverse_action"), &LevelEditorController::do_action);
+    ClassDB::bind_method(D_METHOD("track_action", "new_action", "reverse_action"), &LevelEditorController::track_action);
     ClassDB::bind_method(D_METHOD("undo_action"), &LevelEditorController::undo_action);
     ClassDB::bind_method(D_METHOD("redo_action"), &LevelEditorController::redo_action);
     ClassDB::bind_method(D_METHOD("clear_action"), &LevelEditorController::clear_action);
@@ -45,24 +45,14 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("save_level", "filepath"), &LevelEditorController::save_level);
     ClassDB::bind_method(D_METHOD("unload_level"), &LevelEditorController::unload_level);
     ClassDB::bind_method(D_METHOD("reload_level"), &LevelEditorController::reload_level);
+    ClassDB::bind_method(D_METHOD("is_level_loaded"), &LevelEditorController::is_level_loaded);
 
-    ClassDB::bind_method(D_METHOD("_test_print", "s", "n"), &LevelEditorController::_test_print);
+    ClassDB::bind_method(D_METHOD("toggle_physics", "enable"), &LevelEditorController::toggle_physics);
+    ClassDB::bind_method(D_METHOD("world_to_tile_pos", "world_pos", "tile_map_scale", "tile_size"), &LevelEditorController::world_to_tile_pos);
+    ClassDB::bind_method(D_METHOD("tile_to_world_pos", "tile_pos", "tile_map_scale", "tile_size"), &LevelEditorController::tile_to_world_pos);
+
+    ClassDB::bind_method(D_METHOD("_test_action", "n"), &LevelEditorController::_test_action);
     ClassDB::bind_method(D_METHOD("_debug"), &LevelEditorController::_debug);
-
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_open_previous_screen"), &LevelEditorController::_on_level_editor_ui_open_previous_screen);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_playtest_button_toggled", "active"), &LevelEditorController::_on_level_editor_ui_playtest_button_toggled);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_debug_level_editor_controller"), &LevelEditorController::_on_level_editor_ui_debug_level_editor_controller);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_test_action_button_pressed", "n"), &LevelEditorController::_on_level_editor_ui_test_action_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_undo_button_pressed"), &LevelEditorController::_on_level_editor_ui_undo_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_redo_button_pressed"), &LevelEditorController::_on_level_editor_ui_redo_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_load_level_path_selected", "filepath"), &LevelEditorController::_on_level_editor_ui_load_level_path_selected);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_save_level_path_selected", "filepath"), &LevelEditorController::_on_level_editor_ui_save_level_path_selected);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_quick_load_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_quick_load_level_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_quick_save_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_quick_save_level_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_unload_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_unload_level_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_reload_level_button_pressed"), &LevelEditorController::_on_level_editor_ui_reload_level_button_pressed);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_screen_left_clicked", "mouse_pos"), &LevelEditorController::_on_level_editor_ui_screen_left_clicked);
-    ClassDB::bind_method(D_METHOD("_on_level_editor_ui_screen_right_clicked", "mouse_pos"), &LevelEditorController::_on_level_editor_ui_screen_right_clicked);
 }
 
 /**
@@ -111,33 +101,32 @@ void LevelEditorController::_ready() {
         ui_canvas->add_child(ui_node);
 
         // Connect Godot UI signals
-        ui_node->connect("open_previous_screen", Callable(this, "_on_level_editor_ui_open_previous_screen"));
-        ui_node->connect("playtest_button_toggled", Callable(this, "_on_level_editor_ui_playtest_button_toggled"));
-        ui_node->connect("debug_level_editor_controller", Callable(this, "_on_level_editor_ui_debug_level_editor_controller"));
-        ui_node->connect("test_action_button_pressed", Callable(this, "_on_level_editor_ui_test_action_button_pressed"));
-        ui_node->connect("undo_button_pressed", Callable(this, "_on_level_editor_ui_undo_button_pressed"));
-        ui_node->connect("redo_button_pressed", Callable(this, "_on_level_editor_ui_redo_button_pressed"));
-        ui_node->connect("load_level_path_selected", Callable(this, "_on_level_editor_ui_load_level_path_selected"));
-        ui_node->connect("save_level_path_selected", Callable(this, "_on_level_editor_ui_save_level_path_selected"));
-        ui_node->connect("quick_load_level_button_pressed", Callable(this, "_on_level_editor_ui_quick_load_level_button_pressed"));
-        ui_node->connect("quick_save_level_button_pressed", Callable(this, "_on_level_editor_ui_quick_save_level_button_pressed"));
-        ui_node->connect("unload_level_button_pressed", Callable(this, "_on_level_editor_ui_unload_level_button_pressed"));
-        ui_node->connect("reload_level_button_pressed", Callable(this, "_on_level_editor_ui_reload_level_button_pressed"));
-        ui_node->connect("screen_left_clicked", Callable(this, "_on_level_editor_ui_screen_left_clicked"));
-        ui_node->connect("screen_right_clicked", Callable(this, "_on_level_editor_ui_screen_right_clicked"));
+        ui_node->connect("physics_toggled", Callable(this, "toggle_physics"));
+        ui_node->connect("debug_level_editor_controller", Callable(this, "_debug"));
+        ui_node->connect("test_action_button_pressed", Callable(this, "_test_action"));
+        ui_node->connect("undo_button_pressed", Callable(this, "undo_action"));
+        ui_node->connect("redo_button_pressed", Callable(this, "redo_action"));
+        ui_node->connect("load_level_path_selected", Callable(this, "load_level"));
+        ui_node->connect("save_level_path_selected", Callable(this, "save_level"));
+        ui_node->connect("quick_load_level_button_pressed", Callable(this, "quick_load_level"));
+        ui_node->connect("quick_save_level_button_pressed", Callable(this, "quick_save_level"));
+        ui_node->connect("unload_level_button_pressed", Callable(this, "unload_level"));
+        ui_node->connect("reload_level_button_pressed", Callable(this, "reload_level"));
+        //ui_node->connect("screen_left_clicked", Callable(this, "_on_level_editor_ui_screen_left_clicked")); // TODO
+        //ui_node->connect("screen_right_clicked", Callable(this, "_on_level_editor_ui_screen_right_clicked")); // TODO
     }
 }
 
 // - - - Action Handling Functions - - -
 
 /**
- * @brief Track a new action and execute it, and track its reverse action.
+ * @brief Track a new action and its reverse action.
  * 
  * @param new_action New action
  * @param reverse_action Reserse action
  * @return Variant Output of calling new_action
  */
-Variant LevelEditorController::do_action(Callable new_action, Callable reverse_action) {
+Variant LevelEditorController::track_action(Callable new_action, Callable reverse_action) {
     // Remove actions in old timeline
     while (action_index < redo_stack->size()) {
         undo_stack->pop_back();
@@ -265,7 +254,6 @@ void LevelEditorController::save_level(String filepath) {
     } else {
         UtilityFunctions::print("Warning: Nothing to save!");
     }
-
 }
 
 void LevelEditorController::quick_load_level() {
@@ -289,9 +277,23 @@ void LevelEditorController::reload_level() {
     }
 }
 
+bool LevelEditorController::is_level_loaded() {
+    return (level_node != nullptr);
+}
+
 // - - - Tile Editing Functions - - -
 
-Vector2i LevelEditorController::world_pos_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size) {
+void LevelEditorController::toggle_physics(bool enable) {
+    if (level_node) {
+        if (enable) {
+            level_node->set_process_mode(PROCESS_MODE_ALWAYS);
+        } else {
+            level_node->set_process_mode(PROCESS_MODE_DISABLED);
+        }
+    }
+}
+
+Vector2i LevelEditorController::world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2i result;
 
     result.x = floor(world_pos.x / tile_map_scale.x / (real_t)tile_size.x);
@@ -299,7 +301,7 @@ Vector2i LevelEditorController::world_pos_to_tile_pos(Vector2 world_pos, Vector2
     return result;
 }
 
-Vector2 LevelEditorController::tile_pos_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size) {
+Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2 result;
 
     result.x = ((real_t)tile_pos.x * tile_map_scale.x * tile_size.x);
@@ -312,11 +314,19 @@ Vector2 LevelEditorController::tile_pos_to_world_pos(Vector2i tile_pos, Vector2 
 /**
  * @brief Test function.
  * 
- * @param s String
  * @param n Integer
  */
-void LevelEditorController::_test_print(String s, int n) {
-    UtilityFunctions::print(s, n);
+void LevelEditorController::_test_action(int n) {
+    track_action(
+        Callable(this, "_test_action").bind(n), 
+        Callable(this, "_test_action").bind(n)
+    );
+
+    if (n < 0) {
+        UtilityFunctions::print("Undo: ", n);
+    } else {
+        UtilityFunctions::print("  Do: ", n);
+    }
 }
 
 /**
@@ -345,72 +355,15 @@ void LevelEditorController::_debug() {
     UtilityFunctions::print("------------------------------");
 }
 
-// - - - Godot UI Signal Receivers - - -
 
-void LevelEditorController::_on_level_editor_ui_open_previous_screen() {
-    SceneManager::get_instance()->load_previous_scene(this->get_tree());
-}
 
-void LevelEditorController::_on_level_editor_ui_playtest_button_toggled(bool active) {
-    if (level_node) {
-        if (active) {
-            quick_save_level();
-            level_node->set_process_mode(PROCESS_MODE_ALWAYS);
-        } else {
-            quick_load_level();
-        }
-    }
-}
-
-void LevelEditorController::_on_level_editor_ui_debug_level_editor_controller() {
-    _debug();
-}
-
-void LevelEditorController::_on_level_editor_ui_test_action_button_pressed(int n) {
-    Callable actionA = Callable(this, "_test_print").bind("ReDo:", n);
-    Callable actionB = Callable(this, "_test_print").bind("Undo:", n);
-    do_action(actionA, actionB);
-}
-
-void LevelEditorController::_on_level_editor_ui_undo_button_pressed() {
-    undo_action();
-}
-
-void LevelEditorController::_on_level_editor_ui_redo_button_pressed() {
-    redo_action();
-}
-
-void LevelEditorController::_on_level_editor_ui_load_level_path_selected(String filepath) {
-    load_level(filepath);
-}
-
-void LevelEditorController::_on_level_editor_ui_save_level_path_selected(String filepath) {
-    save_level(filepath);
-}
-
-void LevelEditorController::_on_level_editor_ui_quick_load_level_button_pressed() {
-    quick_load_level();
-}
-
-void LevelEditorController::_on_level_editor_ui_quick_save_level_button_pressed() {
-    quick_save_level();
-}
-
-void LevelEditorController::_on_level_editor_ui_unload_level_button_pressed() {
-    unload_level();
-}
-
-void LevelEditorController::_on_level_editor_ui_reload_level_button_pressed() {
-    reload_level();
-}
-
-void LevelEditorController::_on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos) {
+/* void LevelEditorController::_on_level_editor_ui_screen_left_clicked(Vector2 mouse_pos) {
     if (level_node) {
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_child(1));
         Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
 
-        Vector2i tile_pos = world_pos_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
-        Vector2 world_pos = tile_pos_to_world_pos(tile_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2 world_pos = tile_to_world_pos(tile_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
 
         UtilityFunctions::print(mouse_pos);
         UtilityFunctions::print(tile_pos);
@@ -420,16 +373,16 @@ void LevelEditorController::_on_level_editor_ui_screen_left_clicked(Vector2 mous
         tile_map_layer->set_cell(tile_pos, 0, Vector2(0, 0), 0);
     }
     // TODO
-}
+} */
 
-void LevelEditorController::_on_level_editor_ui_screen_right_clicked(Vector2 mouse_pos) {
+/* void LevelEditorController::_on_level_editor_ui_screen_right_clicked(Vector2 mouse_pos) {
     if (level_node) {
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_child(1));
         Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
 
 
-        Vector2i world_pos1 = world_pos_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
-        Vector2 world_pos2 = tile_pos_to_world_pos(world_pos1, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2i world_pos1 = world_to_tile_pos(mouse_pos, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
+        Vector2 world_pos2 = tile_to_world_pos(world_pos1, tile_map_layer->get_scale(), tile_set.ptr()->get_tile_size());
 
         Ref<PackedScene> reimu_scene = ResourceLoader::get_singleton()->load("res://entity/yinyang_orb.tscn", "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
         RigidBody2D * reimu_node = (RigidBody2D *)reimu_scene.ptr()->instantiate();
@@ -438,4 +391,4 @@ void LevelEditorController::_on_level_editor_ui_screen_right_clicked(Vector2 mou
         reimu_node->set_owner(reimu_node->get_parent()->get_parent());
     }
     // TODO
-}
+} */

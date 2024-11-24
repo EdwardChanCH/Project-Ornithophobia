@@ -1,8 +1,7 @@
 extends Control
 
 
-signal open_previous_screen
-signal playtest_button_toggled(active: bool)
+signal physics_toggled(active: bool)
 signal debug_level_editor_controller
 signal test_action_button_pressed(n: int)
 signal undo_button_pressed
@@ -72,7 +71,6 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
-	
 	if event.is_action_pressed("left_click"):
 		screen_left_clicked.emit(self.get_global_mouse_position() + camera.get_position())
 	if event.is_action_pressed("right_click"):
@@ -81,12 +79,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	open_previous_screen.emit()
+	SceneManager.get_instance().load_previous_scene(self.get_tree())
 	pass
 
 
 func _on_playtest_button_toggled(toggled_on: bool) -> void:
-	playtest_button_toggled.emit(toggled_on)
+	if (toggled_on):
+		quick_save_level_button_pressed.emit()
+		physics_toggled.emit(true)
+	else:
+		quick_load_level_button_pressed.emit()
+		physics_toggled.emit(false)
 	pass
 
 
@@ -137,7 +140,6 @@ func _on_load_level_button_pressed() -> void:
 
 
 func _on_load_level_popup_file_selected(path: String) -> void:
-	print("Debug: Load File Selected: ", path)
 	load_level_path_selected.emit(path)
 	camera.set_position(Vector2(0, 0))
 	pass
@@ -149,7 +151,6 @@ func _on_save_level_button_pressed() -> void:
 
 
 func _on_save_level_popup_file_selected(path: String) -> void:
-	print("Debug: Save File Selected: ", path)
 	save_level_path_selected.emit(path)
 	pass
 
@@ -164,14 +165,12 @@ func _on_quick_save_level_button_pressed() -> void:
 
 
 func _on_reload_level_button_pressed() -> void:
-	print("Debug: Reloaded Last Save.")
 	reload_level_button_pressed.emit()
 	camera.set_position(Vector2(0, 0))
 	pass
 
 
 func _on_unload_level_button_pressed() -> void:
-	print("Debug: Unloaded Level.")
 	unload_level_button_pressed.emit()
 	camera.set_position(Vector2(0, 0))
 	pass

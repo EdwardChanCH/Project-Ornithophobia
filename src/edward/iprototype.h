@@ -20,6 +20,7 @@ namespace godot {
 	class IPrototype : public Node {
 		
 		GDCLASS(IPrototype, Node) // A Godot macro for class inheritance
+		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
 
