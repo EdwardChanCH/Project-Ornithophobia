@@ -220,17 +220,6 @@ void PlayerController::_process(double _delta) {
         lastBlastTime = Time::get_singleton()->get_ticks_msec() - lastBlastTime;
     }
 
-    // Slow motion code
-    if (input->is_action_pressed("action_button") && canSlowTime) {
-        float newTimeValue = Engine::get_singleton()->get_time_scale() - delta * timeSlowFactor;
-        newTimeValue = Math::clamp(newTimeValue, maxTimeSlowValue, 1.f);
-        set_game_speed(newTimeValue);
-    } else {
-        float newTimeValue = Engine::get_singleton()->get_time_scale() + delta * timeSlowFactor;
-        newTimeValue = Math::clamp(newTimeValue, maxTimeSlowValue, 1.f);
-        set_game_speed(newTimeValue);
-    }
-
     // When blast button released, blast player in direction opposite to the mouse cursor
     if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
         // Get the direction the player will move from the blast based on the position of the mouse

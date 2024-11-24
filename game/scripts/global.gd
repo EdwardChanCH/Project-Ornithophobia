@@ -12,6 +12,7 @@ var level_data = []
 var data_index = 0
 
 func _ready() -> void:
+	# Keep mouse locked to window
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	# Register levels
 	for data in temp_level_data:

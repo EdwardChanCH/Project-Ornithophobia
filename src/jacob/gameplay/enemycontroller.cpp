@@ -59,8 +59,6 @@ void EnemyController::_ready() {
 
 
 void EnemyController::_on_player_controller_entered(Node2D *body) {
-    UtilityFunctions::print(UtilityFunctions::str(Node::cast_to<PlayerController>(body)->get_velocity().length()));
-    UtilityFunctions::print(UtilityFunctions::str(minKillSpeed));
     if (Node::cast_to<PlayerController>(body)->get_velocity().length() >= minKillSpeed) {
         if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
             deathAnim->set_visible(true);
