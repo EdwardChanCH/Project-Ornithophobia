@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 [gd_scene load_steps=33 format=3 uid="uid://cmcgj8vwugx0i"]
-[gd_scene load_steps=10 format=3 uid="uid://cmcgj8vwugx0i"]
 
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
+[ext_resource type="Script" path="res://scripts/player/slow_motion_meter.gd" id="2_8nh8l"]
 [ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://assets/sprites/idle.png" id="3_y7hit"]
 [ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://assets/sprites/idleAir.png" id="4_xupyp"]
 [ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://assets/sprites/run.png" id="5_myyve"]
 [ext_resource type="Texture2D" uid="uid://c8swskw4scmwd" path="res://assets/sprites/idleArms.png" id="6_b8ksx"]
 [ext_resource type="Texture2D" uid="uid://cu68hrjd3u332" path="res://assets/sprites/idleairArms.png" id="7_vwd3g"]
 [ext_resource type="Texture2D" uid="uid://d307ssje2iyn3" path="res://assets/sprites/runArms.png" id="8_unw1c"]
+=======
+[gd_scene load_steps=10 format=3 uid="uid://cmcgj8vwugx0i"]
+
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
+>>>>>>> jacob_dev
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2dk60"]
 animations = [{
@@ -233,7 +239,10 @@ groundDecel = 4.0
 groundFriction = 0.95
 gravity = 425.0
 maxAirSpeed = 100
+<<<<<<< HEAD
+=======
 fallSpeed = nan
+>>>>>>> jacob_dev
 maxFallSpeed = 750
 airFriction = 0.7
 trueMaxSpeed = 405

@@ -45,8 +45,9 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
-    GDREGISTER_CLASS(EdwardTester);
-    GDREGISTER_CLASS(LevelEditor);
+    GDREGISTER_CLASS(AnimationController);
+    GDREGISTER_CLASS(SlowMotionMeter);
+    GDREGISTER_CLASS(EnemyController);
     GDREGISTER_CLASS(GDExample1New);
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);
