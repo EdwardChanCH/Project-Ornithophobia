@@ -4,7 +4,7 @@ extends Control
 signal playtest_button_pressed
 
 signal debug_button_pressed
-signal test_action_button_pressed(n: int)
+signal test_action_button_pressed(s:String, n: int)
 signal undo_button_pressed
 signal redo_button_pressed
 
@@ -103,7 +103,7 @@ func _on_debug_scene_manager_button_pressed() -> void:
 	pass
 
 
-func _on_debug_button_pressed_button_pressed() -> void:
+func _on_debug_level_editor_controller_button_pressed() -> void:
 	debug_button_pressed.emit()
 	pass
 
@@ -125,17 +125,17 @@ func _on_redo_button_pressed() -> void:
 
 
 func _on_test_action_1_button_pressed() -> void:
-	test_action_button_pressed.emit(1)
+	test_action_button_pressed.emit("Do", 1)
 	pass
 
 
 func _on_test_action_2_button_pressed() -> void:
-	test_action_button_pressed.emit(2)
+	test_action_button_pressed.emit("Do", 2)
 	pass
 
 
 func _on_test_action_3_button_pressed() -> void:
-	test_action_button_pressed.emit(3)
+	test_action_button_pressed.emit("Do", 3)
 	pass
 
 

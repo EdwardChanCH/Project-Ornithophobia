@@ -49,7 +49,7 @@ namespace godot {
 
 		void _ready();
 
-		Variant track_action(Callable new_action, Callable reverse_action);
+		void track_action(Callable new_action, Callable reverse_action);
 		Variant undo_action();
 		Variant redo_action();
 		void clear_action();
@@ -74,7 +74,7 @@ namespace godot {
 		void add_enemy(Vector2 mouse_pos);
 		void add_entity(Vector2 mouse_pos);
 
-		void _test_action(int n);
+		void _test_action(String s, int n);
 		void _debug();
 
 		const String default_level_filepath = "res://level/level_title_screen.tscn";

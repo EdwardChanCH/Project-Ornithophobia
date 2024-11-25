@@ -148,7 +148,7 @@ void LevelEditorController::_ready() {
  * @param reverse_action Reserse action
  * @return Variant Output of calling new_action
  */
-Variant LevelEditorController::track_action(Callable new_action, Callable reverse_action) {
+void LevelEditorController::track_action(Callable new_action, Callable reverse_action) {
     // Remove actions in old timeline
     while (action_index < redo_stack->size()) {
         undo_stack->pop_back();
@@ -166,9 +166,6 @@ Variant LevelEditorController::track_action(Callable new_action, Callable revers
         redo_stack->pop_front();
         --action_index;
     }
-
-    // Execute action
-    return new_action.call();
 }
 
 /**
@@ -415,17 +412,15 @@ void LevelEditorController::add_entity(Vector2 mouse_pos) {
  * 
  * @param n Integer
  */
-void LevelEditorController::_test_action(int n) {
-    track_action(
-        Callable(this, "_test_action").bind(n), 
-        Callable(this, "_test_action").bind(n)
-    );
-
-    if (n < 0) {
-        UtilityFunctions::print("Undo: ", n);
-    } else {
-        UtilityFunctions::print("  Do: ", n);
+void LevelEditorController::_test_action(String s, int n) {
+    if (s == "Do") {
+        track_action(
+            Callable(this, "_test_action").bind("Redo", n), 
+            Callable(this, "_test_action").bind("Undo", n)
+        );
     }
+
+    UtilityFunctions::print(s, ": ", n);
 }
 
 /**
@@ -439,12 +434,14 @@ void LevelEditorController::_debug() {
 
     UtilityFunctions::print("Undo Stack:");
     for (int i = 0; i < undo_stack->size(); ++i) {
-        UtilityFunctions::print((*undo_stack)[i]);
+        Callable c = (*undo_stack)[i];
+        UtilityFunctions::print(c.get_method(), ":", c.get_bound_arguments());
     }
 
     UtilityFunctions::print("Redo Stack:");
     for (int i = 0; i < redo_stack->size(); ++i) {
-        UtilityFunctions::print((*redo_stack)[i]);
+        Callable c = (*redo_stack)[i];
+        UtilityFunctions::print(c.get_method(), ":", c.get_bound_arguments());
     }
 
     UtilityFunctions::print("Action Index:", action_index);
