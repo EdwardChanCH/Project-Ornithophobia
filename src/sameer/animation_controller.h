@@ -25,7 +25,7 @@ namespace godot {
 
 	private:
         PlayerController *parent;
-        AnimatedSprite2D *animated_sprite;
+		AnimatedSprite2D *arms;
 
 	protected:
 		static void _bind_methods(); // Must be declared

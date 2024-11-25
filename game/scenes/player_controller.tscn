@@ -1,10 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://cmcgj8vwugx0i"]
+[gd_scene load_steps=33 format=3 uid="uid://cmcgj8vwugx0i"]
 
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
 [ext_resource type="Script" path="res://scripts/player/slow_motion_meter.gd" id="2_8nh8l"]
 [ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://assets/sprites/idle.png" id="3_y7hit"]
 [ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://assets/sprites/idleAir.png" id="4_xupyp"]
 [ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://assets/sprites/run.png" id="5_myyve"]
+[ext_resource type="Texture2D" uid="uid://c8swskw4scmwd" path="res://assets/sprites/idleArms.png" id="6_b8ksx"]
+[ext_resource type="Texture2D" uid="uid://cu68hrjd3u332" path="res://assets/sprites/idleairArms.png" id="7_vwd3g"]
+[ext_resource type="Texture2D" uid="uid://d307ssje2iyn3" path="res://assets/sprites/runArms.png" id="8_unw1c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2dk60"]
 animations = [{
@@ -156,6 +159,73 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv2b7"]
+atlas = ExtResource("6_b8ksx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc0f5"]
+atlas = ExtResource("6_b8ksx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wco5b"]
+atlas = ExtResource("7_vwd3g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr85h"]
+atlas = ExtResource("8_unw1c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7o3w"]
+atlas = ExtResource("8_unw1c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pasi"]
+atlas = ExtResource("8_unw1c")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgflw"]
+atlas = ExtResource("8_unw1c")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xnpqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv2b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc0f5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wco5b")
+}],
+"loop": true,
+"name": &"idleAir",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr85h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7o3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pasi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgflw")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
 [node name="PlayerController" type="PlayerController"]
 maxGroundSpeed = 60
 groundAccel = 4.0
@@ -214,10 +284,15 @@ libraries = {
 }
 
 [node name="AnimationController" type="AnimationController" parent="."]
-process_mode = 3
 sprite_frames = SubResource("SpriteFrames_c2j7w")
 animation = &"idleAir"
 autoplay = "idle"
-frame_progress = 0.64691
+
+[node name="Arms" type="AnimatedSprite2D" parent="AnimationController"]
+process_mode = 3
+sprite_frames = SubResource("SpriteFrames_xnpqg")
+animation = &"idleAir"
+autoplay = "idle"
+frame_progress = 0.470191
 
 [connection signal="timeout" from="SlowMotionMeter/CooldownTimer" to="SlowMotionMeter" method="_on_cooldown_timer_timeout"]
