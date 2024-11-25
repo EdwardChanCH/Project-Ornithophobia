@@ -21,9 +21,11 @@ signal add_enemy_button_pressed(mouse_pos: Vector2)
 signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
-@export var camera: Camera2D
+@export var camera_node: Camera2D
+@export var ui_node: Control
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
+@export var bgm_player_node: AudioStreamPlayer
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
 
@@ -31,7 +33,7 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 func _process(delta: float) -> void:
-	camera.translate(camera_movement * delta)
+	camera_node.translate(camera_movement * delta)
 	pass
 
 
@@ -82,9 +84,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
 	if event.is_action_pressed("editor_left_click"):
-		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera.get_position())
+		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	if event.is_action_pressed("editor_right_click"):
-		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera.get_position())
+		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	pass
 
 
@@ -146,7 +148,7 @@ func _on_load_level_button_pressed() -> void:
 
 func _on_load_level_popup_file_selected(path: String) -> void:
 	load_level_path_selected.emit(path)
-	camera.set_position(Vector2(0, 0))
+	camera_node.set_position(Vector2(0, 0))
 	pass
 
 
@@ -171,16 +173,35 @@ func _on_quick_save_level_button_pressed() -> void:
 
 func _on_reload_level_button_pressed() -> void:
 	reload_level_button_pressed.emit()
-	camera.set_position(Vector2(0, 0))
+	camera_node.set_position(Vector2(0, 0))
 	pass
 
 
 func _on_unload_level_button_pressed() -> void:
 	unload_level_button_pressed.emit()
-	camera.set_position(Vector2(0, 0))
+	camera_node.set_position(Vector2(0, 0))
 	pass
 
 
 func _on_center_level_button_pressed() -> void:
-	camera.set_position(Vector2(0, 0))
+	camera_node.set_position(Vector2(0, 0))
+	pass
+
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	bgm_player_node.set_volume_db(linear_to_db(value))
+	if value < 0.01:
+		bgm_player_node.stop()
+	elif !bgm_player_node.is_playing():
+			bgm_player_node.play()
+	pass
+
+
+func _on_bgm_player_finished() -> void:
+	bgm_player_node.play()
+	pass
+
+
+func _on_hide_ui_button_pressed() -> void:
+	ui_node.set_visible(!ui_node.is_visible())
 	pass
