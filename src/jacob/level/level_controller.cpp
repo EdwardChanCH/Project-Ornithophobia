@@ -21,7 +21,7 @@ void LevelController::_ready() {
     if (!Engine::get_singleton()->is_editor_hint()) {
         debugScene = ResourceLoader::get_singleton()->load("res://scenes/debug.tscn");
         debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
-        get_parent()->call_deferred("add_child", debugInstance);
+        get_parent()->find_child("UI")->call_deferred("add_child", debugInstance);
     }
 }
 

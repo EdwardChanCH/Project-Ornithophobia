@@ -18,6 +18,8 @@
 #include "animation_controller.h"
 #include "edward_tester.h"
 #include "level_editor.h"
+#include "slow_motion_meter.h"
+#include "enemycontroller.h"
 #include "gdexample_1_new.h"
 #include "gdexample_1_old.h"
 #include "gdexample_2_new.h"
@@ -48,6 +50,8 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     GDREGISTER_CLASS(AnimationController);
     GDREGISTER_CLASS(EdwardTester);
     GDREGISTER_CLASS(LevelEditor);
+    GDREGISTER_CLASS(SlowMotionMeter);
+    GDREGISTER_CLASS(EnemyController);
     GDREGISTER_CLASS(GDExample1New);
     GDREGISTER_CLASS(GDExample1Old);
     GDREGISTER_CLASS(GDExample2New);

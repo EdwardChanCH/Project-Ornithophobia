@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "C:/Users/thesu/Documents/GitHub/project-deliverable-2-team-ornithophobia/godot-cpp"
+    "cmake.sourceDirectory": "C:/Users/thesu/Documents/GitHub/project-deliverable-2-team-ornithophobia/godot-cpp",
+    "files.associations": {
+        "algorithm": "cpp"
+    }
 }
