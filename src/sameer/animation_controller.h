@@ -3,7 +3,7 @@
  * @author Sameer Bugti
  * @brief
  * @version 1
- * @date November 21st, 2024.
+ * @date November 25th, 2024.
  * 
  */
 
@@ -24,8 +24,8 @@ namespace godot {
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
-        PlayerController *parent;
-		AnimatedSprite2D *arms;
+        PlayerController *parent;	//grabs parent node for player characteristics
+		AnimatedSprite2D *arms;	//grabs child node for arm sprite
 
 	protected:
 		static void _bind_methods(); // Must be declared
