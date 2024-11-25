@@ -1,17 +1,24 @@
-// This example class receives a signal from a GDExampleNode and output some text to the terminal.
+/**
+ * @file playercontroller.cpp
+ * @author Jacob Couture
+ * @brief This class handles movement and physics for the player
+ */
 
 #include "playercontroller.h"
 
 using namespace godot;
 
+/**
+ * @brief Binding function for exposing methods/properties to Godot.
+ */
 void PlayerController::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("set_game_speed", "gameSpeed"), &PlayerController::set_game_speed);
     ClassDB::bind_method(D_METHOD("update_blast_velocity", "blastDir", "vel", "maxBlastSpeed", "direction"), &PlayerController::update_blast_velocity);
-    ClassDB::bind_method(D_METHOD("can_slow_time"), &PlayerController::can_slow_time);
-    ClassDB::bind_method(D_METHOD("set_can_slow_time", "value"), &PlayerController::set_can_slow_time);
     ClassDB::bind_method(D_METHOD("was_on_floor"), &PlayerController::was_on_floor);
 }
 
+/**
+ * @brief Constructor for PlayerController
+ */
 PlayerController::PlayerController() {
     speed = 0;
     isAirborne = false;
@@ -19,6 +26,9 @@ PlayerController::PlayerController() {
     input = Input::get_singleton();
 }
 
+/**
+ * @brief Deconstructor for PlayerController
+ */
 PlayerController::~PlayerController() {
 }
 
@@ -41,8 +51,6 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "largeBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
 
-_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "maxTimeSlowValue", PROPERTY_HINT_RANGE, "0,1,0.01"))
-_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeSlowFactor"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor. 
@@ -64,8 +72,6 @@ _GDEXPORT_GET(largeBlastStrength)
 _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
 
-_GDEXPORT_GET(maxTimeSlowValue)
-_GDEXPORT_GET(timeSlowFactor)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor. 
@@ -87,11 +93,13 @@ _GDEXPORT_SET(largeBlastStrength)
 _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
-_GDEXPORT_SET(maxTimeSlowValue)
-_GDEXPORT_SET(timeSlowFactor)
 _GDEXPORT_SET_SUFFIX
 
+/**
+ * @brief Same as Godot's _ready() function
+ */
 void PlayerController::_ready() {
+    // Disable the process function while in editor
     if (Engine::get_singleton()->is_editor_hint())
         set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
     else {
@@ -101,13 +109,13 @@ void PlayerController::_ready() {
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
     wasOnFloor = false;
-    canSlowTime = true;
     movementDirection.x = 1;
 }
 
-void PlayerController::_exit_tree() {
-}
-
+/**
+ * @brief Same as _process() in GDScript.
+ * @param delta Delta time
+ */
 void PlayerController::_process(double _delta) {
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
@@ -270,11 +278,14 @@ void PlayerController::_process(double _delta) {
     
 }
 
-void PlayerController::set_game_speed(float gameSpeed) {
-    Engine::get_singleton()->set_time_scale(gameSpeed);
-}
 
-// Calculates the correct velocity based on the direction of a blast and the current velocity of the player
+/**
+ * @brief Calculates the correct velocity based on the direction of a blast and the current velocity of the player
+ * @param blastDir direction the blast is pointing
+ * @param vel current player velocity
+ * @param maxBlastSpeed maximum possible blast speed for the given type of blast
+ * @param direction whether the calculation is for horizontal or vertical velocity
+ */
 float PlayerController::update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction) {
     if ((blastDir < 0 && vel >= 0) ) {          // blasting from right when moving right
         if (direction == "vertical")
@@ -297,14 +308,10 @@ float PlayerController::update_blast_velocity(float blastDir, float vel, int max
     return vel;
 }
 
-bool PlayerController::can_slow_time() {
-    return canSlowTime;
-}
 
-void PlayerController::set_can_slow_time(bool value) {
-    canSlowTime = value;
-}
-
+/**
+ * @brief Getter for wasOnFloor
+ */
 bool PlayerController::was_on_floor() {
     return wasOnFloor;
 }

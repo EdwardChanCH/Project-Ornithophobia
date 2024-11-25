@@ -1,3 +1,9 @@
+/**
+ * @file debug_controller.h
+ * @author Jacob Couture
+ * @brief Header file for the DebugController class
+ */
+
 #ifndef DEBUG_CONTROLLER_H
 #define DEBUG_CONTROLLER_H
 

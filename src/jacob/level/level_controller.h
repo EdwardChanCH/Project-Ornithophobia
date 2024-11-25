@@ -1,3 +1,9 @@
+/**
+ * @file level_controller.h
+ * @author Jacob Couture
+ * @brief Header file for the LevelController class
+ */
+
 #ifndef LEVEL_CONTROLLER_H
 #define LEVEL_CONTROLLER_H
 

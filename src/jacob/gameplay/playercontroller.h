@@ -1,3 +1,9 @@
+/**
+ * @file playercontroller.h
+ * @author Jacob Couture
+ * @brief Header file for the PlayerController class
+ */
+
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
@@ -47,9 +53,6 @@ namespace godot {
         long lastBlastTime;
 
         // Misc.
-        float maxTimeSlowValue;
-        float timeSlowFactor;
-        bool canSlowTime;
         Input *input;
 
 
@@ -59,16 +62,12 @@ namespace godot {
 
     public:
         virtual void _ready() override;
-        virtual void _exit_tree() override;
 
         PlayerController();
         ~PlayerController();
 
         void _process(double delta) override;
-        void set_game_speed(float gameSpeed);
         float update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction="");
-        bool can_slow_time();
-        void set_can_slow_time(bool value);
         bool was_on_floor();
 
     };

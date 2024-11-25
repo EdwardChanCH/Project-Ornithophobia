@@ -1,10 +1,7 @@
 /**
  * @file slow_motion_meter.h
- * @author
- * @brief
- * @version
- * @date
- * 
+ * @author Jacob Couture
+ * @brief Header file for the SlowMotionMeter class.
  */
 
 #ifndef SLOW_MOTION_METER_H

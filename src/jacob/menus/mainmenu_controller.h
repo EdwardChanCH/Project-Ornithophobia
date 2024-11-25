@@ -1,3 +1,9 @@
+/**
+ * @file mainmenu_controller.h
+ * @author Jacob Couture
+ * @brief Header file for the MainMenuController class.
+ */
+
 #ifndef MAINMENU_CONTROLLER_H
 #define MAINMENU_CONTROLLER_H
 
