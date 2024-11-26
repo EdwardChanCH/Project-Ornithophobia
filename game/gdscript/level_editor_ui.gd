@@ -39,39 +39,76 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug"):
-		print("DEBUG")
-		SceneManager.get_instance()._debug()
-		debug_button_pressed.emit()
+		_on_debug_level_editor_controller_button_pressed()
+		_on_debug_scene_manager_button_pressed()
 	
 	if event.is_action_pressed("editor_camera_up"):
 		camera_movement += Vector2(0, -1) * camera_movement_scale
-	if event.is_action_pressed("editor_camera_down"):
-		camera_movement += Vector2(0, +1) * camera_movement_scale
-	if event.is_action_pressed("editor_camera_left"):
-		camera_movement += Vector2(-1, 0) * camera_movement_scale
-	if event.is_action_pressed("editor_camera_right"):
-		camera_movement += Vector2(+1, 0) * camera_movement_scale
-	if event.is_action_pressed("editor_camera_slow"):
-		camera_movement /= camera_movement_multiplier
-		camera_movement_scale /= camera_movement_multiplier
-	if event.is_action_pressed("editor_camera_fast"):
-		camera_movement *= camera_movement_multiplier
-		camera_movement_scale *= camera_movement_multiplier
-	
 	if event.is_action_released("editor_camera_up"):
+		camera_movement += Vector2(0, +1) * camera_movement_scale
+		
+	if event.is_action_pressed("editor_camera_down"):
 		camera_movement += Vector2(0, +1) * camera_movement_scale
 	if event.is_action_released("editor_camera_down"):
 		camera_movement += Vector2(0, -1) * camera_movement_scale
+		
+	if event.is_action_pressed("editor_camera_left"):
+		camera_movement += Vector2(-1, 0) * camera_movement_scale
 	if event.is_action_released("editor_camera_left"):
+		camera_movement += Vector2(+1, 0) * camera_movement_scale
+		
+	if event.is_action_pressed("editor_camera_right"):
 		camera_movement += Vector2(+1, 0) * camera_movement_scale
 	if event.is_action_released("editor_camera_right"):
 		camera_movement += Vector2(-1, 0) * camera_movement_scale
+		
+	if event.is_action_pressed("editor_camera_slow"):
+		camera_movement /= camera_movement_multiplier
+		camera_movement_scale /= camera_movement_multiplier
 	if event.is_action_released("editor_camera_slow"):
+		camera_movement *= camera_movement_multiplier
+		camera_movement_scale *= camera_movement_multiplier
+		
+	if event.is_action_pressed("editor_camera_fast"):
 		camera_movement *= camera_movement_multiplier
 		camera_movement_scale *= camera_movement_multiplier
 	if event.is_action_released("editor_camera_fast"):
 		camera_movement /= camera_movement_multiplier
 		camera_movement_scale /= camera_movement_multiplier
+	
+	if event.is_action_pressed("editor_previous_rotation"):
+		pass
+	
+	if event.is_action_pressed("editor_next_rotation"):
+		pass
+	
+	if event.is_action_pressed("editor_flip_h"):
+		pass
+	
+	if event.is_action_pressed("editor_flip_v"):
+		pass
+	
+	if event.is_action_pressed("editor_flip_d"):
+		pass
+	
+	if event.is_action_pressed("editor_undo"):
+		_on_undo_button_pressed()
+	
+	if event.is_action_pressed("editor_redo"):
+		_on_redo_button_pressed()
+	
+	if event.is_action_pressed("editor_load_level"):
+		_on_load_level_button_pressed()
+	
+	if event.is_action_pressed("editor_save_level"):
+		_on_save_level_button_pressed()
+	
+	if event.is_action_pressed("editor_quick_load_level"):
+		_on_quick_load_level_button_pressed()
+	
+	if event.is_action_pressed("editor_quick_save_level"):
+		_on_quick_save_level_button_pressed()
+	
 	pass
 
 
@@ -85,8 +122,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Note: Must set this control node to "Mouse > Filter = Pass"
 	if event.is_action_pressed("editor_left_click"):
 		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+	
 	if event.is_action_pressed("editor_right_click"):
 		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+	
 	pass
 
 

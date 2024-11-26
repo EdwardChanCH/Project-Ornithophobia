@@ -15,10 +15,9 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 // #include ">_< headers_here >_<"
-#include "level_editor_controller.h"
 #include "iprototype.h"
 #include "level.h"
-//#include "level_editor_controller.h"
+#include "level_editor_controller.h"
 #include "edward_main.h"
 #include "scene_manager.h"
 #include "gdexample_1_new.h"
@@ -43,10 +42,9 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
-    GDREGISTER_CLASS(LevelEditorController);
     GDREGISTER_ABSTRACT_CLASS(IPrototype);
     GDREGISTER_CLASS(Level);
-    //GDREGISTER_CLASS(LevelEditorController);
+    GDREGISTER_CLASS(LevelEditorController);
     GDREGISTER_CLASS(EdwardMain);
     GDREGISTER_CLASS(SceneManager);
     GDREGISTER_CLASS(GDExample1New);

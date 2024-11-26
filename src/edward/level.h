@@ -2,8 +2,8 @@
  * @file level.h
  * @author Chun Ho Chan (Edward)
  * @brief Header file.
- * @version 0.1.0
- * @date 2024-11-13
+ * @version 0.3.0
+ * @date 2024-11-25
  * 
  */
 
@@ -43,17 +43,21 @@ namespace godot {
 
 		Dictionary get_level_info();
 		void set_level_info(Dictionary value);
+
 		Node * get_list(String list_name);
-		void add_list(String list_name);
+		bool add_list(String list_name);
 		void clear_list(String list_name);
+		int get_list_length(String list_name);
+
 		Node * get_node_in_list(String list_name, String node_name);
-		bool add_node(Node * parent_node, Node * child_node);
+		bool add_node_to_list(String list_name, Node * child_node);
 
 		// List name constants
 		const String tile_list_name = "TileList";
 		const String player_list_name = "PlayerList";
 		const String enemy_list_name = "EnemyList";
 		const String entity_list_name = "EntityList";
+		//const String trash_list_name = "TrashList"; // TODO not implemented yet
 	};
 
 } // namespace godot

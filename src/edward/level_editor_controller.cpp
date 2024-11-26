@@ -3,8 +3,8 @@
  * @author Chun Ho Chan (Edward)
  * @brief Mediator Pattern (MVC).
  * This class controlls all communication between Godot UI (view) and Level data (model).
- * @version 0.3.0
- * @date 2024-11-22
+ * @version 0.3.1
+ * @date 2024-11-25
  * 
  */
 
@@ -39,7 +39,7 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void LevelEditorController::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("track_action", "new_action", "reverse_action"), &LevelEditorController::track_action);
+    ClassDB::bind_method(D_METHOD("track_action", "redo_action", "undo_action"), &LevelEditorController::track_action);
     ClassDB::bind_method(D_METHOD("undo_action"), &LevelEditorController::undo_action);
     ClassDB::bind_method(D_METHOD("redo_action"), &LevelEditorController::redo_action);
     ClassDB::bind_method(D_METHOD("clear_action"), &LevelEditorController::clear_action);
@@ -47,6 +47,7 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("can_redo"), &LevelEditorController::can_redo);
 
     ClassDB::bind_method(D_METHOD("set_level_filepath", "filepath"), &LevelEditorController::set_level_filepath);
+    ClassDB::bind_method(D_METHOD("load_new_level", "filepath"), &LevelEditorController::load_new_level);
     ClassDB::bind_method(D_METHOD("load_level", "filepath"), &LevelEditorController::load_level);
     ClassDB::bind_method(D_METHOD("save_level", "filepath"), &LevelEditorController::save_level);
     ClassDB::bind_method(D_METHOD("quick_load_level"), &LevelEditorController::quick_load_level);
@@ -58,7 +59,9 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("toggle_physics"), &LevelEditorController::toggle_physics);
     ClassDB::bind_method(D_METHOD("world_to_tile_pos", "world_pos", "tile_map_scale", "tile_size"), &LevelEditorController::world_to_tile_pos);
     ClassDB::bind_method(D_METHOD("tile_to_world_pos", "tile_pos", "tile_map_scale", "tile_size"), &LevelEditorController::tile_to_world_pos);
+    ClassDB::bind_method(D_METHOD("to_tile_alt", "flip_h", "flip_v", "flip_d"), &LevelEditorController::to_tile_alt);
     ClassDB::bind_method(D_METHOD("add_tile", "mouse_pos"), &LevelEditorController::add_tile);
+    ClassDB::bind_method(D_METHOD("replace_tile", "tile_pos", "source_id", "tile_id", "tile_alt"), &LevelEditorController::replace_tile);
     ClassDB::bind_method(D_METHOD("add_scene_object", "mouse_pos", "list_name", "scene_path"), &LevelEditorController::add_scene_object);
     ClassDB::bind_method(D_METHOD("add_player", "mouse_pos"), &LevelEditorController::add_player);
     ClassDB::bind_method(D_METHOD("add_enemy", "mouse_pos"), &LevelEditorController::add_enemy);
@@ -74,13 +77,17 @@ void LevelEditorController::_bind_methods() {
  */
 LevelEditorController::LevelEditorController() {
     level_node = nullptr;
+    level_filepath = default_level_filepath;
 
     undo_stack = memnew(TypedArray<Callable>);
     redo_stack = memnew(TypedArray<Callable>);
     action_index = 0;
+    quick_save_action_index = 0;
     undo_limit = default_undo_limit;
-    level_filepath = default_level_filepath;
+    has_quick_saved = false;
+
     physics_on = false;
+    tracking_on = true;
 }
 
 /**
@@ -106,10 +113,12 @@ LevelEditorController::~LevelEditorController() {
 void LevelEditorController::_ready() {
     // Load Godot UI
     if (ResourceLoader::get_singleton()->exists(ui_filepath, "PackedScene")) {
+        // Render on top of everything else
         CanvasLayer *ui_canvas = memnew(CanvasLayer);
-        ui_canvas->set_layer(100); // Draw on top of everything else
+        ui_canvas->set_layer(100);
         add_child(ui_canvas);
 
+        // Load UI from scene file
         ui_scene = ResourceLoader::get_singleton()->load(ui_filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
         ui_node = ui_scene.ptr()->instantiate();
         ui_canvas->add_child(ui_node);
@@ -122,7 +131,7 @@ void LevelEditorController::_ready() {
         ui_node->connect("undo_button_pressed", Callable(this, "undo_action"));
         ui_node->connect("redo_button_pressed", Callable(this, "redo_action"));
 
-        ui_node->connect("load_level_path_selected", Callable(this, "load_level"));
+        ui_node->connect("load_level_path_selected", Callable(this, "load_new_level"));
         ui_node->connect("save_level_path_selected", Callable(this, "save_level"));
         ui_node->connect("quick_load_level_button_pressed", Callable(this, "quick_load_level"));
         ui_node->connect("quick_save_level_button_pressed", Callable(this, "quick_save_level"));
@@ -148,7 +157,7 @@ void LevelEditorController::_ready() {
  * @param reverse_action Reserse action
  * @return Variant Output of calling new_action
  */
-void LevelEditorController::track_action(Callable new_action, Callable reverse_action) {
+void LevelEditorController::track_action(Callable redo_action, Callable undo_action) {
     // Remove actions in old timeline
     while (action_index < redo_stack->size()) {
         undo_stack->pop_back();
@@ -156,8 +165,8 @@ void LevelEditorController::track_action(Callable new_action, Callable reverse_a
     }
 
     // Track new action
-    undo_stack->push_back(reverse_action);
-    redo_stack->push_back(new_action);
+    undo_stack->push_back(undo_action);
+    redo_stack->push_back(redo_action);
     ++action_index;
 
     if (action_index > undo_limit) {
@@ -166,6 +175,17 @@ void LevelEditorController::track_action(Callable new_action, Callable reverse_a
         redo_stack->pop_front();
         --action_index;
     }
+}
+
+/**
+ * @brief Clear all tracked undo/ redo actions.
+ * 
+ */
+void LevelEditorController::clear_action() {
+    undo_stack->clear();
+    redo_stack->clear();
+    action_index = 0;
+    quick_save_action_index = 0;
 }
 
 /**
@@ -185,7 +205,10 @@ Variant LevelEditorController::undo_action() {
     Callable action = (*undo_stack)[action_index];
 
     // Execute action
-    return action.call();
+    tracking_on = false;
+    Variant output = action.call();
+    tracking_on = true;
+    return output;
 }
 
 /**
@@ -205,17 +228,10 @@ Variant LevelEditorController::redo_action() {
     ++action_index;
 
     // Execute action
-    return action.call();
-}
-
-/**
- * @brief Clear all tracked undo/ redo actions.
- * 
- */
-void LevelEditorController::clear_action() {
-    undo_stack->clear();
-    redo_stack->clear();
-    action_index = 0;
+    tracking_on = false;
+    Variant output = action.call();
+    tracking_on = true;
+    return output;
 }
 
 /**
@@ -246,6 +262,12 @@ void LevelEditorController::set_level_filepath(String filepath) {
     level_filepath = filepath;
 }
 
+void LevelEditorController::load_new_level(String filepath) {
+    has_quick_saved = false;
+    clear_action();
+    load_level(filepath);
+}
+
 void LevelEditorController::load_level(String filepath) {
     if (ResourceLoader::get_singleton()->exists(filepath, "PackedScene")) {
         unload_level();
@@ -260,16 +282,7 @@ void LevelEditorController::load_level(String filepath) {
 }
 
 void LevelEditorController::save_level(String filepath) {
-    if ((level_node) && (filepath.length() > 0)) {
-        // Recursively set children as 'owned' for packing // TODO bad performance!
-        //TypedArray<Node> family = level_node->get_children(false);
-        //Node * child;
-        //while (!family.is_empty()) {
-        //    child = (Node *)(Object *)family.pop_front();
-        //    child->set_owner(level_node);
-        //    family.append_array(child->get_children());
-        //}
-
+    if ((is_level_loaded()) && (filepath.length() > 0)) {
         level_filepath = BASE_FILEPATH(filepath);
         Level::export_level_tscn(filepath, level_node);
     } else {
@@ -278,36 +291,39 @@ void LevelEditorController::save_level(String filepath) {
 }
 
 void LevelEditorController::quick_load_level() {
-    load_level(QUICK_FILEPATH(level_filepath));
+    if (has_quick_saved) {
+        action_index = quick_save_action_index;
+        load_level(QUICK_FILEPATH(level_filepath));
+    }
 }
 
 void LevelEditorController::quick_save_level() {
+    has_quick_saved = true;
+    quick_save_action_index = action_index;
     save_level(QUICK_FILEPATH(level_filepath));
 }
 
 void LevelEditorController::unload_level() {
-    if (level_node) {
+    if (is_level_loaded()) {
 		level_node->queue_free();
 		level_node = nullptr;
     }
 }
 
 void LevelEditorController::reload_level() {
-    if (ResourceLoader::get_singleton()->exists(level_filepath, "PackedScene")) {
-        load_level(level_filepath);
-    }
+    load_new_level(level_filepath);
 }
 
 bool LevelEditorController::is_level_loaded() {
     return (level_node != nullptr);
 }
 
-// - - - Tile Editing Functions - - -
+// - - - Level Editing Functions - - -
 
 void LevelEditorController::toggle_physics() {
     physics_on = !physics_on;
 
-    if (level_node) {
+    if (is_level_loaded()) {
         if (physics_on) {
             level_node->set_process_mode(PROCESS_MODE_ALWAYS);
         } else {
@@ -332,75 +348,128 @@ Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile
     return result;
 }
 
+int LevelEditorController::to_tile_alt(bool flip_h, bool flip_v, bool flip_d) {
+    int tile_flags = 0;
+
+    if (flip_h) {
+        tile_flags |= TileSetAtlasSource::TRANSFORM_FLIP_H;
+    }
+    if (flip_v) {
+        tile_flags |= TileSetAtlasSource::TRANSFORM_FLIP_V;
+    }
+    if (flip_d) {
+        tile_flags |= TileSetAtlasSource::TRANSFORM_TRANSPOSE;
+    }
+
+    return tile_flags;
+}
+
 void LevelEditorController::add_tile(Vector2 mouse_pos) {
     // TODO hard-coded to add the square tile
-    if (level_node) {
+    if (is_level_loaded()) {
+        // Get tile map
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
         if (!tile_map_layer) {
             UtilityFunctions::print("Warning: Tile map layer is missing!");
             return;
         }
 
+        // Get tile set
         Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
         if (tile_set.is_null()) {
             UtilityFunctions::print("Warning: Tile set is missing!");
             return;
         }
 
+        // Calculate tile coordinates
         Vector2 tile_map_scale = tile_map_layer->get_scale();
         Vector2i tile_size = tile_set.ptr()->get_tile_size();
         Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
         
-        tile_map_layer->set_cell(tile_pos, 0, Vector2(0, 0), 0);
+        // Add tile (reversible)
+        replace_tile(tile_pos, 0, Vector2(0, 0), 0);
     }
 }
 
-void LevelEditorController::add_scene_object(Vector2 mouse_pos, String list_name, String scene_path) {
-    if (level_node) {
+void LevelEditorController::replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_alt) {
+    if (is_level_loaded()) {
+        // Get tile map
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
         if (!tile_map_layer) {
             UtilityFunctions::print("Warning: Tile map layer is missing!");
             return;
         }
 
+        // Store the original tile information
+        int old_source_id = tile_map_layer->get_cell_source_id(tile_pos);
+        Vector2i old_tile_id = tile_map_layer->get_cell_atlas_coords(tile_pos);
+        int old_tile_flags = tile_map_layer->get_cell_alternative_tile(tile_pos);
+
+        // Replace with new tile
+        tile_map_layer->set_cell(tile_pos, source_id, tile_id, tile_alt);
+        
+        // Track its reversible actions
+        if (tracking_on) {
+            track_action(
+                Callable(this, "replace_tile").bind(tile_pos, source_id, tile_id, tile_alt), 
+                Callable(this, "replace_tile").bind(tile_pos, old_source_id, old_tile_id, old_tile_flags)
+            );
+        }
+    }
+}
+
+void LevelEditorController::add_scene_object(Vector2 mouse_pos, String list_name, String scene_path) {
+    if (is_level_loaded()) {
+        // Get tile map
+        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
+        if (!tile_map_layer) {
+            UtilityFunctions::print("Warning: Tile map layer is missing!");
+            return;
+        }
+
+        // Gte tile set
         Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
         if (tile_set.is_null()) {
             UtilityFunctions::print("Warning: Tile set is missing!");
             return;
         }
 
+        // Calculate tile coordinates
         Vector2 tile_map_scale = tile_map_layer->get_scale();
         Vector2i tile_size = tile_set.ptr()->get_tile_size();
         Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
 
+        // Calculate object coordinates
         Vector2 offset = (Vector2)tile_size * tile_map_scale * 0.5; // Offset from tile top-left corner to center
         Vector2 object_pos = tile_to_world_pos(tile_pos, tile_map_scale, tile_size) + offset; // Object origin is at its center, not its top-left corner
 
+        // Generate object
         Ref<PackedScene> object_scene = ResourceLoader::get_singleton()->load(scene_path, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
         RigidBody2D * object_node = (RigidBody2D *)(object_scene.ptr()->instantiate());
         object_node->set_position(object_pos);
 
-        level_node->add_node(level_node->get_list(list_name), object_node);
+        // Add object
+        level_node->add_node_to_list(list_name, object_node);
     }
 }
 
 void LevelEditorController::add_player(Vector2 mouse_pos) {
     // TODO hard-coded to add the yinyang orb
-    if (level_node) {
+    if (is_level_loaded()) {
         add_scene_object(mouse_pos, level_node->player_list_name, "res://entity/yinyang_orb.tscn");
     }
 }
 
 void LevelEditorController::add_enemy(Vector2 mouse_pos) {
     // TODO hard-coded to add the yinyang orb
-    if (level_node) {
+    if (is_level_loaded()) {
         add_scene_object(mouse_pos, level_node->enemy_list_name, "res://entity/yinyang_orb.tscn");
     }
 }
 
 void LevelEditorController::add_entity(Vector2 mouse_pos) {
     // TODO hard-coded to add the yinyang orb
-    if (level_node) {
+    if (is_level_loaded()) {
         add_scene_object(mouse_pos, level_node->entity_list_name, "res://entity/yinyang_orb.tscn");
     }
 }
@@ -408,19 +477,20 @@ void LevelEditorController::add_entity(Vector2 mouse_pos) {
 // - - - Test Functions - - -
 
 /**
- * @brief Test function.
+ * @brief Test function (reversible).
  * 
  * @param n Integer
  */
 void LevelEditorController::_test_action(String s, int n) {
-    if (s == "Do") {
+    UtilityFunctions::print(s, ": ", n);
+
+    // Track its reversible actions
+    if (tracking_on) {
         track_action(
             Callable(this, "_test_action").bind("Redo", n), 
             Callable(this, "_test_action").bind("Undo", n)
         );
     }
-
-    UtilityFunctions::print(s, ": ", n);
 }
 
 /**
@@ -445,6 +515,7 @@ void LevelEditorController::_debug() {
     }
 
     UtilityFunctions::print("Action Index:", action_index);
+    UtilityFunctions::print("Quicksave's Action Index:", quick_save_action_index);
 
     UtilityFunctions::print("Undo Limit:", undo_limit);
 

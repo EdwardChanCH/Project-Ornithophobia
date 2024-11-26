@@ -4,8 +4,8 @@
  * @brief Prototype Pattern + Mediator Pattern (MVC).
  * This class handles all data storage of a level.
  * Custom user levels are cloned from a default level object instead of constructed from scratch.
- * @version 0.2.0
- * @date 2024-11-23
+ * @version 0.3.0
+ * @date 2024-11-25
  * 
  */
 
@@ -42,8 +42,9 @@ void Level::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_list", "list_name"), &Level::get_list);
     ClassDB::bind_method(D_METHOD("add_list", "list_name"), &Level::get_list);
     ClassDB::bind_method(D_METHOD("clear_list", "list_name"), &Level::clear_list);
+    ClassDB::bind_method(D_METHOD("get_list_length", "list_name"), &Level::get_list_length);
     ClassDB::bind_method(D_METHOD("get_node_in_list", "list_name", "node_name"), &Level::get_node_in_list);
-    ClassDB::bind_method(D_METHOD("add_node", "parent_node", "child_node"), &Level::add_node);
+    ClassDB::bind_method(D_METHOD("add_node_to_list", "list_name", "child_node"), &Level::add_node_to_list);
 }
 
 /**
@@ -55,8 +56,8 @@ Level::Level() {
 }
 
 /**
- * @brief Deep copy of a Level:: Level object.
- * Note: Use clone() instead to also duplicate its children.
+ * @brief Deep-copy a Level:: Level object.
+ * Note: Use clone() if child nodes need to be duplicated as well.
  * 
  */
 Level::Level(Level * level) {
@@ -79,17 +80,20 @@ void Level::_ready() {
     add_list(player_list_name);
     add_list(enemy_list_name);
     add_list(entity_list_name);
+    //add_list(trash_list_name);  // TODO not implemented yet; need this to implement the remove_node() function
 }
 
 /**
- * @brief Clones a level node and all of its children.
+ * @brief Deep-copy a level node and all of its children.
  * 
  * @return Level* Cloned Level
  */
 Level * Level::clone() {
     int32_t flag = Node::DUPLICATE_SIGNALS + Node::DUPLICATE_USE_INSTANTIATION;
+
     Level * clone_level = (Level *)this->duplicate(flag);
     clone_level->level_info = this->level_info.duplicate(true);
+
     return clone_level;
 }
 
@@ -155,16 +159,26 @@ Node * Level::get_list(String list_name) {
     }
 }
 
-void Level::add_list(String list_name) {
+/**
+ * @brief Add a list.
+ * Return false if list already exists.
+ * 
+ * @param list_name List Name
+ * @return true 
+ * @return false 
+ */
+bool Level::add_list(String list_name) {
     Node * list;
 
     if (has_node(list_name)) {
-        return;
+        return false;
     }
 
     list = memnew(Node);
     list->set_name(list_name);
-    add_node(this, list);
+    add_child(list);
+    list->set_owner(this);
+    return true;
 }
 
 /**
@@ -185,6 +199,24 @@ void Level::clear_list(String list_name) {
         list->remove_child(child);
         child->queue_free();
     }
+}
+
+/**
+ * @brief Get the number of child nodes in the list.
+ * Return -1 if list does not exist.
+ * 
+ * @param list_name List Name
+ * @return int Number of Child Nodes
+ */
+int Level::get_list_length(String list_name) {
+    Node * list;
+
+    list = get_list(list_name);
+    if (!list) {
+        return -1;
+    }
+
+    return list->get_child_count();
 }
 
 /**
@@ -211,20 +243,24 @@ Node * Level::get_node_in_list(String list_name, String node_name) {
 }
 
 /**
- * @brief Add a node to a list.
- * Return false if list or node is missing.
+ * @brief Add a node to the list.
+ * Return false if list or node does not exist.
  * 
- * @param list_name List Name (constant)
- * @param new_node New Node
+ * @param list_name List Name
+ * @param child_node Child Node
  * @return true 
  * @return false 
  */
-bool Level::add_node(Node * parent_node, Node * child_node) {
-    if ((!parent_node) || (!child_node)) {
+bool Level::add_node_to_list(String list_name, Node * child_node) {
+    Node * list, * node;
+
+    list = get_list(list_name);
+
+    if ((!list) || (!child_node)) {
         return false;
     }
     
-    parent_node->add_child(child_node);
+    list->add_child(child_node);
     child_node->set_owner(this);
     return true;
 }
