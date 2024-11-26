@@ -91,6 +91,7 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classgodot_1_1_level_editor_controller-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">godot::LevelEditorController Class Reference</div></div>
@@ -131,80 +132,95 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_ready</b> ()</td></tr>
 <tr class="memdesc:a354bc3ed416f188cd1eaacfa980e53b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when this node is ready in Godot's scene tree. <br /></td></tr>
 <tr class="separator:a354bc3ed416f188cd1eaacfa980e53b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6fb1b1484e7fd6e8d4f276932b2dffe" id="r_aa6fb1b1484e7fd6e8d4f276932b2dffe"><td class="memItemLeft" align="right" valign="top">Variant&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6fb1b1484e7fd6e8d4f276932b2dffe">do_action</a> (Callable new_action, Callable reverse_action)</td></tr>
-<tr class="memdesc:aa6fb1b1484e7fd6e8d4f276932b2dffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track a new action and execute it, and track its reverse action.  <br /></td></tr>
-<tr class="separator:aa6fb1b1484e7fd6e8d4f276932b2dffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2843cb7e707ada502447139acbc6525a" id="r_a2843cb7e707ada502447139acbc6525a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2843cb7e707ada502447139acbc6525a">track_action</a> (Callable <a class="el" href="#a559cfc2a1e80879b547defa43f8be494">redo_action</a>, Callable <a class="el" href="#a21536468594e4754cf718a0f8ca47a9e">undo_action</a>)</td></tr>
+<tr class="memdesc:a2843cb7e707ada502447139acbc6525a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track a new action and its reverse action.  <br /></td></tr>
+<tr class="separator:a2843cb7e707ada502447139acbc6525a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c8feb9ff98ec5af90cdecec065145f" id="r_ab6c8feb9ff98ec5af90cdecec065145f"><td class="memItemLeft" align="right" valign="top"><a id="ab6c8feb9ff98ec5af90cdecec065145f" name="ab6c8feb9ff98ec5af90cdecec065145f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_action</b> ()</td></tr>
+<tr class="memdesc:ab6c8feb9ff98ec5af90cdecec065145f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all tracked undo/ redo actions. <br /></td></tr>
+<tr class="separator:ab6c8feb9ff98ec5af90cdecec065145f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21536468594e4754cf718a0f8ca47a9e" id="r_a21536468594e4754cf718a0f8ca47a9e"><td class="memItemLeft" align="right" valign="top">Variant&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21536468594e4754cf718a0f8ca47a9e">undo_action</a> ()</td></tr>
 <tr class="memdesc:a21536468594e4754cf718a0f8ca47a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the last undo-able action.  <br /></td></tr>
 <tr class="separator:a21536468594e4754cf718a0f8ca47a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a559cfc2a1e80879b547defa43f8be494" id="r_a559cfc2a1e80879b547defa43f8be494"><td class="memItemLeft" align="right" valign="top">Variant&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a559cfc2a1e80879b547defa43f8be494">redo_action</a> ()</td></tr>
 <tr class="memdesc:a559cfc2a1e80879b547defa43f8be494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the last redo-able action.  <br /></td></tr>
 <tr class="separator:a559cfc2a1e80879b547defa43f8be494"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6c8feb9ff98ec5af90cdecec065145f" id="r_ab6c8feb9ff98ec5af90cdecec065145f"><td class="memItemLeft" align="right" valign="top"><a id="ab6c8feb9ff98ec5af90cdecec065145f" name="ab6c8feb9ff98ec5af90cdecec065145f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_action</b> ()</td></tr>
-<tr class="memdesc:ab6c8feb9ff98ec5af90cdecec065145f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all tracked undo/ redo actions. <br /></td></tr>
-<tr class="separator:ab6c8feb9ff98ec5af90cdecec065145f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9b1f5fd6f7386083e88eea0b7d01ef7" id="r_aa9b1f5fd6f7386083e88eea0b7d01ef7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9b1f5fd6f7386083e88eea0b7d01ef7">can_undo</a> ()</td></tr>
 <tr class="memdesc:aa9b1f5fd6f7386083e88eea0b7d01ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any undoable action is available.  <br /></td></tr>
 <tr class="separator:aa9b1f5fd6f7386083e88eea0b7d01ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c98f2fd77a3a765ec112be4909ff59b" id="r_a1c98f2fd77a3a765ec112be4909ff59b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c98f2fd77a3a765ec112be4909ff59b">can_redo</a> ()</td></tr>
 <tr class="memdesc:a1c98f2fd77a3a765ec112be4909ff59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any redoable action is available.  <br /></td></tr>
 <tr class="separator:a1c98f2fd77a3a765ec112be4909ff59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06d92e554b0436c2e49410b653c13f5b" id="r_a06d92e554b0436c2e49410b653c13f5b"><td class="memItemLeft" align="right" valign="top"><a id="a06d92e554b0436c2e49410b653c13f5b" name="a06d92e554b0436c2e49410b653c13f5b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_level_filepath</b> (String filepath)</td></tr>
+<tr class="separator:a06d92e554b0436c2e49410b653c13f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e840e108672993a75bd5584ee64592" id="r_a55e840e108672993a75bd5584ee64592"><td class="memItemLeft" align="right" valign="top"><a id="a55e840e108672993a75bd5584ee64592" name="a55e840e108672993a75bd5584ee64592"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>load_new_level</b> (String filepath)</td></tr>
+<tr class="separator:a55e840e108672993a75bd5584ee64592"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a843b215435082c0e70727ee8f28cd18b" id="r_a843b215435082c0e70727ee8f28cd18b"><td class="memItemLeft" align="right" valign="top"><a id="a843b215435082c0e70727ee8f28cd18b" name="a843b215435082c0e70727ee8f28cd18b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>load_level</b> (String filepath)</td></tr>
 <tr class="separator:a843b215435082c0e70727ee8f28cd18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a94dd53e33d573699cffe9ecf2eb6f" id="r_af7a94dd53e33d573699cffe9ecf2eb6f"><td class="memItemLeft" align="right" valign="top"><a id="af7a94dd53e33d573699cffe9ecf2eb6f" name="af7a94dd53e33d573699cffe9ecf2eb6f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save_level</b> (String filepath)</td></tr>
 <tr class="separator:af7a94dd53e33d573699cffe9ecf2eb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a509d6c1cd43473091c1f318edd35c15a" id="r_a509d6c1cd43473091c1f318edd35c15a"><td class="memItemLeft" align="right" valign="top"><a id="a509d6c1cd43473091c1f318edd35c15a" name="a509d6c1cd43473091c1f318edd35c15a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>quick_load_level</b> ()</td></tr>
+<tr class="separator:a509d6c1cd43473091c1f318edd35c15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a381de09ce9ca34933f141788a6f8f1c3" id="r_a381de09ce9ca34933f141788a6f8f1c3"><td class="memItemLeft" align="right" valign="top"><a id="a381de09ce9ca34933f141788a6f8f1c3" name="a381de09ce9ca34933f141788a6f8f1c3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>quick_save_level</b> ()</td></tr>
+<tr class="separator:a381de09ce9ca34933f141788a6f8f1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc96721919fe3d1d643f17385c58653f" id="r_acc96721919fe3d1d643f17385c58653f"><td class="memItemLeft" align="right" valign="top"><a id="acc96721919fe3d1d643f17385c58653f" name="acc96721919fe3d1d643f17385c58653f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unload_level</b> ()</td></tr>
 <tr class="separator:acc96721919fe3d1d643f17385c58653f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1050dfa3935ff84430abb888768cd962" id="r_a1050dfa3935ff84430abb888768cd962"><td class="memItemLeft" align="right" valign="top"><a id="a1050dfa3935ff84430abb888768cd962" name="a1050dfa3935ff84430abb888768cd962"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reload_level</b> ()</td></tr>
 <tr class="separator:a1050dfa3935ff84430abb888768cd962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba601a69466f5cb110df1fd6ed0987be" id="r_aba601a69466f5cb110df1fd6ed0987be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba601a69466f5cb110df1fd6ed0987be">_test_print</a> (String s, int n)</td></tr>
-<tr class="memdesc:aba601a69466f5cb110df1fd6ed0987be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test function.  <br /></td></tr>
-<tr class="separator:aba601a69466f5cb110df1fd6ed0987be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50d668489b010d68239b8da321860d73" id="r_a50d668489b010d68239b8da321860d73"><td class="memItemLeft" align="right" valign="top"><a id="a50d668489b010d68239b8da321860d73" name="a50d668489b010d68239b8da321860d73"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_level_loaded</b> ()</td></tr>
+<tr class="separator:a50d668489b010d68239b8da321860d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38dff2efa80cd00717836d93a7aef0" id="r_a3f38dff2efa80cd00717836d93a7aef0"><td class="memItemLeft" align="right" valign="top"><a id="a3f38dff2efa80cd00717836d93a7aef0" name="a3f38dff2efa80cd00717836d93a7aef0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>toggle_physics</b> ()</td></tr>
+<tr class="separator:a3f38dff2efa80cd00717836d93a7aef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff75fdcdd6685ff81d63d8bf217a79f1" id="r_aff75fdcdd6685ff81d63d8bf217a79f1"><td class="memItemLeft" align="right" valign="top"><a id="aff75fdcdd6685ff81d63d8bf217a79f1" name="aff75fdcdd6685ff81d63d8bf217a79f1"></a>
+Vector2i&#160;</td><td class="memItemRight" valign="bottom"><b>world_to_tile_pos</b> (Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="separator:aff75fdcdd6685ff81d63d8bf217a79f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b64b2c9c25e9b5055ea5daa31bee4c" id="r_a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="memItemLeft" align="right" valign="top"><a id="a19b64b2c9c25e9b5055ea5daa31bee4c" name="a19b64b2c9c25e9b5055ea5daa31bee4c"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>tile_to_world_pos</b> (Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="separator:a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e213f96151cd3c57d889c89f586c85" id="r_a62e213f96151cd3c57d889c89f586c85"><td class="memItemLeft" align="right" valign="top"><a id="a62e213f96151cd3c57d889c89f586c85" name="a62e213f96151cd3c57d889c89f586c85"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>to_tile_alt</b> (bool flip_h, bool flip_v, bool flip_d)</td></tr>
+<tr class="separator:a62e213f96151cd3c57d889c89f586c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c5bb261190c1b6ab92e21206f149f1" id="r_ad0c5bb261190c1b6ab92e21206f149f1"><td class="memItemLeft" align="right" valign="top"><a id="ad0c5bb261190c1b6ab92e21206f149f1" name="ad0c5bb261190c1b6ab92e21206f149f1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_tile</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:ad0c5bb261190c1b6ab92e21206f149f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b5bbc4382ae3c551511b41d03f28085" id="r_a2b5bbc4382ae3c551511b41d03f28085"><td class="memItemLeft" align="right" valign="top"><a id="a2b5bbc4382ae3c551511b41d03f28085" name="a2b5bbc4382ae3c551511b41d03f28085"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>replace_tile</b> (Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags)</td></tr>
+<tr class="separator:a2b5bbc4382ae3c551511b41d03f28085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36fb16b8cb5480f965f3b21f459a1b69" id="r_a36fb16b8cb5480f965f3b21f459a1b69"><td class="memItemLeft" align="right" valign="top"><a id="a36fb16b8cb5480f965f3b21f459a1b69" name="a36fb16b8cb5480f965f3b21f459a1b69"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_scene_object</b> (Vector2 mouse_pos, String list_name, String scene_path)</td></tr>
+<tr class="separator:a36fb16b8cb5480f965f3b21f459a1b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9d78df873ee51263322eb05668ca6bb" id="r_ad9d78df873ee51263322eb05668ca6bb"><td class="memItemLeft" align="right" valign="top"><a id="ad9d78df873ee51263322eb05668ca6bb" name="ad9d78df873ee51263322eb05668ca6bb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_player</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:ad9d78df873ee51263322eb05668ca6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad846ee186a6046737ea304c0affeb29c" id="r_ad846ee186a6046737ea304c0affeb29c"><td class="memItemLeft" align="right" valign="top"><a id="ad846ee186a6046737ea304c0affeb29c" name="ad846ee186a6046737ea304c0affeb29c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_enemy</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:ad846ee186a6046737ea304c0affeb29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40b821bd86fe6bb71a502587d1609a92" id="r_a40b821bd86fe6bb71a502587d1609a92"><td class="memItemLeft" align="right" valign="top"><a id="a40b821bd86fe6bb71a502587d1609a92" name="a40b821bd86fe6bb71a502587d1609a92"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_entity</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:a40b821bd86fe6bb71a502587d1609a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac49fa1676216fe9b6ca5b11280d930ee" id="r_ac49fa1676216fe9b6ca5b11280d930ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac49fa1676216fe9b6ca5b11280d930ee">_test_action</a> (String s, int n)</td></tr>
+<tr class="memdesc:ac49fa1676216fe9b6ca5b11280d930ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test function (reversible).  <br /></td></tr>
+<tr class="separator:ac49fa1676216fe9b6ca5b11280d930ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c822429285ec2800419f42b6493a2f3" id="r_a5c822429285ec2800419f42b6493a2f3"><td class="memItemLeft" align="right" valign="top"><a id="a5c822429285ec2800419f42b6493a2f3" name="a5c822429285ec2800419f42b6493a2f3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_debug</b> ()</td></tr>
 <tr class="memdesc:a5c822429285ec2800419f42b6493a2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug function. <br /></td></tr>
 <tr class="separator:a5c822429285ec2800419f42b6493a2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19c348c95b98e044ab92a3cde9eab436" id="r_a19c348c95b98e044ab92a3cde9eab436"><td class="memItemLeft" align="right" valign="top"><a id="a19c348c95b98e044ab92a3cde9eab436" name="a19c348c95b98e044ab92a3cde9eab436"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_open_previous_screen</b> ()</td></tr>
-<tr class="separator:a19c348c95b98e044ab92a3cde9eab436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49843c1b16fd5e42a8c54019c6c3a697" id="r_a49843c1b16fd5e42a8c54019c6c3a697"><td class="memItemLeft" align="right" valign="top"><a id="a49843c1b16fd5e42a8c54019c6c3a697" name="a49843c1b16fd5e42a8c54019c6c3a697"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_playtest_button_toggled</b> (bool active)</td></tr>
-<tr class="separator:a49843c1b16fd5e42a8c54019c6c3a697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a599097b28ea3ce30e427981a867c0b63" id="r_a599097b28ea3ce30e427981a867c0b63"><td class="memItemLeft" align="right" valign="top"><a id="a599097b28ea3ce30e427981a867c0b63" name="a599097b28ea3ce30e427981a867c0b63"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_debug_level_editor_controller</b> ()</td></tr>
-<tr class="separator:a599097b28ea3ce30e427981a867c0b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4586645546198b8af7c1847bee95bc3d" id="r_a4586645546198b8af7c1847bee95bc3d"><td class="memItemLeft" align="right" valign="top"><a id="a4586645546198b8af7c1847bee95bc3d" name="a4586645546198b8af7c1847bee95bc3d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_test_action_button_pressed</b> (int n)</td></tr>
-<tr class="separator:a4586645546198b8af7c1847bee95bc3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ca40d31426974b2e4d78bdf9e81c219" id="r_a5ca40d31426974b2e4d78bdf9e81c219"><td class="memItemLeft" align="right" valign="top"><a id="a5ca40d31426974b2e4d78bdf9e81c219" name="a5ca40d31426974b2e4d78bdf9e81c219"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_undo_button_pressed</b> ()</td></tr>
-<tr class="separator:a5ca40d31426974b2e4d78bdf9e81c219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a593405c3f72605a913b9de1392727672" id="r_a593405c3f72605a913b9de1392727672"><td class="memItemLeft" align="right" valign="top"><a id="a593405c3f72605a913b9de1392727672" name="a593405c3f72605a913b9de1392727672"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_redo_button_pressed</b> ()</td></tr>
-<tr class="separator:a593405c3f72605a913b9de1392727672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c252ec523c5f85d91f51316822a9f31" id="r_a7c252ec523c5f85d91f51316822a9f31"><td class="memItemLeft" align="right" valign="top"><a id="a7c252ec523c5f85d91f51316822a9f31" name="a7c252ec523c5f85d91f51316822a9f31"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_load_level_path_selected</b> (String filepath)</td></tr>
-<tr class="separator:a7c252ec523c5f85d91f51316822a9f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72cf90c8dc0bbb9cd423f2c43bb9fdb6" id="r_a72cf90c8dc0bbb9cd423f2c43bb9fdb6"><td class="memItemLeft" align="right" valign="top"><a id="a72cf90c8dc0bbb9cd423f2c43bb9fdb6" name="a72cf90c8dc0bbb9cd423f2c43bb9fdb6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_save_level_path_selected</b> (String filepath)</td></tr>
-<tr class="separator:a72cf90c8dc0bbb9cd423f2c43bb9fdb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20164ad6763df3b435696b4919289b33" id="r_a20164ad6763df3b435696b4919289b33"><td class="memItemLeft" align="right" valign="top"><a id="a20164ad6763df3b435696b4919289b33" name="a20164ad6763df3b435696b4919289b33"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_reload_level_button_pressed</b> ()</td></tr>
-<tr class="separator:a20164ad6763df3b435696b4919289b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98918cb9beb66f63878ab6a07ef9a6cb" id="r_a98918cb9beb66f63878ab6a07ef9a6cb"><td class="memItemLeft" align="right" valign="top"><a id="a98918cb9beb66f63878ab6a07ef9a6cb" name="a98918cb9beb66f63878ab6a07ef9a6cb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_unload_level_button_pressed</b> ()</td></tr>
-<tr class="separator:a98918cb9beb66f63878ab6a07ef9a6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f4c5923e1c34b99e6fdd1f3cecf2cbd" id="r_a5f4c5923e1c34b99e6fdd1f3cecf2cbd"><td class="memItemLeft" align="right" valign="top"><a id="a5f4c5923e1c34b99e6fdd1f3cecf2cbd" name="a5f4c5923e1c34b99e6fdd1f3cecf2cbd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_screen_left_clicked</b> (Vector2 mouse_pos)</td></tr>
-<tr class="separator:a5f4c5923e1c34b99e6fdd1f3cecf2cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecf4529347af01c024a77df4538ea3e6" id="r_aecf4529347af01c024a77df4538ea3e6"><td class="memItemLeft" align="right" valign="top"><a id="aecf4529347af01c024a77df4538ea3e6" name="aecf4529347af01c024a77df4538ea3e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_on_level_editor_ui_screen_right_clicked</b> (Vector2 mouse_pos)</td></tr>
-<tr class="separator:aecf4529347af01c024a77df4538ea3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a38ebd9764465054274969c089e3a47a8" id="r_a38ebd9764465054274969c089e3a47a8"><td class="memItemLeft" align="right" valign="top"><a id="a38ebd9764465054274969c089e3a47a8" name="a38ebd9764465054274969c089e3a47a8"></a>
+const String&#160;</td><td class="memItemRight" valign="bottom"><b>default_level_filepath</b> = &quot;res://level/level_title_screen.tscn&quot;</td></tr>
+<tr class="separator:a38ebd9764465054274969c089e3a47a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -214,14 +230,14 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods<
 <tr class="separator:aaed610eb1b67c3443cc74dcabad5c2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aba601a69466f5cb110df1fd6ed0987be" name="aba601a69466f5cb110df1fd6ed0987be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba601a69466f5cb110df1fd6ed0987be">&#9670;&#160;</a></span>_test_print()</h2>
+<a id="ac49fa1676216fe9b6ca5b11280d930ee" name="ac49fa1676216fe9b6ca5b11280d930ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac49fa1676216fe9b6ca5b11280d930ee">&#9670;&#160;</a></span>_test_action()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void LevelEditorController::_test_print </td>
+          <td class="memname">void LevelEditorController::_test_action </td>
           <td>(</td>
           <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
@@ -233,10 +249,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods<
       </table>
 </div><div class="memdoc">
 
-<p>Test function. </p>
+<p>Test function (reversible). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>String </td></tr>
     <tr><td class="paramname">n</td><td>Integer </td></tr>
   </table>
   </dd>
@@ -288,37 +303,6 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="aa6fb1b1484e7fd6e8d4f276932b2dffe" name="aa6fb1b1484e7fd6e8d4f276932b2dffe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6fb1b1484e7fd6e8d4f276932b2dffe">&#9670;&#160;</a></span>do_action()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Variant LevelEditorController::do_action </td>
-          <td>(</td>
-          <td class="paramtype">Callable</td>          <td class="paramname"><span class="paramname"><em>new_action</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Callable</td>          <td class="paramname"><span class="paramname"><em>reverse_action</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Track a new action and execute it, and track its reverse action. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">new_action</td><td>New action </td></tr>
-    <tr><td class="paramname">reverse_action</td><td>Reserse action </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Variant Output of calling new_action </dd></dl>
-
-</div>
-</div>
 <a id="a559cfc2a1e80879b547defa43f8be494" name="a559cfc2a1e80879b547defa43f8be494"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a559cfc2a1e80879b547defa43f8be494">&#9670;&#160;</a></span>redo_action()</h2>
 
@@ -336,6 +320,37 @@ false </dd></dl>
 
 <p>Execute the last redo-able action. </p>
 <dl class="section return"><dt>Returns</dt><dd>Variant Output of the last redo-able action </dd></dl>
+
+</div>
+</div>
+<a id="a2843cb7e707ada502447139acbc6525a" name="a2843cb7e707ada502447139acbc6525a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2843cb7e707ada502447139acbc6525a">&#9670;&#160;</a></span>track_action()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::track_action </td>
+          <td>(</td>
+          <td class="paramtype">Callable</td>          <td class="paramname"><span class="paramname"><em>redo_action</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Callable</td>          <td class="paramname"><span class="paramname"><em>undo_action</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Track a new action and its reverse action. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_action</td><td>New action </td></tr>
+    <tr><td class="paramname">reverse_action</td><td>Reserse action </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Variant Output of calling new_action </dd></dl>
 
 </div>
 </div>

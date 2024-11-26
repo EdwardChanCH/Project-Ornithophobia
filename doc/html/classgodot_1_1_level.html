@@ -91,6 +91,8 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classgodot_1_1_level-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">godot::Level Class Reference</div></div>
@@ -101,9 +103,11 @@ Inheritance diagram for godot::Level:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgodot_1_1_level__inherit__graph.png" border="0" usemap="#agodot_1_1_level_inherit__map" alt="Inheritance graph"/></div>
 <map name="agodot_1_1_level_inherit__map" id="agodot_1_1_level_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,98,107"/>
-<area shape="rect" title=" " alt="" coords="25,5,78,32"/>
-<area shape="poly" title=" " alt="" coords="54,48,54,80,49,80,49,48"/>
+<area shape="rect" title=" " alt="" coords="20,155,112,181"/>
+<area shape="rect" href="classgodot_1_1_i_prototype.html" title=" " alt="" coords="5,80,127,107"/>
+<area shape="poly" title=" " alt="" coords="69,122,69,154,63,154,63,122"/>
+<area shape="rect" title=" " alt="" coords="40,5,92,32"/>
+<area shape="poly" title=" " alt="" coords="69,48,69,80,63,80,63,48"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -111,9 +115,11 @@ Collaboration diagram for godot::Level:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgodot_1_1_level__coll__graph.png" border="0" usemap="#agodot_1_1_level_coll__map" alt="Collaboration graph"/></div>
 <map name="agodot_1_1_level_coll__map" id="agodot_1_1_level_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,98,107"/>
-<area shape="rect" title=" " alt="" coords="25,5,78,32"/>
-<area shape="poly" title=" " alt="" coords="54,48,54,80,49,80,49,48"/>
+<area shape="rect" title=" " alt="" coords="20,155,112,181"/>
+<area shape="rect" href="classgodot_1_1_i_prototype.html" title=" " alt="" coords="5,80,127,107"/>
+<area shape="poly" title=" " alt="" coords="69,122,69,154,63,154,63,122"/>
+<area shape="rect" title=" " alt="" coords="40,5,92,32"/>
+<area shape="poly" title=" " alt="" coords="69,48,69,80,63,80,63,48"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -123,24 +129,172 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Level</b> ()</td></tr>
 <tr class="memdesc:a7a696c928ca5d5354db6e50e46d0f67d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classgodot_1_1_level.html">Level</a>:: <a class="el" href="classgodot_1_1_level.html">Level</a> object. <br /></td></tr>
 <tr class="separator:a7a696c928ca5d5354db6e50e46d0f67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89d13cb814dacef8e1785d031f03bfc8" id="r_a89d13cb814dacef8e1785d031f03bfc8"><td class="memItemLeft" align="right" valign="top"><a id="a89d13cb814dacef8e1785d031f03bfc8" name="a89d13cb814dacef8e1785d031f03bfc8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Level</b> (<a class="el" href="classgodot_1_1_level.html">Level</a> *level)</td></tr>
+<tr class="memdesc:a89d13cb814dacef8e1785d031f03bfc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep-copy a <a class="el" href="classgodot_1_1_level.html">Level</a>:: <a class="el" href="classgodot_1_1_level.html">Level</a> object. Note: Use <a class="el" href="#ac54ec4fe5634c986414f91a6223b1c43" title="Deep-copy a level node and all of its children.">clone()</a> if child nodes need to be duplicated as well. <br /></td></tr>
+<tr class="separator:a89d13cb814dacef8e1785d031f03bfc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a249eac1e8f19ff44134efa5e986feaca" id="r_a249eac1e8f19ff44134efa5e986feaca"><td class="memItemLeft" align="right" valign="top"><a id="a249eac1e8f19ff44134efa5e986feaca" name="a249eac1e8f19ff44134efa5e986feaca"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Level</b> ()</td></tr>
 <tr class="memdesc:a249eac1e8f19ff44134efa5e986feaca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classgodot_1_1_level.html">Level</a>:: <a class="el" href="classgodot_1_1_level.html">Level</a> object. <br /></td></tr>
 <tr class="separator:a249eac1e8f19ff44134efa5e986feaca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad051f67a1eda597d4cb6c4093930ceaf" id="r_ad051f67a1eda597d4cb6c4093930ceaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad051f67a1eda597d4cb6c4093930ceaf">_process</a> (double delta) override</td></tr>
-<tr class="memdesc:ad051f67a1eda597d4cb6c4093930ceaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#ad051f67a1eda597d4cb6c4093930ceaf" title="Same as _process() in GDScript.">_process()</a> in GDScript.  <br /></td></tr>
-<tr class="separator:ad051f67a1eda597d4cb6c4093930ceaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae635edf39508dd91b356454567700cd6" id="r_ae635edf39508dd91b356454567700cd6"><td class="memItemLeft" align="right" valign="top"><a id="ae635edf39508dd91b356454567700cd6" name="ae635edf39508dd91b356454567700cd6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>_ready</b> ()</td></tr>
+<tr class="memdesc:ae635edf39508dd91b356454567700cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when this node is ready in Godot's scene tree. <br /></td></tr>
+<tr class="separator:ae635edf39508dd91b356454567700cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac54ec4fe5634c986414f91a6223b1c43" id="r_ac54ec4fe5634c986414f91a6223b1c43"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgodot_1_1_level.html">Level</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac54ec4fe5634c986414f91a6223b1c43">clone</a> () override</td></tr>
+<tr class="memdesc:ac54ec4fe5634c986414f91a6223b1c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep-copy a level node and all of its children.  <br /></td></tr>
+<tr class="separator:ac54ec4fe5634c986414f91a6223b1c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b963231e48a50ec5eb6915d0a98381" id="r_a93b963231e48a50ec5eb6915d0a98381"><td class="memItemLeft" align="right" valign="top">Dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93b963231e48a50ec5eb6915d0a98381">get_level_info</a> ()</td></tr>
+<tr class="memdesc:a93b963231e48a50ec5eb6915d0a98381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get level info dictionary.  <br /></td></tr>
+<tr class="separator:a93b963231e48a50ec5eb6915d0a98381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e9dfa071a6e246aeb96ac1e0129361" id="r_a51e9dfa071a6e246aeb96ac1e0129361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51e9dfa071a6e246aeb96ac1e0129361">set_level_info</a> (Dictionary value)</td></tr>
+<tr class="memdesc:a51e9dfa071a6e246aeb96ac1e0129361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set level info dictionary.  <br /></td></tr>
+<tr class="separator:a51e9dfa071a6e246aeb96ac1e0129361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1278cea5dfcd354e19685d3309f9f88c" id="r_a1278cea5dfcd354e19685d3309f9f88c"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1278cea5dfcd354e19685d3309f9f88c">get_list</a> (String list_name)</td></tr>
+<tr class="memdesc:a1278cea5dfcd354e19685d3309f9f88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the list. Return nullptr if list does not exist. Note: Use add_node() to add child node to this list safely!  <br /></td></tr>
+<tr class="separator:a1278cea5dfcd354e19685d3309f9f88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6faee3a130ec3f6d870eb7c05d196f81" id="r_a6faee3a130ec3f6d870eb7c05d196f81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6faee3a130ec3f6d870eb7c05d196f81">add_list</a> (String list_name)</td></tr>
+<tr class="memdesc:a6faee3a130ec3f6d870eb7c05d196f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a list. Return false if list already exists.  <br /></td></tr>
+<tr class="separator:a6faee3a130ec3f6d870eb7c05d196f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6de5c4fee8e1075f6e9315bb38cb9a2" id="r_af6de5c4fee8e1075f6e9315bb38cb9a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6de5c4fee8e1075f6e9315bb38cb9a2">clear_list</a> (String list_name)</td></tr>
+<tr class="memdesc:af6de5c4fee8e1075f6e9315bb38cb9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all children nodes in the list.  <br /></td></tr>
+<tr class="separator:af6de5c4fee8e1075f6e9315bb38cb9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8f4850cf7e9fc8e433f9c3402504871" id="r_ae8f4850cf7e9fc8e433f9c3402504871"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8f4850cf7e9fc8e433f9c3402504871">get_list_length</a> (String list_name)</td></tr>
+<tr class="memdesc:ae8f4850cf7e9fc8e433f9c3402504871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of child nodes in the list. Return -1 if list does not exist.  <br /></td></tr>
+<tr class="separator:ae8f4850cf7e9fc8e433f9c3402504871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e397c5b3dfcfa89d3aff50c0a4dcc42" id="r_a9e397c5b3dfcfa89d3aff50c0a4dcc42"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e397c5b3dfcfa89d3aff50c0a4dcc42">get_node_in_list</a> (String list_name, String node_name)</td></tr>
+<tr class="memdesc:a9e397c5b3dfcfa89d3aff50c0a4dcc42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the node in the list. Return nullptr if list or node does not exist.  <br /></td></tr>
+<tr class="separator:a9e397c5b3dfcfa89d3aff50c0a4dcc42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5815dd14dd352f1ca185a6a70e7112a9" id="r_a5815dd14dd352f1ca185a6a70e7112a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5815dd14dd352f1ca185a6a70e7112a9">add_node_to_list</a> (String list_name, Node *child_node)</td></tr>
+<tr class="memdesc:a5815dd14dd352f1ca185a6a70e7112a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a node to the list. Return false if list or node does not exist.  <br /></td></tr>
+<tr class="separator:a5815dd14dd352f1ca185a6a70e7112a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classgodot_1_1_i_prototype"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classgodot_1_1_i_prototype')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgodot_1_1_i_prototype.html">godot::IPrototype</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad936053754d4ee4c94e4b5a9d232587b" id="r_ad936053754d4ee4c94e4b5a9d232587b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgodot_1_1_level.html">Level</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad936053754d4ee4c94e4b5a9d232587b">import_level_tscn</a> (String filepath)</td></tr>
+<tr class="memdesc:ad936053754d4ee4c94e4b5a9d232587b"><td class="mdescLeft">&#160;</td><td class="mdescRight">File import function for .tscn format. Warning: The input is not validated.  <br /></td></tr>
+<tr class="separator:ad936053754d4ee4c94e4b5a9d232587b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f18719c41cf2cc752afadb8e20b11e" id="r_a48f18719c41cf2cc752afadb8e20b11e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48f18719c41cf2cc752afadb8e20b11e">export_level_tscn</a> (String filepath, <a class="el" href="classgodot_1_1_level.html">Level</a> *level_node)</td></tr>
+<tr class="memdesc:a48f18719c41cf2cc752afadb8e20b11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">File export function for .tscn format. Warning: The input is not validated.  <br /></td></tr>
+<tr class="separator:a48f18719c41cf2cc752afadb8e20b11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a3b5856d1309651cda14bccd4007fc36b" id="r_a3b5856d1309651cda14bccd4007fc36b"><td class="memItemLeft" align="right" valign="top"><a id="a3b5856d1309651cda14bccd4007fc36b" name="a3b5856d1309651cda14bccd4007fc36b"></a>
+const String&#160;</td><td class="memItemRight" valign="bottom"><b>tile_list_name</b> = &quot;TileList&quot;</td></tr>
+<tr class="separator:a3b5856d1309651cda14bccd4007fc36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dec97e9d377435c51e44b15e6c99c5e" id="r_a8dec97e9d377435c51e44b15e6c99c5e"><td class="memItemLeft" align="right" valign="top"><a id="a8dec97e9d377435c51e44b15e6c99c5e" name="a8dec97e9d377435c51e44b15e6c99c5e"></a>
+const String&#160;</td><td class="memItemRight" valign="bottom"><b>player_list_name</b> = &quot;PlayerList&quot;</td></tr>
+<tr class="separator:a8dec97e9d377435c51e44b15e6c99c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40d53eb9540e5caff363643360260f7" id="r_ae40d53eb9540e5caff363643360260f7"><td class="memItemLeft" align="right" valign="top"><a id="ae40d53eb9540e5caff363643360260f7" name="ae40d53eb9540e5caff363643360260f7"></a>
+const String&#160;</td><td class="memItemRight" valign="bottom"><b>enemy_list_name</b> = &quot;EnemyList&quot;</td></tr>
+<tr class="separator:ae40d53eb9540e5caff363643360260f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce2af034e1fbee30a8619d58ac9513a" id="r_a2ce2af034e1fbee30a8619d58ac9513a"><td class="memItemLeft" align="right" valign="top"><a id="a2ce2af034e1fbee30a8619d58ac9513a" name="a2ce2af034e1fbee30a8619d58ac9513a"></a>
+const String&#160;</td><td class="memItemRight" valign="bottom"><b>entity_list_name</b> = &quot;EntityList&quot;</td></tr>
+<tr class="separator:a2ce2af034e1fbee30a8619d58ac9513a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:abccc55e31a72970b178e6960b8fb6062" id="r_abccc55e31a72970b178e6960b8fb6062"><td class="memItemLeft" align="right" valign="top"><a id="abccc55e31a72970b178e6960b8fb6062" name="abccc55e31a72970b178e6960b8fb6062"></a>
+<tr class="memitem:ae246b2060091f1ae649eba20a6115ea4" id="r_ae246b2060091f1ae649eba20a6115ea4"><td class="memItemLeft" align="right" valign="top"><a id="ae246b2060091f1ae649eba20a6115ea4" name="ae246b2060091f1ae649eba20a6115ea4"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods</b> ()</td></tr>
-<tr class="memdesc:abccc55e31a72970b178e6960b8fb6062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding function for exposing methods/ properties to Godot. <br /></td></tr>
-<tr class="separator:abccc55e31a72970b178e6960b8fb6062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ae246b2060091f1ae649eba20a6115ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding function for exposing methods/ properties to Godot. <br /></td></tr>
+<tr class="separator:ae246b2060091f1ae649eba20a6115ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_methods_classgodot_1_1_i_prototype"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_methods_classgodot_1_1_i_prototype')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classgodot_1_1_i_prototype.html">godot::IPrototype</a></td></tr>
+<tr class="memitem:a13c8a4355ad00a861bc2a23bc68f6220 inherit pro_static_methods_classgodot_1_1_i_prototype" id="r_a13c8a4355ad00a861bc2a23bc68f6220"><td class="memItemLeft" align="right" valign="top">
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods</b> ()</td></tr>
+<tr class="memdesc:a13c8a4355ad00a861bc2a23bc68f6220 inherit pro_static_methods_classgodot_1_1_i_prototype"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding function for exposing methods/ properties to Godot. <br /></td></tr>
+<tr class="separator:a13c8a4355ad00a861bc2a23bc68f6220 inherit pro_static_methods_classgodot_1_1_i_prototype"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad051f67a1eda597d4cb6c4093930ceaf" name="ad051f67a1eda597d4cb6c4093930ceaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad051f67a1eda597d4cb6c4093930ceaf">&#9670;&#160;</a></span>_process()</h2>
+<a id="a6faee3a130ec3f6d870eb7c05d196f81" name="a6faee3a130ec3f6d870eb7c05d196f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6faee3a130ec3f6d870eb7c05d196f81">&#9670;&#160;</a></span>add_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Level::add_list </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a list. Return false if list already exists. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a5815dd14dd352f1ca185a6a70e7112a9" name="a5815dd14dd352f1ca185a6a70e7112a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5815dd14dd352f1ca185a6a70e7112a9">&#9670;&#160;</a></span>add_node_to_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Level::add_node_to_list </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Node *</td>          <td class="paramname"><span class="paramname"><em>child_node</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a node to the list. Return false if list or node does not exist. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name </td></tr>
+    <tr><td class="paramname">child_node</td><td>Child Node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="af6de5c4fee8e1075f6e9315bb38cb9a2" name="af6de5c4fee8e1075f6e9315bb38cb9a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6de5c4fee8e1075f6e9315bb38cb9a2">&#9670;&#160;</a></span>clear_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::clear_list </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free all children nodes in the list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name (constant) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac54ec4fe5634c986414f91a6223b1c43" name="ac54ec4fe5634c986414f91a6223b1c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54ec4fe5634c986414f91a6223b1c43">&#9670;&#160;</a></span>clone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,23 +303,220 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods<
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">_GDEXPORT_ADD_SUFFIX _GDEXPORT_GET_SUFFIX _GDEXPORT_SET_SUFFIX void Level::_process </td>
+          <td class="memname"><a class="el" href="classgodot_1_1_level.html">Level</a> * Level::clone </td>
           <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>delta</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="#ad051f67a1eda597d4cb6c4093930ceaf" title="Same as _process() in GDScript.">_process()</a> in GDScript. </p>
+<p>Deep-copy a level node and all of its children. </p>
+<dl class="section return"><dt>Returns</dt><dd>Level* Cloned <a class="el" href="classgodot_1_1_level.html">Level</a> </dd></dl>
+
+<p>Implements <a class="el" href="classgodot_1_1_i_prototype.html">godot::IPrototype</a>.</p>
+
+</div>
+</div>
+<a id="a48f18719c41cf2cc752afadb8e20b11e" name="a48f18719c41cf2cc752afadb8e20b11e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f18719c41cf2cc752afadb8e20b11e">&#9670;&#160;</a></span>export_level_tscn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::export_level_tscn </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgodot_1_1_level.html">Level</a> *</td>          <td class="paramname"><span class="paramname"><em>level_node</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File export function for .tscn format. Warning: The input is not validated. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delta</td><td>Delta time </td></tr>
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+    <tr><td class="paramname">level_node</td><td><a class="el" href="classgodot_1_1_level.html">Level</a> Node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a93b963231e48a50ec5eb6915d0a98381" name="a93b963231e48a50ec5eb6915d0a98381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b963231e48a50ec5eb6915d0a98381">&#9670;&#160;</a></span>get_level_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dictionary Level::get_level_info </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get level info dictionary. </p>
+<dl class="section return"><dt>Returns</dt><dd>Dictionary <a class="el" href="classgodot_1_1_level.html">Level</a> Info </dd></dl>
+
+</div>
+</div>
+<a id="a1278cea5dfcd354e19685d3309f9f88c" name="a1278cea5dfcd354e19685d3309f9f88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1278cea5dfcd354e19685d3309f9f88c">&#9670;&#160;</a></span>get_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node * Level::get_list </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the list. Return nullptr if list does not exist. Note: Use add_node() to add child node to this list safely! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name (constant) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Node* List Node </dd></dl>
+
+</div>
+</div>
+<a id="ae8f4850cf7e9fc8e433f9c3402504871" name="ae8f4850cf7e9fc8e433f9c3402504871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f4850cf7e9fc8e433f9c3402504871">&#9670;&#160;</a></span>get_list_length()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Level::get_list_length </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the number of child nodes in the list. Return -1 if list does not exist. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Number of Child Nodes </dd></dl>
+
+</div>
+</div>
+<a id="a9e397c5b3dfcfa89d3aff50c0a4dcc42" name="a9e397c5b3dfcfa89d3aff50c0a4dcc42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e397c5b3dfcfa89d3aff50c0a4dcc42">&#9670;&#160;</a></span>get_node_in_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Node * Level::get_node_in_list </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>node_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the node in the list. Return nullptr if list or node does not exist. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list_name</td><td>List Name (constant) </td></tr>
+    <tr><td class="paramname">node_name</td><td>Node Name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Node* List Node </dd></dl>
+
+</div>
+</div>
+<a id="ad936053754d4ee4c94e4b5a9d232587b" name="ad936053754d4ee4c94e4b5a9d232587b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad936053754d4ee4c94e4b5a9d232587b">&#9670;&#160;</a></span>import_level_tscn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgodot_1_1_level.html">Level</a> * Level::import_level_tscn </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File import function for .tscn format. Warning: The input is not validated. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Level* <a class="el" href="classgodot_1_1_level.html">Level</a> Node </dd></dl>
+
+</div>
+</div>
+<a id="a51e9dfa071a6e246aeb96ac1e0129361" name="a51e9dfa071a6e246aeb96ac1e0129361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e9dfa071a6e246aeb96ac1e0129361">&#9670;&#160;</a></span>set_level_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Level::set_level_info </td>
+          <td>(</td>
+          <td class="paramtype">Dictionary</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set level info dictionary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>New Dictionary </td></tr>
   </table>
   </dd>
 </dl>

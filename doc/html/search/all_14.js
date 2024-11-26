@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['level_0',['Level',['../classgodot_1_1_level.html',1,'godot::Level'],['../classgodot_1_1_level.html#a7a696c928ca5d5354db6e50e46d0f67d',1,'godot::Level::Level()']]],
+  ['level_0',['Level',['../classgodot_1_1_level.html',1,'godot::Level'],['../classgodot_1_1_level.html#a7a696c928ca5d5354db6e50e46d0f67d',1,'godot::Level::Level()'],['../classgodot_1_1_level.html#a89d13cb814dacef8e1785d031f03bfc8',1,'godot::Level::Level(Level *level)']]],
   ['level_2ecpp_1',['level.cpp',['../level_8cpp.html',1,'']]],
   ['level_2eh_2',['level.h',['../level_8h.html',1,'']]],
   ['level_5feditor_5fcontroller_2ecpp_3',['level_editor_controller.cpp',['../level__editor__controller_8cpp.html',1,'']]],

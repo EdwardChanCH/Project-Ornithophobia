@@ -1,30 +1,37 @@
 <map id="src/boilerplate_macros.h" name="src/boilerplate_macros.h">
-<area shape="rect" id="Node000001" title="This header file contains all custom macros for GDExtension&#39;s boilerplate code. The purpose is to min..." alt="" coords="624,5,788,32"/>
-<area shape="rect" id="Node000002" href="$edward__main_8h.html" title="Header file." alt="" coords="426,88,604,115"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="663,41,546,90,544,85,661,36"/>
-<area shape="rect" id="Node000005" href="$level_8h.html" title=" " alt="" coords="1008,88,1135,115"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="785,33,993,77,1024,85,1022,90,992,83,784,38"/>
-<area shape="rect" id="Node000007" href="$level__editor__controller_8h.html" title="Header file." alt="" coords="628,80,784,123"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="708,48,708,80,703,80,703,48"/>
-<area shape="rect" id="Node000009" href="$scene__manager_8h.html" title="Header file." alt="" coords="210,88,402,115"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="628,38,370,90,369,85,627,33"/>
-<area shape="rect" id="Node000011" href="$gdexample__1__new_8h.html" title="Header file." alt="" coords="807,80,980,123"/>
-<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="750,36,846,77,844,82,748,41"/>
-<area shape="rect" id="Node000003" href="$edward__main_8cpp.html" title="This main class is for loading Edward&#39;s level editor subsystem." alt="" coords="236,179,427,205"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="476,124,359,180,356,176,474,119"/>
-<area shape="rect" id="Node000004" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="631,179,781,205"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="557,119,680,176,677,181,555,124"/>
-<area shape="rect" id="Node000006" href="$level_8cpp.html" title=" " alt="" coords="1003,179,1144,205"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1075,130,1076,178,1071,178,1069,130"/>
-<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="708,138,708,178,703,178,703,138"/>
-<area shape="rect" id="Node000008" href="$level__editor__controller_8cpp.html" title="Mediator Pattern (also MVC Pattern). This class controlls all communication between Godot UI (view) a..." alt="" coords="451,171,606,213"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="652,132,571,173,569,168,649,128"/>
-<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="316,129,330,177,325,179,311,131"/>
-<area shape="poly" id="edge13_Node000009_Node000004" title=" " alt="" coords="380,116,618,168,651,175,650,181,617,173,379,121"/>
-<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="353,118,477,168,475,173,351,123"/>
-<area shape="rect" id="Node000010" href="$scene__manager_8cpp.html" title="Singleton Pattern. This class solely manages the transition between scenes in Godot." alt="" coords="5,179,212,205"/>
-<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="265,124,138,181,136,176,263,119"/>
-<area shape="poly" id="edge16_Node000011_Node000004" title=" " alt="" coords="837,132,734,180,732,176,835,127"/>
-<area shape="rect" id="Node000012" href="$gdexample__1__new_8cpp.html" title="This example class moves an image sprite around in a scene." alt="" coords="806,171,979,213"/>
-<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="896,138,895,170,890,170,891,138"/>
+<area shape="rect" id="Node000001" title="This header file contains all custom macros for GDExtension&#39;s boilerplate code. The purpose is to min..." alt="" coords="729,5,892,32"/>
+<area shape="rect" id="Node000002" href="$edward__main_8h.html" title="Header file." alt="" coords="32,88,210,115"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="714,32,503,54,255,83,202,90,201,85,254,77,502,48,713,27"/>
+<area shape="rect" id="Node000005" href="$iprototype_8h.html" title="Header file." alt="" coords="637,88,794,115"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="786,44,732,90,728,86,782,40"/>
+<area shape="rect" id="Node000007" href="$level_8h.html" title="Header file." alt="" coords="1016,179,1143,205"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="907,34,958,51,1005,78,1031,102,1051,129,1077,177,1072,180,1047,132,1027,105,1002,82,956,56,905,39"/>
+<area shape="rect" id="Node000009" href="$level__editor__controller_8h.html" title="Header file." alt="" coords="1069,261,1224,304"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="908,33,976,51,1044,78,1112,112,1136,134,1158,170,1165,193,1166,218,1157,262,1152,260,1160,218,1160,194,1153,172,1132,138,1109,117,1041,82,974,56,907,38"/>
+<area shape="rect" id="Node000011" href="$scene__manager_8h.html" title="Header file." alt="" coords="266,88,459,115"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="726,38,434,90,433,85,725,33"/>
+<area shape="rect" id="Node000013" href="$gdexample__1__new_8h.html" title="Header file." alt="" coords="818,80,992,123"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="839,40,883,77,879,82,835,44"/>
+<area shape="rect" id="Node000003" href="$edward__main_8cpp.html" title="This main class is for loading Edward&#39;s level editor subsystem." alt="" coords="25,179,217,205"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,130,124,178,118,178,118,130"/>
+<area shape="rect" id="Node000004" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="681,360,831,387"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="72,124,40,144,15,172,8,193,10,202,15,212,34,230,59,248,128,278,215,304,313,324,415,340,515,352,681,365,680,371,515,357,414,345,312,329,213,309,126,283,56,252,30,235,11,215,5,203,3,192,11,169,36,140,69,119"/>
+<area shape="poly" id="edge12_Node000005_Node000004" title=" " alt="" coords="723,130,757,359,751,360,717,131"/>
+<area shape="rect" id="Node000006" href="$iprototype_8cpp.html" title="Prototype Pattern. Abstract interface for clonable classes." alt="" coords="522,179,693,205"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="690,127,625,180,622,176,687,123"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="786,116,1004,168,1034,176,1032,181,1003,173,785,121"/>
+<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="1071,221,1047,265,1029,287,1008,306,966,331,920,348,875,361,832,368,831,363,873,355,919,343,964,326,1005,302,1025,284,1042,262,1067,218"/>
+<area shape="rect" id="Node000008" href="$level_8cpp.html" title="Prototype Pattern + Mediator Pattern (MVC). This class handles all data storage of a level...." alt="" coords="853,269,994,296"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1045,216,947,271,945,266,1043,211"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="1100,216,1133,259,1129,263,1096,219"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="1054,307,812,362,811,357,1053,302"/>
+<area shape="rect" id="Node000010" href="$level__editor__controller_8cpp.html" title="Mediator Pattern (MVC). This class controlls all communication between Godot UI (view) and Level data..." alt="" coords="1069,352,1224,395"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1149,320,1149,352,1144,352,1144,320"/>
+<area shape="poly" id="edge16_Node000011_Node000003" title=" " alt="" coords="314,123,157,181,155,176,313,118"/>
+<area shape="poly" id="edge18_Node000011_Node000004" title=" " alt="" coords="326,125,301,146,282,172,275,193,277,202,282,212,321,255,367,289,419,316,474,336,530,351,585,361,680,369,680,375,584,366,529,356,473,341,417,321,364,294,317,259,278,215,271,203,270,192,277,169,298,142,323,121"/>
+<area shape="rect" id="Node000012" href="$scene__manager_8cpp.html" title="Singleton Pattern. This class solely manages the transition between scenes in Godot." alt="" coords="291,179,498,205"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="375,128,392,177,387,179,370,130"/>
+<area shape="poly" id="edge21_Node000013_Node000004" title=" " alt="" coords="851,133,828,151,809,172,793,209,779,263,760,360,755,359,774,262,788,207,804,169,824,147,848,129"/>
+<area shape="rect" id="Node000014" href="$gdexample__1__new_8cpp.html" title="This example class moves an image sprite around in a scene." alt="" coords="818,171,992,213"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="908,138,908,170,902,170,902,138"/>
 </map>
