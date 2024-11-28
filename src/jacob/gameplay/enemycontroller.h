@@ -1,10 +1,7 @@
 /**
  * @file enemycontroller.h
- * @author
- * @brief
- * @version
- * @date
- * 
+ * @author Jacob Couture
+ * @brief Header file for the enemy controller class
  */
 
 #ifndef ENEMYCONTROLLER_H

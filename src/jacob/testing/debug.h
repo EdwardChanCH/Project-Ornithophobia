@@ -1,3 +1,9 @@
+/**
+ * @file debug.h
+ * @author Jacob Couture
+ * @brief Header file for the Debug singleton
+ */
+
 #ifndef DEBUG_H
 #define DEBUG_H
 

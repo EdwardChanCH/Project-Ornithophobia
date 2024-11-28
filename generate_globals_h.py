@@ -27,12 +27,16 @@ def include_setting(directory):
     """
     Return 1 if the headers in the input directory should be included by default, 0 if otherwise.
     """
+    IGNORE_WHITELIST = True
+
     WHITELIST = [
         "godot-cpp/gen/include/godot_cpp/classes/", 
         "godot-cpp/gen/include/godot_cpp/variant/", 
-        "godot-cpp/include/godot_cpp/variant/"
+        "godot-cpp/include/godot_cpp/variant/", 
+        "godot-cpp/include/godot_cpp/core/"
     ]
-    return int(directory in WHITELIST)
+    
+    return 1 if IGNORE_WHITELIST else int(directory in WHITELIST)
 
 def main():
     """

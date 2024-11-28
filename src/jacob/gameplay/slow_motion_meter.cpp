@@ -1,10 +1,7 @@
 /**
  * @file slow_motion_meter.cpp
- * @author
- * @brief
- * @version
- * @date
- * 
+ * @author Jacob Couture
+ * @brief This class handles the player's ability to use slow motion. It controls when the player can use it and for how long it can stay active.
  */
 
 #include "slow_motion_meter.h"
@@ -14,7 +11,6 @@ using namespace godot;
 
 /**
  * @brief Binding function for exposing methods/ properties to Godot.
- * 
  */
 void SlowMotionMeter::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_cooldown_timer_timeout"), &SlowMotionMeter::_on_cooldown_timer_timeout);
@@ -22,14 +18,12 @@ void SlowMotionMeter::_bind_methods() {
 
 /**
  * @brief Construct a new SlowMotionMeter::SlowMotionMeter object.
- * 
  */
 SlowMotionMeter::SlowMotionMeter() {
 }
 
 /**
  * @brief Destroy the SlowMotionMeter::SlowMotionMeter object.
- * 
  */
 SlowMotionMeter::~SlowMotionMeter() {
 }
@@ -62,6 +56,9 @@ _GDEXPORT_SET(soft_max_value)
 _GDEXPORT_SET_SUFFIX
 
 
+/**
+ * @brief Same as _ready() in GDScript.
+ */
 void SlowMotionMeter::_ready() {
     max_time_slow_factor = max_slow_time / 100;
     animation_player = cast_to<AnimationPlayer>(find_child("AnimationPlayer"));
@@ -74,7 +71,6 @@ void SlowMotionMeter::_ready() {
 
 /**
  * @brief Same as _process() in GDScript.
- * 
  * @param delta Delta time
  */
 void SlowMotionMeter::_process(double delta) {
@@ -130,6 +126,9 @@ void SlowMotionMeter::_process(double delta) {
 }
 
 
+/**
+ * @brief Function for calculating updates to the value of the slow motion meter.
+ */
 void SlowMotionMeter::update_meter() {
     long time_pressed = 0;
 	if (Input::get_singleton()->is_action_just_pressed("action_button")) {
@@ -180,6 +179,9 @@ void SlowMotionMeter::update_meter() {
 }
 
 
+/**
+ * @brief Receiver for the timeout signal of the cooldown timer.
+ */
 void SlowMotionMeter::_on_cooldown_timer_timeout() {
     can_regenerate = true;
 }

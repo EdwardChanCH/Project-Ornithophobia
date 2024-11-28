@@ -13,8 +13,13 @@ var searchData=
   ['gdexample_5f2_5fold_2ecpp_10',['gdexample_2_old.cpp',['../gdexample__2__old_8cpp.html',1,'']]],
   ['gdexample_5f2_5fold_2eh_11',['gdexample_2_old.h',['../gdexample__2__old_8h.html',1,'']]],
   ['get_5famplitude_12',['get_amplitude',['../classgodot_1_1_g_d_example1_old.html#a574683cfe4872d93bf7424507b1e7035',1,'godot::GDExample1Old']]],
-  ['get_5fspeed_13',['get_speed',['../classgodot_1_1_g_d_example1_old.html#ab4a24c7d8ae3490c493915a598814b9e',1,'godot::GDExample1Old']]],
-  ['globals_2eh_14',['globals.h',['../globals_8h.html',1,'']]],
-  ['guide_15',['5. User Guide',['../index.html#autotoc_md12',1,'']]],
-  ['guide_16',['guide',['../index.html#autotoc_md10',1,'3. How To Compile (step-by-step guide)'],['../index.html#autotoc_md11',1,'4. How To Run (step-by-step guide)']]]
+  ['get_5finstance_13',['get_instance',['../classgodot_1_1_scene_manager.html#a901dc8edde5b9ba0da3ecfbae4bb6dbd',1,'godot::SceneManager']]],
+  ['get_5flevel_5finfo_14',['get_level_info',['../classgodot_1_1_level.html#a93b963231e48a50ec5eb6915d0a98381',1,'godot::Level']]],
+  ['get_5flist_15',['get_list',['../classgodot_1_1_level.html#a1278cea5dfcd354e19685d3309f9f88c',1,'godot::Level']]],
+  ['get_5flist_5flength_16',['get_list_length',['../classgodot_1_1_level.html#ae8f4850cf7e9fc8e433f9c3402504871',1,'godot::Level']]],
+  ['get_5fnode_5fin_5flist_17',['get_node_in_list',['../classgodot_1_1_level.html#a9e397c5b3dfcfa89d3aff50c0a4dcc42',1,'godot::Level']]],
+  ['get_5fspeed_18',['get_speed',['../classgodot_1_1_g_d_example1_old.html#ab4a24c7d8ae3490c493915a598814b9e',1,'godot::GDExample1Old']]],
+  ['globals_2eh_19',['globals.h',['../globals_8h.html',1,'']]],
+  ['guide_20',['5. User Guide',['../index.html#autotoc_md12',1,'']]],
+  ['guide_21',['guide',['../index.html#autotoc_md10',1,'3. How To Compile (step-by-step guide)'],['../index.html#autotoc_md11',1,'4. How To Run (step-by-step guide)']]]
 ];

@@ -1,14 +1,9 @@
-/**
- * \mainpage Home Page
- */
 # README File
 
 ## 0. Copyright & Credits
 
 ### a. Team Members:
 
-* *Full Name*  
-  * *Email Address*  
 * Jacob Couture  
   * jcoutur9@uwo.ca  
 * Chun Ho Chan (Edward)  
@@ -26,9 +21,12 @@ This game project was created as part of CompSci 3307A at Western University.
 
 ### d. 3rd Party Resources
 
-* *Media Type (copyright license)*  
-  * *"Source Title", creator*  
-    * *Source URL*  
+* *Media Type (copyright license)*
+  * *"Source Title", creator*
+    * *Source URL*
+* Background Music (CC BY license)
+  * "東方 Piano - Green-Eyed Jealousy 『2』", made by -K.
+    * https://youtu.be/DizE73Ie3Ok
 
 ## 1. Short Description
 
@@ -36,8 +34,6 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 
 ## 2. Required Libraries & 3rd Party Tools
 
-* *Library/Tool*  
-  * *Version Number*  
 * Godot  
   * version 4.3  
   * Note: Use the standard version of Godot instead of the .NET version.  

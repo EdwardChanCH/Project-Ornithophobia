@@ -10,7 +10,7 @@
 #define GLOBALS_H
 
     // .h files found in path: godot-cpp/gdextension/
-    #if 0
+    #if 1
     #include "../godot-cpp/gdextension/gdextension_interface.h"
     #endif
 
@@ -954,7 +954,7 @@
     #endif
 
     // .hpp files found in path: godot-cpp/gen/include/godot_cpp/core/
-    #if 0
+    #if 1
     #include "../godot-cpp/gen/include/godot_cpp/core/version.hpp"
     #endif
 
@@ -986,19 +986,19 @@
     #endif
 
     // .hpp files found in path: godot-cpp/include/godot_cpp/
-    #if 0
+    #if 1
     #include "../godot-cpp/include/godot_cpp/godot.hpp"
     #endif
 
     // .hpp files found in path: godot-cpp/include/godot_cpp/classes/
-    #if 0
+    #if 1
     #include "../godot-cpp/include/godot_cpp/classes/editor_plugin_registration.hpp"
     #include "../godot-cpp/include/godot_cpp/classes/ref.hpp"
     #include "../godot-cpp/include/godot_cpp/classes/wrapped.hpp"
     #endif
 
     // .hpp files found in path: godot-cpp/include/godot_cpp/core/
-    #if 0
+    #if 1
     #include "../godot-cpp/include/godot_cpp/core/binder_common.hpp"
     #include "../godot-cpp/include/godot_cpp/core/builtin_ptrcall.hpp"
     #include "../godot-cpp/include/godot_cpp/core/class_db.hpp"
@@ -1017,7 +1017,7 @@
     #endif
 
     // .hpp files found in path: godot-cpp/include/godot_cpp/templates/
-    #if 0
+    #if 1
     #include "../godot-cpp/include/godot_cpp/templates/cowdata.hpp"
     #include "../godot-cpp/include/godot_cpp/templates/hashfuncs.hpp"
     #include "../godot-cpp/include/godot_cpp/templates/hash_map.hpp"
@@ -1068,7 +1068,7 @@
     #endif
 
     // .h files found in path: godot-cpp/test/src/
-    #if 0
+    #if 1
     #include "../godot-cpp/test/src/example.h"
     #include "../godot-cpp/test/src/register_types.h"
     #include "../godot-cpp/test/src/tests.h"

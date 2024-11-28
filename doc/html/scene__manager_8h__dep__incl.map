@@ -1,0 +1,9 @@
+<map id="src/edward/scene_manager.h" name="src/edward/scene_manager.h">
+<area shape="rect" id="Node000001" title="Header file." alt="" coords="228,5,420,32"/>
+<area shape="rect" id="Node000002" href="$edward__main_8cpp.html" title="This main class is for loading Edward&#39;s level editor subsystem." alt="" coords="5,80,197,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="272,40,141,82,139,77,270,35"/>
+<area shape="rect" id="Node000003" href="$scene__manager_8cpp.html" title="Singleton Pattern. This class solely manages the transition between scenes in Godot." alt="" coords="220,80,427,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="326,48,326,80,321,80,321,48"/>
+<area shape="rect" id="Node000004" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="451,80,602,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="374,35,492,77,490,82,372,40"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="src/edward/iprototype.h" name="src/edward/iprototype.h">
+<area shape="rect" id="Node000001" title="Header file." alt="" coords="201,5,359,32"/>
+<area shape="rect" id="Node000002" href="$iprototype_8cpp.html" title="Prototype Pattern. Abstract interface for clonable classes." alt="" coords="21,80,192,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,41,138,82,136,77,235,36"/>
+<area shape="rect" id="Node000003" href="$level_8h.html" title="Header file." alt="" coords="216,80,344,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="283,48,283,80,277,80,277,48"/>
+<area shape="rect" id="Node000007" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="313,253,463,280"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="318,39,340,56,358,79,378,126,388,176,392,221,391,253,386,253,386,221,383,177,373,128,354,81,336,60,315,43"/>
+<area shape="rect" id="Node000004" href="$level_8cpp.html" title="Prototype Pattern + Mediator Pattern (MVC). This class handles all data storage of a level...." alt="" coords="5,163,147,189"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="235,115,109,165,107,160,233,110"/>
+<area shape="rect" id="Node000005" href="$level__editor__controller_8h.html" title="Header file." alt="" coords="170,155,326,197"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="272,122,259,155,254,153,267,120"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="307,116,340,153,368,207,386,252,381,254,364,209,335,156,303,119"/>
+<area shape="rect" id="Node000006" href="$level__editor__controller_8cpp.html" title="Mediator Pattern (MVC). This class controlls all communication between Godot UI (view) and Level data..." alt="" coords="133,245,288,288"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="236,213,222,246,217,244,231,211"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="295,204,369,250,367,255,292,208"/>
+</map>

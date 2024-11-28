@@ -113,6 +113,8 @@ def generate_file(format_file, output_file):
                     temp = line[head + 1 : tail].strip()
                     if temp in headers:
                         headers.remove(temp)
+                    else:
+                        print("\nWarning: File '" + temp + "' is not found!\n")
                     continue
                     
                 # Find existing registered classes
@@ -126,6 +128,8 @@ def generate_file(format_file, output_file):
                     temp = line[head + 1 : tail].strip()
                     if temp in classes:
                         classes.remove(temp)
+                    else:
+                        print("\nWarning: File '" + temp + "' is not found!\n")
                     continue
     
     if (len(headers) == 0) and (len(classes) == 0):
