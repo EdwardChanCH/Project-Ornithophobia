@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://v41xssxrwdta" path="res://assets/sprites/jake scrunkle.png" id="1_f1bfd"]
 [ext_resource type="Texture2D" uid="uid://bs7ge0v8bln3" path="res://assets/sprites/explosione_spritesheet.png" id="2_6d0t4"]
-[ext_resource type="AudioStream" uid="uid://wh4w78hx72xd" path="res://assets/audio/sfx/enemy_death.mp3" id="3_xdu82"]
+[ext_resource type="AudioStream" uid="uid://wh4w78hx72xd" path="res://asset/sound/enemy_death.mp3" id="3_xdu82"]
 [ext_resource type="Script" path="res://scenes/sfx_player.gd" id="4_3l50r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_am7sp"]
