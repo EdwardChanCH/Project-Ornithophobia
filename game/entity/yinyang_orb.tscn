@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch3gt5suqivw2"]
+
+[ext_resource type="Texture2D" uid="uid://bpt3u4p037ngl" path="res://asset/image/yinyang_orb.png" id="2_3b0ev"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbgt3"]
+radius = 8.0
+
+[node name="YinyangBall" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_grotq")
+linear_damp_mode = 1
+angular_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_3b0ev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tbgt3")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://jn6bkibr833"]
+
+[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_pilyb"]
+
+[node name="Level" type="Level"]
+
+[node name="TileList" type="Node" parent="."]
+
+[node name="Terrain" type="TileMapLayer" parent="TileList"]
+scale = Vector2(3, 3)
+tile_set = ExtResource("1_pilyb")
+navigation_enabled = false
+
+[node name="PlayerList" type="Node" parent="."]
+
+[node name="EnemyList" type="Node" parent="."]
+
+[node name="EntityList" type="Node" parent="."]
