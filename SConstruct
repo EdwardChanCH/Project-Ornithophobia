@@ -21,6 +21,7 @@ if "src/gen/" in subfolders:
     subfolders.remove("src/gen/") # exclude the folder of "doc_data.gen.cpp", or else SCons would crash
 
 env.Append(CPPPATH=subfolders)
+env.Append(CCFLAGS=["/EHsc"]) # Specify compiler's exception handling model
 
 sources = []
 for d in subfolders:

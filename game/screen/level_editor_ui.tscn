@@ -1,0 +1,224 @@
+[gd_scene load_steps=4 format=3 uid="uid://db00fhsn58v7m"]
+
+[ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
+[ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/sound/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
+
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("camera_node", "ui_node", "load_level_popup_node", "save_level_popup_node", "bgm_player_node")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+script = ExtResource("1_f5a73")
+camera_node = NodePath("Camera")
+ui_node = NodePath("UIContainer/VBox0/Panel1")
+load_level_popup_node = NodePath("LoadLevelPopup")
+save_level_popup_node = NodePath("SaveLevelPopup")
+bgm_player_node = NodePath("BGMPlayer")
+camera_movement_scale = 2500.0
+camera_movement_multiplier = 5.0
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="LoadLevelPopup" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
+
+[node name="SaveLevelPopup" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Save Level File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Save"
+dialog_hide_on_ok = true
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jom34")
+
+[node name="SceneName" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -148.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "level_editor.tscn
+level_editor_ui.tscn"
+horizontal_alignment = 2
+
+[node name="UIContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 276.0
+
+[node name="VBox0" type="VBoxContainer" parent="UIContainer"]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+
+[node name="Panel1" type="PanelContainer" parent="UIContainer/VBox0"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cupx8")
+
+[node name="HBox1" type="HBoxContainer" parent="UIContainer/VBox0/Panel1"]
+layout_mode = 2
+
+[node name="VBox1" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox1"]
+layout_mode = 2
+text = "Back"
+
+[node name="PlaytestButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox1"]
+layout_mode = 2
+toggle_mode = true
+text = "Playtest
+(Toggle Physics)"
+
+[node name="VBox2" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LoadLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Load Level"
+
+[node name="SaveLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Save Level"
+
+[node name="QuickLoadLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Quick Load Level"
+
+[node name="QuickSaveLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Quick Save Level"
+
+[node name="ReloadLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Reload Level"
+
+[node name="UnloadLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Unload Level"
+
+[node name="CenterLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "Center Level"
+
+[node name="VBox3" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UndoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Undo"
+
+[node name="RedoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Redo"
+
+[node name="TestAction1Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Do Action 1"
+
+[node name="TestAction2Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Do Action 2"
+
+[node name="TestAction3Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Do Action 3"
+
+[node name="VBox4" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+layout_mode = 2
+text = "Debug Log
+(Level Editor Controller)"
+
+[node name="DebugSceneManagerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+layout_mode = 2
+text = "Debug Log
+(Scene Manager)"
+
+[node name="TestAddSceneButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+layout_mode = 2
+text = "Test Changing Scene
+(To Itself)"
+
+[node name="VBox5" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicVolumeLabel" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Spacer1" type="Control" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="HideUIButton" type="Button" parent="UIContainer/VBox0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Show / Hide"
+
+[connection signal="file_selected" from="LoadLevelPopup" to="." method="_on_load_level_popup_file_selected"]
+[connection signal="file_selected" from="SaveLevelPopup" to="." method="_on_save_level_popup_file_selected"]
+[connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox1/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox1/PlaytestButton" to="." method="_on_playtest_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/SaveLevelButton" to="." method="_on_save_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/QuickLoadLevelButton" to="." method="_on_quick_load_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/QuickSaveLevelButton" to="." method="_on_quick_save_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/CenterLevelButton" to="." method="_on_center_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
+[connection signal="value_changed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="pressed" from="UIContainer/VBox0/HideUIButton" to="." method="_on_hide_ui_button_pressed"]

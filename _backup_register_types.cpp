@@ -15,17 +15,6 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 // #include ">_< headers_here >_<"
-#include "slow_motion_meter.h"
-#include "enemycontroller.h"
-#include "gdexample_1_new.h"
-#include "gdexample_1_old.h"
-#include "gdexample_2_new.h"
-#include "gdexample_2_old.h"
-#include "debug.h"
-#include "debug_controller.h"
-#include "level_controller.h"
-#include "mainmenu_controller.h"
-#include "playercontroller.h"
 /*--------------------------------------------------*/
 
 // Everything in GDExtension is defined within the namespace "godot"
@@ -44,17 +33,6 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
-    GDREGISTER_CLASS(SlowMotionMeter);
-    GDREGISTER_CLASS(EnemyController);
-    GDREGISTER_CLASS(GDExample1New);
-    GDREGISTER_CLASS(GDExample1Old);
-    GDREGISTER_CLASS(GDExample2New);
-    GDREGISTER_CLASS(GDExample2Old);
-    GDREGISTER_CLASS(Debug);
-    GDREGISTER_CLASS(DebugController);
-    GDREGISTER_CLASS(LevelController);
-    GDREGISTER_CLASS(MainMenuController);
-    GDREGISTER_CLASS(PlayerController);
     /*--------------------------------------------------*/
 }
 

@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0rd0tprf4yfs"]
+
+[ext_resource type="Script" path="res://gdscript/edward_main_ui.gd" id="1_57e4d"]
+
+[node name="EdwardMainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_57e4d")
+
+[node name="SceneName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -142.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "edward_main.tscn
+edward_main_ui.tscn"
+horizontal_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OpenLevelEditorButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Open Level Editor"
+
+[connection signal="pressed" from="VBoxContainer/OpenLevelEditorButton" to="." method="_on_open_level_editor_button_pressed"]

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['edward_5ftester_2ecpp_0',['edward_tester.cpp',['../edward__tester_8cpp.html',1,'']]],
-  ['edward_5ftester_2eh_1',['edward_tester.h',['../edward__tester_8h.html',1,'']]]
+  ['edward_5fmain_2ecpp_0',['edward_main.cpp',['../edward__main_8cpp.html',1,'']]],
+  ['edward_5fmain_2eh_1',['edward_main.h',['../edward__main_8h.html',1,'']]]
 ];
