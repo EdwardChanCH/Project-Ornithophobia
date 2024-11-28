@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://crcbqj1gkpn35"]
+
+[sub_resource type="Gradient" id="Gradient_jas1x"]
+offsets = PackedFloat32Array(0, 0.175325, 0.357143, 0.519481, 0.681818, 0.837662, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.490196, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0.490196, 1, 1, 0, 0, 1, 1, 0.490196, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gklm2"]
+gradient = SubResource("Gradient_jas1x")
+
+[sub_resource type="Gradient" id="Gradient_bryre"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a1dmo"]
+gradient = SubResource("Gradient_bryre")
+
+[node name="Example" type="Node2D"]
+
+[node name="GDExample1Old" type="GDExample1Old" parent="."]
+position = Vector2(0.771387, 19.9538)
+texture = SubResource("GradientTexture2D_gklm2")
+centered = false
+
+[node name="GDExample2Old" type="GDExample2Old" parent="."]
+offset_left = 100.0
+offset_right = 304.0
+offset_bottom = 23.0
+text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+visible_characters = 3
+visible_ratio = 0.115385
+
+[node name="GDExample1New" type="GDExample1New" parent="."]
+amplitude = 2.5
+speed = 5.0
+position = Vector2(3.48725, 4.71641)
+texture = SubResource("GradientTexture2D_a1dmo")
+centered = false
+offset = Vector2(0, 100)
+
+[node name="GDExample2New" type="GDExample2New" parent="."]
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 192.0
+offset_bottom = 123.0
+text = "0123456789"
+visible_characters = 7
+visible_ratio = 0.7
+
+[connection signal="position_changed_signal" from="GDExample1Old" to="GDExample2Old" method="_on_gd_example_1_old_position_changed_signal"]
+[connection signal="position_changed_signal" from="GDExample1New" to="GDExample2New" method="print_received_signal"]
