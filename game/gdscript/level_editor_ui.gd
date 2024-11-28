@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug"):
+	if event.is_action_pressed("editor_debug"):
 		_on_debug_level_editor_controller_button_pressed()
 		_on_debug_scene_manager_button_pressed()
 	
