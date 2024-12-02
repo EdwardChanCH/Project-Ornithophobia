@@ -49,21 +49,21 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cem4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3d2vl"]
 bg_color = Color(0.236731, 0.739581, 0.639447, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjid"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4o6o"]
 bg_color = Color(0.223529, 0.670588, 0.580392, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32fcp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jch66"]
 bg_color = Color(0.197766, 0.606005, 0.523742, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -73,25 +73,25 @@ corner_radius_bottom_left = 8
 [sub_resource type="Theme" id="Theme_vt4i6"]
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_0cem4")
-Button/styles/normal = SubResource("StyleBoxFlat_jkjid")
-Button/styles/pressed = SubResource("StyleBoxFlat_32fcp")
+Button/styles/hover = SubResource("StyleBoxFlat_3d2vl")
+Button/styles/normal = SubResource("StyleBoxFlat_g4o6o")
+Button/styles/pressed = SubResource("StyleBoxFlat_jch66")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f6ci0"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nksj7"]
 texture = ExtResource("13_ssjs2")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3y0c3"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_51mh1"]
 texture = ExtResource("14_xgrck")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ofgj"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n172j"]
 texture = ExtResource("15_tytln")
 
 [sub_resource type="Theme" id="Theme_hbvdm"]
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxTexture_f6ci0")
-Button/styles/normal = SubResource("StyleBoxTexture_3y0c3")
-Button/styles/pressed = SubResource("StyleBoxTexture_3ofgj")
+Button/styles/hover = SubResource("StyleBoxTexture_nksj7")
+Button/styles/normal = SubResource("StyleBoxTexture_51mh1")
+Button/styles/pressed = SubResource("StyleBoxTexture_n172j")
 
 [node name="LevelMenuPopup" type="Control"]
 layout_mode = 3

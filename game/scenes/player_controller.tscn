@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmcgj8vwugx0i"]
+[gd_scene load_steps=32 format=3 uid="uid://cmcgj8vwugx0i"]
 
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/jacob_v2.png" id="1_yn0ee"]
-[ext_resource type="Script" path="res://scripts/player/slow_motion_meter.gd" id="2_8nh8l"]
 [ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://assets/sprites/idle.png" id="3_y7hit"]
 [ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://assets/sprites/idleAir.png" id="4_xupyp"]
 [ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://assets/sprites/run.png" id="5_myyve"]

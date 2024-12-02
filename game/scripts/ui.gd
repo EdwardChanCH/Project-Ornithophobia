@@ -1,7 +1,7 @@
 extends Node
 
 
-var uiOverlayScene = load("res://scenes/permanent_ui.tscn")
+var uiOverlayScene = load("res://screen/permanent_ui.tscn")
 var uiOverlayInstance
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

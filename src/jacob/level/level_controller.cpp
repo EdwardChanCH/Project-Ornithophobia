@@ -32,9 +32,12 @@ LevelController::~LevelController() {
  */
 void LevelController::_ready() {
     if (!Engine::get_singleton()->is_editor_hint()) {
-        debugScene = ResourceLoader::get_singleton()->load("res://scenes/debug.tscn");
+        set_process_mode(ProcessMode::PROCESS_MODE_ALWAYS);
+        debugScene = ResourceLoader::get_singleton()->load("res://screen/debug.tscn");
         debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
         get_parent()->find_child("UI")->call_deferred("add_child", debugInstance);
+
+        pauseScene = ResourceLoader::get_singleton()->load("res://screen/menu/pause_menu.tscn");
     }
 }
 
@@ -43,7 +46,16 @@ void LevelController::_ready() {
  */
 void LevelController::_input(const Ref<InputEvent> &event) {
     if (event->is_action_pressed("escape")) {
-        get_tree()->change_scene_to_file("res://scenes/main_menu.tscn");
+        get_tree()->set_pause(!get_tree()->is_paused());
+        if (get_tree()->is_paused()) {
+            UtilityFunctions::print("ay we paused");
+            pauseInstance = Node::cast_to<Control>(pauseScene->instantiate());
+            // pauseInstance->set_z_index();
+            get_parent()->find_child("UI")->call_deferred("add_child", pauseInstance);
+        } else {
+            UtilityFunctions::print("ay we unpaused");
+            pauseInstance->queue_free();
+        }
     }
 }
 
@@ -51,6 +63,8 @@ void LevelController::_input(const Ref<InputEvent> &event) {
  * @brief Same as _exit_tree() in GDScript.
  */
 void LevelController::_exit_tree() {
-    if (!Engine::get_singleton()->is_editor_hint())
+    if (!Engine::get_singleton()->is_editor_hint()) {
         debugInstance->queue_free();
+        pauseInstance->queue_free();
+    }
 }

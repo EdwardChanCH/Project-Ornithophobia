@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=4]
+[gd_scene load_steps=4 format=4 uid="uid://bdtl35xbha2fd"]
 
-[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_343ou"]
-[ext_resource type="PackedScene" path="res://entity/yinyang_orb.tscn" id="2_eyoy0"]
+[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_343ou"]
+[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_eyoy0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
 bounce = 1.0
 
-[node name="@Level@221" type="Level"]
+[node name="_Level_221" type="Level"]
 process_mode = 4
 
 [node name="TileList" type="Node" parent="."]
@@ -23,10 +23,6 @@ navigation_enabled = false
 
 [node name="EntityList" type="Node" parent="."]
 
-[node name="YinyangBall" type="RigidBody2D" parent="EntityList" instance=ExtResource("2_eyoy0")]
+[node name="YinyangBall" parent="EntityList" instance=ExtResource("2_eyoy0")]
 position = Vector2(1752, 120)
-collision_layer = 2
-collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_grotq")
-linear_damp_mode = 1
-angular_damp_mode = 1

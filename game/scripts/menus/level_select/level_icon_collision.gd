@@ -1,7 +1,7 @@
 extends Area2D
 
 
-var levelPopupScene = load("res://scenes/level_menu_popup.tscn")
+var levelPopupScene = load("res://screen/menu/level_menu_popup.tscn")
 var levelPopupInstance: Control
 
 

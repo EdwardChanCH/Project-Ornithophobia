@@ -11,6 +11,7 @@ offset_top = 40.0
 offset_right = 160.0
 offset_bottom = 217.0
 scale = Vector2(3, 3)
+mouse_filter = 2
 theme = ExtResource("1_dm2dt")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugContainer"]
