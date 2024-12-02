@@ -49,21 +49,21 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3d2vl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bknm"]
 bg_color = Color(0.236731, 0.739581, 0.639447, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4o6o"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7nlm"]
 bg_color = Color(0.223529, 0.670588, 0.580392, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jch66"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_843jj"]
 bg_color = Color(0.197766, 0.606005, 0.523742, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -73,9 +73,9 @@ corner_radius_bottom_left = 8
 [sub_resource type="Theme" id="Theme_vt4i6"]
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_3d2vl")
-Button/styles/normal = SubResource("StyleBoxFlat_g4o6o")
-Button/styles/pressed = SubResource("StyleBoxFlat_jch66")
+Button/styles/hover = SubResource("StyleBoxFlat_4bknm")
+Button/styles/normal = SubResource("StyleBoxFlat_i7nlm")
+Button/styles/pressed = SubResource("StyleBoxFlat_843jj")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nksj7"]
 texture = ExtResource("13_ssjs2")

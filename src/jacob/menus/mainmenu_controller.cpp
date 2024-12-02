@@ -43,8 +43,7 @@ void MainMenuController::on_play_button_pressed() {
  * @brief Receiver for the workshop_button_pressed signal
  */
 void MainMenuController::on_workshop_button_pressed() {
-	UtilityFunctions::print("i wish there was a shop i could work in");
-	// get_tree()->change_scene_to_file("res://screen/menu/workshop.tscn");
+	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/workshop_level_select.tscn");
 }
 
 /**

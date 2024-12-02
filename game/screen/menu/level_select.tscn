@@ -37,14 +37,14 @@ script = ExtResource("1_1ihvl")
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 640.0
-offset_bottom = 352.0
+offset_bottom = 360.0
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_right = 536.0
-offset_bottom = 352.0
+offset_bottom = 360.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_exsdq")
 
@@ -71,7 +71,7 @@ layout_mode = 0
 offset_left = 24.0
 offset_top = 57.0
 offset_right = 432.0
-offset_bottom = 352.0
+offset_bottom = 360.0
 theme = SubResource("Theme_757ls")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
@@ -92,9 +92,9 @@ columns = 3
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 312.0
+offset_top = 320.0
 offset_right = 88.0
-offset_bottom = 344.0
+offset_bottom = 352.0
 text = "Back"
 icon = SubResource("ImageTexture_pommj")
 script = ExtResource("3_x8tmr")

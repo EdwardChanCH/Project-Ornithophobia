@@ -2,7 +2,6 @@ extends Control
 
 
 var level_path = ""
-var test_level_save = TestIO.new()
 const DIR_PATH = "user://levels/"
 
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +10,7 @@ func _ready() -> void:
 		if (level == Global.cur_level_popup_path):
 			load_level(DIR_PATH + level)
 			Global.data_index = Global.level_data.find(level)
+			break
 
 
 func load_level(level):

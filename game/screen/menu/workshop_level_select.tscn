@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8gfrgrdllnwb"]
+
+[ext_resource type="Script" path="res://scripts/menus/level_select/back_button.gd" id="1_2ewqt"]
+[ext_resource type="PackedScene" uid="uid://dqg5ruy6jaubx" path="res://screen/menu/workshop_level_icon.tscn" id="1_ty507"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtgoc"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3teya"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kma4q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bcfav"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cxl6c"]
+
+[sub_resource type="Theme" id="Theme_cx017"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_3teya")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_kma4q")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_bcfav")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cxl6c")
+
+[sub_resource type="ImageTexture" id="ImageTexture_w0fel"]
+
+[node name="WorkshopLevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="LevelViewer" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 164.0
+offset_right = 1542.0
+offset_bottom = 916.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vtgoc")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelViewer"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 44.0
+offset_right = 1280.0
+offset_bottom = 744.0
+theme = SubResource("Theme_cx017")
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelViewer/ScrollContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelViewer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="WorkshopLevelIcon" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="WorkshopLevelIcon2" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="WorkshopLevelIcon3" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="WorkshopLevelIcon4" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="WorkshopLevelIcon5" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="WorkshopLevelIcon6" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 960.0
+offset_right = 110.0
+offset_bottom = 992.0
+scale = Vector2(3, 3)
+text = "Back"
+icon = SubResource("ImageTexture_w0fel")
+script = ExtResource("1_2ewqt")
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
