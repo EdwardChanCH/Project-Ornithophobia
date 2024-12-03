@@ -9,6 +9,7 @@
 
 #include "edward_main.h"
 #include "scene_manager.h"
+#include "level_editor_controller.h"
 
 // Everything in GDExtension is defined within the namespace "godot"
 using namespace godot;
@@ -78,5 +79,8 @@ void EdwardMain::_exit_tree() {
 // - - - Godot UI Signal Receivers - - -
 
 void EdwardMain::_on_edward_main_ui_open_level_editor_screen() {
-    SceneManager::get_instance()->load_new_scene(this->get_tree(), level_editor_filepath);
+    //SceneManager::get_instance()->load_new_scene(this->get_tree(), level_editor_filepath);
+    LevelEditorController * level_editor_node = (LevelEditorController *)SceneManager::get_instance()->import_scene_tscn(level_editor_filepath);
+    level_editor_node->set_level_filepath("res://level/level_003.tscn");
+    SceneManager::get_instance()->load_new_scene_node(this->get_tree(), level_editor_filepath, level_editor_node);
 }

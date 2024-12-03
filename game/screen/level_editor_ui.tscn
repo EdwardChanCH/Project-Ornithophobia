@@ -89,7 +89,7 @@ size_flags_horizontal = 3
 
 [node name="VBox1Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox1"]
 layout_mode = 2
-text = "Navigation"
+text = "Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -270,7 +270,7 @@ ticks_on_borders = true
 [node name="Spacer1" type="Control" parent="UIContainer/VBox0/Panel1/HBox1"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.0
+size_flags_stretch_ratio = 3.0
 
 [node name="HideUIButton" type="Button" parent="UIContainer/VBox0"]
 layout_mode = 2
