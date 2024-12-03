@@ -78,6 +78,10 @@ namespace godot {
 		Vector2i world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size);
 		Vector2 tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size);
 		int to_tile_alt(bool flip_h, bool flip_v, bool flip_d);
+		
+		void flip_tile(int mode);
+		void rotate_tile(bool clockwise);
+		void cycle_tile(bool next);
 
 		void add_tile(Vector2 mouse_pos);
 		void replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags); // TODO

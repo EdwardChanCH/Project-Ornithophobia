@@ -87,6 +87,12 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="VBox1Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox1"]
+layout_mode = 2
+text = "Navigation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BackButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox1"]
 layout_mode = 2
 text = "Back"
@@ -100,6 +106,12 @@ text = "Playtest
 [node name="VBox2" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="VBox2Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
+layout_mode = 2
+text = "File"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LoadLevelButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox2"]
 layout_mode = 2
@@ -133,55 +145,121 @@ text = "Center Level"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UndoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+[node name="VBox3Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
 layout_mode = 2
-text = "Undo"
+text = "Tile"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RedoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+[node name="TileFlipHButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
 layout_mode = 2
-text = "Redo"
+text = "Flip Horizontally"
 
-[node name="TestAction1Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+[node name="TileFlipVButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
 layout_mode = 2
-text = "Do Action 1"
+text = "Flip Vertically"
 
-[node name="TestAction2Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+[node name="TileFlipDButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
 layout_mode = 2
-text = "Do Action 2"
+text = "Flip Diagonally"
 
-[node name="TestAction3Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+[node name="TileRotateC" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
 layout_mode = 2
-text = "Do Action 3"
+text = "Rotate Clockwise"
+
+[node name="TileRotateCC" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Rotate Counter C."
+
+[node name="TileCyclePrevious" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Cycle Previous"
+
+[node name="TileCycleNext" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox3"]
+layout_mode = 2
+text = "Cycle Next"
 
 [node name="VBox4" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+[node name="VBox4Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
 layout_mode = 2
-text = "Debug Log
-(Level Editor Controller)"
+text = "History"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="DebugSceneManagerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+[node name="UndoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
 layout_mode = 2
-text = "Debug Log
-(Scene Manager)"
+text = "Undo"
 
-[node name="TestAddSceneButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
+[node name="RedoButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox4"]
 layout_mode = 2
-text = "Test Changing Scene
-(To Itself)"
+text = "Redo"
 
 [node name="VBox5" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MusicVolumeLabel" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+[node name="VBox5Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TestAddSceneButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Test Changing Scene
+(To Itself)"
+
+[node name="TestAction1Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Test Action 1"
+
+[node name="TestAction2Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Test Action 2"
+
+[node name="TestAction3Button" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+layout_mode = 2
+text = "Test Action 3"
+
+[node name="VBox6" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox6Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox6"]
+layout_mode = 2
+text = "Debug"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebugSceneManagerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox6"]
+layout_mode = 2
+text = "Debug Log
+(Scene Manager)"
+
+[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/VBox0/Panel1/HBox1/VBox6"]
+layout_mode = 2
+text = "Debug Log
+(Level Editor Controller)"
+
+[node name="VBox7" type="VBoxContainer" parent="UIContainer/VBox0/Panel1/HBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox7Name" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox7"]
+layout_mode = 2
+text = "Setting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicVolumeLabel" type="Label" parent="UIContainer/VBox0/Panel1/HBox1/VBox7"]
 layout_mode = 2
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" type="HSlider" parent="UIContainer/VBox0/Panel1/HBox1/VBox5"]
+[node name="MusicVolumeSlider" type="HSlider" parent="UIContainer/VBox0/Panel1/HBox1/VBox7"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 max_value = 1.0
@@ -212,13 +290,20 @@ text = "Show / Hide"
 [connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
 [connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]
 [connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox2/CenterLevelButton" to="." method="_on_center_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/UndoButton" to="." method="_on_undo_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/RedoButton" to="." method="_on_redo_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
-[connection signal="value_changed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileFlipHButton" to="." method="_on_tile_flip_h_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileFlipVButton" to="." method="_on_tile_flip_v_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileFlipDButton" to="." method="_on_tile_flip_d_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileRotateC" to="." method="_on_tile_rotate_c_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileRotateCC" to="." method="_on_tile_rotate_cc_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileCyclePrevious" to="." method="_on_tile_cycle_previous_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox3/TileCycleNext" to="." method="_on_tile_cycle_next_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox4/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox5/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox6/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
+[connection signal="pressed" from="UIContainer/VBox0/Panel1/HBox1/VBox6/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
+[connection signal="value_changed" from="UIContainer/VBox0/Panel1/HBox1/VBox7/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="pressed" from="UIContainer/VBox0/HideUIButton" to="." method="_on_hide_ui_button_pressed"]

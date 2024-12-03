@@ -60,6 +60,11 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("world_to_tile_pos", "world_pos", "tile_map_scale", "tile_size"), &LevelEditorController::world_to_tile_pos);
     ClassDB::bind_method(D_METHOD("tile_to_world_pos", "tile_pos", "tile_map_scale", "tile_size"), &LevelEditorController::tile_to_world_pos);
     ClassDB::bind_method(D_METHOD("to_tile_alt", "flip_h", "flip_v", "flip_d"), &LevelEditorController::to_tile_alt);
+    
+    ClassDB::bind_method(D_METHOD("flip_tile", "mode"), &LevelEditorController::flip_tile);
+    ClassDB::bind_method(D_METHOD("rotate_tile", "clockwise"), &LevelEditorController::rotate_tile);
+    ClassDB::bind_method(D_METHOD("cycle_tile", "next"), &LevelEditorController::cycle_tile);
+
     ClassDB::bind_method(D_METHOD("add_tile", "mouse_pos"), &LevelEditorController::add_tile);
     ClassDB::bind_method(D_METHOD("replace_tile", "tile_pos", "source_id", "tile_id", "tile_alt"), &LevelEditorController::replace_tile);
     ClassDB::bind_method(D_METHOD("add_scene_object", "mouse_pos", "list_name", "scene_path"), &LevelEditorController::add_scene_object);
@@ -88,6 +93,11 @@ LevelEditorController::LevelEditorController() {
 
     physics_on = false;
     tracking_on = true;
+
+    tile_id = Vector2i(0, 0);
+    tile_flip_h = false;
+    tile_flip_v = false;
+    tile_flip_d = false;
 }
 
 /**
@@ -137,6 +147,10 @@ void LevelEditorController::_ready() {
         ui_node->connect("quick_save_level_button_pressed", Callable(this, "quick_save_level"));
         ui_node->connect("unload_level_button_pressed", Callable(this, "unload_level"));
         ui_node->connect("reload_level_button_pressed", Callable(this, "reload_level"));
+
+        ui_node->connect("tile_flip_button_pressed", Callable(this, "flip_tile"));
+        ui_node->connect("tile_rotate_button_pressed", Callable(this, "rotate_tile"));
+        ui_node->connect("tile_cycle_button_pressed", Callable(this, "cycle_tile"));
 
         ui_node->connect("add_tile_button_pressed", Callable(this, "add_tile"));
         ui_node->connect("add_player_button_pressed", Callable(this, "add_player"));
@@ -364,8 +378,104 @@ int LevelEditorController::to_tile_alt(bool flip_h, bool flip_v, bool flip_d) {
     return tile_flags;
 }
 
+void LevelEditorController::flip_tile(int mode) {
+    switch (mode) {
+    case 0:
+        tile_flip_h = !tile_flip_h;
+        break;
+    case 1:
+        tile_flip_v = !tile_flip_v;
+        break;
+    case 2:
+        tile_flip_d = !tile_flip_d;
+        break;
+    }
+}
+
+void LevelEditorController::cycle_tile(bool next) {
+    if (next) {
+        tile_id.x = tile_id.x + 1;
+        if (tile_id.x > 4) {tile_id.x = 0;}
+    } else {
+        tile_id.x = tile_id.x - 1;
+        if (tile_id.x < 0) {tile_id.x = 4;}
+    }
+}
+
+void LevelEditorController::rotate_tile(bool clockwise) {
+    int rotation;
+
+    // Encode
+    if (!tile_flip_h && !tile_flip_v && !tile_flip_d) {
+        rotation = 0;
+    } else if (tile_flip_h && !tile_flip_v && tile_flip_d) {
+        rotation = 1;
+    } else if (tile_flip_h && tile_flip_v && !tile_flip_d) {
+        rotation = 2;
+    } else if (!tile_flip_h && tile_flip_v && tile_flip_d) {
+        rotation = 3;
+    } else if (tile_flip_h && !tile_flip_v && !tile_flip_d) {
+        rotation = 4;
+    } else if (tile_flip_h && tile_flip_v && tile_flip_d) {
+        rotation = 5;
+    } else if (!tile_flip_h && tile_flip_v && !tile_flip_d) {
+        rotation = 6;
+    } else if (!tile_flip_h && !tile_flip_v && tile_flip_d) {
+        rotation = 7;
+    }
+
+    // Update
+    if (clockwise) {
+        if (rotation == 3) {
+            rotation = 0; // 0-3
+        } else if (rotation == 7) {
+            rotation = 4; // 4-7
+        } else {
+            ++rotation;
+        }
+    } else {
+        if (rotation == 0) {
+            rotation = 3; // 0-3
+        } else if (rotation == 4) {
+            rotation = 7; // 4-7
+        } else {
+            --rotation;
+        }
+    }
+
+    // Decode
+    switch (rotation) {
+    case 0:
+        tile_flip_h = false; tile_flip_v = false; tile_flip_d = false;
+        break;
+    case 1:
+        tile_flip_h = true; tile_flip_v = false; tile_flip_d = true;
+        break;
+    case 2:
+        tile_flip_h = true; tile_flip_v = true; tile_flip_d = false;
+        break;
+    case 3:
+        tile_flip_h = false; tile_flip_v = true; tile_flip_d = true;
+        break;
+    case 4:
+        tile_flip_h = true; tile_flip_v = false; tile_flip_d = false;
+        break;
+    case 5:
+        tile_flip_h = true; tile_flip_v = true; tile_flip_d = true;
+        break;
+    case 6:
+        tile_flip_h = false; tile_flip_v = true; tile_flip_d = false;
+        break;
+    case 7:
+        tile_flip_h = false; tile_flip_v = false; tile_flip_d = true;
+        break;
+    default: // == Case 0
+        tile_flip_h = false; tile_flip_v = false; tile_flip_d = false;
+        break;
+    }
+}
+
 void LevelEditorController::add_tile(Vector2 mouse_pos) {
-    // TODO hard-coded to add the square tile
     if (is_level_loaded()) {
         // Get tile map
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
@@ -387,7 +497,7 @@ void LevelEditorController::add_tile(Vector2 mouse_pos) {
         Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
         
         // Add tile (reversible)
-        replace_tile(tile_pos, 0, Vector2(0, 0), 0);
+        replace_tile(tile_pos, 0, tile_id, to_tile_alt(tile_flip_h, tile_flip_v, tile_flip_d));
     }
 }
 

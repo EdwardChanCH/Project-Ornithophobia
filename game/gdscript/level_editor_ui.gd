@@ -15,6 +15,10 @@ signal quick_save_level_button_pressed
 signal reload_level_button_pressed
 signal unload_level_button_pressed
 
+signal tile_flip_button_pressed(mode: int)
+signal tile_rotate_button_pressed(clockwise: bool)
+signal tile_cycle_button_pressed(next: bool)
+
 signal add_tile_button_pressed(mouse_pos: Vector2)
 signal add_player_button_pressed(mouse_pos: Vector2)
 signal add_enemy_button_pressed(mouse_pos: Vector2)
@@ -76,20 +80,26 @@ func _input(event: InputEvent) -> void:
 		camera_movement /= camera_movement_multiplier
 		camera_movement_scale /= camera_movement_multiplier
 	
-	if event.is_action_pressed("editor_previous_rotation"):
-		pass
-	
-	if event.is_action_pressed("editor_next_rotation"):
-		pass
-	
 	if event.is_action_pressed("editor_flip_h"):
-		pass
+		_on_tile_flip_h_button_pressed()
 	
 	if event.is_action_pressed("editor_flip_v"):
-		pass
+		_on_tile_flip_v_button_pressed()
 	
 	if event.is_action_pressed("editor_flip_d"):
-		pass
+		_on_tile_flip_d_button_pressed()
+	
+	if event.is_action_pressed("editor_rotate_clockwise"):
+		_on_tile_rotate_c_pressed()
+	
+	if event.is_action_pressed("editor_rotate_counter_clockwise"):
+		_on_tile_rotate_cc_pressed()
+	
+	if event.is_action_pressed("editor_cycle_previous"):
+		_on_tile_cycle_previous_pressed()
+	
+	if event.is_action_pressed("editor_cycle_next"):
+		_on_tile_cycle_next_pressed()
 	
 	if event.is_action_pressed("editor_undo"):
 		_on_undo_button_pressed()
@@ -243,4 +253,39 @@ func _on_bgm_player_finished() -> void:
 
 func _on_hide_ui_button_pressed() -> void:
 	ui_node.set_visible(!ui_node.is_visible())
+	pass
+
+
+func _on_tile_flip_h_button_pressed() -> void:
+	tile_flip_button_pressed.emit(0)
+	pass
+
+
+func _on_tile_flip_v_button_pressed() -> void:
+	tile_flip_button_pressed.emit(1)
+	pass
+
+
+func _on_tile_flip_d_button_pressed() -> void:
+	tile_flip_button_pressed.emit(2)
+	pass
+
+
+func _on_tile_rotate_c_pressed() -> void:
+	tile_rotate_button_pressed.emit(true)
+	pass
+
+
+func _on_tile_rotate_cc_pressed() -> void:
+	tile_rotate_button_pressed.emit(false)
+	pass
+
+
+func _on_tile_cycle_previous_pressed() -> void:
+	tile_cycle_button_pressed.emit(false)
+	pass
+
+
+func _on_tile_cycle_next_pressed() -> void:
+	tile_cycle_button_pressed.emit(true)
 	pass
