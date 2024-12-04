@@ -84,6 +84,7 @@ namespace godot {
 		void cycle_tile(bool next);
 
 		void add_tile(Vector2 mouse_pos);
+		void remove_tile(Vector2 mouse_pos);
 		void replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags); // TODO
 		void add_scene_object(Vector2 mouse_pos, String list_name, String scene_path);
 		void add_player(Vector2 mouse_pos);
@@ -93,7 +94,7 @@ namespace godot {
 		void _test_action(String s, int n);
 		void _debug();
 
-		const String default_level_filepath = "res://level/level_title_screen.tscn";
+		const String default_level_filepath = "res://level/level_default_empty.tscn";
 	};
 
 } // namespace godot

@@ -66,6 +66,7 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("cycle_tile", "next"), &LevelEditorController::cycle_tile);
 
     ClassDB::bind_method(D_METHOD("add_tile", "mouse_pos"), &LevelEditorController::add_tile);
+    ClassDB::bind_method(D_METHOD("remove_tile", "mouse_pos"), &LevelEditorController::remove_tile);
     ClassDB::bind_method(D_METHOD("replace_tile", "tile_pos", "source_id", "tile_id", "tile_alt"), &LevelEditorController::replace_tile);
     ClassDB::bind_method(D_METHOD("add_scene_object", "mouse_pos", "list_name", "scene_path"), &LevelEditorController::add_scene_object);
     ClassDB::bind_method(D_METHOD("add_player", "mouse_pos"), &LevelEditorController::add_player);
@@ -153,6 +154,7 @@ void LevelEditorController::_ready() {
         ui_node->connect("tile_cycle_button_pressed", Callable(this, "cycle_tile"));
 
         ui_node->connect("add_tile_button_pressed", Callable(this, "add_tile"));
+        ui_node->connect("remove_tile_button_pressed", Callable(this, "remove_tile"));
         ui_node->connect("add_player_button_pressed", Callable(this, "add_player"));
         ui_node->connect("add_enemy_button_pressed", Callable(this, "add_enemy"));
         ui_node->connect("add_entity_button_pressed", Callable(this, "add_entity"));
@@ -498,6 +500,32 @@ void LevelEditorController::add_tile(Vector2 mouse_pos) {
         
         // Add tile (reversible)
         replace_tile(tile_pos, 0, tile_id, to_tile_alt(tile_flip_h, tile_flip_v, tile_flip_d));
+    }
+}
+
+void LevelEditorController::remove_tile(Vector2 mouse_pos) {
+    if (is_level_loaded()) {
+        // Get tile map
+        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
+        if (!tile_map_layer) {
+            UtilityFunctions::print("Warning: Tile map layer is missing!");
+            return;
+        }
+
+        // Get tile set
+        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
+        if (tile_set.is_null()) {
+            UtilityFunctions::print("Warning: Tile set is missing!");
+            return;
+        }
+
+        // Calculate tile coordinates
+        Vector2 tile_map_scale = tile_map_layer->get_scale();
+        Vector2i tile_size = tile_set.ptr()->get_tile_size();
+        Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
+        
+        // Remove tile (reversible)
+        replace_tile(tile_pos, -1, Vector2i(-1, -1), -1);
     }
 }
 

@@ -20,6 +20,7 @@ signal tile_rotate_button_pressed(clockwise: bool)
 signal tile_cycle_button_pressed(next: bool)
 
 signal add_tile_button_pressed(mouse_pos: Vector2)
+signal remove_tile_button_pressed(mouse_pos: Vector2)
 signal add_player_button_pressed(mouse_pos: Vector2)
 signal add_enemy_button_pressed(mouse_pos: Vector2)
 signal add_entity_button_pressed(mouse_pos: Vector2)
@@ -27,6 +28,7 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 @export var camera_node: Camera2D
 @export var ui_node: Control
+@export var help_popup_node: AcceptDialog
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
 @export var bgm_player_node: AudioStreamPlayer
@@ -42,6 +44,9 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("editor_back"):
+		_on_back_button_pressed()
+		
 	if event.is_action_pressed("editor_debug"):
 		_on_debug_level_editor_controller_button_pressed()
 		_on_debug_scene_manager_button_pressed()
@@ -90,16 +95,16 @@ func _input(event: InputEvent) -> void:
 		_on_tile_flip_d_button_pressed()
 	
 	if event.is_action_pressed("editor_rotate_clockwise"):
-		_on_tile_rotate_c_pressed()
+		_on_tile_rotate_c_button_pressed()
 	
 	if event.is_action_pressed("editor_rotate_counter_clockwise"):
-		_on_tile_rotate_cc_pressed()
+		_on_tile_rotate_cc_button_pressed()
 	
 	if event.is_action_pressed("editor_cycle_previous"):
-		_on_tile_cycle_previous_pressed()
+		_on_tile_cycle_previous_button_pressed()
 	
 	if event.is_action_pressed("editor_cycle_next"):
-		_on_tile_cycle_next_pressed()
+		_on_tile_cycle_next_button_pressed()
 	
 	if event.is_action_pressed("editor_undo"):
 		_on_undo_button_pressed()
@@ -130,11 +135,12 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
-	if event.is_action_pressed("editor_left_click"):
+	if event.is_action_pressed("editor_primary_click"):
 		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
-	if event.is_action_pressed("editor_right_click"):
-		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+	if event.is_action_pressed("editor_secondary_click"):
+		remove_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+		# add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
 	pass
 
@@ -187,6 +193,11 @@ func _on_test_action_2_button_pressed() -> void:
 
 func _on_test_action_3_button_pressed() -> void:
 	test_action_button_pressed.emit("Do", 3)
+	pass
+
+
+func _on_help_button_pressed() -> void:
+	help_popup_node.set_visible(true)
 	pass
 
 
@@ -271,21 +282,21 @@ func _on_tile_flip_d_button_pressed() -> void:
 	pass
 
 
-func _on_tile_rotate_c_pressed() -> void:
+func _on_tile_rotate_c_button_pressed() -> void:
 	tile_rotate_button_pressed.emit(true)
 	pass
 
 
-func _on_tile_rotate_cc_pressed() -> void:
+func _on_tile_rotate_cc_button_pressed() -> void:
 	tile_rotate_button_pressed.emit(false)
 	pass
 
 
-func _on_tile_cycle_previous_pressed() -> void:
+func _on_tile_cycle_previous_button_pressed() -> void:
 	tile_cycle_button_pressed.emit(false)
 	pass
 
 
-func _on_tile_cycle_next_pressed() -> void:
+func _on_tile_cycle_next_button_pressed() -> void:
 	tile_cycle_button_pressed.emit(true)
 	pass

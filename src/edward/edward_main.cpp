@@ -81,6 +81,6 @@ void EdwardMain::_exit_tree() {
 void EdwardMain::_on_edward_main_ui_open_level_editor_screen() {
     //SceneManager::get_instance()->load_new_scene(this->get_tree(), level_editor_filepath);
     LevelEditorController * level_editor_node = (LevelEditorController *)SceneManager::get_instance()->import_scene_tscn(level_editor_filepath);
-    level_editor_node->set_level_filepath("res://level/level_003.tscn");
+    level_editor_node->set_level_filepath("res://level/level_title_screen.tscn");
     SceneManager::get_instance()->load_new_scene_node(this->get_tree(), level_editor_filepath, level_editor_node);
 }
