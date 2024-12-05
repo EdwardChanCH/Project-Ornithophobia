@@ -14,6 +14,7 @@ using namespace godot;
 void PlayerController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("update_blast_velocity", "blastDir", "vel", "maxBlastSpeed", "direction"), &PlayerController::update_blast_velocity);
     ClassDB::bind_method(D_METHOD("was_on_floor"), &PlayerController::was_on_floor);
+    ClassDB::bind_method(D_METHOD("collide_with_enemy"), &PlayerController::collide_with_enemy);
 }
 
 /**
@@ -314,4 +315,9 @@ float PlayerController::update_blast_velocity(float blastDir, float vel, int max
  */
 bool PlayerController::was_on_floor() {
     return wasOnFloor;
+}
+
+
+void PlayerController::collide_with_enemy() {
+
 }

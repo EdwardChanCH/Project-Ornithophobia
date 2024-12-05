@@ -9,7 +9,8 @@
 
 #include <godot_cpp/core/class_db.hpp> // This hold the list of all registered classes. 
 #include "globals.h"
-#include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code. 
+#include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code.
+#include "scene_manager.h"
 
 namespace godot {
 

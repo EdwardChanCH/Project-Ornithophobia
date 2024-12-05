@@ -69,6 +69,7 @@ namespace godot {
         void _process(double delta) override;
         float update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction="");
         bool was_on_floor();
+        void collide_with_enemy();
 
     };
 

@@ -25,7 +25,7 @@ void Debug::_bind_methods() {
  * @brief Constructor for Debug
  */
 Debug::Debug() {
-    debugProperties = memnew(Dictionary());
+    debugProperties = Dictionary();
 }
 
 /**
@@ -38,7 +38,7 @@ Debug::~Debug() {
         singleton = nullptr;
     }
 
-    memdelete(debugProperties);
+    // debugProperties.~Dictionary();
 }
 
 /**
@@ -60,16 +60,16 @@ Debug *Debug::get_singleton() {
  * @param value The value of the property to be tracked
  */
 void Debug::add_debug_property(String name, Variant value) {
-    if (!debugProperties->has(name)) {
-        debugProperties->get_or_add(name, value);
+    if (!debugProperties.has(name)) {
+        debugProperties.get_or_add(name, value);
     } else {
-        debugProperties->operator[](name) = value;
+        debugProperties.operator[](name) = value;
     }
 }
 
 /**
  * @brief Returns the dictionary of tracked debug properties
  */
-Dictionary *Debug::get_debug_properties() {
+Dictionary Debug::get_debug_properties() {
     return debugProperties;
 }

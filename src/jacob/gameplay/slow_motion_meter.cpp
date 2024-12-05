@@ -120,7 +120,7 @@ void SlowMotionMeter::_process(double delta) {
     // Debug::get_singleton()->add_debug_property("a", get_self_modulate().get_a8());
     // Debug::get_singleton()->add_debug_property("can_fade_in", can_fade_in);
     // Debug::get_singleton()->add_debug_property("can_fade_out", can_fade_out);
-    // Debug::get_singleton()->add_debug_property("value", value);
+    Debug::get_singleton()->add_debug_property("value", value);
 	// Debug::get_singleton()->add_debug_property("can_drain", can_drain);
     // Debug::get_singleton()->add_debug_property("can_slow_time", can_slow_time);
 }

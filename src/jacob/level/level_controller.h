@@ -11,6 +11,7 @@
 #include "globals.h"
 #include "boilerplate_macros.h" // Macros for GDExtension's boilerplate code. 
 #include "debug_controller.h"
+#include "scene_manager.h"
 
 namespace godot {
 
@@ -22,8 +23,10 @@ namespace godot {
 		static void _bind_methods(); // Must be declared.
 
     private:
-        Ref<PackedScene> debugScene;
-        DebugController* debugInstance;
+        Ref<PackedScene> levelUIScene;
+        Control* levelUIInstance;
+		Ref<PackedScene> pauseScene;
+		Control* pauseInstance;
 
 	public:
 		LevelController();

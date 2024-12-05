@@ -2,5 +2,6 @@
     "cmake.sourceDirectory": "C:/Users/thesu/Documents/GitHub/project-deliverable-2-team-ornithophobia/godot-cpp",
     "files.associations": {
         "algorithm": "cpp"
-    }
+    },
+    "godotTools.editorPath.godot4": "c:\\Program Files\\Godot\\Godot_v4.3-stable\\Godot_v4.3-stable_win64.exe"
 }

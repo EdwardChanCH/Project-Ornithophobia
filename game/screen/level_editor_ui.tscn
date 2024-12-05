@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/sound/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
 [ext_resource type="PackedScene" uid="uid://ccjs3sart8d6f" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
 
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 

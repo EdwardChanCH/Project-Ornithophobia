@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3tyby5sraw30"]
+
+[ext_resource type="Script" path="res://script/menus/level_select/level_select.gd" id="1_1ihvl"]
+[ext_resource type="FontFile" uid="uid://dv8obm6mlador" path="res://ui/fonts/operius-mono.ttf" id="2_78q23"]
+[ext_resource type="Script" path="res://script/menus/level_select/back_button.gd" id="3_x8tmr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exsdq"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.662745, 0.662745, 0.662745, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofnn6"]
+font = ExtResource("2_78q23")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_757ls"]
+VScrollBar/styles/grabber = null
+VScrollBar/styles/grabber_highlight = null
+VScrollBar/styles/grabber_pressed = null
+VScrollBar/styles/scroll = null
+VScrollBar/styles/scroll_focus = null
+
+[sub_resource type="ImageTexture" id="ImageTexture_pommj"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+mouse_filter = 2
+script = ExtResource("1_1ihvl")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_right = 536.0
+offset_bottom = 360.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_exsdq")
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 440.0
+offset_bottom = 69.0
+text = "LEVEL SELECT"
+label_settings = SubResource("LabelSettings_ofnn6")
+horizontal_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="Panel"]
+position = Vector2(16, 58)
+points = PackedVector2Array(8, -2, 400, -2)
+width = 2.0
+default_color = Color(0.317647, 0.317647, 0.317647, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 57.0
+offset_right = 432.0
+offset_bottom = 360.0
+theme = SubResource("Theme_757ls")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 16
+
+[node name="LevelContainer" type="GridContainer" parent="Panel/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 320.0
+offset_right = 88.0
+offset_bottom = 352.0
+text = "Back"
+icon = SubResource("ImageTexture_pommj")
+script = ExtResource("3_x8tmr")
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
