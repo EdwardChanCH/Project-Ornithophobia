@@ -77,7 +77,7 @@ namespace godot {
 		void toggle_physics();
 		Vector2i world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size);
 		Vector2 tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size);
-		int to_tile_alt(bool flip_h, bool flip_v, bool flip_d);
+		int get_tile_alt();
 		
 		void flip_tile(int mode);
 		void rotate_tile(bool clockwise);

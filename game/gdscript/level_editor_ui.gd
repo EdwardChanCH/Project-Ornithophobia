@@ -39,6 +39,13 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 @onready var camera_movement: Vector2 = Vector2(0, 0)
 
 
+func _ready() -> void:
+	# TODO
+	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
+	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
+	pass
+
+
 func _process(delta: float) -> void:
 	camera_node.translate(camera_movement * delta)
 	ghost_tile_node.position = get_viewport().get_mouse_position()
@@ -129,11 +136,6 @@ func _input(event: InputEvent) -> void:
 	pass
 
 
-# func _unhandled_key_input(event: InputEvent) -> void:
-	# Detect keyboard shortcut inputs
-	# pass
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
@@ -142,8 +144,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("editor_secondary_click"):
 		remove_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
-		# add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
+	pass
+
+
+func _on_tile_type_changed(atlas_coords: Vector2i) -> void:
+	ghost_tile_node.set_tile_type(atlas_coords)
+	pass
+
+
+func _on_tile_alt_changed(tile_alt: int) -> void:
+	ghost_tile_node.set_tile_alt(tile_alt)
 	pass
 
 

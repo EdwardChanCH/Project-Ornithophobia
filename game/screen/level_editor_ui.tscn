@@ -32,18 +32,6 @@ anchor_mode = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="GridLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1920, 1056)
-
-[node name="Grid" type="Sprite2D" parent="ParallaxBackground/GridLayer"]
-modulate = Color(1, 1, 1, 0.0392157)
-texture_repeat = 2
-scale = Vector2(3, 3)
-texture = ExtResource("2_hcpxa")
-centered = false
-
 [node name="LoadLevelPopup" type="FileDialog" parent="."]
 title = "Open a File"
 initial_position = 1
@@ -157,31 +145,28 @@ Mouse 2
 H
 V
 B
-[
-]
 ,
-."
-
-[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_jom34")
+.
+[
+]"
 
 [node name="GhostTileEntity" parent="." instance=ExtResource("2_ryqqs")]
 modulate = Color(1, 1, 1, 0.313726)
 
-[node name="SceneName" type="Label" parent="."]
-z_index = 1
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -148.0
-offset_bottom = 49.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "level_editor.tscn
-level_editor_ui.tscn"
-horizontal_alignment = 2
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="GridLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1056)
+
+[node name="Grid" type="Sprite2D" parent="ParallaxBackground/GridLayer"]
+modulate = Color(1, 1, 1, 0.0392157)
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_hcpxa")
+centered = false
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jom34")
 
 [node name="UIContainer" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -205,7 +190,7 @@ size_flags_horizontal = 3
 
 [node name="VBox1Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
 layout_mode = 2
-text = "Screen"
+text = "Level Editor"
 horizontal_alignment = 1
 vertical_alignment = 1
 

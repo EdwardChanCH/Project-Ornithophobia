@@ -39,6 +39,9 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void LevelEditorController::_bind_methods() {
+    ADD_SIGNAL(MethodInfo("tile_type_changed", PropertyInfo(Variant::VECTOR2I, "atlas_coords")));
+    ADD_SIGNAL(MethodInfo("tile_alt_changed", PropertyInfo(Variant::INT, "tile_alt")));
+
     ClassDB::bind_method(D_METHOD("track_action", "redo_action", "undo_action"), &LevelEditorController::track_action);
     ClassDB::bind_method(D_METHOD("undo_action"), &LevelEditorController::undo_action);
     ClassDB::bind_method(D_METHOD("redo_action"), &LevelEditorController::redo_action);
@@ -59,7 +62,7 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("toggle_physics"), &LevelEditorController::toggle_physics);
     ClassDB::bind_method(D_METHOD("world_to_tile_pos", "world_pos", "tile_map_scale", "tile_size"), &LevelEditorController::world_to_tile_pos);
     ClassDB::bind_method(D_METHOD("tile_to_world_pos", "tile_pos", "tile_map_scale", "tile_size"), &LevelEditorController::tile_to_world_pos);
-    ClassDB::bind_method(D_METHOD("to_tile_alt", "flip_h", "flip_v", "flip_d"), &LevelEditorController::to_tile_alt);
+    ClassDB::bind_method(D_METHOD("get_tile_alt"), &LevelEditorController::get_tile_alt);
     
     ClassDB::bind_method(D_METHOD("flip_tile", "mode"), &LevelEditorController::flip_tile);
     ClassDB::bind_method(D_METHOD("rotate_tile", "clockwise"), &LevelEditorController::rotate_tile);
@@ -364,16 +367,16 @@ Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile
     return result;
 }
 
-int LevelEditorController::to_tile_alt(bool flip_h, bool flip_v, bool flip_d) {
+int LevelEditorController::get_tile_alt() {
     int tile_flags = 0;
 
-    if (flip_h) {
+    if (tile_flip_h) {
         tile_flags |= TileSetAtlasSource::TRANSFORM_FLIP_H;
     }
-    if (flip_v) {
+    if (tile_flip_v) {
         tile_flags |= TileSetAtlasSource::TRANSFORM_FLIP_V;
     }
-    if (flip_d) {
+    if (tile_flip_d) {
         tile_flags |= TileSetAtlasSource::TRANSFORM_TRANSPOSE;
     }
 
@@ -392,6 +395,9 @@ void LevelEditorController::flip_tile(int mode) {
         tile_flip_d = !tile_flip_d;
         break;
     }
+
+    // Update UI
+    emit_signal("tile_alt_changed", get_tile_alt());
 }
 
 void LevelEditorController::cycle_tile(bool next) {
@@ -402,6 +408,9 @@ void LevelEditorController::cycle_tile(bool next) {
         tile_id.x = tile_id.x - 1;
         if (tile_id.x < 0) {tile_id.x = 4;}
     }
+
+    // Update UI
+    emit_signal("tile_type_changed", tile_id);
 }
 
 void LevelEditorController::rotate_tile(bool clockwise) {
@@ -475,6 +484,9 @@ void LevelEditorController::rotate_tile(bool clockwise) {
         tile_flip_h = false; tile_flip_v = false; tile_flip_d = false;
         break;
     }
+
+    // Update UI
+    emit_signal("tile_alt_changed", get_tile_alt());
 }
 
 void LevelEditorController::add_tile(Vector2 mouse_pos) {
@@ -499,7 +511,7 @@ void LevelEditorController::add_tile(Vector2 mouse_pos) {
         Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
         
         // Add tile (reversible)
-        replace_tile(tile_pos, 0, tile_id, to_tile_alt(tile_flip_h, tile_flip_v, tile_flip_d));
+        replace_tile(tile_pos, 0, tile_id, get_tile_alt());
     }
 }
 
