@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://db00fhsn58v7m"]
 
-[ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
-[ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/sound/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
+[ext_resource type="Script" path="res://script/level_editor_ui.gd" id="1_f5a73"]
+[ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/audio/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)

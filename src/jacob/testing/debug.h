@@ -24,7 +24,7 @@ namespace godot {
         static void _bind_methods();
     
     private:
-        Dictionary *debugProperties;
+        Dictionary debugProperties;
 
         Debug();
         ~Debug();

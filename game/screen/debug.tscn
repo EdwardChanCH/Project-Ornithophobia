@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcypmvbf3y6rg"]
 
 [ext_resource type="Theme" uid="uid://cqpv5wh24ymef" path="res://ui/themes/debug.tres" id="1_dm2dt"]
-[ext_resource type="Script" path="res://scripts/debug_container.gd" id="2_shc82"]
+[ext_resource type="Script" path="res://script/debug_container.gd" id="2_shc82"]
 
 [node name="DebugController" type="DebugController"]
 

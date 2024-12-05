@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://dqg5ruy6jaubx"]
 
-[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="1_3r5vm"]
-[ext_resource type="Script" path="res://scripts/menus/level_select/workshop_level_icon.gd" id="1_n52tw"]
+[ext_resource type="Script" path="res://script/menus/level_select/workshop_level_icon.gd" id="1_n52tw"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprites/default_texture.png" id="2_hwi28"]
 [ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="2_ltwxi"]
-[ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://assets/sprites/menu/user-solid.svg" id="3_fsx8k"]
-[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://assets/sprites/menu/crown icon.png" id="5_js56h"]
-[ext_resource type="Texture2D" uid="uid://coasakkkc5cwv" path="res://assets/sprites/menu/play-solid.svg" id="5_mwtnk"]
-[ext_resource type="Texture2D" uid="uid://bfo21xarqesaw" path="res://assets/sprites/menu/wrench-solid.svg" id="6_2rfx7"]
+[ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://asset/sprites/menu/user-solid.svg" id="4_fxfpi"]
+[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://asset/sprites/menu/crown icon.png" id="5_rspec"]
+[ext_resource type="Texture2D" uid="uid://coasakkkc5cwv" path="res://asset/sprites/menu/play-solid.svg" id="6_br2j0"]
+[ext_resource type="Texture2D" uid="uid://bfo21xarqesaw" path="res://asset/sprites/menu/wrench-solid.svg" id="7_o7xup"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0hx"]
 bg_color = Color(0.882353, 0.882353, 0.882353, 1)
@@ -126,7 +126,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_t37d8")
 [node name="LevelIcon" type="TextureRect" parent="Banner/LevelIconPanel/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("1_3r5vm")
+texture = ExtResource("2_hwi28")
 expand_mode = 1
 
 [node name="LevelDetails" type="Control" parent="Banner"]
@@ -152,7 +152,7 @@ offset_left = 224.0
 offset_top = 72.0
 offset_right = 248.0
 offset_bottom = 100.0
-texture = ExtResource("3_fsx8k")
+texture = ExtResource("4_fxfpi")
 expand_mode = 1
 stretch_mode = 4
 
@@ -174,7 +174,7 @@ offset_left = 504.0
 offset_top = 72.0
 offset_right = 528.0
 offset_bottom = 100.0
-texture = ExtResource("5_js56h")
+texture = ExtResource("5_rspec")
 expand_mode = 1
 stretch_mode = 4
 
@@ -200,7 +200,7 @@ theme = SubResource("Theme_px8ee")
 theme_override_fonts/font = SubResource("FontVariation_mxl23")
 theme_override_font_sizes/font_size = 36
 text = "PLAY"
-icon = ExtResource("5_mwtnk")
+icon = ExtResource("6_br2j0")
 
 [node name="EditButton" type="Button" parent="Banner"]
 layout_mode = 0
@@ -214,7 +214,7 @@ theme_override_fonts/font = SubResource("FontVariation_mxl23")
 theme_override_font_sizes/font_size = 36
 theme_override_icons/icon = SubResource("CompressedTexture2D_mqu0t")
 text = "EDIT"
-icon = ExtResource("6_2rfx7")
+icon = ExtResource("7_o7xup")
 
 [connection signal="pressed" from="Banner/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Banner/EditButton" to="." method="_on_edit_button_pressed"]

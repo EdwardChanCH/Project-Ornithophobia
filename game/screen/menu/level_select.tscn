@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://b3tyby5sraw30"]
 
-[ext_resource type="Script" path="res://scripts/menus/level_select/level_select.gd" id="1_1ihvl"]
+[ext_resource type="Script" path="res://script/menus/level_select/level_select.gd" id="1_1ihvl"]
 [ext_resource type="FontFile" uid="uid://dv8obm6mlador" path="res://ui/fonts/operius-mono.ttf" id="2_78q23"]
-[ext_resource type="Script" path="res://scripts/menus/level_select/back_button.gd" id="3_x8tmr"]
+[ext_resource type="Script" path="res://script/menus/level_select/back_button.gd" id="3_x8tmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exsdq"]
 bg_color = Color(0.882353, 0.882353, 0.882353, 1)

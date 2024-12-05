@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ch3gt5suqivw2"]
 
-[ext_resource type="Texture2D" uid="uid://bpt3u4p037ngl" path="res://asset/image/yinyang_orb.png" id="2_3b0ev"]
+[ext_resource type="Texture2D" uid="uid://bpt3u4p037ngl" path="res://assets/sprites/gameplay/yinyang_orb.png" id="2_3b0ev"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
 bounce = 1.0

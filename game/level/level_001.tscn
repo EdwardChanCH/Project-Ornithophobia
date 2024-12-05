@@ -9,9 +9,9 @@ bounce = 1.0
 [node name="_Level_221" type="Level"]
 level_info = {
 "best_time": "00:32.74",
-"level_icon": "res://assets/sprites/menu/test/test_level_icon.png",
+"level_icon": "res://asset/sprites/menu/test/test_level_icon.png",
 "name": "Level 1",
-"rank_icon": "res://assets/sprites/menu/gold_rank_icon.png",
+"rank_icon": "res://asset/sprites/menu/gold_rank_icon.png",
 "rank_times": ["00:30.00", "00:45.00", "01:00.00"]
 }
 process_mode = 4

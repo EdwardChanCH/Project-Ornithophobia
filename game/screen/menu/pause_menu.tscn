@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cqxcn2r7q0b27"]
 
 [ext_resource type="FontFile" uid="uid://dv8obm6mlador" path="res://ui/fonts/operius-mono.ttf" id="1_mkxx5"]
-[ext_resource type="Script" path="res://scripts/menus/pause_menu_button_container.gd" id="2_pbbuf"]
+[ext_resource type="Script" path="res://script/menus/pause_menu_button_container.gd" id="2_pbbuf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie5r5"]
 bg_color = Color(0, 0, 0, 0.490196)
