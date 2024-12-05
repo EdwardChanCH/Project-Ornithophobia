@@ -39,6 +39,7 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void LevelEditorController::_bind_methods() {
+    ADD_SIGNAL(MethodInfo("level_saved", PropertyInfo(Variant::STRING, "filepath")));
     ADD_SIGNAL(MethodInfo("tile_type_changed", PropertyInfo(Variant::VECTOR2I, "atlas_coords")));
     ADD_SIGNAL(MethodInfo("tile_alt_changed", PropertyInfo(Variant::INT, "tile_alt")));
 
@@ -302,9 +303,15 @@ void LevelEditorController::load_level(String filepath) {
 
 void LevelEditorController::save_level(String filepath) {
     if ((is_level_loaded()) && (filepath.length() > 0)) {
+        // Change save location to user data
         filepath = filepath.replace("res://", "user://");
+
+        // Save level as TSCN
         level_filepath = BASE_FILEPATH(filepath);
         Level::export_level_tscn(filepath, level_node);
+
+        // Update thumbnail
+    emit_signal("level_saved", filepath);
     } else {
         UtilityFunctions::print("Warning: Nothing to save!");
     }

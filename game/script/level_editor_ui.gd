@@ -41,9 +41,12 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 func _ready() -> void:
-	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))	# TODO
-	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))	# TODO
+	# Receiver parent signals
+	get_parent().get_parent().connect("level_saved", Callable(self, "_on_level_saved"))
+	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
+	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
 	
+	# Create directories
 	DirAccess.make_dir_recursive_absolute("user://level")
 	DirAccess.make_dir_recursive_absolute("user://level/story")
 	DirAccess.make_dir_recursive_absolute("user://level/user")
@@ -150,6 +153,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_secondary_click"):
 		remove_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
+	pass
+
+
+func _on_level_saved(filepath: String) -> void:
+	_on_update_thumbnail_button_toggled(filepath)
 	pass
 
 
@@ -341,4 +349,26 @@ func _on_tile_cycle_next_button_pressed() -> void:
 
 func _on_grid_button_toggled(toggled_on: bool) -> void:
 	grid_layer.visible = toggled_on
+	pass
+
+func _on_update_thumbnail_button_toggled(filepath: String) -> void:
+	# Set thumbnail filepath
+	filepath = filepath.replace(".tscn", ".png").replace("res://", "user://")
+	
+	# Hide UI
+	self.visible = false
+	var grid_layer_visible: bool = grid_layer.visible
+	grid_layer.visible = false
+	
+	# Wait for the current frame to finish rendering
+	await RenderingServer.frame_post_draw
+	
+	# Save thumbnail
+	var thumbnail: Image = get_viewport().get_texture().get_image()
+	thumbnail.save_png(filepath)
+	
+	# Unhide UI
+	self.visible = true
+	grid_layer.visible = grid_layer_visible
+	
 	pass
