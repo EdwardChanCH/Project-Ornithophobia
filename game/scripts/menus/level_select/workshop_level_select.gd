@@ -58,3 +58,8 @@ func _on_refresh_levels_button_pressed() -> void:
 		reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
 	elif (current_tab == "user"):
 		reload_levels(Global.USER_LEVELS_DIR_PATH)
+
+
+func _on_create_button_pressed() -> void:
+	# Create new level editor instance here
+	pass # Replace with function body.

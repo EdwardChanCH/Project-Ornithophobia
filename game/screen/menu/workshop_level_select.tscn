@@ -245,5 +245,6 @@ expand_icon = true
 [connection signal="mouse_clicked" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab" method="_on_my_levels_collision_mouse_clicked"]
 [connection signal="mouse_entered" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab/MyLevelsCollision" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab/MyLevelsCollision" method="_on_mouse_exited"]
+[connection signal="pressed" from="Options/CreateButton" to="." method="_on_create_button_pressed"]
 [connection signal="pressed" from="Options/LevelFolderButton" to="." method="_on_level_folder_button_pressed"]
 [connection signal="pressed" from="RefreshLevelsButton" to="." method="_on_refresh_levels_button_pressed"]
