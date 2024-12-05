@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b8vqrsukiwtx0"]
 
-[ext_resource type="Texture2D" uid="uid://x474w8lkkn43" path="res://asset/sprites/gameplay/terrain.png" id="1_0fkom"]
+[ext_resource type="Texture2D" uid="uid://x474w8lkkn43" path="res://asset/sprite/gameplay/terrain.png" id="1_0fkom"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1teo"]
 resource_name = "terrain"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://t81mvpjh4g0i"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_7rkkl"]
-[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://asset/tiles/tilesheet.png" id="2_3tlab"]
+[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://asset/sprite/tile/tilesheet.png" id="2_3tlab"]
 [ext_resource type="Script" path="res://script/screen_wrap_triggers.gd" id="2_hr32a"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_jduqa"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="4_oqkom"]

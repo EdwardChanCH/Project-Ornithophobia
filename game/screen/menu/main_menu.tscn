@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://vkvs2gtr8dpu"]
 
-[ext_resource type="Texture2D" uid="uid://p54crqw1ykai" path="res://assets/sprites/test_logo.png" id="1_wwo21"]
-[ext_resource type="Texture2D" uid="uid://bdoph3cvti204" path="res://assets/sprites/bird.png" id="2_u64jl"]
+[ext_resource type="Texture2D" uid="uid://p54crqw1ykai" path="res://asset/sprite/test_logo.png" id="1_wwo21"]
+[ext_resource type="Texture2D" uid="uid://bdoph3cvti204" path="res://asset/sprite/bird.png" id="2_u64jl"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

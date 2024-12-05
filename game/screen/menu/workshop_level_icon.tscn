@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://dqg5ruy6jaubx"]
 
-[ext_resource type="Script" path="res://script/menus/level_select/workshop_level_icon.gd" id="1_n52tw"]
-[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprites/default_texture.png" id="2_hwi28"]
-[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="2_ltwxi"]
-[ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://asset/sprites/menu/user-solid.svg" id="4_fxfpi"]
-[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://asset/sprites/menu/crown icon.png" id="5_rspec"]
-[ext_resource type="Texture2D" uid="uid://coasakkkc5cwv" path="res://asset/sprites/menu/play-solid.svg" id="6_br2j0"]
-[ext_resource type="Texture2D" uid="uid://bfo21xarqesaw" path="res://asset/sprites/menu/wrench-solid.svg" id="7_o7xup"]
+[ext_resource type="Script" path="res://script/menu/level_select/workshop_level_icon.gd" id="1_n52tw"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprite/default_texture.png" id="2_hwi28"]
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://style/fonts/dogicabold.ttf" id="2_ltwxi"]
+[ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://asset/sprite/menu/user-solid.svg" id="4_fxfpi"]
+[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://asset/sprite/menu/crown icon.png" id="5_rspec"]
+[ext_resource type="Texture2D" uid="uid://coasakkkc5cwv" path="res://asset/sprite/menu/play-solid.svg" id="6_br2j0"]
+[ext_resource type="Texture2D" uid="uid://bfo21xarqesaw" path="res://asset/sprite/menu/wrench-solid.svg" id="7_o7xup"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0hx"]
 bg_color = Color(0.882353, 0.882353, 0.882353, 1)

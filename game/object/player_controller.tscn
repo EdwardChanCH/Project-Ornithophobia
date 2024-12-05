@@ -1,12 +1,12 @@
 [gd_scene load_steps=32 format=3 uid="uid://cmcgj8vwugx0i"]
 
-[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://asset/sprites/gameplay/jacob_v2.png" id="1_yn0ee"]
-[ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://asset/sprites/gameplay/idle.png" id="3_y7hit"]
-[ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://asset/sprites/gameplay/idleAir.png" id="4_xupyp"]
-[ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://asset/sprites/gameplay/run.png" id="5_myyve"]
-[ext_resource type="Texture2D" uid="uid://c8swskw4scmwd" path="res://asset/sprites/gameplay/idleArms.png" id="6_b8ksx"]
-[ext_resource type="Texture2D" uid="uid://cu68hrjd3u332" path="res://asset/sprites/gameplay/idleairArms.png" id="7_vwd3g"]
-[ext_resource type="Texture2D" uid="uid://d307ssje2iyn3" path="res://asset/sprites/gameplay/runArms.png" id="8_unw1c"]
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://asset/sprite/gameplay/jacob_v2.png" id="1_yn0ee"]
+[ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://asset/sprite/gameplay/idle.png" id="3_y7hit"]
+[ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://asset/sprite/gameplay/idleAir.png" id="4_xupyp"]
+[ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://asset/sprite/gameplay/run.png" id="5_myyve"]
+[ext_resource type="Texture2D" uid="uid://c8swskw4scmwd" path="res://asset/sprite/gameplay/idleArms.png" id="6_b8ksx"]
+[ext_resource type="Texture2D" uid="uid://cu68hrjd3u332" path="res://asset/sprite/gameplay/idleairArms.png" id="7_vwd3g"]
+[ext_resource type="Texture2D" uid="uid://d307ssje2iyn3" path="res://asset/sprite/gameplay/runArms.png" id="8_unw1c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2dk60"]
 animations = [{

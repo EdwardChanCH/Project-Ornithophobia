@@ -20,8 +20,12 @@ subfolders = [os.path.relpath(root).replace("\\", "/") + "/" for (root, dirs, fi
 if "src/gen/" in subfolders:
     subfolders.remove("src/gen/") # exclude the folder of "doc_data.gen.cpp", or else SCons would crash
 
+# Specify compiler's source file path
 env.Append(CPPPATH=subfolders)
-env.Append(CCFLAGS=["/EHsc"]) # Specify compiler's exception handling model
+
+# Specify compiler's exception handling model
+# Specify compiler's object file format limit
+env.Append(CCFLAGS=["/EHsc", "/bigobj"])
 
 sources = []
 for d in subfolders:

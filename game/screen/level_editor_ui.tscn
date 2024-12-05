@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://db00fhsn58v7m"]
 
-[ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
-[ext_resource type="Texture2D" uid="uid://dtxpkm1olj4pn" path="res://asset/image/grid.png" id="2_hcpxa"]
-[ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/sound/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
+[ext_resource type="Script" path="res://script/level_editor_ui.gd" id="1_f5a73"]
+[ext_resource type="Texture2D" uid="uid://dtxpkm1olj4pn" path="res://asset/sprite/level_editor/grid.png" id="2_hcpxa"]
+[ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/audio/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
 [ext_resource type="PackedScene" uid="uid://ccjs3sart8d6f" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
 
 

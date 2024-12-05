@@ -26,7 +26,7 @@ using namespace godot;
 void SceneManager::_bind_methods() {
     ClassDB::bind_static_method("SceneManager", D_METHOD("get_instance"), &SceneManager::get_instance);
     ClassDB::bind_method(D_METHOD("import_scene_tscn", "filepath"), &SceneManager::import_scene_tscn);
-    ClassDB::bind_method(D_METHOD("load_new_scene_node", "scene_tree", "packed_scene", "new_scene_node"), &SceneManager::load_new_scene_node);
+    ClassDB::bind_method(D_METHOD("load_new_scene_node", "scene_tree", "filepath", "new_scene_node"), &SceneManager::load_new_scene_node);
     ClassDB::bind_method(D_METHOD("load_new_scene", "scene_tree", "filepath"), &SceneManager::load_new_scene);
     ClassDB::bind_method(D_METHOD("load_previous_scene", "scene_tree"), &SceneManager::load_previous_scene);
     ClassDB::bind_method(D_METHOD("_debug"), &SceneManager::_debug);
