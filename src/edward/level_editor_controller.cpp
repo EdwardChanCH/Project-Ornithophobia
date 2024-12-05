@@ -302,6 +302,7 @@ void LevelEditorController::load_level(String filepath) {
 
 void LevelEditorController::save_level(String filepath) {
     if ((is_level_loaded()) && (filepath.length() > 0)) {
+        filepath = filepath.replace("res://", "user://");
         level_filepath = BASE_FILEPATH(filepath);
         Level::export_level_tscn(filepath, level_node);
     } else {
@@ -312,14 +313,14 @@ void LevelEditorController::save_level(String filepath) {
 void LevelEditorController::quick_load_level() {
     if (has_quick_saved) {
         action_index = quick_save_action_index;
-        load_level(QUICK_FILEPATH(level_filepath));
+        load_level(QUICK_FILEPATH(level_filepath.replace("res://", "user://")));
     }
 }
 
 void LevelEditorController::quick_save_level() {
     has_quick_saved = true;
     quick_save_action_index = action_index;
-    save_level(QUICK_FILEPATH(level_filepath));
+    save_level(QUICK_FILEPATH(level_filepath.replace("res://", "user://")));
 }
 
 void LevelEditorController::unload_level() {

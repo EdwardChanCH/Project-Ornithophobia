@@ -25,8 +25,8 @@ namespace godot {
 
 	private:
 		const String ui_filepath = "res://screen/level_editor_ui.tscn";
-		const String playtest_filepath = "res://screen/playtest.tscn";
 		const int default_undo_limit = 500;
+		const String default_level_filepath = "res://level/level_default_box.tscn";
 
 		Ref<PackedScene> ui_scene;
 		Node * ui_node;
@@ -85,7 +85,7 @@ namespace godot {
 
 		void add_tile(Vector2 mouse_pos);
 		void remove_tile(Vector2 mouse_pos);
-		void replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags); // TODO
+		void replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags);
 		void add_scene_object(Vector2 mouse_pos, String list_name, String scene_path);
 		void add_player(Vector2 mouse_pos);
 		void add_enemy(Vector2 mouse_pos);
@@ -93,8 +93,6 @@ namespace godot {
 
 		void _test_action(String s, int n);
 		void _debug();
-
-		const String default_level_filepath = "res://level/level_default_empty.tscn";
 	};
 
 } // namespace godot

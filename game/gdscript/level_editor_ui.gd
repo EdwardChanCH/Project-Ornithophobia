@@ -29,9 +29,10 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 @export var camera_node: Camera2D
 @export var menu_node: Control
 @export var grid_layer: ParallaxLayer
-@export var help_popup_node: AcceptDialog
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
+@export var help_popup_node: AcceptDialog
+@export var debug_popup_node: AcceptDialog
 @export var bgm_player_node: AudioStreamPlayer
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
@@ -40,9 +41,13 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 func _ready() -> void:
-	# TODO
-	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
-	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
+	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))	# TODO
+	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))	# TODO
+	
+	DirAccess.make_dir_recursive_absolute("user://level")
+	DirAccess.make_dir_recursive_absolute("user://level/story")
+	DirAccess.make_dir_recursive_absolute("user://level/user")
+	DirAccess.make_dir_recursive_absolute("user://level/workshop")
 	pass
 
 
@@ -168,6 +173,11 @@ func _on_playtest_button_pressed() -> void:
 	pass
 
 
+func _on_help_button_pressed() -> void:
+	help_popup_node.set_visible(true)
+	pass
+
+
 func _on_debug_scene_manager_button_pressed() -> void:
 	SceneManager.get_instance()._debug()
 	pass
@@ -182,17 +192,6 @@ func _on_test_add_scene_button_pressed() -> void:
 	print("Debug: Changing scene to Level Editor (itself)...")
 	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor.tscn")
 	pass
-
-
-func _on_undo_button_pressed() -> void:
-	undo_button_pressed.emit()
-	pass
-
-
-func _on_redo_button_pressed() -> void:
-	redo_button_pressed.emit()
-	pass
-
 
 func _on_test_action_1_button_pressed() -> void:
 	test_action_button_pressed.emit("Do", 1)
@@ -209,12 +208,30 @@ func _on_test_action_3_button_pressed() -> void:
 	pass
 
 
-func _on_help_button_pressed() -> void:
-	help_popup_node.set_visible(true)
+func _on_show_user_directory_button_pressed() -> void:
+	debug_popup_node.set_text("User Data Directory: \n" + OS.get_user_data_dir())
+	debug_popup_node.set_visible(true)
+	pass
+
+
+func _on_undo_button_pressed() -> void:
+	undo_button_pressed.emit()
+	pass
+
+
+func _on_redo_button_pressed() -> void:
+	redo_button_pressed.emit()
+	pass
+
+
+func _on_load_example_level_button_pressed() -> void:
+	load_level_popup_node.access = FileDialog.ACCESS_RESOURCES
+	load_level_popup_node.set_visible(true)
 	pass
 
 
 func _on_load_level_button_pressed() -> void:
+	load_level_popup_node.access = FileDialog.ACCESS_USERDATA
 	load_level_popup_node.set_visible(true)
 	pass
 
@@ -226,6 +243,7 @@ func _on_load_level_popup_file_selected(path: String) -> void:
 
 
 func _on_save_level_button_pressed() -> void:
+	save_level_popup_node.access = FileDialog.ACCESS_USERDATA
 	save_level_popup_node.set_visible(true)
 	pass
 
@@ -252,6 +270,12 @@ func _on_reload_level_button_pressed() -> void:
 
 func _on_unload_level_button_pressed() -> void:
 	unload_level_button_pressed.emit()
+	camera_node.set_position(Vector2(0, 0))
+	pass
+
+
+func _on_reset_level_button_pressed() -> void:
+	load_level_path_selected.emit("res://level/level_default_box.tscn")
 	camera_node.set_position(Vector2(0, 0))
 	pass
 
