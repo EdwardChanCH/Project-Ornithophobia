@@ -1,9 +1,11 @@
 extends Control
 
 var current_tab = "custom"
-
+var regex = RegEx.new()
+const LEVEL_NAME_PATTERN_RE = ".*_quicksave[.]tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	regex.compile(LEVEL_NAME_PATTERN_RE)
 	reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
 
 func reload_levels(dir_path):
@@ -14,6 +16,9 @@ func reload_levels(dir_path):
 	%LevelContainer.call_deferred("add_child", scroll_buffer)
 	var num_children = 0
 	for level_path in DirAccess.get_files_at(dir_path):
+		if (regex.search(level_path)):
+			continue
+		
 		var levelBannerScene = load("res://screen/menu/workshop_level_icon.tscn")
 		var levelBannerInstance: Control = levelBannerScene.instantiate()
 		%LevelContainer.call_deferred("add_child", levelBannerInstance)
