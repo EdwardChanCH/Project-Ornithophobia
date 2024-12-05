@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TestIO" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://script/menus/level_select/test_io.gd" id="1_xa2p3"]
+[ext_resource type="Script" path="res://script/menu/level_select/test_io.gd" id="1_xa2p3"]
 
 [resource]
 script = ExtResource("1_xa2p3")

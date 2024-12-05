@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://t81mvpjh4g0i"]
 
-[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://assets/sprites/gameplay/jacob_v2.png" id="1_166wb"]
+[ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://asset/sprite/gameplay/jacob_v2.png" id="1_166wb"]
 [ext_resource type="Script" path="res://main.gd" id="1_fg7lr"]
-[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://assets/tiles/tilesheet.png" id="2_3tlab"]
+[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://asset/sprite/tile/tilesheet.png" id="2_3tlab"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
 font_size = 12

@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://5q6uva2ujhs"]
 
-[ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://ui/themes/level_icon_stylebox.tres" id="1_5kc1e"]
-[ext_resource type="Script" path="res://script/menus/level_select/level_icon.gd" id="1_uo43d"]
-[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprites/default_texture.png" id="2_2w5g6"]
-[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="3_vt7lt"]
-[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://asset/sprites/menu/no_rank_icon.png" id="4_f5hha"]
-[ext_resource type="Script" path="res://script/menus/level_select/level_icon_collision.gd" id="5_vrg2v"]
+[ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://style/themes/level_icon_stylebox.tres" id="1_5kc1e"]
+[ext_resource type="Script" path="res://script/menu/level_select/level_icon.gd" id="1_uo43d"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprite/default_texture.png" id="2_2w5g6"]
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://style/fonts/dogicabold.ttf" id="3_vt7lt"]
+[ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://asset/sprite/menu/no_rank_icon.png" id="4_f5hha"]
+[ext_resource type="Script" path="res://script/menu/level_select/level_icon_collision.gd" id="5_vrg2v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo5w1"]
 bg_color = Color(1, 1, 1, 1)
