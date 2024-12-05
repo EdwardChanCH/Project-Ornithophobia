@@ -23,8 +23,8 @@ namespace godot {
 		static void _bind_methods(); // Must be declared.
 
     private:
-        Ref<PackedScene> debugScene;
-        DebugController* debugInstance;
+        Ref<PackedScene> levelUIScene;
+        Control* levelUIInstance;
 		Ref<PackedScene> pauseScene;
 		Control* pauseInstance;
 

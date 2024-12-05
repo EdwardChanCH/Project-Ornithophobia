@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dqg5ruy6jaubx"]
+[gd_scene load_steps=19 format=3 uid="uid://dqg5ruy6jaubx"]
 
 [ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="1_3r5vm"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/workshop_level_icon.gd" id="1_n52tw"]
 [ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="2_ltwxi"]
 [ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://assets/sprites/menu/user-solid.svg" id="3_fsx8k"]
 [ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://assets/sprites/menu/crown icon.png" id="5_js56h"]
@@ -97,6 +98,7 @@ offset_right = -688.0
 offset_bottom = -952.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_n52tw")
 
 [node name="Banner" type="Panel" parent="."]
 layout_mode = 0
@@ -125,6 +127,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_t37d8")
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_3r5vm")
+expand_mode = 1
 
 [node name="LevelDetails" type="Control" parent="Banner"]
 anchors_preset = 0
@@ -212,3 +215,6 @@ theme_override_font_sizes/font_size = 36
 theme_override_icons/icon = SubResource("CompressedTexture2D_mqu0t")
 text = "EDIT"
 icon = ExtResource("6_2rfx7")
+
+[connection signal="pressed" from="Banner/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Banner/EditButton" to="." method="_on_edit_button_pressed"]

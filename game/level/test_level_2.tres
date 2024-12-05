@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TestIO" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/menus/level_select/test_io.gd" id="1_pfpcn"]
+
+[resource]
+script = ExtResource("1_pfpcn")
+level_name = "Test Level 2"
+rank_times = ["00:23.00", "00:27.00", "00:30.00"]
+best_time = "00:16.31"
+icon_path = "res://assets/sprites/menu/test/test_level_icon.png"
+level_path = "res://scenes/main.tscn"
+rank_img = "res://assets/sprites/menu/gold_rank_icon.png"

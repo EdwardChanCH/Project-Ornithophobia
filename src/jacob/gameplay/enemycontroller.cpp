@@ -52,6 +52,7 @@ _GDEXPORT_SET_SUFFIX
 void EnemyController::_ready() {
     deathAnim = Node::cast_to<AnimatedSprite2D>(find_child("DeathAnimation"));
     deathAnim->stop();
+    // add connect to player to push them back
 }
 
 

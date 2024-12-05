@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://5q6uva2ujhs"]
+[gd_scene load_steps=10 format=3 uid="uid://5q6uva2ujhs"]
 
 [ext_resource type="StyleBox" uid="uid://b1kng5vq2qnwm" path="res://ui/themes/level_icon_stylebox.tres" id="1_5kc1e"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/level_icon.gd" id="1_uo43d"]
 [ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="2_2w5g6"]
 [ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://ui/fonts/dogicabold.ttf" id="3_vt7lt"]
 [ext_resource type="Texture2D" uid="uid://cqaioyx831mus" path="res://assets/sprites/menu/no_rank_icon.png" id="4_f5hha"]
@@ -30,6 +31,7 @@ offset_right = 120.0
 offset_bottom = 91.0
 scale = Vector2(3, 3)
 mouse_filter = 2
+script = ExtResource("1_uo43d")
 
 [node name="Border" type="Panel" parent="."]
 unique_name_in_owner = true

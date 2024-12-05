@@ -70,6 +70,6 @@ void Debug::add_debug_property(String name, Variant value) {
 /**
  * @brief Returns the dictionary of tracked debug properties
  */
-Dictionary *Debug::get_debug_properties() {
-    return debugProperties;
+Dictionary Debug::get_debug_properties() {
+    return *debugProperties;
 }

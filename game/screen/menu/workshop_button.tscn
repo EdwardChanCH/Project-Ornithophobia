@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://buo65exfuyhy8"]
+[gd_scene load_steps=8 format=3 uid="uid://buo65exfuyhy8"]
 
 [ext_resource type="Script" path="res://workshop_button.gd" id="1_fiijd"]
 [ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://assets/sprites/default_texture.png" id="2_xmbfh"]
 [ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://ui/fonts/OpenSans/OpenSans-Bold.ttf" id="3_1s35d"]
-[ext_resource type="Script" path="res://scripts/menus/level_select/file_access_manager.gd" id="4_52dvy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjgp"]
 
@@ -45,20 +44,10 @@ texture = ExtResource("2_xmbfh")
 expand_mode = 1
 
 [node name="ButtonText" type="Label" parent="."]
+layout_mode = 0
 offset_top = 128.0
 offset_right = 320.0
 offset_bottom = 162.0
 text = "Text"
 label_settings = SubResource("LabelSettings_qpurr")
 horizontal_alignment = 1
-
-[node name="FileAccessManager" type="Node" parent="."]
-script = ExtResource("4_52dvy")
-
-[node name="FileDialogUpload" type="FileDialog" parent="FileAccessManager"]
-title = "Open File(s)"
-ok_button_text = "Open"
-file_mode = 1
-access = 2
-
-[connection signal="file_selected" from="FileAccessManager/FileDialogUpload" to="FileAccessManager" method="_on_file_dialog_upload_file_selected"]

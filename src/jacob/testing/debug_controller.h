@@ -24,7 +24,7 @@ namespace godot {
     private:
         VBoxContainer *property_container;
 		Label *debugText;
-		Dictionary *properties;
+		Dictionary properties;
 
 	public:
 		DebugController();

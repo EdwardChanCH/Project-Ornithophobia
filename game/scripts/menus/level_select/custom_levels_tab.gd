@@ -24,7 +24,6 @@ func _on_custom_levels_collision_mouse_clicked() -> void:
 		z_index = 1
 		position.y -= offset
 
-
 func _on_my_levels_tab_activating() -> void:
 	is_active = false
 	position.y += offset

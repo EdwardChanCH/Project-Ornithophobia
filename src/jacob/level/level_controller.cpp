@@ -33,9 +33,9 @@ LevelController::~LevelController() {
 void LevelController::_ready() {
     if (!Engine::get_singleton()->is_editor_hint()) {
         set_process_mode(ProcessMode::PROCESS_MODE_ALWAYS);
-        debugScene = ResourceLoader::get_singleton()->load("res://screen/debug.tscn");
-        debugInstance = Node::cast_to<DebugController>(debugScene->instantiate());
-        get_parent()->find_child("UI")->call_deferred("add_child", debugInstance);
+        levelUIScene = ResourceLoader::get_singleton()->load("res://screen/level_ui.tscn");
+        levelUIInstance = Node::cast_to<Control>(levelUIScene->instantiate());
+        get_parent()->find_child("UI")->call_deferred("add_child", levelUIInstance);
 
         pauseScene = ResourceLoader::get_singleton()->load("res://screen/menu/pause_menu.tscn");
     }
@@ -48,12 +48,9 @@ void LevelController::_input(const Ref<InputEvent> &event) {
     if (event->is_action_pressed("escape")) {
         get_tree()->set_pause(!get_tree()->is_paused());
         if (get_tree()->is_paused()) {
-            UtilityFunctions::print("ay we paused");
             pauseInstance = Node::cast_to<Control>(pauseScene->instantiate());
-            // pauseInstance->set_z_index();
             get_parent()->find_child("UI")->call_deferred("add_child", pauseInstance);
         } else {
-            UtilityFunctions::print("ay we unpaused");
             pauseInstance->queue_free();
         }
     }
@@ -64,7 +61,7 @@ void LevelController::_input(const Ref<InputEvent> &event) {
  */
 void LevelController::_exit_tree() {
     if (!Engine::get_singleton()->is_editor_hint()) {
-        debugInstance->queue_free();
+        levelUIInstance->queue_free();
         pauseInstance->queue_free();
     }
 }

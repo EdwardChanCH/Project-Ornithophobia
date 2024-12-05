@@ -42,10 +42,10 @@ void DebugController::_ready() {
  */
 void DebugController::_process(double _delta) {
 	// Grabs all the values from the debug properties dictionary and adds/updates them on the debug menu
-	if (!properties->is_empty()) {
-		for (int i = 0; i < properties->size(); i++) {
-			String name = UtilityFunctions::str(properties->keys().operator[](i));
-			String value = UtilityFunctions::str(properties->operator[](name));
+	if (!properties.is_empty()) {
+		for (int i = 0; i < properties.size(); i++) {
+			String name = UtilityFunctions::str(properties.keys().operator[](i));
+			String value = UtilityFunctions::str(properties.operator[](name));
 
 			debugText = Node::cast_to<Label>(property_container->find_child(name, true, false));
 

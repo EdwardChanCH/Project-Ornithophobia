@@ -1,7 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8gfrgrdllnwb"]
+[gd_scene load_steps=28 format=3 uid="uid://c8gfrgrdllnwb"]
 
 [ext_resource type="Script" path="res://scripts/menus/level_select/back_button.gd" id="1_2ewqt"]
-[ext_resource type="PackedScene" uid="uid://dqg5ruy6jaubx" path="res://screen/menu/workshop_level_icon.tscn" id="1_ty507"]
+[ext_resource type="Script" path="res://scripts/menus/level_select/workshop_level_select.gd" id="1_dsykr"]
 [ext_resource type="StyleBox" uid="uid://odo4d57gdcgf" path="res://ui/themes/workshop_level_select_tab_active.tres" id="3_oln5m"]
 [ext_resource type="Script" path="res://scripts/menus/level_select/custom_levels_tab.gd" id="4_3ytv8"]
 [ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://ui/fonts/OpenSans/OpenSans-Bold.ttf" id="5_ulta0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://buo65exfuyhy8" path="res://screen/menu/workshop_button.tscn" id="11_lodyv"]
 [ext_resource type="Texture2D" uid="uid://m75oh3fub80k" path="res://assets/sprites/menu/upload.svg" id="12_ypmri"]
 [ext_resource type="Texture2D" uid="uid://dowsvtwksf6p8" path="res://assets/sprites/menu/folder-open.svg" id="13_32qkg"]
+[ext_resource type="Texture2D" uid="uid://bqx7o3dve6mcn" path="res://assets/sprites/menu/reload.svg" id="14_eaw23"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtgoc"]
 bg_color = Color(1, 1, 1, 1)
@@ -40,6 +41,11 @@ VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_kma4q")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_bcfav")
 VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cxl6c")
 
+[sub_resource type="LabelSettings" id="LabelSettings_3s07k"]
+font = ExtResource("5_ulta0")
+font_size = 64
+font_color = Color(0, 0, 0, 0.278431)
+
 [sub_resource type="ImageTexture" id="ImageTexture_w0fel"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5e0bf"]
@@ -50,6 +56,12 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1gxv"]
 size = Vector2(364, 108)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_huam1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hbpbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewyu2"]
+
 [node name="WorkshopLevelSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -58,6 +70,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_dsykr")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
@@ -87,35 +100,20 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelViewer/ScrollContainer/MarginContainer"]
+[node name="LevelContainer" type="VBoxContainer" parent="LevelViewer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ScrollBufferTop" type="ColorRect" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="WorkshopLevelIcon" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="WorkshopLevelIcon2" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="WorkshopLevelIcon3" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="WorkshopLevelIcon4" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="WorkshopLevelIcon5" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="WorkshopLevelIcon6" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_ty507")]
-layout_mode = 2
-
-[node name="ScrollBufferBottom" type="ColorRect" parent="LevelViewer/ScrollContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
+[node name="NoLevelsFound" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 654.0
+offset_top = 488.0
+offset_right = 1151.0
+offset_bottom = 576.0
+text = "No levels found"
+label_settings = SubResource("LabelSettings_3s07k")
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0
@@ -210,7 +208,29 @@ layout_mode = 2
 button_icon = ExtResource("13_32qkg")
 button_text = "OPEN LEVEL FOLDER"
 
+[node name="RefreshLevelsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1272.0
+offset_top = 107.0
+offset_right = 1536.0
+offset_bottom = 154.0
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/font_color = Color(0.466667, 0.466667, 0.466667, 1)
+theme_override_colors/icon_normal_color = Color(0.466667, 0.466667, 0.466667, 1)
+theme_override_colors/icon_pressed_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_colors/icon_hover_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/hover = SubResource("StyleBoxEmpty_huam1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hbpbg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ewyu2")
+text = "Refresh Levels"
+icon = ExtResource("14_eaw23")
+expand_icon = true
+
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]
+[connection signal="activating" from="CustomLevelsTab" to="." method="_on_custom_levels_tab_activating"]
 [connection signal="activating" from="CustomLevelsTab" to="MyLevelsTab" method="_on_custom_levels_tab_activating"]
 [connection signal="gui_input" from="CustomLevelsTab" to="CustomLevelsTab" method="_on_gui_input"]
 [connection signal="mouse_entered" from="CustomLevelsTab" to="CustomLevelsTab" method="_on_mouse_entered"]
@@ -218,9 +238,12 @@ button_text = "OPEN LEVEL FOLDER"
 [connection signal="mouse_clicked" from="CustomLevelsTab/CustomLevelsCollision" to="CustomLevelsTab" method="_on_custom_levels_collision_mouse_clicked"]
 [connection signal="mouse_entered" from="CustomLevelsTab/CustomLevelsCollision" to="CustomLevelsTab/CustomLevelsCollision" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CustomLevelsTab/CustomLevelsCollision" to="CustomLevelsTab/CustomLevelsCollision" method="_on_mouse_exited"]
+[connection signal="activating" from="MyLevelsTab" to="." method="_on_my_levels_tab_activating"]
 [connection signal="activating" from="MyLevelsTab" to="CustomLevelsTab" method="_on_my_levels_tab_activating"]
 [connection signal="mouse_entered" from="MyLevelsTab" to="MyLevelsTab" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MyLevelsTab" to="MyLevelsTab" method="_on_mouse_exited"]
 [connection signal="mouse_clicked" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab" method="_on_my_levels_collision_mouse_clicked"]
 [connection signal="mouse_entered" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab/MyLevelsCollision" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MyLevelsTab/MyLevelsCollision" to="MyLevelsTab/MyLevelsCollision" method="_on_mouse_exited"]
+[connection signal="pressed" from="Options/LevelFolderButton" to="." method="_on_level_folder_button_pressed"]
+[connection signal="pressed" from="RefreshLevelsButton" to="." method="_on_refresh_levels_button_pressed"]

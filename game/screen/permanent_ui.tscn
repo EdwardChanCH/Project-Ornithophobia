@@ -17,9 +17,9 @@ mouse_filter = 2
 
 [node name="VersionText" type="Label" parent="CanvasLayer"]
 offset_left = 1640.0
-offset_top = 976.0
+offset_top = 1000.0
 offset_right = 1912.0
-offset_bottom = 1048.0
+offset_bottom = 1072.0
 text = "UntitledShotgunGame
 Pre-Alpha - v0.3.0.3"
 label_settings = SubResource("LabelSettings_cc0l7")

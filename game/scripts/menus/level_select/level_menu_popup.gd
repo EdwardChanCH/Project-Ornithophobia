@@ -1,13 +1,13 @@
 extends Control
 
 
-var level_path = ""
-const DIR_PATH = "user://levels/"
+@export var level_path = ""
+const DIR_PATH = "res://level/"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for level in DirAccess.get_files_at("user://levels/"):
-		if (level == Global.cur_level_popup_path):
+	for level in DirAccess.get_files_at(DIR_PATH):
+		if (level == level_path):
 			load_level(DIR_PATH + level)
 			Global.data_index = Global.level_data.find(level)
 			break
@@ -15,16 +15,21 @@ func _ready() -> void:
 
 func load_level(level):
 	if ResourceLoader.exists(level):
-		var test_level = ResourceLoader.load(level)
-		if test_level is TestIO:
-			%LevelTitle.text = test_level.level_name
-			%GoldTime.text = test_level.rank_times[0]
-			%SilverTime.text = test_level.rank_times[1]
-			%BronzeTime.text = test_level.rank_times[2]
-			%BestTime.text = test_level.best_time
-			%LevelIcon.texture = load(test_level.icon_path)
-			%Rank.texture = load(test_level.rank_img)
-			level_path = test_level.level_path
+		var level_scene = load(level)
+		var level_instance: Level = level_scene.instantiate()
+		if level_instance is Level:
+			var level_metadata: Dictionary = level_instance.get_level_info()
+			%LevelTitle.text = level_metadata.get("name", "null")
+			var rank_times = level_metadata.get("rank_times", null)
+			if (rank_times != null):
+				%GoldTime.text = rank_times[0]
+				%SilverTime.text = rank_times[1]
+				%BronzeTime.text = rank_times[2]
+			%BestTime.text = level_metadata.get("best_time", "00:00.00")
+			%LevelIcon.texture = load(level_metadata.get("level_icon", "res://assets/sprites/default_texture.png"))
+			%Rank.texture = load(level_metadata.get("rank_icon", "res://assets/sprites/default_texture.png"))
+			level_path = level
+		level_instance.queue_free()
 #
 #
 func _on_play_button_pressed() -> void:
