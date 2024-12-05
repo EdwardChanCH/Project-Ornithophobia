@@ -26,8 +26,8 @@ func load_level(level):
 				%SilverTime.text = rank_times[1]
 				%BronzeTime.text = rank_times[2]
 			%BestTime.text = level_metadata.get("best_time", "00:00.00")
-			%LevelIcon.texture = load(level_metadata.get("level_icon", "res://asset/sprites/default_texture.png"))
-			%Rank.texture = load(level_metadata.get("rank_icon", "res://asset/sprites/default_texture.png"))
+			%LevelIcon.texture = load(level_metadata.get("level_icon", "res://asset/sprite/default_texture.png"))
+			%Rank.texture = load(level_metadata.get("rank_icon", "res://asset/sprite/default_texture.png"))
 			level_path = level
 		level_instance.queue_free()
 #

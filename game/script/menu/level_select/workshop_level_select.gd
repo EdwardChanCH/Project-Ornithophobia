@@ -61,5 +61,5 @@ func _on_refresh_levels_button_pressed() -> void:
 
 
 func _on_create_button_pressed() -> void:
-	# Create new level editor instance here
-	pass # Replace with function body.
+	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor.tscn")
+	pass # TODO

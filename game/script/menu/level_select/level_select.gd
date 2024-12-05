@@ -18,8 +18,8 @@ func _ready() -> void:
 			var level_instance: Level = level_scene.instantiate()
 			var level_metadata: Dictionary = level_instance.get_level_info()
 			levelIconInstance.find_child("LevelTitle").text = level_metadata.get("name", "null")
-			levelIconInstance.find_child("LevelIcon").texture = load(level_metadata.get("level_icon", "res://asset/sprites/default_texture.png"))
-			levelIconInstance.find_child("Rank").texture = load(level_metadata.get("rank_icon", "res://asset/sprites/default_texture.png"))
+			levelIconInstance.find_child("LevelIcon").texture = load(level_metadata.get("level_icon", "res://asset/sprite/default_texture.png"))
+			levelIconInstance.find_child("Rank").texture = load(level_metadata.get("rank_icon", "res://asset/sprite/default_texture.png"))
 			levelIconInstance.level_path = level_path
 			Global.level_data.append(level_path)
 			

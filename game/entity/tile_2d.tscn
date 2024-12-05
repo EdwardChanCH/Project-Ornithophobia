@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccjs3sart8d6f"]
 
 [ext_resource type="Texture2D" uid="uid://x474w8lkkn43" path="res://asset/sprite/gameplay/terrain.png" id="1_0a6yh"]
-[ext_resource type="Script" path="res://gdscript/tile_2d.gd" id="1_xvp2h"]
+[ext_resource type="Script" path="res://script/tile_2d.gd" id="1_xvp2h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btswy"]
 resource_local_to_scene = true
