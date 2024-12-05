@@ -15,6 +15,10 @@
 /*--------------------------------------------------*/
 // Add exposed header files here
 // #include ">_< headers_here >_<"
+#include "gdexample_1_new.h"
+#include "gdexample_1_old.h"
+#include "gdexample_2_new.h"
+#include "gdexample_2_old.h"
 #include "level_timer.h"
 #include "animation_controller.h"
 #include "iprototype.h"
@@ -47,6 +51,10 @@ void initialize_custom_module(ModuleInitializationLevel p_level) {
     /*--------------------------------------------------*/
     // Add exposed class names here
     // GDREGISTER_CLASS(>_< classes_here >_<);
+    GDREGISTER_CLASS(GDExample1New);
+    GDREGISTER_CLASS(GDExample1Old);
+    GDREGISTER_CLASS(GDExample2New);
+    GDREGISTER_CLASS(GDExample2Old);
     GDREGISTER_CLASS(LevelTimer);
     GDREGISTER_CLASS(AnimationController);
     GDREGISTER_ABSTRACT_CLASS(IPrototype);

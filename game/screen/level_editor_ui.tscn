@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/audio/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
 [ext_resource type="PackedScene" uid="uid://ccjs3sart8d6f" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
 
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
@@ -28,6 +27,18 @@ bgm_player_node = NodePath("BGMPlayer")
 camera_movement_scale = 2500.0
 camera_movement_multiplier = 5.0
 ghost_tile_node = NodePath("GhostTileEntity")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="GridLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1056)
+
+[node name="Grid" type="Sprite2D" parent="ParallaxBackground/GridLayer"]
+modulate = Color(1, 1, 1, 0.0392157)
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_hcpxa")
+centered = false
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -164,18 +175,6 @@ dialog_autowrap = true
 
 [node name="GhostTileEntity" parent="." instance=ExtResource("2_ryqqs")]
 modulate = Color(1, 1, 1, 0.313726)
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="GridLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1920, 1056)
-
-[node name="Grid" type="Sprite2D" parent="ParallaxBackground/GridLayer"]
-modulate = Color(1, 1, 1, 0.0392157)
-texture_repeat = 2
-scale = Vector2(3, 3)
-texture = ExtResource("2_hcpxa")
-centered = false
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_jom34")
