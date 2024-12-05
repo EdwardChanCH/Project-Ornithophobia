@@ -27,19 +27,21 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 @export var camera_node: Camera2D
-@export var ui_node: Control
+@export var menu_node: Control
+@export var grid_layer: ParallaxLayer
 @export var help_popup_node: AcceptDialog
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
 @export var bgm_player_node: AudioStreamPlayer
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
-
+@export var ghost_tile_node: Tile2D
 @onready var camera_movement: Vector2 = Vector2(0, 0)
 
 
 func _process(delta: float) -> void:
 	camera_node.translate(camera_movement * delta)
+	ghost_tile_node.position = get_viewport().get_mouse_position()
 	pass
 
 
@@ -263,7 +265,7 @@ func _on_bgm_player_finished() -> void:
 
 
 func _on_hide_ui_button_pressed() -> void:
-	ui_node.set_visible(!ui_node.is_visible())
+	menu_node.set_visible(!menu_node.is_visible())
 	pass
 
 
@@ -299,4 +301,9 @@ func _on_tile_cycle_previous_button_pressed() -> void:
 
 func _on_tile_cycle_next_button_pressed() -> void:
 	tile_cycle_button_pressed.emit(true)
+	pass
+
+
+func _on_grid_button_toggled(toggled_on: bool) -> void:
+	grid_layer.visible = toggled_on
 	pass

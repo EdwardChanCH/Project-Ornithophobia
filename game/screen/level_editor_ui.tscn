@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://db00fhsn58v7m"]
+[gd_scene load_steps=6 format=3 uid="uid://db00fhsn58v7m"]
 
 [ext_resource type="Script" path="res://gdscript/level_editor_ui.gd" id="1_f5a73"]
+[ext_resource type="Texture2D" uid="uid://dtxpkm1olj4pn" path="res://asset/image/grid.png" id="2_hcpxa"]
 [ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/sound/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
+[ext_resource type="PackedScene" uid="uid://ccjs3sart8d6f" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
-[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("camera_node", "ui_node", "help_popup_node", "load_level_popup_node", "save_level_popup_node", "bgm_player_node")]
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("camera_node", "menu_node", "grid_layer", "help_popup_node", "load_level_popup_node", "save_level_popup_node", "bgm_player_node", "ghost_tile_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -15,18 +17,54 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("1_f5a73")
 camera_node = NodePath("Camera")
-ui_node = NodePath("UIContainer/VBox0/MenuPanel")
+menu_node = NodePath("UIContainer/VBox0/MenuPanel")
+grid_layer = NodePath("ParallaxBackground/GridLayer")
 help_popup_node = NodePath("HelpPopup")
 load_level_popup_node = NodePath("LoadLevelPopup")
 save_level_popup_node = NodePath("SaveLevelPopup")
 bgm_player_node = NodePath("BGMPlayer")
 camera_movement_scale = 2500.0
 camera_movement_multiplier = 5.0
+ghost_tile_node = NodePath("GhostTileEntity")
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="GridLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1056)
+
+[node name="Grid" type="Sprite2D" parent="ParallaxBackground/GridLayer"]
+modulate = Color(1, 1, 1, 0.0392157)
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_hcpxa")
+centered = false
+
+[node name="LoadLevelPopup" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
+
+[node name="SaveLevelPopup" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Save Level File"
+initial_position = 1
+size = Vector2i(640, 360)
+min_size = Vector2i(640, 360)
+ok_button_text = "Save"
+dialog_hide_on_ok = true
+filters = PackedStringArray("*.tscn ; Level Files")
+show_hidden_files = true
 
 [node name="HelpPopup" type="AcceptDialog" parent="."]
 title = "Need Help?"
@@ -109,7 +147,7 @@ Ctrl + S
 Shift + L   or   Shift + O
 Shift + S
  
-Arrow Keys
+I ,  J , K , L
 Ctrl
 Shift
  
@@ -124,30 +162,11 @@ B
 ,
 ."
 
-[node name="LoadLevelPopup" type="FileDialog" parent="."]
-title = "Open a File"
-initial_position = 1
-size = Vector2i(640, 360)
-min_size = Vector2i(640, 360)
-ok_button_text = "Open"
-dialog_hide_on_ok = true
-file_mode = 0
-filters = PackedStringArray("*.tscn ; Level Files")
-show_hidden_files = true
-
-[node name="SaveLevelPopup" type="FileDialog" parent="."]
-auto_translate_mode = 1
-title = "Save Level File"
-initial_position = 1
-size = Vector2i(640, 360)
-min_size = Vector2i(640, 360)
-ok_button_text = "Save"
-dialog_hide_on_ok = true
-filters = PackedStringArray("*.tscn ; Level Files")
-show_hidden_files = true
-
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_jom34")
+
+[node name="GhostTileEntity" parent="." instance=ExtResource("2_ryqqs")]
+modulate = Color(1, 1, 1, 0.313726)
 
 [node name="SceneName" type="Label" parent="."]
 z_index = 1
@@ -377,6 +396,11 @@ step = 0.01
 tick_count = 5
 ticks_on_borders = true
 
+[node name="GridButton" type="CheckButton" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+layout_mode = 2
+button_pressed = true
+text = "Show Grid"
+
 [node name="Spacer1" type="Control" parent="UIContainer/VBox0/MenuPanel/HBox1"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -417,4 +441,5 @@ text = "Menu"
 [connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
 [connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
 [connection signal="value_changed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox6/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="toggled" from="UIContainer/VBox0/MenuPanel/HBox1/VBox6/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="pressed" from="UIContainer/VBox0/HideUIButton" to="." method="_on_hide_ui_button_pressed"]
