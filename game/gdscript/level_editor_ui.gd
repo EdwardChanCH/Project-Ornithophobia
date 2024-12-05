@@ -15,29 +15,52 @@ signal quick_save_level_button_pressed
 signal reload_level_button_pressed
 signal unload_level_button_pressed
 
+signal tile_flip_button_pressed(mode: int)
+signal tile_rotate_button_pressed(clockwise: bool)
+signal tile_cycle_button_pressed(next: bool)
+
 signal add_tile_button_pressed(mouse_pos: Vector2)
+signal remove_tile_button_pressed(mouse_pos: Vector2)
 signal add_player_button_pressed(mouse_pos: Vector2)
 signal add_enemy_button_pressed(mouse_pos: Vector2)
 signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
 @export var camera_node: Camera2D
-@export var ui_node: Control
+@export var menu_node: Control
+@export var grid_layer: ParallaxLayer
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
+@export var help_popup_node: AcceptDialog
+@export var debug_popup_node: AcceptDialog
 @export var bgm_player_node: AudioStreamPlayer
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
-
+@export var ghost_tile_node: Tile2D
 @onready var camera_movement: Vector2 = Vector2(0, 0)
+
+
+func _ready() -> void:
+	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))	# TODO
+	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))	# TODO
+	
+	DirAccess.make_dir_recursive_absolute("user://level")
+	DirAccess.make_dir_recursive_absolute("user://level/story")
+	DirAccess.make_dir_recursive_absolute("user://level/user")
+	DirAccess.make_dir_recursive_absolute("user://level/workshop")
+	pass
 
 
 func _process(delta: float) -> void:
 	camera_node.translate(camera_movement * delta)
+	ghost_tile_node.position = get_viewport().get_mouse_position()
 	pass
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("editor_back"):
+		_on_back_button_pressed()
+		
 	if event.is_action_pressed("editor_debug"):
 		_on_debug_level_editor_controller_button_pressed()
 		_on_debug_scene_manager_button_pressed()
@@ -76,20 +99,26 @@ func _input(event: InputEvent) -> void:
 		camera_movement /= camera_movement_multiplier
 		camera_movement_scale /= camera_movement_multiplier
 	
-	if event.is_action_pressed("editor_previous_rotation"):
-		pass
-	
-	if event.is_action_pressed("editor_next_rotation"):
-		pass
-	
 	if event.is_action_pressed("editor_flip_h"):
-		pass
+		_on_tile_flip_h_button_pressed()
 	
 	if event.is_action_pressed("editor_flip_v"):
-		pass
+		_on_tile_flip_v_button_pressed()
 	
 	if event.is_action_pressed("editor_flip_d"):
-		pass
+		_on_tile_flip_d_button_pressed()
+	
+	if event.is_action_pressed("editor_rotate_clockwise"):
+		_on_tile_rotate_c_button_pressed()
+	
+	if event.is_action_pressed("editor_rotate_counter_clockwise"):
+		_on_tile_rotate_cc_button_pressed()
+	
+	if event.is_action_pressed("editor_cycle_previous"):
+		_on_tile_cycle_previous_button_pressed()
+	
+	if event.is_action_pressed("editor_cycle_next"):
+		_on_tile_cycle_next_button_pressed()
 	
 	if event.is_action_pressed("editor_undo"):
 		_on_undo_button_pressed()
@@ -112,20 +141,25 @@ func _input(event: InputEvent) -> void:
 	pass
 
 
-# func _unhandled_key_input(event: InputEvent) -> void:
-	# Detect keyboard shortcut inputs
-	# pass
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
-	if event.is_action_pressed("editor_left_click"):
+	if event.is_action_pressed("editor_primary_click"):
 		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
-	if event.is_action_pressed("editor_right_click"):
-		add_entity_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+	if event.is_action_pressed("editor_secondary_click"):
+		remove_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
 	
+	pass
+
+
+func _on_tile_type_changed(atlas_coords: Vector2i) -> void:
+	ghost_tile_node.set_tile_type(atlas_coords)
+	pass
+
+
+func _on_tile_alt_changed(tile_alt: int) -> void:
+	ghost_tile_node.set_tile_alt(tile_alt)
 	pass
 
 
@@ -136,6 +170,11 @@ func _on_back_button_pressed() -> void:
 
 func _on_playtest_button_pressed() -> void:
 	playtest_button_pressed.emit()
+	pass
+
+
+func _on_help_button_pressed() -> void:
+	help_popup_node.set_visible(true)
 	pass
 
 
@@ -154,17 +193,6 @@ func _on_test_add_scene_button_pressed() -> void:
 	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor.tscn")
 	pass
 
-
-func _on_undo_button_pressed() -> void:
-	undo_button_pressed.emit()
-	pass
-
-
-func _on_redo_button_pressed() -> void:
-	redo_button_pressed.emit()
-	pass
-
-
 func _on_test_action_1_button_pressed() -> void:
 	test_action_button_pressed.emit("Do", 1)
 	pass
@@ -180,7 +208,30 @@ func _on_test_action_3_button_pressed() -> void:
 	pass
 
 
+func _on_show_user_directory_button_pressed() -> void:
+	debug_popup_node.set_text("User Data Directory: \n" + OS.get_user_data_dir())
+	debug_popup_node.set_visible(true)
+	pass
+
+
+func _on_undo_button_pressed() -> void:
+	undo_button_pressed.emit()
+	pass
+
+
+func _on_redo_button_pressed() -> void:
+	redo_button_pressed.emit()
+	pass
+
+
+func _on_load_example_level_button_pressed() -> void:
+	load_level_popup_node.access = FileDialog.ACCESS_RESOURCES
+	load_level_popup_node.set_visible(true)
+	pass
+
+
 func _on_load_level_button_pressed() -> void:
+	load_level_popup_node.access = FileDialog.ACCESS_USERDATA
 	load_level_popup_node.set_visible(true)
 	pass
 
@@ -192,6 +243,7 @@ func _on_load_level_popup_file_selected(path: String) -> void:
 
 
 func _on_save_level_button_pressed() -> void:
+	save_level_popup_node.access = FileDialog.ACCESS_USERDATA
 	save_level_popup_node.set_visible(true)
 	pass
 
@@ -222,6 +274,12 @@ func _on_unload_level_button_pressed() -> void:
 	pass
 
 
+func _on_reset_level_button_pressed() -> void:
+	load_level_path_selected.emit("res://level/level_default_box.tscn")
+	camera_node.set_position(Vector2(0, 0))
+	pass
+
+
 func _on_center_level_button_pressed() -> void:
 	camera_node.set_position(Vector2(0, 0))
 	pass
@@ -242,5 +300,45 @@ func _on_bgm_player_finished() -> void:
 
 
 func _on_hide_ui_button_pressed() -> void:
-	ui_node.set_visible(!ui_node.is_visible())
+	menu_node.set_visible(!menu_node.is_visible())
+	pass
+
+
+func _on_tile_flip_h_button_pressed() -> void:
+	tile_flip_button_pressed.emit(0)
+	pass
+
+
+func _on_tile_flip_v_button_pressed() -> void:
+	tile_flip_button_pressed.emit(1)
+	pass
+
+
+func _on_tile_flip_d_button_pressed() -> void:
+	tile_flip_button_pressed.emit(2)
+	pass
+
+
+func _on_tile_rotate_c_button_pressed() -> void:
+	tile_rotate_button_pressed.emit(true)
+	pass
+
+
+func _on_tile_rotate_cc_button_pressed() -> void:
+	tile_rotate_button_pressed.emit(false)
+	pass
+
+
+func _on_tile_cycle_previous_button_pressed() -> void:
+	tile_cycle_button_pressed.emit(false)
+	pass
+
+
+func _on_tile_cycle_next_button_pressed() -> void:
+	tile_cycle_button_pressed.emit(true)
+	pass
+
+
+func _on_grid_button_toggled(toggled_on: bool) -> void:
+	grid_layer.visible = toggled_on
 	pass
