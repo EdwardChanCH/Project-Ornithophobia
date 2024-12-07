@@ -1,10 +1,8 @@
 [gd_scene load_steps=4 format=4 uid="uid://bdtl35xbha2fd"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_343ou"]
-[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_eyoy0"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
-bounce = 1.0
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_x8x21"]
+[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_gy8vc"]
 
 [node name="_Level_221" type="Level"]
 level_info = {
@@ -14,7 +12,6 @@ level_info = {
 "rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
 "rank_times": ["00:30.00", "00:45.00", "01:00.00"]
 }
-process_mode = 4
 
 [node name="TileList" type="Node" parent="."]
 
@@ -26,10 +23,18 @@ navigation_enabled = false
 
 [node name="PlayerList" type="Node" parent="."]
 
+[node name="PlayerController" parent="PlayerList" instance=ExtResource("2_x8x21")]
+position = Vector2(120, 1007)
+
 [node name="EnemyList" type="Node" parent="."]
+
+[node name="EnemyController" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(840, 544)
+
+[node name="EnemyController2" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(1760, 208)
 
 [node name="EntityList" type="Node" parent="."]
 
-[node name="YinyangBall" parent="EntityList" instance=ExtResource("2_eyoy0")]
-position = Vector2(1752, 120)
-physics_material_override = SubResource("PhysicsMaterial_grotq")
+[node name="LevelController" type="LevelController" parent="."]
+timeScaleFactor = 0.01

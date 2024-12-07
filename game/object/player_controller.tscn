@@ -226,21 +226,23 @@ animations = [{
 }]
 
 [node name="PlayerController" type="PlayerController"]
-maxGroundSpeed = 60
-groundAccel = 4.0
-groundDecel = 4.0
+maxGroundSpeed = 180
+groundAccel = 12.0
+groundDecel = 12.0
 groundFriction = 0.95
-gravity = 425.0
-maxAirSpeed = 100
-fallSpeed = -1.0013e+13
-maxFallSpeed = 750
+gravity = 1275.0
+maxAirSpeed = 300
+maxFallSpeed = 2250
 airFriction = 0.7
-trueMaxSpeed = 405
-largeBlastStrength = 650
-maxSmallBlastSpeed = 100
-maxLargeBlastSpeed = 400
+trueMaxSpeed = 3600
+smallBlastStrength = 750
+largeBlastStrength = 1950
+maxSmallBlastSpeed = 300
+maxLargeBlastSpeed = 1200
+enemyBounceStrength = 500
 process_mode = 4
 z_index = 1
+scale = Vector2(3, 3)
 velocity = Vector2(0, 750)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]

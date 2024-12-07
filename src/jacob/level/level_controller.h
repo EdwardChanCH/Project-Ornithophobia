@@ -18,6 +18,7 @@ namespace godot {
 	class LevelController : public Node2D {
 		
 		GDCLASS(LevelController, Node2D) // A Godot macro for class inheritance. 
+		_GDEXPORT
 
 	protected:
 		static void _bind_methods(); // Must be declared.
@@ -27,6 +28,16 @@ namespace godot {
         Control* levelUIInstance;
 		Ref<PackedScene> pauseScene;
 		Control* pauseInstance;
+		CanvasLayer* gameplayUI;
+		Ref<PackedScene> resultsScreenScene;
+		Control* resultsScreenInstance;
+		
+		Node* enemyList;
+		int numEnemies = -1;
+		int totalEnemies = -1;
+		
+		float timeScaleFactor = 0.0016;
+		long slowLength;
 
 	public:
 		LevelController();
@@ -35,6 +46,11 @@ namespace godot {
 		virtual void _ready() override;
 		virtual void _exit_tree() override;
 		virtual void _input(const Ref<InputEvent> &event) override;
+
+		void _process(double delta) override;
+
+		void _update_enemy_count();
+		void _results_slow_time();
 
 	};
 

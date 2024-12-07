@@ -105,18 +105,8 @@ debug_color = Color(2.40654e-07, 0.650498, 0.0886246, 0.42)
 anchor_mode = 0
 
 [node name="PlayerController" parent="." instance=ExtResource("2_jduqa")]
-maxGroundSpeed = 180
-groundAccel = 12.0
-groundDecel = 12.0
-gravity = 1275.0
-maxAirSpeed = 300
 fallSpeed = nan
-maxFallSpeed = 2250
 trueMaxSpeed = 2250
-smallBlastStrength = 750
-largeBlastStrength = 1950
-maxSmallBlastSpeed = 300
-maxLargeBlastSpeed = 1200
 unique_name_in_owner = true
 position = Vector2(112, 304)
 

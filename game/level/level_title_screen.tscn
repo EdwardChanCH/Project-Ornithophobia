@@ -33,3 +33,5 @@ position = Vector2(256, 82)
 
 [node name="YinyangOrb5" parent="EntityList" instance=ExtResource("2_aufw7")]
 position = Vector2(256, 32)
+
+[node name="LevelController" type="LevelController" parent="."]

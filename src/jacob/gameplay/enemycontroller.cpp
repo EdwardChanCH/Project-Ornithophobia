@@ -16,7 +16,7 @@ using namespace godot;
 void EnemyController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_player_controller_entered", "body"), &EnemyController::_on_player_controller_entered);
     ADD_SIGNAL(MethodInfo("enemy_died"));
-    ADD_SIGNAL(MethodInfo("kill_player"));
+    ADD_SIGNAL(MethodInfo("bounce_player", PropertyInfo(Variant::VECTOR2, "enemy_pos")));
 }
 
 /**
@@ -35,14 +35,17 @@ EnemyController::~EnemyController() {
 
 // Export instance variables to the Godot Editor
 _GDEXPORT_ADD_PREFIX(EnemyController)
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "minKillSpeed"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor
 _GDEXPORT_GET_PREFIX(EnemyController)
+_GDEXPORT_GET(minKillSpeed)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor
 _GDEXPORT_SET_PREFIX(EnemyController)
+_GDEXPORT_SET(minKillSpeed)
 _GDEXPORT_SET_SUFFIX
 
 
@@ -53,6 +56,14 @@ void EnemyController::_ready() {
     deathAnim = Node::cast_to<AnimatedSprite2D>(find_child("DeathAnimation"));
     deathAnim->stop();
     // add connect to player to push them back
+    PlayerController *player = cast_to<PlayerController>(get_tree()->get_root()->find_child("PlayerController", true, false));
+    LevelController *level = cast_to<LevelController>(get_tree()->get_root()->find_child("LevelController", true, false));
+    
+    if (player != nullptr)
+        connect("bounce_player", Callable(player, "_collide_with_enemy"));
+    
+    if (level != nullptr)
+        connect("enemy_died", Callable(level, "_update_enemy_count"));
 }
 
 
@@ -65,9 +76,10 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
             deathAnim->set_visible(true);
             deathAnim->play("death");
             emit_signal("enemy_died");
+            find_child("Area2D")->queue_free();
         }
     } else {
-        emit_signal("kill_player");
+        emit_signal("bounce_player", get_position());
     }
 }
 
