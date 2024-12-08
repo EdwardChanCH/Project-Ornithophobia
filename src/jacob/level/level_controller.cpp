@@ -45,6 +45,7 @@ _GDEXPORT_ADD_SUFFIX
 // Getter(s) for exported instance variables in Godot Editor
 _GDEXPORT_GET_PREFIX(LevelController)
 _GDEXPORT_GET(timeScaleFactor)
+_GDEXPORT_GET(numEnemies)
 
 _GDEXPORT_GET(level_name)
 _GDEXPORT_GET(level_author)
@@ -55,6 +56,7 @@ _GDEXPORT_GET_SUFFIX
 // Setter(s) for exported instance variables in Godot Editor
 _GDEXPORT_SET_PREFIX(LevelController)
 _GDEXPORT_SET(timeScaleFactor)
+_GDEXPORT_SET(numEnemies)
 
 _GDEXPORT_SET(level_name)
 _GDEXPORT_SET(level_author)

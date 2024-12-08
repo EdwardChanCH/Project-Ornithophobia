@@ -39,6 +39,7 @@ namespace godot {
 
 		void _process(double delta) override;
 		void _on_player_controller_entered(Node2D *body);
+		
 	};
 
 } // namespace godot
