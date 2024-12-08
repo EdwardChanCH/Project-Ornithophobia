@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxr3uf4es8fhj"]
+[gd_scene load_steps=8 format=3 uid="uid://bxr3uf4es8fhj"]
 
 [ext_resource type="Script" path="res://script/results_screen.gd" id="1_f51bx"]
+[ext_resource type="Shader" path="res://shader/results_screen.gdshader" id="2_bllvv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2j1t6"]
+shader = ExtResource("2_bllvv")
+shader_parameter/lod = 2.035
+
+[sub_resource type="LabelSettings" id="LabelSettings_fkchx"]
+font_size = 41
 
 [sub_resource type="Animation" id="Animation_fr62t"]
 length = 0.2
@@ -20,7 +28,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cxsb6"]
 resource_name = "fade_in"
-length = 0.15
+length = 0.25
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,7 +37,7 @@ tracks/0/path = NodePath("ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.490196)]
@@ -58,7 +66,25 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 0)
 
+[node name="Blur" type="ColorRect" parent="ColorRect"]
+material = SubResource("ShaderMaterial_2j1t6")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 440.0
+offset_right = 1240.0
+offset_bottom = 544.0
+text = "this will be the results screen"
+label_settings = SubResource("LabelSettings_fkchx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_vaqeo")
 }

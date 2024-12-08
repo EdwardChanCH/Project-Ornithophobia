@@ -103,13 +103,6 @@ _GDEXPORT_SET_SUFFIX
  * @brief Same as Godot's _ready() function
  */
 void PlayerController::_ready() {
-    // Disable the process function while in editor
-    if (Engine::get_singleton()->is_editor_hint())
-        set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
-    else {
-        set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
-    }
-
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
     wasOnFloor = false;
@@ -121,7 +114,7 @@ void PlayerController::_ready() {
  * @brief Same as _process() in GDScript.
  * @param delta Delta time
  */
-void PlayerController::_process(double _delta) {
+void PlayerController::_physics_process(double _delta) {
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;

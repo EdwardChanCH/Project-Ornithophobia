@@ -16,7 +16,7 @@ void LevelController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_update_enemy_count"), &LevelController::_update_enemy_count);
     ClassDB::bind_method(D_METHOD("_results_slow_time"), &LevelController::_results_slow_time);
     ADD_SIGNAL(MethodInfo("results_slow_time"));
-    ADD_SIGNAL(MethodInfo("show_results"));
+    ADD_SIGNAL(MethodInfo("show_results"), PropertyInfo(Variant::DICTIONARY, "level_metadata"));
 }
 
 /**
@@ -35,16 +35,31 @@ LevelController::~LevelController() {
 // Export instance variables to the Godot Editor
 _GDEXPORT_ADD_PREFIX(LevelController)
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "timeScaleFactor"))
+
+_GDEXPORT_ADD(PropertyInfo(Variant::STRING, "level_name"))
+_GDEXPORT_ADD(PropertyInfo(Variant::STRING, "level_author"))
+_GDEXPORT_ADD(PropertyInfo(Variant::STRING, "level_icon_path"))
+_GDEXPORT_ADD(PropertyInfo(Variant::PACKED_STRING_ARRAY, "rank_times"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor
 _GDEXPORT_GET_PREFIX(LevelController)
 _GDEXPORT_GET(timeScaleFactor)
+
+_GDEXPORT_GET(level_name)
+_GDEXPORT_GET(level_author)
+_GDEXPORT_GET(level_icon_path)
+_GDEXPORT_GET(rank_times)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor
 _GDEXPORT_SET_PREFIX(LevelController)
 _GDEXPORT_SET(timeScaleFactor)
+
+_GDEXPORT_SET(level_name)
+_GDEXPORT_SET(level_author)
+_GDEXPORT_SET(level_icon_path)
+_GDEXPORT_SET(rank_times)
 _GDEXPORT_SET_SUFFIX
 
 
@@ -60,15 +75,18 @@ void LevelController::_ready() {
 
         gameplayUI = memnew(CanvasLayer());
 
+        // Instantiate level ui
         levelUIScene = ResourceLoader::get_singleton()->load("res://screen/level_ui.tscn");
         levelUIInstance = Node::cast_to<Control>(levelUIScene->instantiate());
         gameplayUI->add_child(levelUIInstance);
 
+        // Instantiate pause menu
         pauseScene = ResourceLoader::get_singleton()->load("res://screen/menu/pause_menu.tscn");
         pauseInstance = Node::cast_to<Control>(pauseScene->instantiate());
         pauseInstance->set_visible(false);
         gameplayUI->add_child(pauseInstance);
 
+        // Instantiate results screen and connect the "show_results" signal to it
         resultsScreenScene = ResourceLoader::get_singleton()->load("res://screen/results_screen.tscn");
         resultsScreenInstance = Node::cast_to<Control>(resultsScreenScene->instantiate());
         resultsScreenInstance->set_visible(false);
@@ -78,11 +96,19 @@ void LevelController::_ready() {
         get_parent()->call_deferred("add_child", gameplayUI);
 
         enemyList = get_parent()->find_child("EnemyList");
+        playerList = get_parent()->find_child("PlayerList");
 
         if (enemyList != nullptr) {
             numEnemies = enemyList->get_child_count();
             totalEnemies = numEnemies;
             cast_to<Label>(levelUIInstance->find_child("EnemiesRemaining"))->set_text("Enemies Remaining: " + UtilityFunctions::str(numEnemies));
+        }
+
+        if (playerList != nullptr) {
+            if (playerList->get_child_count() > 0) {
+                PlayerController* player = cast_to<PlayerController>(playerList->get_children().front());
+                player->set_process_mode(ProcessMode::PROCESS_MODE_INHERIT);
+            }
         }
     }
 }
@@ -122,9 +148,19 @@ void LevelController::_process(double delta) {
         get_tree()->set_pause(true);
         Engine::get_singleton()->set_time_scale(1.0);
         set_process(false);
-        emit_signal("show_results");
-        UtilityFunctions::print(UtilityFunctions::str(Time::get_singleton()->get_ticks_msec() - slowLength));
-        // instantiate results screen here
+
+        calculate_best_time();
+        if (!rank_times.is_empty())
+            calculate_rank();
+
+        Dictionary level_metadata = Dictionary();
+        level_metadata.get_or_add("level_name", level_name);
+        level_metadata.get_or_add("level_author", level_author);
+        level_metadata.get_or_add("level_icon_path", level_icon_path);
+        level_metadata.get_or_add("best_time", best_time);
+        level_metadata.get_or_add("rank_times", rank_times);
+        level_metadata.get_or_add("rank_icon_path", rank_icon_path);
+        emit_signal("show_results", level_metadata);
     }
 }
 
@@ -146,4 +182,33 @@ void LevelController::_update_enemy_count() {
 
 void LevelController::_results_slow_time() {
     set_process(true);
+}
+
+
+void LevelController::calculate_best_time() {
+    String cur_time = cast_to<LevelTimer>(levelUIInstance->find_child("LevelTimer"))->get_text();
+    if (best_time == "--:--.--" || read_formatted_time(best_time) < read_formatted_time(cur_time)) {
+        best_time = cur_time;
+    }
+}
+
+
+int LevelController::read_formatted_time(String time) {
+    PackedStringArray units = time.replace(":", " ").replace(".", " ").split(" ");
+    return (units[0].to_int() * 60) + units[1].to_int() + float(units[2].to_int()) * 0.01;
+}
+
+
+void LevelController::calculate_rank() {
+    int cur_time = read_formatted_time(cast_to<LevelTimer>(levelUIInstance->find_child("LevelTimer"))->get_text());
+    
+    if (cur_time < read_formatted_time(rank_times[0])) {
+        rank_icon_path = "res://asset/sprite/menu/gold_rank_icon.png";
+    } else if (cur_time < read_formatted_time(rank_times[1])) {
+        rank_icon_path = "res://asset/sprite/menu/silver_rank_icon.png";
+    } else if (cur_time < read_formatted_time(rank_times[2])) {
+        rank_icon_path = "res://asset/sprite/menu/bronze_rank_icon.png";
+    } else {
+        rank_icon_path = "res://asset/sprite/menu/no_rank_icon.png";
+    }
 }

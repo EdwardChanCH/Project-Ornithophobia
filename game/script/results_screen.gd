@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_results_screen_show():
+func _on_results_screen_show(level_metadata: Dictionary):
+	print(level_metadata)
 	visible = true
-	$AnimationPlayer.play("fade_in")
+	%AnimationPlayer.play("fade_in")
