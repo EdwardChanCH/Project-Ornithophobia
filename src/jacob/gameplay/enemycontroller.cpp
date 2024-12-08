@@ -86,6 +86,6 @@ void EnemyController::_process(double delta) {
     // Stop animation when it reaches the last frame. Delete this enemy after
     if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
         deathAnim->stop();
-        queue_free();
+        queue_free(); // TODO This line would crash Godot Editor if the death animation is played in the animation timeline.
     }
 }

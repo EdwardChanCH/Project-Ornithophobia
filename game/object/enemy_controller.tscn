@@ -133,18 +133,17 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66uhf"]
-size = Vector2(32, 24)
+size = Vector2(16, 16)
 
 [node name="EnemyController" type="EnemyController"]
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-position = Vector2(-0.173855, 0.131856)
-scale = Vector2(0.333191, 0.351648)
+scale = Vector2(0.475, 0.695)
 texture = ExtResource("1_f1bfd")
 
 [node name="DeathAnimation" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(-0.173875, -11.8681)
+position = Vector2(0, -12)
 scale = Vector2(0.24, 0.24)
 sprite_frames = SubResource("SpriteFrames_srxqd")
 animation = &"death"
@@ -152,7 +151,7 @@ animation = &"death"
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -0.131856)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_66uhf")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
