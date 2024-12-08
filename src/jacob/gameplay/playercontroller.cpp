@@ -100,12 +100,12 @@ _GDEXPORT_SET_SUFFIX
  * @brief Same as Godot's _ready() function
  */
 void PlayerController::_ready() {
-    // Disable the process function while in editor
+    /* // Disable the process function while in editor
     if (Engine::get_singleton()->is_editor_hint())
         set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
     else {
         set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
-    }
+    } */ // TODO not necessary, in fact this overrides/ ignores the level editor's physics toggle.
 
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;

@@ -9,9 +9,9 @@ atlas = ExtResource("1_0a6yh")
 region = Rect2(0, 0, 16, 16)
 
 [node name="Tile2D" type="Node2D" node_paths=PackedStringArray("tile_sprite")]
-scale = Vector2(3, 3)
 script = ExtResource("1_xvp2h")
 tile_sprite = NodePath("TileSprite")
 
 [node name="TileSprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_btswy")

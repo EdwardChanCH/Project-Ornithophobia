@@ -26,17 +26,23 @@ signal add_enemy_button_pressed(mouse_pos: Vector2)
 signal add_entity_button_pressed(mouse_pos: Vector2)
 
 
-@export var camera_node: Camera2D
-@export var menu_node: Control
-@export var grid_layer: ParallaxLayer
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
 @export var help_popup_node: AcceptDialog
 @export var debug_popup_node: AcceptDialog
+
+@export var camera_node: Camera2D
+@export var menu_node: Control
+@export var grid_layer: ParallaxLayer
+@export var edit_mode_node: OptionButton
 @export var bgm_player_node: AudioStreamPlayer
+@export var ghost_tile_node: Tile2D
+@export var ghost_player_node: Node2D
+@export var ghost_enemy_node: Node2D
+@export var ghost_orb_node: Node2D
+
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
-@export var ghost_tile_node: Tile2D
 @onready var camera_movement: Vector2 = Vector2(0, 0)
 
 
@@ -51,12 +57,23 @@ func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute("user://level/story")
 	DirAccess.make_dir_recursive_absolute("user://level/user")
 	DirAccess.make_dir_recursive_absolute("user://level/workshop")
+	
+	# First-time setups
+	_on_edit_mode_button_item_selected(edit_mode_node.selected)
+	
 	pass
 
 
 func _process(delta: float) -> void:
+	# Move camera
 	camera_node.translate(camera_movement * delta)
-	ghost_tile_node.position = get_viewport().get_mouse_position()
+	
+	# Move edit mode indicators
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	ghost_tile_node.position = mouse_pos
+	ghost_player_node.position = mouse_pos
+	ghost_enemy_node.position = mouse_pos
+	ghost_orb_node.position = mouse_pos
 	pass
 
 
@@ -141,6 +158,22 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_quick_save_level"):
 		_on_quick_save_level_button_pressed()
 	
+	if event.is_action_pressed("editor_edit_mode_1"):
+		edit_mode_node.select(0)
+		_on_edit_mode_button_item_selected(0)
+	
+	if event.is_action_pressed("editor_edit_mode_2"):
+		edit_mode_node.select(1)
+		_on_edit_mode_button_item_selected(1)
+	
+	if event.is_action_pressed("editor_edit_mode_3"):
+		edit_mode_node.select(2)
+		_on_edit_mode_button_item_selected(2)
+	
+	if event.is_action_pressed("editor_edit_mode_4"):
+		edit_mode_node.select(3)
+		_on_edit_mode_button_item_selected(3)
+	
 	pass
 
 
@@ -148,10 +181,30 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Detect non-ui mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
 	if event.is_action_pressed("editor_primary_click"):
-		add_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
+		var edit_mode: int = edit_mode_node.selected
+		
+		if edit_mode == 0:
+			add_tile_button_pressed.emit(mouse_pos)
+		elif edit_mode == 1:
+			pass # TODO
+		elif edit_mode == 2:
+			pass # TODO
+		elif edit_mode == 3:
+			pass # TODO
 	
 	if event.is_action_pressed("editor_secondary_click"):
-		remove_tile_button_pressed.emit(self.get_global_mouse_position() + camera_node.get_position())
+		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
+		var edit_mode: int = edit_mode_node.selected
+		
+		if edit_mode == 0:
+			remove_tile_button_pressed.emit(mouse_pos)
+		elif edit_mode == 1:
+			pass # TODO
+		elif edit_mode == 2:
+			pass # TODO
+		elif edit_mode == 3:
+			pass # TODO
 	
 	pass
 
@@ -370,5 +423,23 @@ func _on_update_thumbnail_button_toggled(filepath: String) -> void:
 	# Unhide UI
 	self.visible = true
 	grid_layer.visible = grid_layer_visible
+	
+	pass
+
+func _on_edit_mode_button_item_selected(index: int) -> void:
+	# Change visibility of edit mode indicators
+	ghost_tile_node.visible = false
+	ghost_player_node.visible = false
+	ghost_enemy_node.visible = false
+	ghost_orb_node.visible = false
+	
+	if index == 0:
+		ghost_tile_node.visible = true
+	elif index == 1:
+		ghost_player_node.visible = true
+	elif index == 2:
+		ghost_enemy_node.visible = true
+	elif index == 3:
+		ghost_orb_node.visible = true
 	
 	pass

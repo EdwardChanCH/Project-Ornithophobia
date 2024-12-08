@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://db00fhsn58v7m"]
+[gd_scene load_steps=9 format=3 uid="uid://db00fhsn58v7m"]
 
 [ext_resource type="Script" path="res://script/level_editor_ui.gd" id="1_f5a73"]
 [ext_resource type="Texture2D" uid="uid://dtxpkm1olj4pn" path="res://asset/sprite/level_editor/grid.png" id="2_hcpxa"]
 [ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/audio/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
 [ext_resource type="PackedScene" uid="uid://ccjs3sart8d6f" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
+[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="4_8txvr"]
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="4_gek1a"]
+[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="7_k5yv3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
-[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("camera_node", "menu_node", "grid_layer", "load_level_popup_node", "save_level_popup_node", "help_popup_node", "debug_popup_node", "bgm_player_node", "ghost_tile_node")]
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node", "help_popup_node", "debug_popup_node", "camera_node", "menu_node", "grid_layer", "edit_mode_node", "bgm_player_node", "ghost_tile_node", "ghost_player_node", "ghost_enemy_node", "ghost_orb_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -16,17 +19,21 @@ offset_bottom = 1080.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("1_f5a73")
-camera_node = NodePath("Camera")
-menu_node = NodePath("UIContainer/VBox0/MenuPanel")
-grid_layer = NodePath("ParallaxBackground/GridLayer")
 load_level_popup_node = NodePath("LoadLevelPopup")
 save_level_popup_node = NodePath("SaveLevelPopup")
 help_popup_node = NodePath("HelpPopup")
 debug_popup_node = NodePath("DebugPopup")
+camera_node = NodePath("Camera")
+menu_node = NodePath("UIContainer/UIVBox/MenuPanel")
+grid_layer = NodePath("ParallaxBackground/GridLayer")
+edit_mode_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton")
 bgm_player_node = NodePath("BGMPlayer")
+ghost_tile_node = NodePath("GhostTileEntity")
+ghost_player_node = NodePath("GhostPlayer")
+ghost_enemy_node = NodePath("GhostEnemy")
+ghost_orb_node = NodePath("GhostYinyangOrb")
 camera_movement_scale = 2500.0
 camera_movement_multiplier = 5.0
-ghost_tile_node = NodePath("GhostTileEntity")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -121,6 +128,7 @@ Camera Movement
 Camera Slow Down
 Camera Speed Up
  
+Select Edit Mode
 Add Tile/ Entity
 Remove Tile/ Entity
  
@@ -154,6 +162,7 @@ I ,  J , K , L
 Ctrl
 Shift
  
+1 , 2 , 3 , 4
 Mouse 1
 Mouse 2
  
@@ -174,7 +183,23 @@ ok_button_text = "   Close   "
 dialog_autowrap = true
 
 [node name="GhostTileEntity" parent="." instance=ExtResource("2_ryqqs")]
-modulate = Color(1, 1, 1, 0.313726)
+process_mode = 4
+visible = false
+modulate = Color(0.313726, 1, 1, 0.313726)
+
+[node name="GhostPlayer" parent="." instance=ExtResource("4_gek1a")]
+visible = false
+modulate = Color(0.313726, 1, 1, 0.313726)
+
+[node name="GhostEnemy" parent="." instance=ExtResource("7_k5yv3")]
+process_mode = 4
+visible = false
+modulate = Color(0.313726, 1, 1, 0.313726)
+
+[node name="GhostYinyangOrb" parent="." instance=ExtResource("4_8txvr")]
+process_mode = 4
+visible = false
+modulate = Color(0.313726, 1, 1, 0.313726)
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_jom34")
@@ -184,219 +209,224 @@ layout_mode = 1
 offset_right = 1920.0
 offset_bottom = 276.0
 
-[node name="VBox0" type="VBoxContainer" parent="UIContainer"]
+[node name="UIVBox" type="VBoxContainer" parent="UIContainer"]
 custom_minimum_size = Vector2(1920, 0)
 layout_mode = 2
 
-[node name="MenuPanel" type="PanelContainer" parent="UIContainer/VBox0"]
+[node name="MenuPanel" type="PanelContainer" parent="UIContainer/UIVBox"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cupx8")
 
-[node name="HBox1" type="HBoxContainer" parent="UIContainer/VBox0/MenuPanel"]
+[node name="MenuHBox" type="HBoxContainer" parent="UIContainer/UIVBox/MenuPanel"]
 layout_mode = 2
 
-[node name="VBox1" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox1" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox1Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="VBox1Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 text = "Level Editor"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator1" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="HSeparator1" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="BackButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 text = "Back"
 
-[node name="HelpButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="HelpButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 text = "Help"
 
-[node name="PlaytestButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="PlaytestButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 toggle_mode = true
 text = "Playtest
 (Toggle Physics)"
 
-[node name="CenterLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox1"]
+[node name="CenterLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
 text = "Center Camera
 (To Level)"
 
-[node name="VBox2" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox2" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox2Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="VBox2Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "File"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="HSeparator2" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 
-[node name="LoadExampleLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="LoadExampleLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Load Example Level"
 
-[node name="LoadLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="LoadLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Load Custom Level"
 
-[node name="SaveLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="SaveLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Save Level"
 
-[node name="QuickLoadLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="QuickLoadLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Quick Load Level"
 
-[node name="QuickSaveLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="QuickSaveLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Quick Save Level"
 
-[node name="ReloadLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="ReloadLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Reload Level"
 
-[node name="UnloadLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="UnloadLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Unload Level"
 
-[node name="ResetLevelButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox2"]
+[node name="ResetLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
 text = "Reset Level"
 
-[node name="VBox3" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox3" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox3Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="VBox3Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Tile"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator3" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="HSeparator3" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 
-[node name="TileFlipHButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileFlipHButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Flip Horizontally"
 
-[node name="TileFlipVButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileFlipVButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Flip Vertically"
 
-[node name="TileFlipDButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileFlipDButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Flip Diagonally"
 
-[node name="TileRotateCButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileRotateCButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Rotate Clockwise"
 
-[node name="TileRotateCCButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileRotateCCButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Rotate Counter C."
 
-[node name="TileCyclePreviousButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileCyclePreviousButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Cycle Previous"
 
-[node name="TileCycleNextButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox3"]
+[node name="TileCycleNextButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3"]
 layout_mode = 2
 text = "Cycle Next"
 
-[node name="VBox4" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox4" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox4Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox4"]
+[node name="VBox4Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4"]
 layout_mode = 2
 text = "History"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator4" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox4"]
+[node name="HSeparator4" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4"]
 layout_mode = 2
 
-[node name="UndoButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox4"]
+[node name="UndoButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4"]
 layout_mode = 2
 text = "Undo"
 
-[node name="RedoButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox4"]
+[node name="RedoButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4"]
 layout_mode = 2
 text = "Redo"
 
-[node name="VBox5" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox5" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox5Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="VBox5Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Debug"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator5" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="HSeparator5" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 
-[node name="DebugSceneManagerButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="DebugSceneManagerButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Debug Log
 (Scene Manager)"
 
-[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Debug Log
 (Level Editor Controller)"
 
-[node name="TestAddSceneButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="TestAddSceneButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Test Changing Scene
 (To Itself)"
 
-[node name="TestAction1Button" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="TestAction1Button" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Test Action 1"
 
-[node name="TestAction2Button" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="TestAction2Button" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Test Action 2"
 
-[node name="TestAction3Button" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="TestAction3Button" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Test Action 3"
 
-[node name="ShowUserDirectoryButton" type="Button" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox5"]
+[node name="ShowUserDirectoryButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Show User Directory"
 
-[node name="VBox6" type="VBoxContainer" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="VBox6" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBox6Name" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+[node name="VBox6Name" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
 text = "Setting"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator6" type="HSeparator" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+[node name="HSeparator6" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
 
-[node name="MusicVolumeLabel" type="Label" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+[node name="GridButton" type="CheckButton" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
+layout_mode = 2
+button_pressed = true
+text = "Show Grid"
+
+[node name="MusicVolumeLabel" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" type="HSlider" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+[node name="MusicVolumeSlider" type="HSlider" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 max_value = 1.0
@@ -404,17 +434,31 @@ step = 0.01
 tick_count = 5
 ticks_on_borders = true
 
-[node name="GridButton" type="CheckButton" parent="UIContainer/VBox0/MenuPanel/HBox1/VBox6"]
+[node name="EditModeLabel" type="Label" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
-button_pressed = true
-text = "Show Grid"
+text = "Edit Mode"
+horizontal_alignment = 1
 
-[node name="Spacer1" type="Control" parent="UIContainer/VBox0/MenuPanel/HBox1"]
+[node name="EditModeButton" type="OptionButton" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
+layout_mode = 2
+alignment = 1
+autowrap_mode = 3
+selected = 0
+item_count = 4
+popup/item_0/text = "Tile"
+popup/item_1/text = "Player"
+popup/item_1/id = 1
+popup/item_2/text = "Enemy"
+popup/item_2/id = 2
+popup/item_3/text = "Bouncy Ball"
+popup/item_3/id = 3
+
+[node name="Spacer1" type="Control" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
+size_flags_stretch_ratio = 2.0
 
-[node name="HideUIButton" type="Button" parent="UIContainer/VBox0"]
+[node name="HideUIButton" type="Button" parent="UIContainer/UIVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -423,34 +467,35 @@ text = "Menu"
 [connection signal="file_selected" from="LoadLevelPopup" to="." method="_on_load_level_popup_file_selected"]
 [connection signal="file_selected" from="SaveLevelPopup" to="." method="_on_save_level_popup_file_selected"]
 [connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox1/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox1/HelpButton" to="." method="_on_help_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox1/PlaytestButton" to="." method="_on_playtest_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox1/CenterLevelButton" to="." method="_on_center_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/LoadExampleLevelButton" to="." method="_on_load_example_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/SaveLevelButton" to="." method="_on_save_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/QuickLoadLevelButton" to="." method="_on_quick_load_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/QuickSaveLevelButton" to="." method="_on_quick_save_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox2/ResetLevelButton" to="." method="_on_reset_level_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileFlipHButton" to="." method="_on_tile_flip_h_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileFlipVButton" to="." method="_on_tile_flip_v_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileFlipDButton" to="." method="_on_tile_flip_d_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileRotateCButton" to="." method="_on_tile_rotate_c_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileRotateCCButton" to="." method="_on_tile_rotate_cc_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileCyclePreviousButton" to="." method="_on_tile_cycle_previous_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox3/TileCycleNextButton" to="." method="_on_tile_cycle_next_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox4/UndoButton" to="." method="_on_undo_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox4/RedoButton" to="." method="_on_redo_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
-[connection signal="pressed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox5/ShowUserDirectoryButton" to="." method="_on_show_user_directory_button_pressed"]
-[connection signal="value_changed" from="UIContainer/VBox0/MenuPanel/HBox1/VBox6/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
-[connection signal="toggled" from="UIContainer/VBox0/MenuPanel/HBox1/VBox6/GridButton" to="." method="_on_grid_button_toggled"]
-[connection signal="pressed" from="UIContainer/VBox0/HideUIButton" to="." method="_on_hide_ui_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/PlaytestButton" to="." method="_on_playtest_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/CenterLevelButton" to="." method="_on_center_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/LoadExampleLevelButton" to="." method="_on_load_example_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/SaveLevelButton" to="." method="_on_save_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/QuickLoadLevelButton" to="." method="_on_quick_load_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/QuickSaveLevelButton" to="." method="_on_quick_save_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/ReloadLevelButton" to="." method="_on_reload_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/UnloadLevelButton" to="." method="_on_unload_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/ResetLevelButton" to="." method="_on_reset_level_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileFlipHButton" to="." method="_on_tile_flip_h_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileFlipVButton" to="." method="_on_tile_flip_v_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileFlipDButton" to="." method="_on_tile_flip_d_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileRotateCButton" to="." method="_on_tile_rotate_c_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileRotateCCButton" to="." method="_on_tile_rotate_cc_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileCyclePreviousButton" to="." method="_on_tile_cycle_previous_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox3/TileCycleNextButton" to="." method="_on_tile_cycle_next_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/ShowUserDirectoryButton" to="." method="_on_show_user_directory_button_pressed"]
+[connection signal="toggled" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/GridButton" to="." method="_on_grid_button_toggled"]
+[connection signal="value_changed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="item_selected" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton" to="." method="_on_edit_mode_button_item_selected"]
+[connection signal="pressed" from="UIContainer/UIVBox/HideUIButton" to="." method="_on_hide_ui_button_pressed"]
