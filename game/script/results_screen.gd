@@ -13,6 +13,5 @@ func _process(delta: float) -> void:
 
 func _on_results_screen_show(level_metadata: Dictionary):
 	print(level_metadata)
-	await(get_tree())
 	visible = true
 	%AnimationPlayer.play("fade_in")

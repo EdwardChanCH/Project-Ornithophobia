@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://bdtl35xbha2fd"]
+[gd_scene load_steps=5 format=4 uid="uid://bdtl35xbha2fd"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_343ou"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_x8x21"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_gy8vc"]
+[ext_resource type="Script" path="res://script/camera_2d.gd" id="4_vvjw1"]
 
 [node name="_Level_221" type="Level"]
 level_info = {
@@ -35,7 +36,21 @@ position = Vector2(832, 496)
 [node name="EnemyController2" parent="EnemyList" instance=ExtResource("3_gy8vc")]
 position = Vector2(1760, 208)
 
+[node name="EnemyController3" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 424)
+
+[node name="EnemyController4" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 352)
+
+[node name="EnemyController5" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 280)
+
 [node name="EntityList" type="Node" parent="."]
 
 [node name="LevelController" type="LevelController" parent="."]
 timeScaleFactor = 0.01
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+script = ExtResource("4_vvjw1")
+random_strength = 10.0
