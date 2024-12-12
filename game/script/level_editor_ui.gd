@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 	# Move edit mode indicators
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	ghost_tile_node.position = mouse_pos
-	ghost_player_node.position = mouse_pos
+	ghost_player_node.position = mouse_pos + Vector2(0, -24)
 	ghost_enemy_node.position = mouse_pos
 	ghost_orb_node.position = mouse_pos
 	pass

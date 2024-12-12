@@ -8,9 +8,11 @@
  * 
  */
 
+// Convert a save path to the base path.
 #define BASE_FILEPATH(filepath) \
 filepath.replace("_quicksave", "")
 
+// Convert a save path to the quicksave path.
 #define QUICK_FILEPATH(filepath) \
 filepath.get_basename().replace("_quicksave", "") + "_quicksave" + "." + filepath.get_extension()
 
@@ -171,11 +173,10 @@ void LevelEditorController::_ready() {
 // - - - Action Handling Functions - - -
 
 /**
- * @brief Track a new action and its reverse action.
+ * @brief Track a redo action and an undo action.
  * 
- * @param new_action New action
- * @param reverse_action Reserse action
- * @return Variant Output of calling new_action
+ * @param redo_action Redo action
+ * @param undo_action Undo action
  */
 void LevelEditorController::track_action(Callable redo_action, Callable undo_action) {
     // Remove actions in old timeline
@@ -278,16 +279,33 @@ bool LevelEditorController::can_redo() {
 
 // - - - File Handling Functions - - -
 
+/**
+ * @brief Set a level filepath. 
+ * i.e. Overwrite the default level filepath.
+ * 
+ * @param filepath Filepath
+ */
 void LevelEditorController::set_level_filepath(String filepath) {
     level_filepath = filepath;
 }
 
+/**
+ * @brief Load a new level. 
+ * Reset action history and quicksave status. 
+ * 
+ * @param filepath Filepath
+ */
 void LevelEditorController::load_new_level(String filepath) {
     has_quick_saved = false;
     clear_action();
     load_level(filepath);
 }
 
+/**
+ * @brief Load a level from file.
+ * 
+ * @param filepath Filepath
+ */
 void LevelEditorController::load_level(String filepath) {
     if (ResourceLoader::get_singleton()->exists(filepath, "PackedScene")) {
         unload_level();
@@ -301,6 +319,11 @@ void LevelEditorController::load_level(String filepath) {
     }
 }
 
+/**
+ * @brief Save a level to file.
+ * 
+ * @param filepath Filepath
+ */
 void LevelEditorController::save_level(String filepath) {
     if ((is_level_loaded()) && (filepath.length() > 0)) {
         // Change save location to user data
@@ -317,6 +340,10 @@ void LevelEditorController::save_level(String filepath) {
     }
 }
 
+/**
+ * @brief Quick load a level from file.
+ * 
+ */
 void LevelEditorController::quick_load_level() {
     if (has_quick_saved) {
         action_index = quick_save_action_index;
@@ -324,12 +351,20 @@ void LevelEditorController::quick_load_level() {
     }
 }
 
+/**
+ * @brief Quick save a level to file.
+ * 
+ */
 void LevelEditorController::quick_save_level() {
     has_quick_saved = true;
     quick_save_action_index = action_index;
     save_level(QUICK_FILEPATH(level_filepath.replace("res://", "user://")));
 }
 
+/**
+ * @brief Unload a level.
+ * 
+ */
 void LevelEditorController::unload_level() {
     if (is_level_loaded()) {
 		level_node->queue_free();
@@ -337,16 +372,30 @@ void LevelEditorController::unload_level() {
     }
 }
 
+/**
+ * @brief Reload the last opened level from file.
+ * 
+ */
 void LevelEditorController::reload_level() {
     load_new_level(level_filepath);
 }
 
+/**
+ * @brief Check if any level is loaded.
+ * 
+ * @return true 
+ * @return false 
+ */
 bool LevelEditorController::is_level_loaded() {
     return (level_node != nullptr);
 }
 
 // - - - Level Editing Functions - - -
 
+/**
+ * @brief Toggle physics.
+ * 
+ */
 void LevelEditorController::toggle_physics() {
     physics_on = !physics_on;
 
@@ -359,6 +408,14 @@ void LevelEditorController::toggle_physics() {
     }
 }
 
+/**
+ * @brief Convert a global position to a tile position.
+ * 
+ * @param world_pos Global position
+ * @param tile_map_scale Tile map scale
+ * @param tile_size Tile size
+ * @return Vector2i Tile position
+ */
 Vector2i LevelEditorController::world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2i result;
 
@@ -367,6 +424,14 @@ Vector2i LevelEditorController::world_to_tile_pos(Vector2 world_pos, Vector2 til
     return result;
 }
 
+/**
+ * @brief Convert a tile position to a global position.
+ * 
+ * @param tile_pos Tile position
+ * @param tile_map_scale Tile map scale
+ * @param tile_size Tile size
+ * @return Vector2 Tile position
+ */
 Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2 result;
 
@@ -375,6 +440,11 @@ Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile
     return result;
 }
 
+/**
+ * @brief Get the alternative tile setting.
+ * 
+ * @return int Alternative tile setting
+ */
 int LevelEditorController::get_tile_alt() {
     int tile_flags = 0;
 
@@ -391,6 +461,11 @@ int LevelEditorController::get_tile_alt() {
     return tile_flags;
 }
 
+/**
+ * @brief Flip a tile.
+ * 
+ * @param mode Mode: 0 = horizontal, 1 = vertical, 2 = diagonal
+ */
 void LevelEditorController::flip_tile(int mode) {
     switch (mode) {
     case 0:
@@ -408,6 +483,11 @@ void LevelEditorController::flip_tile(int mode) {
     emit_signal("tile_alt_changed", get_tile_alt());
 }
 
+/**
+ * @brief Cycle tile type.
+ * 
+ * @param next Next/ Previous
+ */
 void LevelEditorController::cycle_tile(bool next) {
     if (next) {
         tile_id.x = tile_id.x + 1;
@@ -421,6 +501,11 @@ void LevelEditorController::cycle_tile(bool next) {
     emit_signal("tile_type_changed", tile_id);
 }
 
+/**
+ * @brief Rotate a tile.
+ * 
+ * @param clockwise Clockwise/ Counter-clickwise
+ */
 void LevelEditorController::rotate_tile(bool clockwise) {
     int rotation;
 
@@ -497,6 +582,11 @@ void LevelEditorController::rotate_tile(bool clockwise) {
     emit_signal("tile_alt_changed", get_tile_alt());
 }
 
+/**
+ * @brief Add a tile.
+ * 
+ * @param mouse_pos Global cursor position.
+ */
 void LevelEditorController::add_tile(Vector2 mouse_pos) {
     if (is_level_loaded()) {
         // Get tile map
@@ -523,6 +613,11 @@ void LevelEditorController::add_tile(Vector2 mouse_pos) {
     }
 }
 
+/**
+ * @brief Remove a tile.
+ * 
+ * @param mouse_pos Global cursor position.
+ */
 void LevelEditorController::remove_tile(Vector2 mouse_pos) {
     if (is_level_loaded()) {
         // Get tile map
@@ -549,6 +644,15 @@ void LevelEditorController::remove_tile(Vector2 mouse_pos) {
     }
 }
 
+/**
+ * @brief Replace a tile. 
+ * Note: This action is reversible.
+ * 
+ * @param tile_pos Tile position
+ * @param source_id Source ID (usually 0)
+ * @param tile_id Tile ID
+ * @param tile_alt Alternative tile setting
+ */
 void LevelEditorController::replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_alt) {
     if (is_level_loaded()) {
         // Get tile map
@@ -635,9 +739,11 @@ void LevelEditorController::add_entity(Vector2 mouse_pos) {
 // - - - Test Functions - - -
 
 /**
- * @brief Test function (reversible).
+ * @brief Test function, prints a message with a number.
+ * Note: This action is reversible.
  * 
- * @param n Integer
+ * @param s Message
+ * @param n Number
  */
 void LevelEditorController::_test_action(String s, int n) {
     UtilityFunctions::print(s, ": ", n);
