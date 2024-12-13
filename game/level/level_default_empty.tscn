@@ -16,3 +16,5 @@ navigation_enabled = false
 [node name="EnemyList" type="Node" parent="."]
 
 [node name="EntityList" type="Node" parent="."]
+
+[node name="LevelController" type="LevelController" parent="."]

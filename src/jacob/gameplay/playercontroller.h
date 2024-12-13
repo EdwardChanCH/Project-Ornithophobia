@@ -24,6 +24,7 @@ namespace godot {
         float speed;
         Vector2 inputDirection;
         Vector2 movementDirection;
+        Vector2 bounceVelocity;
         bool isAirborne;
         bool wasOnWall;
         bool wasOnFloor;
@@ -54,6 +55,7 @@ namespace godot {
 
         // Misc.
         Input *input;
+        int enemyBounceStrength;
 
 
     protected:
@@ -66,10 +68,10 @@ namespace godot {
         PlayerController();
         ~PlayerController();
 
-        void _process(double delta) override;
+        void _physics_process(double delta) override;
         float update_blast_velocity(float blastDir, float vel, int maxBlastSpeed, String direction="");
         bool was_on_floor();
-        void collide_with_enemy();
+        void _collide_with_enemy(Vector2 enemy_pos);
 
     };
 

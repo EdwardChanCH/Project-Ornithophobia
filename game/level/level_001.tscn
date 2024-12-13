@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bdtl35xbha2fd"]
+[gd_scene load_steps=5 format=4 uid="uid://bdtl35xbha2fd"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_343ou"]
-[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_buh38"]
-[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_eyoy0"]
-[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_7pwel"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
-bounce = 1.0
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_x8x21"]
+[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_gy8vc"]
+[ext_resource type="Script" path="res://script/camera_2d.gd" id="4_vvjw1"]
 
 [node name="_Level_221" type="Level"]
 level_info = {
@@ -27,17 +24,33 @@ navigation_enabled = false
 
 [node name="PlayerList" type="Node" parent="."]
 
-[node name="PlayerController" parent="PlayerList" instance=ExtResource("2_buh38")]
-position = Vector2(113, 1008)
+[node name="PlayerController" parent="PlayerList" instance=ExtResource("2_x8x21")]
+position = Vector2(120, 1007.5)
 velocity = Vector2(0, 0)
 
 [node name="EnemyList" type="Node" parent="."]
 
-[node name="EnemyController" parent="EnemyList" instance=ExtResource("3_7pwel")]
-position = Vector2(1825, 542)
+[node name="EnemyController" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 496)
+
+[node name="EnemyController2" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(1760, 208)
+
+[node name="EnemyController3" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 424)
+
+[node name="EnemyController4" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 352)
+
+[node name="EnemyController5" parent="EnemyList" instance=ExtResource("3_gy8vc")]
+position = Vector2(832, 280)
 
 [node name="EntityList" type="Node" parent="."]
 
-[node name="YinyangBall" parent="EntityList" instance=ExtResource("2_eyoy0")]
-position = Vector2(1752, 120)
-physics_material_override = SubResource("PhysicsMaterial_grotq")
+[node name="LevelController" type="LevelController" parent="."]
+timeScaleFactor = 0.01
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+script = ExtResource("4_vvjw1")
+random_strength = 10.0

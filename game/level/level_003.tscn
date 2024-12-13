@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://dnqanikpk6jom"]
+[gd_scene load_steps=4 format=4 uid="uid://b8m3e5f1bytcp"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_ahm8e"]
 [ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="2_q14m4"]
@@ -26,3 +26,5 @@ navigation_enabled = false
 [node name="YinyangBall" parent="EntityList" instance=ExtResource("2_q14m4")]
 position = Vector2(1800, 120)
 physics_material_override = SubResource("PhysicsMaterial_grotq")
+
+[node name="LevelController" type="LevelController" parent="."]

@@ -20,7 +20,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxytu"]
-size = Vector2(16, 32)
+size = Vector2(8.64198, 18.6187)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dncm"]
 bg_color = Color(0.152941, 0.243137, 0.47451, 1)
@@ -226,21 +226,23 @@ animations = [{
 }]
 
 [node name="PlayerController" type="PlayerController"]
-maxGroundSpeed = 120
-groundAccel = 8.0
-groundDecel = 8.0
+maxGroundSpeed = 180
+groundAccel = 12.0
+groundDecel = 12.0
 groundFriction = 0.95
-gravity = 850.0
-maxAirSpeed = 200
-maxFallSpeed = 1500
+gravity = 1275.0
+maxAirSpeed = 300
+maxFallSpeed = 2250
 airFriction = 0.7
-trueMaxSpeed = 810
-smallBlastStrength = 500
-largeBlastStrength = 1300
-maxSmallBlastSpeed = 200
-maxLargeBlastSpeed = 800
+trueMaxSpeed = 3600
+smallBlastStrength = 750
+largeBlastStrength = 1950
+maxSmallBlastSpeed = 300
+maxLargeBlastSpeed = 1200
+enemyBounceStrength = 500
 process_mode = 4
 z_index = 1
+scale = Vector2(3, 3)
 velocity = Vector2(0, 750)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
@@ -251,7 +253,8 @@ sprite_frames = SubResource("SpriteFrames_2dk60")
 animation = &"walk"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-scale = Vector2(3, 3)
+position = Vector2(0, 1.08114)
+scale = Vector2(1.62, 1.62)
 shape = SubResource("RectangleShape2D_rxytu")
 
 [node name="SlowMotionMeter" type="SlowMotionMeter" parent="."]
@@ -281,7 +284,6 @@ libraries = {
 }
 
 [node name="AnimationController" type="AnimationController" parent="."]
-scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_c2j7w")
 animation = &"idleAir"
 autoplay = "idle"
@@ -290,5 +292,6 @@ autoplay = "idle"
 sprite_frames = SubResource("SpriteFrames_xnpqg")
 animation = &"idleAir"
 autoplay = "idle"
+frame_progress = 0.470191
 
 [connection signal="timeout" from="SlowMotionMeter/CooldownTimer" to="SlowMotionMeter" method="_on_cooldown_timer_timeout"]

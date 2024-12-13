@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://script/debug_container.gd" id="2_shc82"]
 
 [node name="DebugController" type="DebugController"]
+process_mode = 3
 
 [node name="DebugContainer" type="PanelContainer" parent="."]
 z_index = 3
 offset_left = 40.0
 offset_top = 40.0
-offset_right = 160.0
-offset_bottom = 217.0
-scale = Vector2(3, 3)
+offset_right = 400.0
+offset_bottom = 571.0
 mouse_filter = 2
 theme = ExtResource("1_dm2dt")
 script = ExtResource("2_shc82")

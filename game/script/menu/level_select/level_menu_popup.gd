@@ -33,6 +33,7 @@ func load_level(level):
 #
 #
 func _on_play_button_pressed() -> void:
+	#SceneManager.get_instance().load_new_scene(get_tree(), level_path)
 	get_tree().change_scene_to_file(level_path)
 
 
