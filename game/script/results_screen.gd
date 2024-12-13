@@ -1,14 +1,9 @@
 extends Control
 
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node is ready in the scene tree.
 func _ready() -> void:
 	hide_elements()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_results_screen_show(level_metadata: Dictionary):
@@ -20,7 +15,6 @@ func _on_results_screen_show(level_metadata: Dictionary):
 	%Rank.visible = true
 	show_result_attribute(%RankLabel)
 	show_result_attribute(%RankFlavourText)
-	
 
 
 func show_result_attribute(node: Control):

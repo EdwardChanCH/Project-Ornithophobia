@@ -3,6 +3,7 @@ extends Panel
 
 signal activating
 
+
 var stylebox: StyleBoxFlat
 var is_active = false
 var offset = 20
@@ -10,7 +11,8 @@ var active_stylebox = Color("ffffff")
 var inactive_stylebox = Color("c8c8c8")
 var hover_color = Color("d8d8d8")
 
-# Called when the node enters the scene tree for the first time.
+
+# Called when the node is ready in the scene tree.
 func _ready() -> void:
 	stylebox = get_theme_stylebox("panel")
 	stylebox.bg_color = inactive_stylebox

@@ -86,7 +86,6 @@ Button/styles/pressed = SubResource("StyleBoxFlat_jch66")
 variation_embolden = 0.5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mqu0t"]
-load_path = "res://.godot/imported/play-solid.svg-4e8c00bf1a10ee31881fc131fadd77d1.ctex"
 
 [node name="WorkshopLevelIcon" type="Control"]
 custom_minimum_size = Vector2(1232, 128)

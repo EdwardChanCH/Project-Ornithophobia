@@ -1,12 +1,16 @@
 extends Control
 
-var current_tab = "custom"
-var regex = RegEx.new()
-const LEVEL_NAME_PATTERN_RE = ".*_quicksave[.]tscn"
-# Called when the node enters the scene tree for the first time.
+@export var current_tab = "custom"
+@export var level_name_pattern_re = ".*_quicksave[.]tscn"
+var regex
+
+
+# Called when the node is ready in the scene tree.
 func _ready() -> void:
-	regex.compile(LEVEL_NAME_PATTERN_RE)
+	regex = RegEx.new()
+	regex.compile(level_name_pattern_re)
 	reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
+
 
 func reload_levels(dir_path):
 	free_children()
@@ -40,23 +44,29 @@ func reload_levels(dir_path):
 	else:
 		$NoLevelsFound.visible = true
 
+
 func _exit_tree() -> void:
 	free_children()
+
 
 func _on_custom_levels_tab_activating() -> void:
 	reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
 	current_tab = "custom"
 
+
 func _on_my_levels_tab_activating() -> void:
 	reload_levels(Global.USER_LEVELS_DIR_PATH)
 	current_tab = "user"
+
 
 func free_children():
 	for child in %LevelContainer.get_children():
 		child.queue_free()
 
+
 func _on_level_folder_button_pressed() -> void:
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path(Global.CUSTOM_LEVELS_DIR_PATH))
+
 
 func _on_refresh_levels_button_pressed() -> void:
 	if (current_tab == "custom"):
@@ -67,4 +77,4 @@ func _on_refresh_levels_button_pressed() -> void:
 
 func _on_create_button_pressed() -> void:
 	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor.tscn")
-	pass # TODO
+	pass

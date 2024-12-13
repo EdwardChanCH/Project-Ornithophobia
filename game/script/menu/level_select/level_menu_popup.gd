@@ -2,13 +2,14 @@ extends Control
 
 
 @export var level_path = ""
-const DIR_PATH = "res://level/story/"
+@export var dir_path = "res://level/story/"
 
-# Called when the node enters the scene tree for the first time.
+
+# Called when the node is ready in the scene tree.
 func _ready() -> void:
-	for level in DirAccess.get_files_at(DIR_PATH):
+	for level in DirAccess.get_files_at(dir_path):
 		if (level == level_path):
-			load_level(DIR_PATH + level)
+			load_level(dir_path + level)
 			Global.data_index = Global.level_data.find(level)
 			break
 
@@ -33,8 +34,8 @@ func load_level(level):
 #
 #
 func _on_play_button_pressed() -> void:
-	#SceneManager.get_instance().load_new_scene(get_tree(), level_path)
-	get_tree().change_scene_to_file(level_path)
+	# get_tree().change_scene_to_file(level_path)
+	SceneManager.get_instance().load_new_scene(get_tree(), level_path)
 
 
 func _on_next_level_button_pressed() -> void:
@@ -42,7 +43,7 @@ func _on_next_level_button_pressed() -> void:
 		Global.data_index = 0
 	else:
 		Global.data_index += 1
-	load_level(DIR_PATH + Global.level_data[Global.data_index])
+	load_level(dir_path + Global.level_data[Global.data_index])
 
 
 func _on_last_level_button_pressed() -> void:
@@ -50,7 +51,7 @@ func _on_last_level_button_pressed() -> void:
 		Global.data_index = len(Global.level_data) - 1
 	else:
 		Global.data_index -= 1
-	load_level(DIR_PATH + Global.level_data[Global.data_index])
+	load_level(dir_path + Global.level_data[Global.data_index])
 
 
 func _input(event: InputEvent) -> void:
@@ -59,10 +60,10 @@ func _input(event: InputEvent) -> void:
 			Global.data_index = 0
 		else:
 			Global.data_index += 1
-		load_level(DIR_PATH + Global.level_data[Global.data_index])
+		load_level(dir_path + Global.level_data[Global.data_index])
 	elif (event.is_action_pressed("ui_left")):
 		if (Global.data_index == 0):
 			Global.data_index = len(Global.level_data) - 1
 		else:
 			Global.data_index -= 1
-		load_level(DIR_PATH + Global.level_data[Global.data_index])
+		load_level(dir_path + Global.level_data[Global.data_index])

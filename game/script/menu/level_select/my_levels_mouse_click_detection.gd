@@ -4,6 +4,7 @@ extends Area2D
 signal mouse_clicked
 var mouse_in_area = false
 
+
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("left_click") and mouse_in_area):
 		mouse_clicked.emit()

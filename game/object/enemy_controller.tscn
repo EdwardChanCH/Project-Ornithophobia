@@ -136,9 +136,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66uhf"]
 size = Vector2(16, 16)
 
-[node name="EnemyController" type="EnemyController"]
+[node name="EnemyController" type="EnemyController" node_paths=PackedStringArray("sfx_player")]
 scale = Vector2(3, 3)
 script = ExtResource("1_lihbf")
+sfx_player = NodePath("SFXPlayer")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.158, 0.232)

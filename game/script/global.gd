@@ -1,8 +1,8 @@
 extends Node
 
 const MAIN_LEVELS_DIR_PATH = "res://level/story/"
-const CUSTOM_LEVELS_DIR_PATH = "user://workshop/custom_levels/"
-const USER_LEVELS_DIR_PATH = "user://workshop/user_levels/"
+const CUSTOM_LEVELS_DIR_PATH = "user://level/workshop/"
+const USER_LEVELS_DIR_PATH = "user://level/user/"
 
 var level_data = []
 var data_index = 0
