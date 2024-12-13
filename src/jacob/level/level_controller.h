@@ -14,6 +14,7 @@
 #include "scene_manager.h"
 #include "level_timer.h"
 #include "playercontroller.h"
+#include "debug.h"
 
 namespace godot {
 

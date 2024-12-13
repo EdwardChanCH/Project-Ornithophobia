@@ -23,8 +23,8 @@ namespace godot {
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
-		long start_time;
-		long pause_time;
+		uint64_t start_time;
+		uint64_t pause_time;
 
 	protected:
 		static void _bind_methods(); // Must be declared

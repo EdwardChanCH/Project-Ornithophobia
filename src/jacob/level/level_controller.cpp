@@ -70,7 +70,7 @@ _GDEXPORT_SET_SUFFIX
  */
 void LevelController::_ready() {
     set_process(false);
-    connect("results_slow_time", Callable(get_parent()->find_child("SlowMotionMeter"), "_on_results_showing"));
+    connect("results_slow_time", Callable(this, "_results_slow_time"));
 
     if (!Engine::get_singleton()->is_editor_hint()) {
         set_process_mode(ProcessMode::PROCESS_MODE_ALWAYS);
@@ -110,6 +110,7 @@ void LevelController::_ready() {
             if (playerList->get_child_count() > 0) {
                 PlayerController* player = cast_to<PlayerController>(playerList->get_children().front());
                 player->set_process_mode(ProcessMode::PROCESS_MODE_INHERIT);
+                connect("results_slow_time", Callable(player->find_child("SlowMotionMeter"), "_on_results_showing"));
             }
         }
     }
@@ -119,12 +120,31 @@ void LevelController::_ready() {
  * @brief Same as _input() in GDScript.
  */
 void LevelController::_input(const Ref<InputEvent> &event) {
+    // Pause the game
     if (event->is_action_pressed("escape") && UtilityFunctions::str(pauseInstance) != "<Freed Object>") {
         get_tree()->set_pause(!get_tree()->is_paused());
         if (get_tree()->is_paused()) {
             pauseInstance->set_visible(true);
         } else {
             pauseInstance->set_visible(false);
+        }
+    }
+
+    // Debug inputs
+    if (Debug::get_singleton()->is_debug_mode_active()) {
+        // Reload scene if debug mode active
+        if (event->is_action_pressed("debug_reload_scene")) {
+            get_tree()->set_pause(false);
+            Engine::get_singleton()->set_time_scale(1.0);
+            get_tree()->reload_current_scene();
+        }
+
+        // Force results screen to appear
+        if (event->is_action_pressed("debug_force_results") && !pauseInstance->is_visible()) {
+            get_tree()->set_pause(false);
+            resultsScreenInstance->set_visible(false);
+            slowLength = Time::get_singleton()->get_ticks_msec();
+            emit_signal("results_slow_time");
         }
     }
 }
@@ -174,7 +194,7 @@ void LevelController::_update_enemy_count() {
 
         if (numEnemies == 0) {
             slowLength = Time::get_singleton()->get_ticks_msec();
-            set_process(true);
+            // set_process(true);
             emit_signal("results_slow_time");
             pauseInstance->queue_free();
         }

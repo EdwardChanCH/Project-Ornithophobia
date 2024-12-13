@@ -23,6 +23,8 @@ anchors_preset = 0
 [node name="DebugController" parent="." instance=ExtResource("2_meigp")]
 
 [node name="LevelTimer" type="LevelTimer" parent="."]
+start_time = 0
+pause_time = 0
 process_mode = 4
 layout_mode = 1
 anchors_preset = -1

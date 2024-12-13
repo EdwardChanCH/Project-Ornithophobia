@@ -1,14 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxr3uf4es8fhj"]
+[gd_scene load_steps=20 format=3 uid="uid://bxr3uf4es8fhj"]
 
 [ext_resource type="Script" path="res://script/results_screen.gd" id="1_f51bx"]
 [ext_resource type="Shader" path="res://shader/results_screen.gdshader" id="2_bllvv"]
+[ext_resource type="FontFile" uid="uid://dv8obm6mlador" path="res://style/fonts/operius-mono.ttf" id="3_6lwat"]
+[ext_resource type="FontFile" uid="uid://c0hcfr6viuc6a" path="res://style/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf" id="4_kws1v"]
+[ext_resource type="AudioStream" uid="uid://cbcokm7naj7ox" path="res://asset/audio/result_attribute_appear.wav" id="4_l6orl"]
+[ext_resource type="Texture2D" uid="uid://bf2h5wok2tb46" path="res://asset/sprite/menu/gold_rank_icon.png" id="5_v46tx"]
+[ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://style/fonts/OpenSans/OpenSans-Bold.ttf" id="6_ols3d"]
+[ext_resource type="FontFile" uid="uid://cx758073ixjeq" path="res://style/fonts/OpenSans/OpenSans-ExtraBold.ttf" id="6_ptk3a"]
+[ext_resource type="Script" path="res://script/menu/level_select/results_rank_flavour_text.gd" id="7_ogk7m"]
+[ext_resource type="Texture2D" uid="uid://btk2xyf16h86g" path="res://asset/sprite/menu/crown_icon_white.svg" id="7_q5ksr"]
+[ext_resource type="Theme" uid="uid://doafycv68qeaj" path="res://style/themes/default_button_theme.tres" id="8_b547l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2j1t6"]
 shader = ExtResource("2_bllvv")
 shader_parameter/lod = 2.035
 
-[sub_resource type="LabelSettings" id="LabelSettings_fkchx"]
-font_size = 41
+[sub_resource type="LabelSettings" id="LabelSettings_e80yl"]
+font = ExtResource("3_6lwat")
+font_size = 48
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ry7cw"]
+font = ExtResource("4_kws1v")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_nu0b5"]
+font = ExtResource("6_ptk3a")
+font_size = 52
+
+[sub_resource type="LabelSettings" id="LabelSettings_e6lht"]
+font = ExtResource("6_ols3d")
+font_size = 48
 
 [sub_resource type="Animation" id="Animation_fr62t"]
 length = 0.2
@@ -72,19 +96,134 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="LevelComplete" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 664.0
-offset_top = 440.0
-offset_right = 1240.0
-offset_bottom = 544.0
-text = "this will be the results screen"
-label_settings = SubResource("LabelSettings_fkchx")
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 1728.0
+offset_bottom = 256.0
+text = "[LEVEL NAME] COMPLETE!"
+label_settings = SubResource("LabelSettings_e80yl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Rank" type="Control" parent="ColorRect"]
 unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1144.0
+offset_top = 360.0
+offset_right = 1336.0
+offset_bottom = 664.0
+
+[node name="RankLabel" type="Label" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 88.0
+text = "RANK"
+label_settings = SubResource("LabelSettings_ry7cw")
+horizontal_alignment = 1
+
+[node name="RankIcon" type="TextureRect" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 112.0
+offset_right = 192.0
+offset_bottom = 304.0
+texture = ExtResource("5_v46tx")
+
+[node name="RankFlavourText" type="Label" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 0
+offset_left = -608.0
+offset_top = 272.0
+offset_right = -221.0
+offset_bottom = 344.0
+rotation = 0.174533
+pivot_offset = Vector2(194, 36)
+text = "SWEET MOVES!"
+label_settings = SubResource("LabelSettings_nu0b5")
+script = ExtResource("7_ogk7m")
+max_scale = 1.05
+min_scale = 0.95
+scale_speed = 0.01
+
+[node name="Time" type="Control" parent="ColorRect"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 376.0
+offset_right = 768.0
+offset_bottom = 534.0
+
+[node name="TimeLabel" type="Label" parent="ColorRect/Time"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = -16.0
+offset_right = 248.0
+offset_bottom = 72.0
+text = "TIME"
+label_settings = SubResource("LabelSettings_ry7cw")
+horizontal_alignment = 1
+
+[node name="LevelTime" type="Label" parent="ColorRect/Time"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = 96.0
+offset_right = 248.0
+offset_bottom = 163.0
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_e6lht")
+horizontal_alignment = 1
+
+[node name="BestTimeCrown" type="TextureRect" parent="ColorRect/Time"]
+layout_mode = 0
+offset_top = 112.0
+offset_right = 32.0
+offset_bottom = 144.0
+texture = ExtResource("7_q5ksr")
+expand_mode = 1
+
+[node name="Buttons" type="HBoxContainer" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 448.0
+offset_top = 864.0
+offset_right = 1472.0
+offset_bottom = 960.0
+theme_override_constants/separation = 128
+
+[node name="ReturnButton" type="Button" parent="ColorRect/Buttons"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("8_b547l")
+theme_override_font_sizes/font_size = 24
+text = "Return to Menu"
+
+[node name="RetryButton" type="Button" parent="ColorRect/Buttons"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("8_b547l")
+theme_override_font_sizes/font_size = 24
+text = "Retry"
+
+[node name="NextLevelButton" type="Button" parent="ColorRect/Buttons"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("8_b547l")
+theme_override_font_sizes/font_size = 24
+text = "Next Level"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vaqeo")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l6orl")

@@ -33,14 +33,20 @@ LevelTimer::~LevelTimer() {
 
 // Export instance variables to the Godot Editor
 _GDEXPORT_ADD_PREFIX(LevelTimer)
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "start_time"))
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "pause_time"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor
 _GDEXPORT_GET_PREFIX(LevelTimer)
+_GDEXPORT_GET(start_time)
+_GDEXPORT_GET(pause_time)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor
 _GDEXPORT_SET_PREFIX(LevelTimer)
+_GDEXPORT_SET(start_time)
+_GDEXPORT_SET(pause_time)
 _GDEXPORT_SET_SUFFIX
 
 void LevelTimer::_ready() {
@@ -49,7 +55,7 @@ void LevelTimer::_ready() {
     } else {
         set_process_mode(ProcessMode::PROCESS_MODE_DISABLED);
     }
-    start_time = Time::get_singleton()->get_ticks_msec();
+    start_time = 0;
     pause_time = 0;
 }
 
