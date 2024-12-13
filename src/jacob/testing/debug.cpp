@@ -19,6 +19,8 @@ void Debug::_bind_methods() {
     ClassDB::bind_method(D_METHOD("add_debug_property", "name", "value"), &Debug::add_debug_property);
     //TODO: Make this bind properly
     // ClassDB::bind_method(D_METHOD("get_debug_properties"), &Debug::get_debug_properties);
+    ClassDB::bind_method(D_METHOD("is_debug_mode_active"), &Debug::is_debug_mode_active);
+    ClassDB::bind_method(D_METHOD("set_debug_mode", "mode"), &Debug::set_debug_mode);
 }
 
 /**
@@ -26,6 +28,7 @@ void Debug::_bind_methods() {
  */
 Debug::Debug() {
     debugProperties = Dictionary();
+    isDebugModeActive = false;
 }
 
 /**
@@ -72,4 +75,14 @@ void Debug::add_debug_property(String name, Variant value) {
  */
 Dictionary Debug::get_debug_properties() {
     return debugProperties;
+}
+
+
+bool Debug::is_debug_mode_active() {
+    return isDebugModeActive;
+}
+
+
+void Debug::set_debug_mode(bool mode) {
+    isDebugModeActive = mode;
 }

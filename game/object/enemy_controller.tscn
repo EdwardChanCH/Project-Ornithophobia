@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://7a1f4lx35t14"]
+[gd_scene load_steps=25 format=3 uid="uid://7a1f4lx35t14"]
 
 [ext_resource type="Texture2D" uid="uid://v41xssxrwdta" path="res://asset/sprite/gameplay/jake scrunkle.png" id="1_f1bfd"]
+[ext_resource type="Script" path="res://script/enemy_controller.gd" id="1_lihbf"]
 [ext_resource type="Texture2D" uid="uid://bs7ge0v8bln3" path="res://asset/sprite/gameplay/explosione_spritesheet.png" id="2_6d0t4"]
-[ext_resource type="AudioStream" uid="uid://wh4w78hx72xd" path="res://asset/audio/enemy_death.mp3" id="3_xdu82"]
 [ext_resource type="Script" path="res://script/sfx_player.gd" id="4_3l50r"]
+[ext_resource type="AudioStream" uid="uid://brb0iu0ywlo5d" path="res://asset/audio/hitHurt2.wav" id="4_plx1h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_am7sp"]
 atlas = ExtResource("2_6d0t4")
@@ -136,6 +137,9 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="EnemyController" type="EnemyController"]
+minKillSpeed = 1000
+scale = Vector2(3, 3)
+script = ExtResource("1_lihbf")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.475, 0.695)
@@ -155,9 +159,11 @@ scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_66uhf")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_xdu82")
+process_mode = 3
+stream = ExtResource("4_plx1h")
 volume_db = -22.5
+pitch_scale = 1.25
 script = ExtResource("4_3l50r")
 
-[connection signal="enemy_died" from="." to="SFXPlayer" method="_on_enemy_controller_enemy_died"]
+[connection signal="enemy_died" from="." to="." method="_on_enemy_died"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_controller_entered"]

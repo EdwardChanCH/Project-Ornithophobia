@@ -36,6 +36,7 @@ namespace godot {
 		bool can_regenerate = false;
 		bool can_drain = true;
 		bool can_slow_time;
+		bool results_showing = false;
 		long start_press_time = 0;
 		float max_time_slow_factor;
 		float value;
@@ -52,6 +53,7 @@ namespace godot {
 		void _process(double delta) override;
 		void _on_cooldown_timer_timeout();
 		void update_meter();
+		void _on_results_showing();
 	};
 
 } // namespace godot

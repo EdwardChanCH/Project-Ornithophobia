@@ -56,3 +56,5 @@ physics_material_override = SubResource("PhysicsMaterial_grotq")
 [node name="YinyangOrb5" parent="EntityList" instance=ExtResource("4_vubgi")]
 position = Vector2(264, 216)
 physics_material_override = SubResource("PhysicsMaterial_grotq")
+
+[node name="LevelController" type="LevelController" parent="."]

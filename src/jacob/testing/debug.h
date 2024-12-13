@@ -25,6 +25,7 @@ namespace godot {
     
     private:
         Dictionary debugProperties;
+        bool isDebugModeActive;
 
         Debug();
         ~Debug();
@@ -35,6 +36,8 @@ namespace godot {
         static Debug *get_singleton();
         void add_debug_property(String name, Variant value);
         Dictionary get_debug_properties();
+        bool is_debug_mode_active();
+        void set_debug_mode(bool mode);
     };
 
 }

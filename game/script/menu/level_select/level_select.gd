@@ -1,6 +1,6 @@
 extends Control
 
-const DIR_PATH = "res://level/"
+const DIR_PATH = "res://level/story/"
 const LEVEL_NAME_PATTERN_RE = "level_[0-9]{3}[.]tscn"
 
 # Called when the node enters the scene tree for the first time.

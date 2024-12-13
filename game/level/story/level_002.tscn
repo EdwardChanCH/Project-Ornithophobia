@@ -17,54 +17,39 @@ navigation_enabled = false
 
 [node name="PlayerList" type="Node" parent="."]
 
-[node name="PlayerController" type="PlayerController" parent="PlayerList" instance=ExtResource("2_8f7b3")]
-maxGroundSpeed = 120
-groundAccel = 8.0
-groundDecel = 8.0
-groundFriction = 0.95
-gravity = 850.0
-maxAirSpeed = 200
-maxFallSpeed = 1500
-airFriction = 0.7
-trueMaxSpeed = 810
-smallBlastStrength = 500
-largeBlastStrength = 1300
-maxSmallBlastSpeed = 200
-maxLargeBlastSpeed = 800
-z_index = 1
+[node name="PlayerController" parent="PlayerList" instance=ExtResource("2_8f7b3")]
 position = Vector2(216, 960)
-velocity = Vector2(0, 750)
 
 [node name="EnemyList" type="Node" parent="."]
 
-[node name="@EnemyController@210" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@210" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(312, 744)
 
-[node name="@EnemyController@211" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@211" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(312, 504)
 
-[node name="@EnemyController@212" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@212" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(312, 264)
 
-[node name="@EnemyController@213" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@213" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(840, 264)
 
-[node name="@EnemyController@214" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@214" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(840, 504)
 
-[node name="@EnemyController@215" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@215" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(840, 744)
 
-[node name="@EnemyController@218" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@218" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(1368, 744)
 
-[node name="@EnemyController@219" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@219" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(1368, 504)
 
-[node name="@EnemyController@220" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@220" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(1368, 264)
 
-[node name="@EnemyController@221" type="EnemyController" parent="EnemyList" instance=ExtResource("3_1euc4")]
+[node name="@EnemyController@221" parent="EnemyList" instance=ExtResource("3_1euc4")]
 position = Vector2(1656, 264)
 
 [node name="EntityList" type="Node" parent="."]

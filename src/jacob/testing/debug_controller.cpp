@@ -54,6 +54,7 @@ void DebugController::_process(double _delta) {
 
 				debugText->set_name(name);
 				debugText->set_text(name + ": " + value);
+				debugText->add_theme_font_size_override("font_size", 24);
 				property_container->add_child(debugText);
 			} else {
 				debugText->set_text(name + ": " + value);

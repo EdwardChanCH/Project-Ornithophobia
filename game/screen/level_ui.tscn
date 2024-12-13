@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0y7avoi2eu4h"]
+[gd_scene load_steps=6 format=3 uid="uid://b0y7avoi2eu4h"]
 
 [ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://style/fonts/dogicabold.ttf" id="1_fjn1q"]
 [ext_resource type="PackedScene" uid="uid://bcypmvbf3y6rg" path="res://screen/debug.tscn" id="2_meigp"]
+[ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://style/fonts/OpenSans/OpenSans-Bold.ttf" id="3_krcmi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tjpqc"]
 font = ExtResource("1_fjn1q")
 font_size = 48
 outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yugw5"]
+font = ExtResource("3_krcmi")
+font_size = 32
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="LevelUI" type="Control"]
@@ -16,6 +23,8 @@ anchors_preset = 0
 [node name="DebugController" parent="." instance=ExtResource("2_meigp")]
 
 [node name="LevelTimer" type="LevelTimer" parent="."]
+start_time = 0
+pause_time = 0
 process_mode = 4
 layout_mode = 1
 anchors_preset = -1
@@ -32,3 +41,12 @@ text = "01:39.10"
 label_settings = SubResource("LabelSettings_tjpqc")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EnemiesRemaining" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1456.0
+offset_top = 78.0
+offset_right = 1778.0
+offset_bottom = 123.0
+text = "Enemies Remaining:"
+label_settings = SubResource("LabelSettings_yugw5")

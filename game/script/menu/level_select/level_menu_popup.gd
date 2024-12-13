@@ -2,7 +2,7 @@ extends Control
 
 
 @export var level_path = ""
-const DIR_PATH = "res://level/"
+const DIR_PATH = "res://level/story/"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +33,7 @@ func load_level(level):
 #
 #
 func _on_play_button_pressed() -> void:
+	#SceneManager.get_instance().load_new_scene(get_tree(), level_path)
 	get_tree().change_scene_to_file(level_path)
 
 
