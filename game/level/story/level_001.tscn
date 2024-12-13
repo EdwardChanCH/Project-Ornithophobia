@@ -26,7 +26,7 @@ position = Vector2(216, 960)
 position = Vector2(312, 984)
 
 [node name="@EnemyController@207" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(792, 744)
+position = Vector2(904, 648)
 
 [node name="@EnemyController@208" parent="EnemyList" instance=ExtResource("3_bt444")]
 position = Vector2(1272, 504)

@@ -122,6 +122,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ms702")
 theme_override_styles/normal = SubResource("StyleBoxFlat_md1da")
 text = "EXIT TO DESKTOP"
 
-[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ResumeButton" to="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ReturnToMenuButton" to="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer" method="_on_return_to_menu_button_pressed"]
-[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ExitButton" to="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ReturnToMenuButton" to="." method="_on_return_to_menu_button_pressed"]
+[connection signal="pressed" from="DarkenedBackground/PauseMenuPanel/PauseMenuButtonContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

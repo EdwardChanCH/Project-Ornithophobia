@@ -93,16 +93,16 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
  * @brief Same as Godot's _process() function
  */
 void EnemyController::_process(double delta) {
-    Debug::get_singleton()->add_debug_property("deathAnim", deathAnim->is_playing());
+    if (!Engine::get_singleton()->is_editor_hint()) {
+        // Hide enemy sprite at the peak of the explosion
+        if (deathAnim->is_playing() && deathAnim->get_frame() == 8) {
+            Node::cast_to<Sprite2D>(find_child("EnemySprite"))->set_visible(false);
+        }
 
-    // Hide enemy sprite at the peak of the explosion
-    if (deathAnim->is_playing() && deathAnim->get_frame() == 8) {
-        Node::cast_to<Sprite2D>(find_child("EnemySprite"))->set_visible(false);
-    }
-
-    // Stop animation when it reaches the last frame. Delete this enemy after
-    if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
-        deathAnim->stop();
-        queue_free(); // TODO This line would crash Godot Editor if the death animation is played in the animation timeline.
+        // Stop animation when it reaches the last frame. Delete this enemy after
+        if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
+            deathAnim->stop();
+            queue_free(); // TODO This line would crash Godot Editor if the death animation is played in the animation timeline.
+        }
     }
 }
