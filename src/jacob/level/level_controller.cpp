@@ -16,7 +16,7 @@ void LevelController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_update_enemy_count"), &LevelController::_update_enemy_count);
     ClassDB::bind_method(D_METHOD("_results_slow_time"), &LevelController::_results_slow_time);
     ADD_SIGNAL(MethodInfo("results_slow_time"));
-    ADD_SIGNAL(MethodInfo("show_results"), PropertyInfo(Variant::DICTIONARY, "level_metadata"));
+    ADD_SIGNAL(MethodInfo("show_results", PropertyInfo(Variant::DICTIONARY, "level_metadata")));
 }
 
 /**

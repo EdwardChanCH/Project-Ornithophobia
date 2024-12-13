@@ -22,6 +22,7 @@ navigation_enabled = false
 [node name="PlayerList" type="Node" parent="."]
 
 [node name="PlayerController" parent="PlayerList" instance=ExtResource("2_ws8rl")]
+enemyBounceStrength = 99
 position = Vector2(552, 960)
 
 [node name="EnemyList" type="Node" parent="."]

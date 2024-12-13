@@ -220,6 +220,7 @@ smallBlastStrength = 250
 largeBlastStrength = 750
 maxSmallBlastSpeed = 375
 maxLargeBlastSpeed = 500
+enemyBounceStrength = 32
 visible = false
 modulate = Color(0.313726, 1, 1, 0.313726)
 
