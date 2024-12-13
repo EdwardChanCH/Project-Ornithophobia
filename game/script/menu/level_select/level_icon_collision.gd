@@ -1,10 +1,6 @@
 extends Area2D
 
 
-var levelPopupScene = load("res://screen/menu/level_menu_popup.tscn")
-var levelPopupInstance: Control
-
-
 func _ready() -> void:
 	set_process_input(false)
 
@@ -24,7 +20,8 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> vo
 
 func _input(event: InputEvent) -> void:
 	if (event is InputEventMouseButton and event.is_action("left_click") and not event.is_pressed()):
-		levelPopupInstance = levelPopupScene.instantiate()
+		var levelPopupScene = load("res://screen/menu/level_menu_popup.tscn")
+		var levelPopupInstance = levelPopupScene.instantiate()
 		levelPopupInstance.level_path = get_parent().level_path
 		get_tree().root.find_child("LevelSelect", true, false).call_deferred("add_child", levelPopupInstance)
 		set_process_input(false)

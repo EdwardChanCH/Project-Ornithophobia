@@ -1,20 +1,20 @@
 extends Control
 
-const DIR_PATH = "res://level/story/"
-const LEVEL_NAME_PATTERN_RE = "level_[0-9]{3}[.]tscn"
+@export var dir_path = "res://level/story/"
+@export var level_name_pattern_re = "level_[0-9]{3}[.]tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var regex = RegEx.new()
-	regex.compile(LEVEL_NAME_PATTERN_RE)
+	regex.compile(level_name_pattern_re)
 	
-	for level_path in DirAccess.get_files_at(DIR_PATH):
+	for level_path in DirAccess.get_files_at(dir_path):
 		if (regex.search(level_path)):
 			var levelIconScene = load("res://screen/menu/level_icon.tscn")
 			var levelIconInstance: Control = levelIconScene.instantiate()
 			%LevelContainer.call_deferred("add_child", levelIconInstance)
 			
-			var level_scene = load(DIR_PATH + level_path)
+			var level_scene = load(dir_path + level_path)
 			var level_instance: Level = level_scene.instantiate()
 			var level_metadata: Dictionary = level_instance.get_level_info()
 			levelIconInstance.find_child("LevelTitle").text = level_metadata.get("name", "null")

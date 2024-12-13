@@ -1,10 +1,11 @@
 extends Label
 
+
 @export var max_scale: float
 @export var min_scale: float
-
-
 var time_passed = 0
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_passed += delta

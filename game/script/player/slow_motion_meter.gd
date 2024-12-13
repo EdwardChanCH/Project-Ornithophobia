@@ -1,5 +1,6 @@
 extends ProgressBar
 
+
 @export var max_slow_time: float = 3000
 @export var max_slow_time_value = 0.25
 @export var time_slow_factor = 8
@@ -17,7 +18,8 @@ var can_drain = true
 var can_slow_time
 var max_time_slow_factor = max_slow_time / 100
 
-# Called when the node enters the scene tree for the first time.
+
+# Called when the node is ready in the scene tree.
 func _ready() -> void:
 	cooldown = %CooldownTimer
 	cooldown.wait_time = 1.0
@@ -107,6 +109,7 @@ func update_meter():
 	if ((Input.is_action_just_released("action_button")) and cooldown.is_stopped() and !can_regenerate and value < soft_max_value):
 		cooldown.start(cooldown.wait_time)
 	Debug.get_singleton().add_debug_property("time_pressed", time_pressed)
+
 
 # Allow the meter to regenerate when the regen cooldown timer finishes
 func _on_cooldown_timer_timeout() -> void:
