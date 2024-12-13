@@ -147,7 +147,6 @@ label_settings = SubResource("LabelSettings_nu0b5")
 script = ExtResource("7_ogk7m")
 max_scale = 1.05
 min_scale = 0.95
-scale_speed = 0.01
 
 [node name="Time" type="Control" parent="ColorRect"]
 unique_name_in_owner = true

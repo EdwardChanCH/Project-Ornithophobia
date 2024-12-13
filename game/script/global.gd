@@ -1,6 +1,6 @@
 extends Node
 
-const MAIN_LEVELS_DIR_PATH = "res://level/"
+const MAIN_LEVELS_DIR_PATH = "res://level/story/"
 const CUSTOM_LEVELS_DIR_PATH = "user://workshop/custom_levels/"
 const USER_LEVELS_DIR_PATH = "user://workshop/user_levels/"
 
@@ -11,9 +11,9 @@ func _ready() -> void:
 	create_dir(CUSTOM_LEVELS_DIR_PATH)
 	create_dir(USER_LEVELS_DIR_PATH)
 	
-	var c_level_1_scene = load("res://level/level_001.tscn")
-	var c_level_2_scene = load("res://level/level_002.tscn")
-	var c_level_3_scene = load("res://level/level_003.tscn")
+	var c_level_1_scene = load("res://level/story/level_001.tscn")
+	var c_level_2_scene = load("res://level/story/level_002.tscn")
+	var c_level_3_scene = load("res://level/story/level_003.tscn")
 	
 	ResourceSaver.save(c_level_1_scene, CUSTOM_LEVELS_DIR_PATH + "level_001.tscn")
 	ResourceSaver.save(c_level_2_scene, CUSTOM_LEVELS_DIR_PATH + "level_002.tscn")

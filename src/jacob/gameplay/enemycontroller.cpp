@@ -74,15 +74,17 @@ void EnemyController::_ready() {
  * @brief Receiver for detecting when the player controller enters this enemy's collider
  */
 void EnemyController::_on_player_controller_entered(Node2D *body) {
-    if (Node::cast_to<PlayerController>(body)->get_velocity().length() >= minKillSpeed) {
-        if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
-            deathAnim->set_visible(true);
-            deathAnim->play("death");
-            emit_signal("enemy_died");
-            find_child("Area2D")->queue_free();
+    if (body->get_class() == "PlayerController") {
+        if (Node::cast_to<PlayerController>(body)->get_velocity().length() >= minKillSpeed) {
+            if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
+                deathAnim->set_visible(true);
+                deathAnim->play("death");
+                emit_signal("enemy_died");
+                find_child("Area2D")->queue_free();
+            }
+        } else {
+            emit_signal("bounce_player", get_position());
         }
-    } else {
-        emit_signal("bounce_player", get_position());
     }
 }
 

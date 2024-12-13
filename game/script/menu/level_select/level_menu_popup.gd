@@ -2,7 +2,7 @@ extends Control
 
 
 @export var level_path = ""
-const DIR_PATH = "res://level/"
+const DIR_PATH = "res://level/story/"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

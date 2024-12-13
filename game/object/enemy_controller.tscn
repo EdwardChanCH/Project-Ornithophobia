@@ -166,5 +166,4 @@ pitch_scale = 1.25
 script = ExtResource("4_3l50r")
 
 [connection signal="enemy_died" from="." to="." method="_on_enemy_died"]
-[connection signal="hitstop_end" from="." to="SFXPlayer" method="_on_enemy_controller_enemy_died"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_player_controller_entered"]
