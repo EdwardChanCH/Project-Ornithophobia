@@ -39,11 +39,13 @@ void Level::_bind_methods() {
     ClassDB::bind_static_method("Level", D_METHOD("export_level_tscn", "filepath", "level_node"), &Level::export_level_tscn);
     ClassDB::bind_method(D_METHOD("get_level_info"), &Level::get_level_info);
     ClassDB::bind_method(D_METHOD("set_level_info", "value"), &Level::set_level_info);
+    ClassDB::bind_method(D_METHOD("set_physics", "active"), &Level::set_physics);
     ClassDB::bind_method(D_METHOD("get_list", "list_name"), &Level::get_list);
     ClassDB::bind_method(D_METHOD("add_list", "list_name"), &Level::get_list);
     ClassDB::bind_method(D_METHOD("clear_list", "list_name"), &Level::clear_list);
     ClassDB::bind_method(D_METHOD("get_list_length", "list_name"), &Level::get_list_length);
     ClassDB::bind_method(D_METHOD("get_node_in_list", "list_name", "node_name"), &Level::get_node_in_list);
+    ClassDB::bind_method(D_METHOD("get_node_in_list_by_index", "list_name", "index"), &Level::get_node_in_list_by_index);
     ClassDB::bind_method(D_METHOD("add_node_to_list", "list_name", "child_node"), &Level::add_node_to_list);
 }
 
@@ -72,18 +74,6 @@ Level::~Level() {
 }
 
 /**
- * @brief Called when this node is ready in Godot's scene tree.
- * 
- */
-void Level::_ready() {
-    add_list(tile_list_name);
-    add_list(player_list_name);
-    add_list(enemy_list_name);
-    add_list(entity_list_name);
-    //add_list(trash_list_name);  // TODO not implemented yet; need this to implement the remove_node() function
-}
-
-/**
  * @brief Deep-copy a level node and all of its children.
  * 
  * @return Level* Cloned Level
@@ -99,6 +89,7 @@ Level * Level::clone() {
 
 /**
  * @brief File import function for .tscn format.
+ * Note: Use set_physics(true) on level node if necessary.
  * Warning: The input is not validated.
  * 
  * @param filepath Filepath
@@ -106,11 +97,17 @@ Level * Level::clone() {
  */
 Level * Level::import_level_tscn(String filepath) {
     Ref<PackedScene> level_scene = ResourceLoader::get_singleton()->load(filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
-    return (Level *)(level_scene.ptr()->instantiate());
+    Level *level_node = (Level *)(level_scene.ptr()->instantiate());
+    level_node->add_list(level_node->tile_list_name);
+    level_node->add_list(level_node->player_list_name);
+    level_node->add_list(level_node->enemy_list_name);
+    level_node->add_list(level_node->entity_list_name);
+    return level_node;
 }
 
 /**
  * @brief File export function for .tscn format.
+ * Note: Use set_physics(false) on level node if necessary.
  * Warning: The input is not validated.
  * 
  * @param filepath Filepath
@@ -144,6 +141,36 @@ void Level::set_level_info(Dictionary value) {
 }
 
 /**
+ * @brief Set physics to all nodes.
+ * Root node is set to Inherit/ Disabled.
+ * Child nodes are always set to Inherit.
+ * 
+ * @param active Enable/ Disable
+ */
+void Level::set_physics(bool active) {
+    Node *list, *entity;
+    int list_count, entity_count;
+
+    if (active) {
+        this->set_process_mode(Node::PROCESS_MODE_INHERIT);
+    } else {
+        this->set_process_mode(Node::PROCESS_MODE_DISABLED);
+    }
+
+    list_count = this->get_child_count();
+    for (int i = 0; i < list_count; ++i) {
+        list = this->get_child(i);
+        list->set_process_mode(Node::PROCESS_MODE_INHERIT);
+
+        entity_count = list->get_child_count();
+        for (int j = 0; j < entity_count; ++j) {
+            entity = list->get_child(j);
+            entity->set_process_mode(Node::PROCESS_MODE_INHERIT);
+        }
+    }
+}
+
+/**
  * @brief Get the list.
  * Return nullptr if list does not exist.
  * Note: Use add_node() to add child node to this list safely!
@@ -168,7 +195,7 @@ Node * Level::get_list(String list_name) {
  * @return false 
  */
 bool Level::add_list(String list_name) {
-    Node * list;
+    Node *list;
 
     if (has_node(list_name)) {
         return false;
@@ -220,12 +247,14 @@ int Level::get_list_length(String list_name) {
 }
 
 /**
- * @brief Get the node in the list.
+ * @brief Get the node in the list by node path.
  * Return nullptr if list or node does not exist.
+ * Note: May not work for nodes generated in runtime.
+ *       Use get_node_in_list_by_index() instead.
  * 
  * @param list_name List Name (constant)
  * @param node_name Node Name
- * @return Node* List Node
+ * @return Node* Child Node
  */
 Node * Level::get_node_in_list(String list_name, String node_name) {
     Node * list, * node;
@@ -237,6 +266,29 @@ Node * Level::get_node_in_list(String list_name, String node_name) {
 
     if (list->has_node(node_name)) {
         return list->get_node_or_null(NodePath(node_name));
+    } else {
+        return nullptr;
+    }
+}
+
+/**
+ * @brief Get the node in the list by index.
+ * Return nullptr if list or node does not exist.
+ * 
+ * @param list_name List Name (constant)
+ * @param index Child Node index
+ * @return Node* Child Node
+ */
+Node * Level::get_node_in_list_by_index(String list_name, int index) {
+    Node * list, * node;
+
+    list = get_list(list_name);
+    if (!list) {
+        return nullptr;
+    }
+
+    if (index < list->get_child_count()) {
+        return list->get_child(index);
     } else {
         return nullptr;
     }

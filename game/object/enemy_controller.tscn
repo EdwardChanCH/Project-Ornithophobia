@@ -137,25 +137,21 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="EnemyController" type="EnemyController"]
-minKillSpeed = 1000
 scale = Vector2(3, 3)
 script = ExtResource("1_lihbf")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-scale = Vector2(0.475, 0.695)
+scale = Vector2(0.158, 0.232)
 texture = ExtResource("1_f1bfd")
 
 [node name="DeathAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -12)
-scale = Vector2(0.24, 0.24)
+scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_srxqd")
 animation = &"death"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_66uhf")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]

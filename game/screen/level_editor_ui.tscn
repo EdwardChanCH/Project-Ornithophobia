@@ -11,7 +11,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
-[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node", "help_popup_node", "debug_popup_node", "camera_node", "menu_node", "grid_layer", "edit_mode_node", "bgm_player_node", "ghost_tile_node", "ghost_player_node", "ghost_enemy_node", "ghost_orb_node")]
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node", "help_popup_node", "message_popup_node", "camera_node", "menu_node", "grid_layer", "physics_button_node", "edit_mode_node", "bgm_player_node", "ghost_tile_node", "ghost_player_node", "ghost_enemy_node", "ghost_orb_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -22,10 +22,11 @@ script = ExtResource("1_f5a73")
 load_level_popup_node = NodePath("LoadLevelPopup")
 save_level_popup_node = NodePath("SaveLevelPopup")
 help_popup_node = NodePath("HelpPopup")
-debug_popup_node = NodePath("DebugPopup")
+message_popup_node = NodePath("MessagePopup")
 camera_node = NodePath("Camera")
 menu_node = NodePath("UIContainer/UIVBox/MenuPanel")
 grid_layer = NodePath("ParallaxBackground/GridLayer")
+physics_button_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/PhysicsButton")
 edit_mode_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton")
 bgm_player_node = NodePath("BGMPlayer")
 ghost_tile_node = NodePath("GhostTileEntity")
@@ -55,7 +56,7 @@ position_smoothing_speed = 10.0
 [node name="LoadLevelPopup" type="FileDialog" parent="."]
 title = "Open a File"
 initial_position = 1
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 min_size = Vector2i(640, 360)
 ok_button_text = "Open"
 dialog_hide_on_ok = true
@@ -68,7 +69,7 @@ show_hidden_files = true
 auto_translate_mode = 1
 title = "Save Level File"
 initial_position = 1
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 min_size = Vector2i(640, 360)
 ok_button_text = "Save"
 dialog_hide_on_ok = true
@@ -77,16 +78,16 @@ filters = PackedStringArray("*.tscn ; Level Files")
 show_hidden_files = true
 
 [node name="HelpPopup" type="AcceptDialog" parent="."]
-title = "Need Help?"
+title = "User Guide"
 initial_position = 1
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 ok_button_text = "   Close   "
 
 [node name="Scroll0" type="ScrollContainer" parent="HelpPopup"]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 632.0
-offset_bottom = 311.0
+offset_right = 1272.0
+offset_bottom = 671.0
 
 [node name="VBox0" type="VBoxContainer" parent="HelpPopup/Scroll0"]
 layout_mode = 2
@@ -100,10 +101,28 @@ layout_mode = 2
 
 [node name="Heading1" type="Label" parent="HelpPopup/Scroll0/VBox0"]
 layout_mode = 2
-text = "Keyboard Shortcuts"
+text = "Level Requirements"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="HelpPopup/Scroll0/VBox0"]
+layout_mode = 2
+
+[node name="Body1" type="Label" parent="HelpPopup/Scroll0/VBox0"]
+layout_mode = 2
+text = "Each level should have the following: 
+- Exactly 1 player entity.
+- At least 1 enemy entity.
+- Solid walls on all sides."
+
+[node name="HSeparator3" type="HSeparator" parent="HelpPopup/Scroll0/VBox0"]
+layout_mode = 2
+
+[node name="Heading2" type="Label" parent="HelpPopup/Scroll0/VBox0"]
+layout_mode = 2
+text = "Keyboard Shortcuts"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="HelpPopup/Scroll0/VBox0"]
 layout_mode = 2
 
 [node name="HBox0" type="HBoxContainer" parent="HelpPopup/Scroll0/VBox0"]
@@ -162,7 +181,7 @@ I ,  J , K , L
 Ctrl
 Shift
  
-1 , 2 , 3 , 4
+0, 1 , 2 , 3 , 4
 Mouse 1
 Mouse 2
  
@@ -174,11 +193,11 @@ B
 [
 ]"
 
-[node name="DebugPopup" type="AcceptDialog" parent="."]
+[node name="MessagePopup" type="AcceptDialog" parent="."]
 auto_translate_mode = 1
-title = "Debug"
+title = "Message"
 initial_position = 1
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 ok_button_text = "   Close   "
 dialog_autowrap = true
 
@@ -188,6 +207,20 @@ visible = false
 modulate = Color(0.313726, 1, 1, 0.313726)
 
 [node name="GhostPlayer" parent="." instance=ExtResource("4_gek1a")]
+maxGroundSpeed = -1280390992
+groundAccel = 6.92241e-43
+groundDecel = -1.23629e-07
+groundFriction = 6.92241e-43
+gravity = -3.31518e-08
+maxAirSpeed = 0
+maxFallSpeed = 1
+airFriction = 1.4013e-45
+trueMaxSpeed = 0
+smallBlastStrength = 250
+largeBlastStrength = 750
+maxSmallBlastSpeed = 375
+maxLargeBlastSpeed = 500
+enemyBounceStrength = 32
 visible = false
 modulate = Color(0.313726, 1, 1, 0.313726)
 
@@ -239,13 +272,7 @@ text = "Back"
 
 [node name="HelpButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
-text = "Help"
-
-[node name="PlaytestButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
-layout_mode = 2
-toggle_mode = true
-text = "Playtest
-(Toggle Physics)"
+text = "User Guide"
 
 [node name="CenterLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1"]
 layout_mode = 2
@@ -295,7 +322,8 @@ text = "Unload Level"
 
 [node name="ResetLevelButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2"]
 layout_mode = 2
-text = "Reset Level"
+text = "Reset Level
+(Load Default Level)"
 
 [node name="VBox3" type="VBoxContainer" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
@@ -377,15 +405,15 @@ layout_mode = 2
 text = "Debug Log
 (Scene Manager)"
 
-[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
-layout_mode = 2
-text = "Debug Log
-(Level Editor Controller)"
-
 [node name="TestAddSceneButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
 text = "Test Changing Scene
 (To Itself)"
+
+[node name="DebugLevelEditorControllerButton" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
+layout_mode = 2
+text = "Debug Log
+(Level Editor Controller)"
 
 [node name="TestAction1Button" type="Button" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5"]
 layout_mode = 2
@@ -416,6 +444,10 @@ vertical_alignment = 1
 [node name="HSeparator6" type="HSeparator" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
 
+[node name="PhysicsButton" type="CheckButton" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
+layout_mode = 2
+text = "Physics"
+
 [node name="GridButton" type="CheckButton" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
 layout_mode = 2
 button_pressed = true
@@ -443,15 +475,17 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 autowrap_mode = 3
-selected = 0
-item_count = 4
-popup/item_0/text = "Tile"
-popup/item_1/text = "Player"
+selected = 1
+item_count = 5
+popup/item_0/text = "None"
+popup/item_1/text = "Tile"
 popup/item_1/id = 1
-popup/item_2/text = "Enemy"
+popup/item_2/text = "Player"
 popup/item_2/id = 2
-popup/item_3/text = "Bouncy Ball"
+popup/item_3/text = "Enemy"
 popup/item_3/id = 3
+popup/item_4/text = "Bouncy Ball"
+popup/item_4/id = 4
 
 [node name="Spacer1" type="Control" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
@@ -469,7 +503,6 @@ text = "Menu"
 [connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/HelpButton" to="." method="_on_help_button_pressed"]
-[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/PlaytestButton" to="." method="_on_playtest_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox1/CenterLevelButton" to="." method="_on_center_level_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/LoadExampleLevelButton" to="." method="_on_load_example_level_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox2/LoadLevelButton" to="." method="_on_load_level_button_pressed"]
@@ -489,12 +522,13 @@ text = "Menu"
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4/UndoButton" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox4/RedoButton" to="." method="_on_redo_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/DebugSceneManagerButton" to="." method="_on_debug_scene_manager_button_pressed"]
-[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAddSceneButton" to="." method="_on_test_add_scene_button_pressed"]
+[connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/DebugLevelEditorControllerButton" to="." method="_on_debug_level_editor_controller_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction1Button" to="." method="_on_test_action_1_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction2Button" to="." method="_on_test_action_2_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/TestAction3Button" to="." method="_on_test_action_3_button_pressed"]
 [connection signal="pressed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox5/ShowUserDirectoryButton" to="." method="_on_show_user_directory_button_pressed"]
+[connection signal="toggled" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/PhysicsButton" to="." method="_on_physics_button_toggled"]
 [connection signal="toggled" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="value_changed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="item_selected" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton" to="." method="_on_edit_mode_button_item_selected"]
