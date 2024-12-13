@@ -1,10 +1,8 @@
 extends Control
 
 
-signal playtest_button_pressed
+signal physics_button_toggled(active: bool)
 
-signal debug_button_pressed
-signal test_action_button_pressed(s:String, n: int)
 signal undo_button_pressed
 signal redo_button_pressed
 
@@ -22,18 +20,25 @@ signal tile_cycle_button_pressed(next: bool)
 signal add_tile_button_pressed(mouse_pos: Vector2)
 signal remove_tile_button_pressed(mouse_pos: Vector2)
 signal add_player_button_pressed(mouse_pos: Vector2)
+signal remove_player_button_pressed(mouse_pos: Vector2)
 signal add_enemy_button_pressed(mouse_pos: Vector2)
+signal remove_enemy_button_pressed(mouse_pos: Vector2)
 signal add_entity_button_pressed(mouse_pos: Vector2)
+signal remove_entity_button_pressed(mouse_pos: Vector2)
+
+signal debug_button_pressed
+signal test_action_button_pressed(s:String, n: int)
 
 
 @export var load_level_popup_node: FileDialog
 @export var save_level_popup_node: FileDialog
 @export var help_popup_node: AcceptDialog
-@export var debug_popup_node: AcceptDialog
+@export var message_popup_node: AcceptDialog
 
 @export var camera_node: Camera2D
 @export var menu_node: Control
 @export var grid_layer: ParallaxLayer
+@export var physics_button_node: CheckButton
 @export var edit_mode_node: OptionButton
 @export var bgm_player_node: AudioStreamPlayer
 @export var ghost_tile_node: Tile2D
@@ -43,14 +48,20 @@ signal add_entity_button_pressed(mouse_pos: Vector2)
 
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
+
 @onready var camera_movement: Vector2 = Vector2(0, 0)
 
 
 func _ready() -> void:
 	# Receiver parent signals
+	get_parent().get_parent().connect("level_loaded", Callable(self, "_on_level_loaded"))
 	get_parent().get_parent().connect("level_saved", Callable(self, "_on_level_saved"))
 	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
 	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
+	get_parent().get_parent().connect("debug_message", Callable(self, "_on_debug_message"))
+	get_parent().get_parent().connect("normal_message", Callable(self, "_on_normal_message"))
+	get_parent().get_parent().connect("warning_message", Callable(self, "_on_warning_message"))
+	get_parent().get_parent().connect("error_message", Callable(self, "_on_error_message"))
 	
 	# Create directories
 	DirAccess.make_dir_recursive_absolute("user://level")
@@ -60,7 +71,7 @@ func _ready() -> void:
 	
 	# First-time setups
 	_on_edit_mode_button_item_selected(edit_mode_node.selected)
-	
+	_on_help_button_pressed()
 	pass
 
 
@@ -158,58 +169,97 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_quick_save_level"):
 		_on_quick_save_level_button_pressed()
 	
-	if event.is_action_pressed("editor_edit_mode_1"):
+	if event.is_action_pressed("editor_edit_mode_0"):
 		edit_mode_node.select(0)
 		_on_edit_mode_button_item_selected(0)
 	
-	if event.is_action_pressed("editor_edit_mode_2"):
+	if event.is_action_pressed("editor_edit_mode_1"):
 		edit_mode_node.select(1)
 		_on_edit_mode_button_item_selected(1)
 	
-	if event.is_action_pressed("editor_edit_mode_3"):
+	if event.is_action_pressed("editor_edit_mode_2"):
 		edit_mode_node.select(2)
 		_on_edit_mode_button_item_selected(2)
 	
-	if event.is_action_pressed("editor_edit_mode_4"):
+	if event.is_action_pressed("editor_edit_mode_3"):
 		edit_mode_node.select(3)
 		_on_edit_mode_button_item_selected(3)
+	
+	if event.is_action_pressed("editor_edit_mode_4"):
+		edit_mode_node.select(4)
+		_on_edit_mode_button_item_selected(4)
 	
 	pass
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Detect non-ui mouse inputs
+	# Detect non-UI mouse inputs
 	# Note: Must set this control node to "Mouse > Filter = Pass"
+	
 	if event.is_action_pressed("editor_primary_click"):
 		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
 		var edit_mode: int = edit_mode_node.selected
 		
-		if edit_mode == 0:
+		if edit_mode == 1:
 			add_tile_button_pressed.emit(mouse_pos)
-		elif edit_mode == 1:
-			pass # TODO
 		elif edit_mode == 2:
-			pass # TODO
+			add_player_button_pressed.emit(mouse_pos)
 		elif edit_mode == 3:
-			pass # TODO
+			add_enemy_button_pressed.emit(mouse_pos)
+		elif edit_mode == 4:
+			add_entity_button_pressed.emit(mouse_pos)
 	
 	if event.is_action_pressed("editor_secondary_click"):
 		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
 		var edit_mode: int = edit_mode_node.selected
 		
-		if edit_mode == 0:
+		if edit_mode == 1:
 			remove_tile_button_pressed.emit(mouse_pos)
-		elif edit_mode == 1:
-			pass # TODO
 		elif edit_mode == 2:
-			pass # TODO
+			remove_player_button_pressed.emit(mouse_pos)
 		elif edit_mode == 3:
-			pass # TODO
+			remove_enemy_button_pressed.emit(mouse_pos)
+		elif edit_mode == 4:
+			remove_entity_button_pressed.emit(mouse_pos)
 	
 	pass
 
 
+func _on_debug_message(message: String) -> void:
+	message_popup_node.set_title("Debug")
+	message_popup_node.set_text(message)
+	message_popup_node.set_visible(true)
+	pass
+
+
+func _on_normal_message(message: String) -> void:
+	message_popup_node.set_title("Message")
+	message_popup_node.set_text(message)
+	message_popup_node.set_visible(true)
+	pass
+
+
+func _on_warning_message(message: String) -> void:
+	message_popup_node.set_title("Warning!")
+	message_popup_node.set_text(message)
+	message_popup_node.set_visible(true)
+	pass
+
+
+func _on_error_message(message: String) -> void:
+	message_popup_node.set_title("Error!")
+	message_popup_node.set_text(message)
+	message_popup_node.set_visible(true)
+	pass
+
+
+func _on_level_loaded(_filepath: String) -> void:
+	physics_button_node.set_pressed(false)
+	pass
+
+
 func _on_level_saved(filepath: String) -> void:
+	physics_button_node.set_pressed(false)
 	_on_update_thumbnail_button_toggled(filepath)
 	pass
 
@@ -226,11 +276,6 @@ func _on_tile_alt_changed(tile_alt: int) -> void:
 
 func _on_back_button_pressed() -> void:
 	SceneManager.get_instance().load_previous_scene(self.get_tree())
-	pass
-
-
-func _on_playtest_button_pressed() -> void:
-	playtest_button_pressed.emit()
 	pass
 
 
@@ -270,8 +315,11 @@ func _on_test_action_3_button_pressed() -> void:
 
 
 func _on_show_user_directory_button_pressed() -> void:
-	debug_popup_node.set_text("User Data Directory: \n" + OS.get_user_data_dir())
-	debug_popup_node.set_visible(true)
+	_on_debug_message(
+		"User Directory:\n" 
+		+ "(i.e. the location of game data)\n\n" 
+		+ OS.get_user_data_dir()
+		)
 	pass
 
 
@@ -404,6 +452,12 @@ func _on_grid_button_toggled(toggled_on: bool) -> void:
 	grid_layer.visible = toggled_on
 	pass
 
+
+func _on_physics_button_toggled(toggled_on: bool) -> void:
+	physics_button_toggled.emit(toggled_on)
+	pass
+
+
 func _on_update_thumbnail_button_toggled(filepath: String) -> void:
 	# Set thumbnail filepath
 	filepath = filepath.replace(".tscn", ".png").replace("res://", "user://")
@@ -423,6 +477,10 @@ func _on_update_thumbnail_button_toggled(filepath: String) -> void:
 	# Unhide UI
 	self.visible = true
 	grid_layer.visible = grid_layer_visible
+	_on_normal_message(
+		"Level saved!\n" + 
+		"Thumbnail updated!"
+		)
 	
 	pass
 
@@ -433,13 +491,13 @@ func _on_edit_mode_button_item_selected(index: int) -> void:
 	ghost_enemy_node.visible = false
 	ghost_orb_node.visible = false
 	
-	if index == 0:
+	if index == 1:
 		ghost_tile_node.visible = true
-	elif index == 1:
-		ghost_player_node.visible = true
 	elif index == 2:
-		ghost_enemy_node.visible = true
+		ghost_player_node.visible = true
 	elif index == 3:
+		ghost_enemy_node.visible = true
+	elif index == 4:
 		ghost_orb_node.visible = true
 	
 	pass

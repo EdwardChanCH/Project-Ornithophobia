@@ -41,9 +41,14 @@ _GDEXPORT_SET_SUFFIX
  * 
  */
 void LevelEditorController::_bind_methods() {
+    ADD_SIGNAL(MethodInfo("level_loaded", PropertyInfo(Variant::STRING, "filepath")));
     ADD_SIGNAL(MethodInfo("level_saved", PropertyInfo(Variant::STRING, "filepath")));
     ADD_SIGNAL(MethodInfo("tile_type_changed", PropertyInfo(Variant::VECTOR2I, "atlas_coords")));
     ADD_SIGNAL(MethodInfo("tile_alt_changed", PropertyInfo(Variant::INT, "tile_alt")));
+    ADD_SIGNAL(MethodInfo("debug_message", PropertyInfo(Variant::STRING, "message")));
+    ADD_SIGNAL(MethodInfo("normal_message", PropertyInfo(Variant::STRING, "message")));
+    ADD_SIGNAL(MethodInfo("warning_message", PropertyInfo(Variant::STRING, "message")));
+    ADD_SIGNAL(MethodInfo("error_message", PropertyInfo(Variant::STRING, "message")));
 
     ClassDB::bind_method(D_METHOD("track_action", "redo_action", "undo_action"), &LevelEditorController::track_action);
     ClassDB::bind_method(D_METHOD("undo_action"), &LevelEditorController::undo_action);
@@ -62,22 +67,28 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("reload_level"), &LevelEditorController::reload_level);
     ClassDB::bind_method(D_METHOD("is_level_loaded"), &LevelEditorController::is_level_loaded);
 
-    ClassDB::bind_method(D_METHOD("toggle_physics"), &LevelEditorController::toggle_physics);
+    ClassDB::bind_method(D_METHOD("set_physics", "active"), &LevelEditorController::set_physics);
     ClassDB::bind_method(D_METHOD("world_to_tile_pos", "world_pos", "tile_map_scale", "tile_size"), &LevelEditorController::world_to_tile_pos);
     ClassDB::bind_method(D_METHOD("tile_to_world_pos", "tile_pos", "tile_map_scale", "tile_size"), &LevelEditorController::tile_to_world_pos);
+    ClassDB::bind_method(D_METHOD("cursor_to_tile_pos", "cursor_pos"), &LevelEditorController::cursor_to_tile_pos);
+    ClassDB::bind_method(D_METHOD("cursor_to_object_pos", "cursor_pos", "list_name"), &LevelEditorController::cursor_to_object_pos);
     ClassDB::bind_method(D_METHOD("get_tile_alt"), &LevelEditorController::get_tile_alt);
     
     ClassDB::bind_method(D_METHOD("flip_tile", "mode"), &LevelEditorController::flip_tile);
     ClassDB::bind_method(D_METHOD("rotate_tile", "clockwise"), &LevelEditorController::rotate_tile);
     ClassDB::bind_method(D_METHOD("cycle_tile", "next"), &LevelEditorController::cycle_tile);
 
+    ClassDB::bind_method(D_METHOD("replace_tile", "tile_pos", "source_id", "tile_id", "tile_alt"), &LevelEditorController::replace_tile);
+    ClassDB::bind_method(D_METHOD("add_scene_object", "object_pos", "list_name", "scene_path"), &LevelEditorController::add_scene_object);
+    ClassDB::bind_method(D_METHOD("remove_scene_object", "object_pos", "list_name", "scene_path"), &LevelEditorController::remove_scene_object);
     ClassDB::bind_method(D_METHOD("add_tile", "mouse_pos"), &LevelEditorController::add_tile);
     ClassDB::bind_method(D_METHOD("remove_tile", "mouse_pos"), &LevelEditorController::remove_tile);
-    ClassDB::bind_method(D_METHOD("replace_tile", "tile_pos", "source_id", "tile_id", "tile_alt"), &LevelEditorController::replace_tile);
-    ClassDB::bind_method(D_METHOD("add_scene_object", "mouse_pos", "list_name", "scene_path"), &LevelEditorController::add_scene_object);
     ClassDB::bind_method(D_METHOD("add_player", "mouse_pos"), &LevelEditorController::add_player);
+    ClassDB::bind_method(D_METHOD("remove_player", "mouse_pos"), &LevelEditorController::remove_player);
     ClassDB::bind_method(D_METHOD("add_enemy", "mouse_pos"), &LevelEditorController::add_enemy);
+    ClassDB::bind_method(D_METHOD("remove_enemy", "mouse_pos"), &LevelEditorController::remove_enemy);
     ClassDB::bind_method(D_METHOD("add_entity", "mouse_pos"), &LevelEditorController::add_entity);
+    ClassDB::bind_method(D_METHOD("remove_entity", "mouse_pos"), &LevelEditorController::remove_entity);
 
     ClassDB::bind_method(D_METHOD("_test_action", "n"), &LevelEditorController::_test_action);
     ClassDB::bind_method(D_METHOD("_debug"), &LevelEditorController::_debug);
@@ -98,7 +109,6 @@ LevelEditorController::LevelEditorController() {
     undo_limit = default_undo_limit;
     has_quick_saved = false;
 
-    physics_on = false;
     tracking_on = true;
 
     tile_id = Vector2i(0, 0);
@@ -141,10 +151,8 @@ void LevelEditorController::_ready() {
         ui_canvas->add_child(ui_node);
 
         // Connect Godot UI signals
-        ui_node->connect("playtest_button_pressed", Callable(this, "toggle_physics"));
+        ui_node->connect("physics_button_toggled", Callable(this, "set_physics"));
         
-        ui_node->connect("debug_button_pressed", Callable(this, "_debug"));
-        ui_node->connect("test_action_button_pressed", Callable(this, "_test_action"));
         ui_node->connect("undo_button_pressed", Callable(this, "undo_action"));
         ui_node->connect("redo_button_pressed", Callable(this, "redo_action"));
 
@@ -162,12 +170,30 @@ void LevelEditorController::_ready() {
         ui_node->connect("add_tile_button_pressed", Callable(this, "add_tile"));
         ui_node->connect("remove_tile_button_pressed", Callable(this, "remove_tile"));
         ui_node->connect("add_player_button_pressed", Callable(this, "add_player"));
+        ui_node->connect("remove_player_button_pressed", Callable(this, "remove_player"));
         ui_node->connect("add_enemy_button_pressed", Callable(this, "add_enemy"));
+        ui_node->connect("remove_enemy_button_pressed", Callable(this, "remove_enemy"));
         ui_node->connect("add_entity_button_pressed", Callable(this, "add_entity"));
+        ui_node->connect("remove_entity_button_pressed", Callable(this, "remove_entity"));
+
+        ui_node->connect("debug_button_pressed", Callable(this, "_debug"));
+        ui_node->connect("test_action_button_pressed", Callable(this, "_test_action"));
     }
 
     // Load default level
     load_level(level_filepath);
+}
+
+// - - - Settings Functions - - -
+
+/**
+ * @brief Toggle physics.
+ * 
+ */
+void LevelEditorController::set_physics(bool active) {
+    if (is_level_loaded()) {
+        level_node->set_physics(active);
+    }
 }
 
 // - - - Action Handling Functions - - -
@@ -217,7 +243,7 @@ void LevelEditorController::clear_action() {
 Variant LevelEditorController::undo_action() {
     if (!can_undo()) {
         // No more undo available
-        UtilityFunctions::print("Warning: No undo available.");
+        emit_signal("warning_message", "No undo available.");
         return Variant::NIL;
     }
 
@@ -240,7 +266,7 @@ Variant LevelEditorController::undo_action() {
 Variant LevelEditorController::redo_action() {
     if (!can_redo()) {
         // No more redo available
-        UtilityFunctions::print("Warning: No redo available.");
+        emit_signal("warning_message", "No redo available.");
         return Variant::NIL;
     }
 
@@ -311,11 +337,11 @@ void LevelEditorController::load_level(String filepath) {
         unload_level();
         level_filepath = BASE_FILEPATH(filepath);
         level_node = Level::import_level_tscn(filepath);
-        level_node->set_process_mode(PROCESS_MODE_DISABLED); // Disable physics simulation
-        physics_on = false;
+        level_node->set_physics(false); // Disable physics simulation
         add_child(level_node);
+        emit_signal("level_loaded", filepath);
     } else {
-        UtilityFunctions::print("Warning: Cannot find level at '", filepath,"' !");
+        emit_signal("warning_message", "Cannot find level at '" + filepath + "' !");
     }
 }
 
@@ -326,17 +352,32 @@ void LevelEditorController::load_level(String filepath) {
  */
 void LevelEditorController::save_level(String filepath) {
     if ((is_level_loaded()) && (filepath.length() > 0)) {
+        // Check if the level is valid
+        if (level_node->get_list_length(level_node->player_list_name) < 1) {
+            emit_signal("error_message", "Save aborted. Cannot have less than 1 player.");
+            return;
+        }
+        if (level_node->get_list_length(level_node->player_list_name) > 1) {
+            emit_signal("error_message", "Save aborted. Cannot have more than 1 player.");
+            return;
+        }
+        if (level_node->get_list_length(level_node->enemy_list_name) < 1) {
+            emit_signal("error_message", "Save aborted. Cannot have less than 1 enemy.");
+            return;
+        }
+
         // Change save location to user data
         filepath = filepath.replace("res://", "user://");
 
         // Save level as TSCN
         level_filepath = BASE_FILEPATH(filepath);
+        level_node->set_physics(false); // Disable physics simulation
         Level::export_level_tscn(filepath, level_node);
 
         // Update thumbnail
-    emit_signal("level_saved", filepath);
+        emit_signal("level_saved", filepath);
     } else {
-        UtilityFunctions::print("Warning: Nothing to save!");
+        emit_signal("warning_message", "Nothing to save!");
     }
 }
 
@@ -348,6 +389,8 @@ void LevelEditorController::quick_load_level() {
     if (has_quick_saved) {
         action_index = quick_save_action_index;
         load_level(QUICK_FILEPATH(level_filepath.replace("res://", "user://")));
+    } else {
+        emit_signal("warning_message", "Cannot quick load before quick saving at least once!");
     }
 }
 
@@ -393,28 +436,12 @@ bool LevelEditorController::is_level_loaded() {
 // - - - Level Editing Functions - - -
 
 /**
- * @brief Toggle physics.
- * 
- */
-void LevelEditorController::toggle_physics() {
-    physics_on = !physics_on;
-
-    if (is_level_loaded()) {
-        if (physics_on) {
-            level_node->set_process_mode(PROCESS_MODE_ALWAYS);
-        } else {
-            level_node->set_process_mode(PROCESS_MODE_DISABLED);
-        }
-    }
-}
-
-/**
  * @brief Convert a global position to a tile position.
  * 
- * @param world_pos Global position
- * @param tile_map_scale Tile map scale
- * @param tile_size Tile size
- * @return Vector2i Tile position
+ * @param world_pos Global Position
+ * @param tile_map_scale Tile Map Scale
+ * @param tile_size Tile Size
+ * @return Vector2i Tile Position
  */
 Vector2i LevelEditorController::world_to_tile_pos(Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2i result;
@@ -427,10 +454,10 @@ Vector2i LevelEditorController::world_to_tile_pos(Vector2 world_pos, Vector2 til
 /**
  * @brief Convert a tile position to a global position.
  * 
- * @param tile_pos Tile position
- * @param tile_map_scale Tile map scale
- * @param tile_size Tile size
- * @return Vector2 Tile position
+ * @param tile_pos Tile Position
+ * @param tile_map_scale Tile Map Scale
+ * @param tile_size Tile Size
+ * @return Vector2 Tile Position
  */
 Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size) {
     Vector2 result;
@@ -441,9 +468,74 @@ Vector2 LevelEditorController::tile_to_world_pos(Vector2i tile_pos, Vector2 tile
 }
 
 /**
+ * @brief Convert a global cursor position to a tile position.
+ * 
+ * @param cursor_pos Cursor Position
+ * @return Vector2i Tile Position
+ */
+Vector2i LevelEditorController::cursor_to_tile_pos(Vector2 cursor_pos) {
+    // Get tile map
+    TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
+    if (!tile_map_layer) {
+        emit_signal("warning_message", "Tile map layer is missing!");
+        return Vector2i(0 ,0);
+    }
+
+    // Get tile set
+    Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
+    if (tile_set.is_null()) {
+        emit_signal("warning_message", "Tile set is missing!");
+        return Vector2i(0 ,0);
+    }
+
+    // Calculate tile coordinates
+    Vector2 tile_map_scale = tile_map_layer->get_scale();
+    Vector2i tile_size = tile_set.ptr()->get_tile_size();
+    Vector2i tile_pos = world_to_tile_pos(cursor_pos, tile_map_scale, tile_size);
+
+    return tile_pos;
+}
+
+/**
+ * @brief Convert a global cursor position to an global object position.
+ * 
+ * @param cursor_pos Cursor Position
+ * @return Vector2 Object Position
+ */
+Vector2 LevelEditorController::cursor_to_object_pos(Vector2 cursor_pos, String list_name) {
+    // Get tile map
+    TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
+    if (!tile_map_layer) {
+        emit_signal("warning_message", "Tile map layer is missing!");
+        return Vector2(0, 0);
+    }
+
+    // Get tile set
+    Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
+    if (tile_set.is_null()) {
+        emit_signal("warning_message", "Tile set is missing!");
+        return Vector2(0, 0);
+    }
+
+    // Calculate tile coordinates
+    Vector2 tile_map_scale = tile_map_layer->get_scale();
+    Vector2i tile_size = tile_set.ptr()->get_tile_size();
+    Vector2i tile_pos = world_to_tile_pos(cursor_pos, tile_map_scale, tile_size);
+
+    // Calculate object coordinates
+    Vector2 offset = (Vector2)tile_size * tile_map_scale * 0.5; // Offset from tile top-left corner to center
+    Vector2 object_pos = tile_to_world_pos(tile_pos, tile_map_scale, tile_size) + offset; // Object origin is at its center, not its top-left corner
+    if (list_name == level_node->player_list_name) {
+        object_pos += Vector2(0, -24);
+    }
+
+    return object_pos;
+}
+
+/**
  * @brief Get the alternative tile setting.
  * 
- * @return int Alternative tile setting
+ * @return int Alternative Tile Setting
  */
 int LevelEditorController::get_tile_alt() {
     int tile_flags = 0;
@@ -464,7 +556,7 @@ int LevelEditorController::get_tile_alt() {
 /**
  * @brief Flip a tile.
  * 
- * @param mode Mode: 0 = horizontal, 1 = vertical, 2 = diagonal
+ * @param mode Mode: 0 = Horizontal, 1 = Vertical, 2 = Diagonal
  */
 void LevelEditorController::flip_tile(int mode) {
     switch (mode) {
@@ -504,7 +596,7 @@ void LevelEditorController::cycle_tile(bool next) {
 /**
  * @brief Rotate a tile.
  * 
- * @param clockwise Clockwise/ Counter-clickwise
+ * @param clockwise Clockwise/ Counter-Clockwise
  */
 void LevelEditorController::rotate_tile(bool clockwise) {
     int rotation;
@@ -583,30 +675,117 @@ void LevelEditorController::rotate_tile(bool clockwise) {
 }
 
 /**
- * @brief Add a tile.
+ * @brief Replace a tile. 
+ * Note: This action is reversible.
  * 
- * @param mouse_pos Global cursor position.
+ * @param tile_pos Tile Position
+ * @param source_id Source ID (usually 0)
+ * @param tile_id Tile ID
+ * @param tile_alt Alternative Tile Setting
  */
-void LevelEditorController::add_tile(Vector2 mouse_pos) {
+void LevelEditorController::replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_alt) {
     if (is_level_loaded()) {
         // Get tile map
         TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
         if (!tile_map_layer) {
-            UtilityFunctions::print("Warning: Tile map layer is missing!");
+            emit_signal("warning_message", "Tile map layer is missing!");
             return;
         }
 
-        // Get tile set
-        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
-        if (tile_set.is_null()) {
-            UtilityFunctions::print("Warning: Tile set is missing!");
+        // Hold the original tile information
+        int old_source_id = tile_map_layer->get_cell_source_id(tile_pos);
+        Vector2i old_tile_id = tile_map_layer->get_cell_atlas_coords(tile_pos);
+        int old_tile_alt = tile_map_layer->get_cell_alternative_tile(tile_pos);
+
+        // Check if there is any difference
+        if ((source_id == old_source_id) && (tile_id == old_tile_id) && (tile_alt == old_tile_alt)) {
+            // emit_signal("warning_message", "No difference between new and old tiles!");
             return;
         }
 
-        // Calculate tile coordinates
-        Vector2 tile_map_scale = tile_map_layer->get_scale();
-        Vector2i tile_size = tile_set.ptr()->get_tile_size();
-        Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
+        // Replace with new tile
+        tile_map_layer->set_cell(tile_pos, source_id, tile_id, tile_alt);
+        
+        // Track its reversible actions
+        if (tracking_on) {
+            track_action(
+                Callable(this, "replace_tile").bind(tile_pos, source_id, tile_id, tile_alt), 
+                Callable(this, "replace_tile").bind(tile_pos, old_source_id, old_tile_id, old_tile_alt)
+            );
+        }
+    }
+}
+
+void LevelEditorController::add_scene_object(Vector2 object_pos, String list_name, String scene_path) {
+    if (is_level_loaded()) {
+        // Generate object
+        Ref<PackedScene> object_scene = ResourceLoader::get_singleton()->load(scene_path, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
+        Node2D *object_node = (Node2D *)(object_scene.ptr()->instantiate());
+        object_node->set_position(object_pos);
+        object_node->set_process_mode(Node::PROCESS_MODE_INHERIT);
+
+        // Add object
+        level_node->add_node_to_list(list_name, object_node);
+
+        // Track its reversible actions
+        if (tracking_on) {
+            track_action(
+                Callable(this, "add_scene_object").bind(object_pos, list_name, scene_path), 
+                Callable(this, "remove_scene_object").bind(object_pos, list_name, scene_path)
+            );
+        }
+    }
+}
+
+void LevelEditorController::remove_scene_object(Vector2 object_pos, String list_name, String scene_path) {
+    if (is_level_loaded()) {
+        // Find object in list
+        int num_children = level_node->get_list_length(list_name);
+        Node2D *child_node;
+        for (int i = num_children - 1; i >= 0; --i) {
+            child_node = (Node2D *)level_node->get_node_in_list_by_index(list_name, i);
+            if (!child_node) {
+                continue;
+            }
+
+            // Check if instance type matches
+            if (child_node->get_scene_file_path() != scene_path) {
+                continue;
+            }
+
+            // Checek if global coordinates matches
+            if (child_node->get_position() != object_pos) {
+                continue;
+            }
+
+            // Remove object
+            child_node->queue_free();
+
+            // Track its reversible actions
+            if (tracking_on) {
+                track_action(
+                    Callable(this, "remove_scene_object").bind(object_pos, list_name, scene_path), 
+                    Callable(this, "add_scene_object").bind(object_pos, list_name, scene_path)
+                );
+            }
+            return;
+        }
+
+        // Cannot find object
+        // emit_signal("warning_message", "Cannot find object of the same type!");
+        return;
+    }
+}
+
+/**
+ * @brief Add a tile.
+ * 
+ * @param mouse_pos Global Cursor Position
+ */
+void LevelEditorController::add_tile(Vector2 mouse_pos) {
+    if (is_level_loaded()) {
+        // Get tile position
+        Vector2i tile_pos = cursor_to_tile_pos(mouse_pos);
         
         // Add tile (reversible)
         replace_tile(tile_pos, 0, tile_id, get_tile_alt());
@@ -616,123 +795,75 @@ void LevelEditorController::add_tile(Vector2 mouse_pos) {
 /**
  * @brief Remove a tile.
  * 
- * @param mouse_pos Global cursor position.
+ * @param mouse_pos Global Cursor Position
  */
 void LevelEditorController::remove_tile(Vector2 mouse_pos) {
     if (is_level_loaded()) {
-        // Get tile map
-        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
-        if (!tile_map_layer) {
-            UtilityFunctions::print("Warning: Tile map layer is missing!");
-            return;
-        }
-
-        // Get tile set
-        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
-        if (tile_set.is_null()) {
-            UtilityFunctions::print("Warning: Tile set is missing!");
-            return;
-        }
-
-        // Calculate tile coordinates
-        Vector2 tile_map_scale = tile_map_layer->get_scale();
-        Vector2i tile_size = tile_set.ptr()->get_tile_size();
-        Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
+        // Get tile position
+        Vector2i tile_pos = cursor_to_tile_pos(mouse_pos);
         
         // Remove tile (reversible)
         replace_tile(tile_pos, -1, Vector2i(-1, -1), -1);
     }
 }
 
-/**
- * @brief Replace a tile. 
- * Note: This action is reversible.
- * 
- * @param tile_pos Tile position
- * @param source_id Source ID (usually 0)
- * @param tile_id Tile ID
- * @param tile_alt Alternative tile setting
- */
-void LevelEditorController::replace_tile(Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_alt) {
-    if (is_level_loaded()) {
-        // Get tile map
-        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
-        if (!tile_map_layer) {
-            UtilityFunctions::print("Warning: Tile map layer is missing!");
-            return;
-        }
-
-        // Store the original tile information
-        int old_source_id = tile_map_layer->get_cell_source_id(tile_pos);
-        Vector2i old_tile_id = tile_map_layer->get_cell_atlas_coords(tile_pos);
-        int old_tile_flags = tile_map_layer->get_cell_alternative_tile(tile_pos);
-
-        // Replace with new tile
-        tile_map_layer->set_cell(tile_pos, source_id, tile_id, tile_alt);
-        
-        // Track its reversible actions
-        if (tracking_on) {
-            track_action(
-                Callable(this, "replace_tile").bind(tile_pos, source_id, tile_id, tile_alt), 
-                Callable(this, "replace_tile").bind(tile_pos, old_source_id, old_tile_id, old_tile_flags)
-            );
-        }
-    }
-}
-
-void LevelEditorController::add_scene_object(Vector2 mouse_pos, String list_name, String scene_path) {
-    if (is_level_loaded()) {
-        // Get tile map
-        TileMapLayer * tile_map_layer = (TileMapLayer *)(level_node->get_node_in_list(level_node->tile_list_name, "Terrain"));
-        if (!tile_map_layer) {
-            UtilityFunctions::print("Warning: Tile map layer is missing!");
-            return;
-        }
-
-        // Gte tile set
-        Ref<TileSet> tile_set = tile_map_layer->get_tile_set();
-        if (tile_set.is_null()) {
-            UtilityFunctions::print("Warning: Tile set is missing!");
-            return;
-        }
-
-        // Calculate tile coordinates
-        Vector2 tile_map_scale = tile_map_layer->get_scale();
-        Vector2i tile_size = tile_set.ptr()->get_tile_size();
-        Vector2i tile_pos = world_to_tile_pos(mouse_pos, tile_map_scale, tile_size);
-
-        // Calculate object coordinates
-        Vector2 offset = (Vector2)tile_size * tile_map_scale * 0.5; // Offset from tile top-left corner to center
-        Vector2 object_pos = tile_to_world_pos(tile_pos, tile_map_scale, tile_size) + offset; // Object origin is at its center, not its top-left corner
-
-        // Generate object
-        Ref<PackedScene> object_scene = ResourceLoader::get_singleton()->load(scene_path, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
-        RigidBody2D * object_node = (RigidBody2D *)(object_scene.ptr()->instantiate());
-        object_node->set_position(object_pos);
-
-        // Add object
-        level_node->add_node_to_list(list_name, object_node);
-    }
-}
-
 void LevelEditorController::add_player(Vector2 mouse_pos) {
-    // TODO hard-coded to add the yinyang orb
     if (is_level_loaded()) {
-        add_scene_object(mouse_pos, level_node->player_list_name, "res://entity/yinyang_orb.tscn");
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->player_list_name);
+
+        // Add player
+        add_scene_object(object_pos, level_node->player_list_name, "res://object/player_controller.tscn");
+    }
+}
+
+void LevelEditorController::remove_player(Vector2 mouse_pos) {
+    if (is_level_loaded()) {
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->player_list_name);
+
+        // Remove player
+        remove_scene_object(object_pos, level_node->player_list_name, "res://object/player_controller.tscn");
     }
 }
 
 void LevelEditorController::add_enemy(Vector2 mouse_pos) {
-    // TODO hard-coded to add the yinyang orb
     if (is_level_loaded()) {
-        add_scene_object(mouse_pos, level_node->enemy_list_name, "res://entity/yinyang_orb.tscn");
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->enemy_list_name);
+
+        // Add enemy
+        add_scene_object(object_pos, level_node->enemy_list_name, "res://object/enemy_controller.tscn");
+    }
+}
+
+void LevelEditorController::remove_enemy(Vector2 mouse_pos) {
+    if (is_level_loaded()) {
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->enemy_list_name);
+
+        // Remove enemy
+        remove_scene_object(object_pos, level_node->enemy_list_name, "res://object/enemy_controller.tscn");
     }
 }
 
 void LevelEditorController::add_entity(Vector2 mouse_pos) {
-    // TODO hard-coded to add the yinyang orb
     if (is_level_loaded()) {
-        add_scene_object(mouse_pos, level_node->entity_list_name, "res://entity/yinyang_orb.tscn");
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->entity_list_name);
+
+        // Add entity
+        add_scene_object(object_pos, level_node->entity_list_name, "res://entity/yinyang_orb.tscn");
+    }
+}
+
+void LevelEditorController::remove_entity(Vector2 mouse_pos) {
+    if (is_level_loaded()) {
+        // Get object position
+        Vector2 object_pos = cursor_to_object_pos(mouse_pos, level_node->entity_list_name);
+
+        // Remove entity
+        remove_scene_object(object_pos, level_node->entity_list_name, "res://entity/yinyang_orb.tscn");
     }
 }
 
@@ -746,7 +877,7 @@ void LevelEditorController::add_entity(Vector2 mouse_pos) {
  * @param n Number
  */
 void LevelEditorController::_test_action(String s, int n) {
-    UtilityFunctions::print(s, ": ", n);
+    emit_signal("normal_message", s + ": " + UtilityFunctions::str(n));
 
     // Track its reversible actions
     if (tracking_on) {
@@ -762,26 +893,24 @@ void LevelEditorController::_test_action(String s, int n) {
  * 
  */
 void LevelEditorController::_debug() {
-    UtilityFunctions::print("------------------------------");
-
-    UtilityFunctions::print("Class: LevelEditorController");
-
-    UtilityFunctions::print("Undo Stack:");
+    String message = "";
+    
+    message += "------------------------------\n";
+    message += UtilityFunctions::str("Class: ", "LevelEditorController", "\n");
+    message += "Undo Stack:\n";
     for (int i = 0; i < undo_stack->size(); ++i) {
         Callable c = (*undo_stack)[i];
-        UtilityFunctions::print(c.get_method(), ":", c.get_bound_arguments());
+        message += UtilityFunctions::str("    ", c.get_method(), ": ", c.get_bound_arguments(), "\n");
     }
-
-    UtilityFunctions::print("Redo Stack:");
+    message += "Redo Stack:\n";
     for (int i = 0; i < redo_stack->size(); ++i) {
         Callable c = (*redo_stack)[i];
-        UtilityFunctions::print(c.get_method(), ":", c.get_bound_arguments());
+        message += UtilityFunctions::str("    ", c.get_method(), ": ", c.get_bound_arguments(), "\n");
     }
+    message += UtilityFunctions::str("Action Index: ", action_index, "\n");
+    message += UtilityFunctions::str("Quicksave's Action Index: ", quick_save_action_index, "\n");
+    message += UtilityFunctions::str("Undo Limit: ", undo_limit, "\n");
+    message += "------------------------------";
 
-    UtilityFunctions::print("Action Index:", action_index);
-    UtilityFunctions::print("Quicksave's Action Index:", quick_save_action_index);
-
-    UtilityFunctions::print("Undo Limit:", undo_limit);
-
-    UtilityFunctions::print("------------------------------");
+    emit_signal("debug_message", message);
 }

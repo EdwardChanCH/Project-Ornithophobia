@@ -1,18 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://jn6bkibr833"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_pilyb"]
+[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_lht1l"]
+[ext_resource type="PackedScene" path="res://object/player_controller.tscn" id="2_5u25o"]
+[ext_resource type="PackedScene" path="res://object/enemy_controller.tscn" id="3_7jl5b"]
 
 [node name="Level" type="Level"]
+process_mode = 4
 
 [node name="TileList" type="Node" parent="."]
 
 [node name="Terrain" type="TileMapLayer" parent="TileList"]
 scale = Vector2(3, 3)
-tile_set = ExtResource("1_pilyb")
+tile_set = ExtResource("1_lht1l")
 navigation_enabled = false
 
 [node name="PlayerList" type="Node" parent="."]
 
+[node name="PlayerController" type="PlayerController" parent="PlayerList" instance=ExtResource("2_5u25o")]
+maxGroundSpeed = 120
+groundAccel = 8.0
+groundDecel = 8.0
+groundFriction = 0.95
+gravity = 850.0
+maxAirSpeed = 200
+maxFallSpeed = 1500
+airFriction = 0.7
+trueMaxSpeed = 810
+smallBlastStrength = 500
+largeBlastStrength = 1300
+maxSmallBlastSpeed = 200
+maxLargeBlastSpeed = 800
+z_index = 1
+position = Vector2(216, 960)
+velocity = Vector2(0, 750)
+
 [node name="EnemyList" type="Node" parent="."]
 
+[node name="EnemyController" type="EnemyController" parent="EnemyList" instance=ExtResource("3_7jl5b")]
+position = Vector2(312, 984)
+
 [node name="EntityList" type="Node" parent="."]
+
+[connection signal="enemy_died" from="EnemyList/EnemyController" to="EnemyList/EnemyController/SFXPlayer" method="_on_enemy_controller_enemy_died"]
