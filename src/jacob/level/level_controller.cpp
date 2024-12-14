@@ -15,6 +15,8 @@ using namespace godot;
 void LevelController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_update_enemy_count"), &LevelController::_update_enemy_count);
     ClassDB::bind_method(D_METHOD("_results_slow_time"), &LevelController::_results_slow_time);
+    ClassDB::bind_method(D_METHOD("_on_return_button_pressed"), &LevelController::_on_return_button_pressed);
+    ClassDB::bind_method(D_METHOD("_on_retry_button_pressed"), &LevelController::_on_retry_button_pressed);
     ClassDB::bind_method(D_METHOD("set_level"), &LevelController::set_level);
     ADD_SIGNAL(MethodInfo("results_slow_time"));
     ADD_SIGNAL(MethodInfo("show_results", PropertyInfo(Variant::DICTIONARY, "level_metadata")));
@@ -71,14 +73,15 @@ _GDEXPORT_SET_SUFFIX
  */
 void LevelController::_ready() {
     set_process(false);
-    connect("results_slow_time", Callable(this, "_results_slow_time"));
+    
+    if (!is_connected("results_slow_time", Callable(this, "_results_slow_time")))
+        connect("results_slow_time", Callable(this, "_results_slow_time"));
 
     if (!Engine::get_singleton()->is_editor_hint()) {
         set_process_mode(ProcessMode::PROCESS_MODE_ALWAYS);
         
         if (levelNode != nullptr) {
             levelNode->set_physics(true);
-            // add_child(levelNode);
         }
 
 
@@ -109,6 +112,11 @@ void LevelController::_ready() {
         resultsScreenNode = (Control*) SceneManager::get_instance()->import_scene_tscn("res://screen/results_screen.tscn");
         resultsScreenNode->set_visible(false);
         connect("show_results", Callable(resultsScreenNode, "_on_results_screen_show"));
+        Button* returnButton = cast_to<Button>(resultsScreenNode->find_child("ReturnButton", true, false));
+        Button* retryButton = cast_to<Button>(resultsScreenNode->find_child("RetryButton", true, false));
+        returnButton->connect("pressed", Callable(this, "_on_return_button_pressed"));
+        retryButton->connect("pressed", Callable(this, "_on_retry_button_pressed"));
+        UtilityFunctions::print(returnButton->get_signal_connection_list("pressed"));
         gameplayUI->add_child(resultsScreenNode);
 
         // Add gameplayUI to the scene tree once setup is complete
@@ -169,9 +177,7 @@ void LevelController::_input(const Ref<InputEvent> &event) {
     if (Debug::get_singleton()->is_debug_mode_active()) {
         // Reload scene if debug mode active
         if (event->is_action_pressed("debug_reload_scene")) {
-            get_tree()->set_pause(false);
-            Engine::get_singleton()->set_time_scale(1.0);
-            get_tree()->reload_current_scene();
+            _on_return_button_pressed();
         }
 
         // Force results screen to appear
@@ -246,6 +252,22 @@ void LevelController::_results_slow_time() {
 }
 
 
+void LevelController::_on_return_button_pressed() {
+    get_tree()->set_pause(false);
+    Engine::get_singleton()->set_time_scale(1);
+    SceneManager::get_instance()->load_previous_scene(get_tree());
+}
+
+
+void LevelController::_on_retry_button_pressed() {
+    get_tree()->set_pause(false);
+    Engine::get_singleton()->set_time_scale(1);
+    _exit_tree();
+    set_level(level_path);
+    _ready();
+}
+
+
 void LevelController::calculate_best_time() {
     String cur_time = cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text();
     if (best_time == "--:--.--" || read_formatted_time(best_time) < read_formatted_time(cur_time)) {
@@ -291,5 +313,6 @@ void LevelController::set_level(String level_path) {
     level_icon = level_metadata.get_or_add("level_icon", "res://asset/sprite/default_texture.png");
     best_time = level_metadata.get_or_add("best_time", "--:--.--");
     rank_times = level_metadata.get_or_add("rank_times", PackedStringArray(Array({"00:00.00", "00:00.00", "00:00.00"})));
+    this->level_path = level_path;
     add_child(levelNode);
 }

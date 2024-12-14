@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node is ready in the scene tree.
 func _ready() -> void:
+	visible = false
 	hide_elements()
 
 
@@ -47,8 +48,16 @@ func hide_elements():
 		child.visible = false
 
 
-func _on_return_button_pressed() -> void:
-	get_tree().paused = false
-	SceneManager.get_instance()._debug()
-	SceneManager.get_instance().load_previous_scene(get_tree())
-	SceneManager.get_instance()._debug()
+#func _on_return_button_pressed() -> void:
+	#
+	#get_tree().paused = false
+	#SceneManager.get_instance()._debug()
+	#SceneManager.get_instance().load_previous_scene(get_tree())
+	#SceneManager.get_instance()._debug()
+#
+#
+#func _on_retry_button_pressed() -> void:
+	#get_tree().paused = false
+	#Engine.time_scale = 1
+	#get_tree().reload_current_scene()
+	

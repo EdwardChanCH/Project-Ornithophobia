@@ -2,11 +2,13 @@ extends Control
 
 
 @export var level_path = ""
+var level_controller_path = "res://level/level_controller.tscn"
 
 
 func _on_play_button_pressed() -> void:
-	SceneManager.get_instance().load_new_scene(get_tree(), level_path)
-	# TODO call load_new_scene() with a filepath to a screen, not a level
+	var level_controller: LevelController = SceneManager.get_instance().import_scene_tscn(level_controller_path)
+	level_controller.set_level(level_path)
+	SceneManager.get_instance().load_new_scene_node(get_tree(), level_controller_path, level_controller)
 
 
 func _on_edit_button_pressed() -> void:

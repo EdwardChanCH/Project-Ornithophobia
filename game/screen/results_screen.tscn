@@ -221,5 +221,3 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_l6orl")
-
-[connection signal="pressed" from="ColorRect/Buttons/ReturnButton" to="." method="_on_return_button_pressed"]

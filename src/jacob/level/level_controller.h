@@ -41,6 +41,7 @@ namespace godot {
 		Array silver_rank_text;
 		Array bronze_rank_text;
 		String no_rank_text = "BETTER LUCK NEXT TIME!";
+		String level_path;
 
 		Level* levelNode;
 		CanvasLayer* gameplayUI;
@@ -72,6 +73,8 @@ namespace godot {
 		void _process(double delta) override;
 		void _update_enemy_count();
 		void _results_slow_time();
+		void _on_return_button_pressed();
+		void _on_retry_button_pressed();
 
 		void calculate_best_time();
 		int read_formatted_time(String time);
