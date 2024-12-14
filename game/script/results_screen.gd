@@ -19,17 +19,26 @@ func _on_results_screen_show(level_metadata: Dictionary):
 	visible = true
 	$AnimationPlayer.play("fade_in")
 	await get_tree().create_timer(0.8).timeout
+	
+	# If this is a custom level, move the Time nodes to the center of the screen
+	if (level_metadata.get("level_author") != "null"):
+		%Time.position = Vector2(808, 456)
+	
 	show_result_attribute(%TimeLabel)
 	await get_tree().create_timer(0.6).timeout
 	show_result_attribute(%LevelTime)
-	if (Global.read_formatted_time(%LevelTime.text) >= Global.read_formatted_time(level_metadata.get("best_time"))):
+	if (Global.read_formatted_time(%LevelTime.text) <= Global.read_formatted_time(level_metadata.get("best_time"))):
 		%BestTimeCrown.visible = true
-	await get_tree().create_timer(0.8).timeout
-	show_result_attribute(%RankLabel)
-	await get_tree().create_timer(0.6).timeout
-	show_result_attribute(%RankIcon)
-	await get_tree().create_timer(0.8).timeout
-	show_result_attribute(%RankFlavourText)
+	
+	# If this is a story level, display the rank information
+	if (level_metadata.get("level_author") == "null"):
+		await get_tree().create_timer(0.8).timeout
+		show_result_attribute(%RankLabel)
+		await get_tree().create_timer(0.6).timeout
+		show_result_attribute(%RankIcon)
+		await get_tree().create_timer(0.8).timeout
+		show_result_attribute(%RankFlavourText)
+	
 	await get_tree().create_timer(0.5).timeout
 	%Buttons.visible = true
 
@@ -46,18 +55,3 @@ func hide_elements():
 		child.visible = false
 	for child in %Time.get_children():
 		child.visible = false
-
-
-#func _on_return_button_pressed() -> void:
-	#
-	#get_tree().paused = false
-	#SceneManager.get_instance()._debug()
-	#SceneManager.get_instance().load_previous_scene(get_tree())
-	#SceneManager.get_instance()._debug()
-#
-#
-#func _on_retry_button_pressed() -> void:
-	#get_tree().paused = false
-	#Engine.time_scale = 1
-	#get_tree().reload_current_scene()
-	

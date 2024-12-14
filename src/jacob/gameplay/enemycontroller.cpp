@@ -53,20 +53,10 @@ _GDEXPORT_SET_SUFFIX
  * @brief Same as Godot's _ready() function
  */
 void EnemyController::_ready() {
+    if (!is_connected("enemy_died", Callable(find_child("SFXPlayer"), "_on_enemy_died")))
+        connect("enemy_died", Callable(find_child("SFXPlayer"), "_on_enemy_died"));
     deathAnim = Node::cast_to<AnimatedSprite2D>(find_child("DeathAnimation"));
     deathAnim->stop();
-    // // add connect to player to push them back
-    // PlayerController *player = cast_to<PlayerController>(get_tree()->get_root()->find_child("PlayerController", true, false));
-    // LevelController *level = cast_to<LevelController>(get_tree()->get_root()->find_child("LevelController", true, false));
-    // Camera2D *camera = cast_to<Camera2D>(get_tree()->get_root()->find_child("Camera2D", true, false));
-    
-    // if (player != nullptr)
-    //     connect("bounce_player", Callable(player, "_collide_with_enemy"));
-    
-    // if (level != nullptr) {
-    //     connect("enemy_died", Callable(level, "_update_enemy_count"));
-    //     connect("enemy_died", Callable(camera, "apply_shake"));
-    // }
 }
 
 

@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=4 uid="uid://immfpg4kfsgd"]
+[gd_scene load_steps=4 format=4 uid="uid://xenb6pofw6p3"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_13eaf"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_fy7jx"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_bt444"]
 
 [node name="Level" type="Level"]
+level_info = {
+"best_time": "00:02.20",
+"level_author": "null",
+"level_icon": "res://asset/sprite/default_texture.png",
+"level_name": "Level 1",
+"level_time": "00:04.69",
+"rank_flavour_text": "PERFECT!",
+"rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
+"rank_text": "rank text",
+"rank_times": PackedStringArray("00:05.00", "00:10.00", "00:20.00")
+}
 process_mode = 4
 
 [node name="TileList" type="Node" parent="."]
@@ -18,7 +29,6 @@ navigation_enabled = false
 [node name="PlayerList" type="Node" parent="."]
 
 [node name="PlayerController" parent="PlayerList" instance=ExtResource("2_fy7jx")]
-enemyBounceStrength = 500
 position = Vector2(216, 960)
 
 [node name="EnemyList" type="Node" parent="."]

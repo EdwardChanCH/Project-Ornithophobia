@@ -72,6 +72,179 @@ _GDEXPORT_SET_SUFFIX
  * @brief Same as _ready() in GDScript.
  */
 void LevelController::_ready() {
+    get_tree()->set_pause(false);
+}
+
+/**
+ * @brief Same as _input() in GDScript.
+ */
+void LevelController::_input(const Ref<InputEvent> &event) {
+    // Pause the game
+    if (event->is_action_pressed("escape") && UtilityFunctions::str(pauseScreenNode) != "<Freed Object>" && !resultsScreenNode->is_visible()) {
+        get_tree()->set_pause(!get_tree()->is_paused());
+        if (get_tree()->is_paused()) {
+            pauseScreenNode->set_visible(true);
+        } else {
+            pauseScreenNode->set_visible(false);
+        }
+    }
+
+    // Debug inputs
+    if (Debug::get_singleton()->is_debug_mode_active()) {
+        // Reload scene if debug mode active
+        if (event->is_action_pressed("debug_reload_scene")) {
+            _on_retry_button_pressed();
+        }
+
+        // Force results screen to appear
+        if (event->is_action_pressed("debug_force_results") && !pauseScreenNode->is_visible()) {
+            get_tree()->set_pause(false);
+            resultsScreenNode->set_visible(false);
+            slowLength = Time::get_singleton()->get_ticks_msec();
+            emit_signal("results_slow_time");
+        }
+    }
+}
+
+/**
+ * @brief Same as _exit_tree() in GDScript.
+ */
+void LevelController::_exit_tree() {
+    if (!Engine::get_singleton()->is_editor_hint()) {
+        levelUINode->queue_free();
+        pauseScreenNode->queue_free();
+        resultsScreenNode->queue_free();
+        gameplayUI->queue_free();
+        camera->queue_free();
+        levelNode->queue_free();
+    }
+}
+
+
+void LevelController::_process(double delta) {
+    float newTimeScale = Engine::get_singleton()->get_time_scale() - timeScaleFactor;
+    Engine::get_singleton()->set_time_scale(newTimeScale);
+
+    if (Engine::get_singleton()->get_time_scale() <= 0) {
+        get_tree()->set_pause(true);
+        Engine::get_singleton()->set_time_scale(1.0);
+        set_process(false);
+
+        calculate_best_time();
+        if (!rank_times.is_empty())
+            calculate_rank();
+
+        level_metadata["level_name"] = level_name;
+        level_metadata["level_author"] = level_author;
+        level_metadata["level_icon"] = level_icon;
+        level_metadata["level_time"] = ((Label*) levelUINode->find_child("LevelTimer"))->get_text();
+        level_metadata["best_time"] = best_time;
+        level_metadata["rank_times"] = rank_times;
+        level_metadata["rank_icon"] = rank_icon;
+        level_metadata["rank_flavour_text"] = rank_flavour_text;
+        
+        levelNode->set_level_info(level_metadata);
+        emit_signal("show_results", level_metadata);
+    }
+}
+
+
+void LevelController::_update_enemy_count() {
+    if (numEnemies > 0) {
+        numEnemies--;
+        cast_to<Label>(levelUINode->find_child("EnemiesRemaining"))->set_text("Enemies Remaining: " + UtilityFunctions::str(numEnemies));
+
+        if (numEnemies == 0) {
+            slowLength = Time::get_singleton()->get_ticks_msec();
+            emit_signal("results_slow_time");
+        }
+    }
+}
+
+
+void LevelController::_results_slow_time() {
+    set_process(true);
+}
+
+
+void LevelController::_on_return_button_pressed() {
+    // get_tree()->set_pause(false);
+    Engine::get_singleton()->set_time_scale(1);
+    _exit_tree();
+    SceneManager::get_instance()->_debug();
+    SceneManager::get_instance()->load_previous_scene(get_tree());
+}
+
+
+void LevelController::_on_retry_button_pressed() {
+    // get_tree()->set_pause(false);
+    Engine::get_singleton()->set_time_scale(1);
+    _exit_tree();
+    set_level(level_path);
+    _ready();
+}
+
+
+void LevelController::calculate_best_time() {
+    String cur_time = cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text();
+    if (best_time == "--:--.--" || read_formatted_time(cur_time) < read_formatted_time(best_time)) {
+        best_time = cur_time;
+        // TODO: Make level data save
+        // Level* updatedLevelNode = ((Level*) SceneManager::get_instance()->import_scene_tscn(level_path));
+        // updatedLevelNode->set_level_info(level_metadata);
+        // Level::export_level_tscn(level_path, updatedLevelNode);
+        // updatedLevelNode->queue_free();
+    }
+}
+
+
+float LevelController::read_formatted_time(String time) {
+    PackedStringArray units = time.replace(":", " ").replace(".", " ").split(" ");
+    return (units[0].to_int() * 60) + units[1].to_int() + float(units[2].to_int()) * 0.01;
+}
+
+
+void LevelController::calculate_rank() {
+    float cur_time = read_formatted_time(cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text());
+
+    gold_rank_text = Array({"SWEET MOVES!", "PERFECT!", "AMAZING!"});
+    silver_rank_text = Array({"RADICAL!", "ARTISTIC!", "GREAT!"});
+    bronze_rank_text = Array({"GOOD!", "COOL!", "NICE!"});
+
+    if (cur_time <= read_formatted_time(rank_times[0])) {
+        rank_icon = "res://asset/sprite/menu/gold_rank_icon.png";
+        rank_flavour_text = gold_rank_text.pick_random();
+    } else if (cur_time <= read_formatted_time(rank_times[1])) {
+        rank_icon = "res://asset/sprite/menu/silver_rank_icon.png";
+        rank_flavour_text = silver_rank_text.pick_random();
+    } else if (cur_time <= read_formatted_time(rank_times[2])) {
+        rank_icon = "res://asset/sprite/menu/bronze_rank_icon.png";
+        rank_flavour_text = bronze_rank_text.pick_random();
+    } else {
+        rank_icon = "res://asset/sprite/menu/no_rank_icon.png";
+        rank_flavour_text = no_rank_text;
+    }
+}
+
+
+void LevelController::set_level(String level_path) {
+    levelNode = (Level*) SceneManager::get_instance()->import_scene_tscn(level_path);
+    level_metadata = levelNode->get_level_info();
+    level_name = level_metadata.get_or_add("level_name", "null");
+    level_author = level_metadata.get_or_add("level_author", "null");
+    level_icon = level_metadata.get_or_add("level_icon", "res://asset/sprite/default_texture.png");
+    level_metadata.get_or_add("level_time", "00:00.00");
+    best_time = level_metadata.get_or_add("best_time", "--:--.--");
+    rank_times = level_metadata.get_or_add("rank_times", PackedStringArray(Array({"00:00.00", "00:00.00", "00:00.00"})));
+    rank_icon = level_metadata.get_or_add("rank_icon", "res://asset/sprite/menu/no_rank_icon.png");
+    rank_flavour_text = level_metadata.get_or_add("rank_text", "rank text");
+    this->level_path = level_path;
+    add_child(levelNode);
+    initialize_level();
+}
+
+
+void LevelController::initialize_level() {
     set_process(false);
     
     if (!is_connected("results_slow_time", Callable(this, "_results_slow_time")))
@@ -116,7 +289,6 @@ void LevelController::_ready() {
         Button* retryButton = cast_to<Button>(resultsScreenNode->find_child("RetryButton", true, false));
         returnButton->connect("pressed", Callable(this, "_on_return_button_pressed"));
         retryButton->connect("pressed", Callable(this, "_on_retry_button_pressed"));
-        UtilityFunctions::print(returnButton->get_signal_connection_list("pressed"));
         gameplayUI->add_child(resultsScreenNode);
 
         // Add gameplayUI to the scene tree once setup is complete
@@ -157,162 +329,4 @@ void LevelController::_ready() {
         levelNode->set_process_mode(ProcessMode::PROCESS_MODE_PAUSABLE);
         gameplayUI->set_process_mode(ProcessMode::PROCESS_MODE_PAUSABLE);
     }
-}
-
-/**
- * @brief Same as _input() in GDScript.
- */
-void LevelController::_input(const Ref<InputEvent> &event) {
-    // Pause the game
-    if (event->is_action_pressed("escape") && UtilityFunctions::str(pauseScreenNode) != "<Freed Object>") {
-        get_tree()->set_pause(!get_tree()->is_paused());
-        if (get_tree()->is_paused()) {
-            pauseScreenNode->set_visible(true);
-        } else {
-            pauseScreenNode->set_visible(false);
-        }
-    }
-
-    // Debug inputs
-    if (Debug::get_singleton()->is_debug_mode_active()) {
-        // Reload scene if debug mode active
-        if (event->is_action_pressed("debug_reload_scene")) {
-            _on_return_button_pressed();
-        }
-
-        // Force results screen to appear
-        if (event->is_action_pressed("debug_force_results") && !pauseScreenNode->is_visible()) {
-            get_tree()->set_pause(false);
-            resultsScreenNode->set_visible(false);
-            slowLength = Time::get_singleton()->get_ticks_msec();
-            emit_signal("results_slow_time");
-        }
-    }
-}
-
-/**
- * @brief Same as _exit_tree() in GDScript.
- */
-void LevelController::_exit_tree() {
-    if (!Engine::get_singleton()->is_editor_hint()) {
-        levelUINode->queue_free();
-        pauseScreenNode->queue_free();
-        resultsScreenNode->queue_free();
-        gameplayUI->queue_free();
-        camera->queue_free();
-        levelNode->queue_free();
-    }
-}
-
-
-void LevelController::_process(double delta) {
-    float newTimeScale = Engine::get_singleton()->get_time_scale() - timeScaleFactor;
-    Engine::get_singleton()->set_time_scale(newTimeScale);
-
-    if (Engine::get_singleton()->get_time_scale() <= 0) {
-        get_tree()->set_pause(true);
-        Engine::get_singleton()->set_time_scale(1.0);
-        set_process(false);
-
-        calculate_best_time();
-        if (!rank_times.is_empty())
-            calculate_rank();
-
-        Dictionary level_metadata = Dictionary();
-        level_metadata.get_or_add("level_name", level_name);
-        level_metadata.get_or_add("level_author", level_author);
-        level_metadata.get_or_add("level_icon", level_icon);
-        level_metadata.get_or_add("level_time", ((Label*) levelUINode->find_child("LevelTimer"))->get_text());
-        level_metadata.get_or_add("best_time", best_time);
-        level_metadata.get_or_add("rank_times", rank_times);
-        level_metadata.get_or_add("rank_icon", rank_icon);
-        level_metadata.get_or_add("rank_flavour_text", rank_flavour_text);
-        emit_signal("show_results", level_metadata);
-    }
-}
-
-
-void LevelController::_update_enemy_count() {
-    if (numEnemies > 0) {
-        numEnemies--;
-        cast_to<Label>(levelUINode->find_child("EnemiesRemaining"))->set_text("Enemies Remaining: " + UtilityFunctions::str(numEnemies));
-
-        if (numEnemies == 0) {
-            slowLength = Time::get_singleton()->get_ticks_msec();
-            // set_process(true);
-            emit_signal("results_slow_time");
-            pauseScreenNode->queue_free();
-        }
-    }
-}
-
-
-void LevelController::_results_slow_time() {
-    set_process(true);
-}
-
-
-void LevelController::_on_return_button_pressed() {
-    get_tree()->set_pause(false);
-    Engine::get_singleton()->set_time_scale(1);
-    SceneManager::get_instance()->load_previous_scene(get_tree());
-}
-
-
-void LevelController::_on_retry_button_pressed() {
-    get_tree()->set_pause(false);
-    Engine::get_singleton()->set_time_scale(1);
-    _exit_tree();
-    set_level(level_path);
-    _ready();
-}
-
-
-void LevelController::calculate_best_time() {
-    String cur_time = cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text();
-    if (best_time == "--:--.--" || read_formatted_time(best_time) < read_formatted_time(cur_time)) {
-        best_time = cur_time;
-    }
-}
-
-
-int LevelController::read_formatted_time(String time) {
-    PackedStringArray units = time.replace(":", " ").replace(".", " ").split(" ");
-    return (units[0].to_int() * 60) + units[1].to_int() + float(units[2].to_int()) * 0.01;
-}
-
-
-void LevelController::calculate_rank() {
-    int cur_time = read_formatted_time(cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text());
-
-    gold_rank_text = Array({"SWEET MOVES!", "PERFECT!", "AMAZING!"});
-    silver_rank_text = Array({"RADICAL!", "ARTISTIC!", "COOL!"});
-    bronze_rank_text = Array({"GOOD!", "GREAT!", "NICE!"});
-
-    if (cur_time < read_formatted_time(rank_times[0])) {
-        rank_icon = "res://asset/sprite/menu/gold_rank_icon.png";
-        rank_flavour_text = gold_rank_text.pick_random();
-    } else if (cur_time < read_formatted_time(rank_times[1])) {
-        rank_icon = "res://asset/sprite/menu/silver_rank_icon.png";
-        rank_flavour_text = silver_rank_text.pick_random();
-    } else if (cur_time < read_formatted_time(rank_times[2])) {
-        rank_icon = "res://asset/sprite/menu/bronze_rank_icon.png";
-        rank_flavour_text = bronze_rank_text.pick_random();
-    } else {
-        rank_icon = "res://asset/sprite/menu/no_rank_icon.png";
-        rank_flavour_text = no_rank_text;
-    }
-}
-
-
-void LevelController::set_level(String level_path) {
-    levelNode = (Level*) SceneManager::get_instance()->import_scene_tscn(level_path);
-    level_metadata = levelNode->get_level_info();
-    level_name = level_metadata.get_or_add("level_name", "null");
-    level_author = level_metadata.get_or_add("level_author", "null");
-    level_icon = level_metadata.get_or_add("level_icon", "res://asset/sprite/default_texture.png");
-    best_time = level_metadata.get_or_add("best_time", "--:--.--");
-    rank_times = level_metadata.get_or_add("rank_times", PackedStringArray(Array({"00:00.00", "00:00.00", "00:00.00"})));
-    this->level_path = level_path;
-    add_child(levelNode);
 }

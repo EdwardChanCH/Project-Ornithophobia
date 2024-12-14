@@ -32,6 +32,10 @@ mouse_cursor/custom_image="res://asset/sprite/mouse_reticle.png"
 mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 window/canvas_textures/default_texture_filter=1
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [global_group]
 
 level_select=""

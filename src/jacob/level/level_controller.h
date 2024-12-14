@@ -45,11 +45,8 @@ namespace godot {
 
 		Level* levelNode;
 		CanvasLayer* gameplayUI;
-        // Ref<PackedScene> levelUIScene;
         Control* levelUINode;
-		// Ref<PackedScene> pauseScene;
 		Control* pauseScreenNode;
-		// Ref<PackedScene> resultsScreenScene;
 		Control* resultsScreenNode;
 		Camera2D* camera;
 		
@@ -59,7 +56,7 @@ namespace godot {
 
 		Node* playerList;
 		
-		float timeScaleFactor = 0.0016;
+		float timeScaleFactor = 0.01;
 		long slowLength;
 
 	public:
@@ -77,9 +74,10 @@ namespace godot {
 		void _on_retry_button_pressed();
 
 		void calculate_best_time();
-		int read_formatted_time(String time);
+		float read_formatted_time(String time);
 		void calculate_rank();
 		void set_level(String level_path);
+		void initialize_level();
 	};
 
 } // namespace godot

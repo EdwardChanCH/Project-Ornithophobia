@@ -7,6 +7,7 @@ var regex
 
 # Called when the node is ready in the scene tree.
 func _ready() -> void:
+	get_tree().paused = false
 	regex = RegEx.new()
 	regex.compile(level_name_pattern_re)
 	reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
@@ -31,7 +32,7 @@ func reload_levels(dir_path):
 		var level_instance: Level = level_scene.instantiate()
 		var level_metadata: Dictionary = level_instance.get_level_info()
 		levelBannerInstance.find_child("LevelName", true, false).text = level_metadata.get("name", "null")
-		levelBannerInstance.find_child("LevelIcon", true, false).texture = load(level_metadata.get("level_icon", "res://asset/sprite/default_texture.png"))
+		levelBannerInstance.find_child("LevelIcon", true, false).texture = load(dir_path + level_path.replace(".tscn", ".png"))
 		levelBannerInstance.find_child("AuthorName", true, false).text = level_metadata.get("author", "null")
 		levelBannerInstance.find_child("BestTime", true, false).text = level_metadata.get("best_time", "00:00.00")
 		levelBannerInstance.level_path = dir_path + level_path
