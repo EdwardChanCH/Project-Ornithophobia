@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dkgnl3f4s3wpv"]
+
+[node name="LevelController" type="LevelController"]
+timeScaleFactor = 0.01

@@ -5,11 +5,11 @@ extends Camera2D
 
 var rng = RandomNumberGenerator.new()
 var shake_strength = 0.0
-@onready var player: PlayerController = get_parent().find_child("PlayerList").get_children().front()
+@onready var player: PlayerController = get_parent().find_child("PlayerList", true, false).get_children().front()
 
 
 func apply_shake():
-	shake_strength = random_strength * (player.velocity.length() / 1500)
+	shake_strength = random_strength * (player.velocity.length() / 1500) * Engine.time_scale
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

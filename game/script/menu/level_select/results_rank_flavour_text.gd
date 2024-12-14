@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	var new_scale = scale
 	var value
 	
-	value = easeInOutSine(min_scale, max_scale, time_passed, 1) + 1
+	value = easeInOutSine(min_scale, max_scale, time_passed, 1) + 1.2
 	
 	if (time_passed >= 2):
 		time_passed = 0

@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=4]
+[gd_scene load_steps=4 format=4 uid="uid://bw10ubmc81cx3"]
 
-[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_6mudw"]
-[ext_resource type="PackedScene" path="res://object/player_controller.tscn" id="2_8f7b3"]
-[ext_resource type="PackedScene" path="res://object/enemy_controller.tscn" id="3_1euc4"]
+[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_6mudw"]
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_8f7b3"]
+[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_1euc4"]
 
 [node name="Level" type="Level"]
 process_mode = 4

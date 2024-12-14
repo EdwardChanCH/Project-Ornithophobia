@@ -26,13 +26,13 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("4_kws1v")
 font_size = 64
 
-[sub_resource type="LabelSettings" id="LabelSettings_nu0b5"]
-font = ExtResource("6_ptk3a")
-font_size = 52
-
 [sub_resource type="LabelSettings" id="LabelSettings_e6lht"]
 font = ExtResource("6_ols3d")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_nu0b5"]
+font = ExtResource("6_ptk3a")
+font_size = 52
 
 [sub_resource type="Animation" id="Animation_fr62t"]
 length = 0.2
@@ -97,6 +97,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="LevelComplete" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 192.0
 offset_top = 128.0
@@ -106,47 +107,6 @@ text = "[LEVEL NAME] COMPLETE!"
 label_settings = SubResource("LabelSettings_e80yl")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Rank" type="Control" parent="ColorRect"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 1144.0
-offset_top = 360.0
-offset_right = 1336.0
-offset_bottom = 664.0
-
-[node name="RankLabel" type="Label" parent="ColorRect/Rank"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 88.0
-text = "RANK"
-label_settings = SubResource("LabelSettings_ry7cw")
-horizontal_alignment = 1
-
-[node name="RankIcon" type="TextureRect" parent="ColorRect/Rank"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 112.0
-offset_right = 192.0
-offset_bottom = 304.0
-texture = ExtResource("5_v46tx")
-
-[node name="RankFlavourText" type="Label" parent="ColorRect/Rank"]
-unique_name_in_owner = true
-process_mode = 3
-layout_mode = 0
-offset_left = -608.0
-offset_top = 272.0
-offset_right = -221.0
-offset_bottom = 344.0
-rotation = 0.174533
-pivot_offset = Vector2(194, 36)
-text = "SWEET MOVES!"
-label_settings = SubResource("LabelSettings_nu0b5")
-script = ExtResource("7_ogk7m")
-max_scale = 1.05
-min_scale = 0.95
 
 [node name="Time" type="Control" parent="ColorRect"]
 unique_name_in_owner = true
@@ -179,6 +139,7 @@ label_settings = SubResource("LabelSettings_e6lht")
 horizontal_alignment = 1
 
 [node name="BestTimeCrown" type="TextureRect" parent="ColorRect/Time"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_top = 112.0
 offset_right = 32.0
@@ -186,14 +147,56 @@ offset_bottom = 144.0
 texture = ExtResource("7_q5ksr")
 expand_mode = 1
 
+[node name="Rank" type="Control" parent="ColorRect"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1144.0
+offset_top = 360.0
+offset_right = 1336.0
+offset_bottom = 664.0
+
+[node name="RankLabel" type="Label" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 88.0
+text = "RANK"
+label_settings = SubResource("LabelSettings_ry7cw")
+horizontal_alignment = 1
+
+[node name="RankIcon" type="TextureRect" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 112.0
+offset_right = 192.0
+offset_bottom = 304.0
+texture = ExtResource("5_v46tx")
+
+[node name="RankFlavourText" type="Label" parent="ColorRect/Rank"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 0
+offset_left = -632.0
+offset_top = 312.0
+offset_right = -245.0
+offset_bottom = 384.0
+rotation = 0.1309
+pivot_offset = Vector2(194, 36)
+text = "SWEET MOVES!"
+label_settings = SubResource("LabelSettings_nu0b5")
+horizontal_alignment = 1
+script = ExtResource("7_ogk7m")
+max_scale = 1.05
+min_scale = 0.95
+
 [node name="Buttons" type="HBoxContainer" parent="ColorRect"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 448.0
+offset_left = 576.0
 offset_top = 864.0
-offset_right = 1472.0
+offset_right = 1344.0
 offset_bottom = 960.0
-theme_override_constants/separation = 128
+theme_override_constants/separation = 256
 
 [node name="ReturnButton" type="Button" parent="ColorRect/Buttons"]
 custom_minimum_size = Vector2(256, 0)
@@ -211,14 +214,6 @@ theme = ExtResource("8_b547l")
 theme_override_font_sizes/font_size = 24
 text = "Retry"
 
-[node name="NextLevelButton" type="Button" parent="ColorRect/Buttons"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("8_b547l")
-theme_override_font_sizes/font_size = 24
-text = "Next Level"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vaqeo")
@@ -226,3 +221,5 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_l6orl")
+
+[connection signal="pressed" from="ColorRect/Buttons/ReturnButton" to="." method="_on_return_button_pressed"]
