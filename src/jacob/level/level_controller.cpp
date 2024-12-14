@@ -164,11 +164,11 @@ void LevelController::_update_enemy_count() {
 
 void LevelController::_results_slow_time() {
     set_process(true);
+    levelUINode->set_process_mode(ProcessMode::PROCESS_MODE_DISABLED);
 }
 
 
 void LevelController::_on_return_button_pressed() {
-    // get_tree()->set_pause(false);
     Engine::get_singleton()->set_time_scale(1);
     _exit_tree();
     SceneManager::get_instance()->_debug();
@@ -177,7 +177,6 @@ void LevelController::_on_return_button_pressed() {
 
 
 void LevelController::_on_retry_button_pressed() {
-    // get_tree()->set_pause(false);
     Engine::get_singleton()->set_time_scale(1);
     _exit_tree();
     set_level(level_path);
@@ -328,5 +327,6 @@ void LevelController::initialize_level() {
 
         levelNode->set_process_mode(ProcessMode::PROCESS_MODE_PAUSABLE);
         gameplayUI->set_process_mode(ProcessMode::PROCESS_MODE_PAUSABLE);
+        levelUINode->set_process_mode(ProcessMode::PROCESS_MODE_INHERIT);
     }
 }
