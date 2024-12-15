@@ -278,6 +278,7 @@ void LevelController::initialize_level() {
         // Instantiate pause menu
         pauseScreenNode = (Control*) SceneManager::get_instance()->import_scene_tscn("res://screen/menu/pause_menu.tscn");
         pauseScreenNode->set_visible(false);
+        pauseScreenNode->find_child("RestartButton", true, false)->connect("pressed", Callable(this, "_on_retry_button_pressed"));
         gameplayUI->add_child(pauseScreenNode);
 
         // Instantiate results screen and connect the "show_results" signal to it
