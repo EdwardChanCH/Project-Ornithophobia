@@ -1,7 +1,7 @@
 extends Control
 
 @export var current_tab = "custom"
-@export var level_name_pattern_re = ".*_quicksave[.]tscn"
+@export var level_name_pattern_re = ".[.]tscn"
 var regex
 
 
@@ -21,19 +21,20 @@ func reload_levels(dir_path):
 	%LevelContainer.call_deferred("add_child", scroll_buffer)
 	var num_children = 0
 	for level_path in DirAccess.get_files_at(dir_path):
-		if (regex.search(level_path)):
+		if (!regex.search(level_path)):
 			continue
 		
 		var levelBannerScene = load("res://screen/menu/workshop_level_icon.tscn")
 		var levelBannerInstance: Control = levelBannerScene.instantiate()
 		%LevelContainer.call_deferred("add_child", levelBannerInstance)
 		
-		var level_scene = load(dir_path + level_path)
-		var level_instance: Level = level_scene.instantiate()
+		var level_instance: Level = SceneManager.get_instance().import_scene_tscn(dir_path + level_path)
 		var level_metadata: Dictionary = level_instance.get_level_info()
-		levelBannerInstance.find_child("LevelName", true, false).text = level_metadata.get("name", "null")
-		levelBannerInstance.find_child("LevelIcon", true, false).texture = load(dir_path + level_path.replace(".tscn", ".png"))
-		levelBannerInstance.find_child("AuthorName", true, false).text = level_metadata.get("author", "null")
+		levelBannerInstance.find_child("LevelName", true, false).text = level_metadata.get("level_name", "null")
+		var img = Image.new()
+		img.load(dir_path + level_path.replace(".tscn", ".png"))
+		levelBannerInstance.find_child("LevelIcon", true, false).texture = ImageTexture.create_from_image(img)
+		levelBannerInstance.find_child("AuthorName", true, false).text = level_metadata.get("level_author", "null")
 		levelBannerInstance.find_child("BestTime", true, false).text = level_metadata.get("best_time", "00:00.00")
 		levelBannerInstance.level_path = dir_path + level_path
 		level_instance.queue_free()

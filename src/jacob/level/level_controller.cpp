@@ -188,11 +188,13 @@ void LevelController::calculate_best_time() {
     String cur_time = cast_to<LevelTimer>(levelUINode->find_child("LevelTimer"))->get_text();
     if (best_time == "--:--.--" || read_formatted_time(cur_time) < read_formatted_time(best_time)) {
         best_time = cur_time;
-        // TODO: Make level data save
-        // Level* updatedLevelNode = ((Level*) SceneManager::get_instance()->import_scene_tscn(level_path));
-        // updatedLevelNode->set_level_info(level_metadata);
-        // Level::export_level_tscn(level_path, updatedLevelNode);
-        // updatedLevelNode->queue_free();
+        // TODO: Make level data save in main levels
+        if (level_path.begins_with("user://")) {
+            Level* updatedLevelNode = ((Level*) SceneManager::get_instance()->import_scene_tscn(level_path));
+            updatedLevelNode->set_level_info(level_metadata);
+            Level::export_level_tscn(level_path, updatedLevelNode);
+            updatedLevelNode->queue_free();
+        }
     }
 }
 
