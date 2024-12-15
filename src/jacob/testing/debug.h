@@ -1,7 +1,7 @@
 /**
  * @file debug.h
  * @author Jacob Couture
- * @brief Header file for the Debug singleton
+ * @brief Header file for the Debug singleton.
  */
 
 #ifndef DEBUG_H
@@ -27,13 +27,17 @@ namespace godot {
         Dictionary debugProperties;
         bool isDebugModeActive;
 
+        // Private constructor and destructor
         Debug();
         ~Debug();
 
     public:
+        // Prevent other instances of this class from being created
         Debug(Debug &other) = delete;
 
+        // Gets the instance of this class
         static Debug *get_singleton();
+
         void add_debug_property(String name, Variant value);
         Dictionary get_debug_properties();
         bool is_debug_mode_active();

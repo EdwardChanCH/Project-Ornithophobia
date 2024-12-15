@@ -1,11 +1,24 @@
-[gd_scene load_steps=5 format=4 uid="uid://immfpg4kfsgd"]
+[gd_scene load_steps=5 format=4 uid="uid://xenb6pofw6p3"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_13eaf"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_fy7jx"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_bt444"]
-[ext_resource type="Script" path="res://script/camera_2d.gd" id="4_urst1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1t3xm"]
+font_size = 24
 
 [node name="Level" type="Level"]
+level_info = {
+"best_time": "00:02.20",
+"level_author": "null",
+"level_icon": "res://asset/sprite/default_texture.png",
+"level_name": "Level 1",
+"level_time": "00:04.69",
+"rank_flavour_text": "PERFECT!",
+"rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
+"rank_text": "rank text",
+"rank_times": PackedStringArray("00:05.00", "00:10.00", "00:20.00")
+}
 process_mode = 4
 
 [node name="TileList" type="Node" parent="."]
@@ -23,28 +36,49 @@ position = Vector2(216, 960)
 
 [node name="EnemyList" type="Node" parent="."]
 
-[node name="EnemyController" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(312, 984)
-
 [node name="@EnemyController@207" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(888, 648)
+position = Vector2(840, 744)
 
 [node name="@EnemyController@208" parent="EnemyList" instance=ExtResource("3_bt444")]
 position = Vector2(1272, 504)
 
 [node name="@EnemyController@209" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(1608, 504)
+position = Vector2(1560, 504)
 
 [node name="EntityList" type="Node" parent="."]
 
-[node name="LevelController" type="LevelController" parent="."]
-timeScaleFactor = 0.01
+[node name="Tutorial1" type="Label" parent="."]
+offset_left = 152.0
+offset_top = 640.0
+offset_right = 517.0
+offset_bottom = 748.0
+text = "Press A/D to move Left/Right
+Use LEFT CLICK for a Small Blast
+Use RIGHT CLICK for a Large Blast
+Press SPACE to slow down time"
+label_settings = SubResource("LabelSettings_1t3xm")
+horizontal_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(960, 540)
-script = ExtResource("4_urst1")
+[node name="Tutorial2" type="Label" parent="."]
+offset_left = 664.0
+offset_top = 496.0
+offset_right = 997.0
+offset_bottom = 567.0
+text = "You need to be going fast
+to defeat enemies"
+label_settings = SubResource("LabelSettings_1t3xm")
+horizontal_alignment = 1
 
-[connection signal="enemy_died" from="EnemyList/EnemyController" to="EnemyList/EnemyController/SFXPlayer" method="_on_enemy_controller_enemy_died"]
+[node name="Tutorial3" type="Label" parent="."]
+offset_left = 1240.0
+offset_top = 280.0
+offset_right = 1592.0
+offset_bottom = 351.0
+text = "Defeat all enemies as fast as
+possible to complete the level"
+label_settings = SubResource("LabelSettings_1t3xm")
+horizontal_alignment = 1
+
 [connection signal="enemy_died" from="EnemyList/@EnemyController@207" to="EnemyList/@EnemyController@207/SFXPlayer" method="_on_enemy_controller_enemy_died"]
 [connection signal="enemy_died" from="EnemyList/@EnemyController@208" to="EnemyList/@EnemyController@208/SFXPlayer" method="_on_enemy_controller_enemy_died"]
 [connection signal="enemy_died" from="EnemyList/@EnemyController@209" to="EnemyList/@EnemyController@209/SFXPlayer" method="_on_enemy_controller_enemy_died"]

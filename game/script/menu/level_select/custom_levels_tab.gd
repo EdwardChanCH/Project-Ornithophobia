@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Custom button for the Custom Levels tab
+
 extends Panel
 
 
@@ -16,6 +19,7 @@ func _ready() -> void:
 	stylebox.bg_color = active_stylebox
 
 
+# Set this tab to be active when clicked
 func _on_custom_levels_collision_mouse_clicked() -> void:
 	if (!is_active):
 		is_active = true
@@ -24,6 +28,8 @@ func _on_custom_levels_collision_mouse_clicked() -> void:
 		z_index = 1
 		position.y -= offset
 
+
+# Deactivate this tab when the My Levels tab is activated
 func _on_my_levels_tab_activating() -> void:
 	is_active = false
 	position.y += offset

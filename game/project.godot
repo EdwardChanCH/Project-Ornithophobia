@@ -26,11 +26,16 @@ Ui="*res://script/ui.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://asset/sprite/mouse_reticle.png"
 mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 window/canvas_textures/default_texture_filter=1
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [global_group]
 

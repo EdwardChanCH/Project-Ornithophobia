@@ -1,7 +1,7 @@
 /**
  * @file debug_controller.cpp
  * @author Jacob Couture
- * @brief This class handles the creation and rendering of properties on the in-game debug menu
+ * @brief This class handles the creation and rendering of properties on the in-game debug menu.
  */
 
 #include "debug_controller.h"
@@ -39,6 +39,7 @@ void DebugController::_ready() {
 
 /**
  * @brief Same as _process() in GDScript.
+ * @param _delta The time passed since the last frame (unused)
  */
 void DebugController::_process(double _delta) {
 	// Grabs all the values from the debug properties dictionary and adds/updates them on the debug menu
@@ -47,8 +48,10 @@ void DebugController::_process(double _delta) {
 			String name = UtilityFunctions::str(properties.keys().operator[](i));
 			String value = UtilityFunctions::str(properties.operator[](name));
 
-			debugText = Node::cast_to<Label>(property_container->find_child(name, true, false));
+			// Checks to see if a label with the given name already already exists
+			Label* debugText = Node::cast_to<Label>(property_container->find_child(name, true, false));
 
+			// Creates a new label with the given name and value if one doesn't exist, otherwise updates the existing label
 			if (!debugText) {
 				debugText = memnew(Label());
 

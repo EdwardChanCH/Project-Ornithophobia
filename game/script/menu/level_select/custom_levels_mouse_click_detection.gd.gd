@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Custom mouse click detection using an Area2D node
+
 extends Area2D
 
 

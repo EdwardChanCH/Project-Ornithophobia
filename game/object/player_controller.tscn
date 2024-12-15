@@ -267,6 +267,7 @@ smallBlastStrength = 750
 largeBlastStrength = 1950
 maxSmallBlastSpeed = 300
 maxLargeBlastSpeed = 1200
+enemyBounceStrength = 500
 process_mode = 4
 z_index = 1
 scale = Vector2(3, 3)
