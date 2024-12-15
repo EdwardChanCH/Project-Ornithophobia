@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://buo65exfuyhy8"]
+
+[ext_resource type="Script" path="res://workshop_button.gd" id="1_fiijd"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprite/default_texture.png" id="2_xmbfh"]
+[ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://style/fonts/OpenSans/OpenSans-Bold.ttf" id="3_1s35d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bd7rt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l50s3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qpurr"]
+font = ExtResource("3_1s35d")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[node name="WorkshopButton" type="Button"]
+custom_minimum_size = Vector2(320, 168)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -64.0
+offset_right = -1760.0
+offset_bottom = -976.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ubjgp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bd7rt")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l50s3")
+script = ExtResource("1_fiijd")
+button_icon = ExtResource("2_xmbfh")
+button_text = "Text"
+
+[node name="ButtonIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 96.0
+offset_right = 224.0
+offset_bottom = 128.0
+texture = ExtResource("2_xmbfh")
+expand_mode = 1
+
+[node name="ButtonText" type="Label" parent="."]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 162.0
+text = "Text"
+label_settings = SubResource("LabelSettings_qpurr")
+horizontal_alignment = 1

@@ -14,6 +14,7 @@ using namespace godot;
 void PlayerController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("update_blast_velocity", "blastDir", "vel", "maxBlastSpeed", "direction"), &PlayerController::update_blast_velocity);
     ClassDB::bind_method(D_METHOD("was_on_floor"), &PlayerController::was_on_floor);
+    ClassDB::bind_method(D_METHOD("_collide_with_enemy", "enemy_pos"), &PlayerController::_collide_with_enemy);
 }
 
 /**
@@ -41,7 +42,6 @@ _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "groundFriction"))
 
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "gravity"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxAirSpeed"))
-_GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "fallSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "maxFallSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::FLOAT, "airFriction"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "trueMaxSpeed"))
@@ -50,6 +50,8 @@ _GDEXPORT_ADD(PropertyInfo(Variant::INT, "smallBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "largeBlastStrength"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxSmallBlastSpeed"))
 _GDEXPORT_ADD(PropertyInfo(Variant::INT, "maxLargeBlastSpeed"))
+
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "enemyBounceStrength"))
 
 _GDEXPORT_ADD_SUFFIX
 
@@ -62,7 +64,6 @@ _GDEXPORT_GET(groundFriction)
 
 _GDEXPORT_GET(gravity)
 _GDEXPORT_GET(maxAirSpeed)
-_GDEXPORT_GET(fallSpeed)
 _GDEXPORT_GET(maxFallSpeed)
 _GDEXPORT_GET(airFriction)
 _GDEXPORT_GET(trueMaxSpeed)
@@ -71,6 +72,8 @@ _GDEXPORT_GET(smallBlastStrength)
 _GDEXPORT_GET(largeBlastStrength)
 _GDEXPORT_GET(maxSmallBlastSpeed)
 _GDEXPORT_GET(maxLargeBlastSpeed)
+
+_GDEXPORT_GET(enemyBounceStrength)
 
 _GDEXPORT_GET_SUFFIX
 
@@ -83,7 +86,6 @@ _GDEXPORT_SET(groundFriction)
 
 _GDEXPORT_SET(gravity)
 _GDEXPORT_SET(maxAirSpeed)
-_GDEXPORT_SET(fallSpeed)
 _GDEXPORT_SET(maxFallSpeed)
 _GDEXPORT_SET(airFriction)
 _GDEXPORT_SET(trueMaxSpeed)
@@ -93,30 +95,26 @@ _GDEXPORT_SET(largeBlastStrength)
 _GDEXPORT_SET(maxSmallBlastSpeed)
 _GDEXPORT_SET(maxLargeBlastSpeed)
 
+_GDEXPORT_SET(enemyBounceStrength)
+
 _GDEXPORT_SET_SUFFIX
 
 /**
  * @brief Same as Godot's _ready() function
  */
 void PlayerController::_ready() {
-    // Disable the process function while in editor
-    if (Engine::get_singleton()->is_editor_hint())
-        set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
-    else {
-        set_process_mode(Node::ProcessMode::PROCESS_MODE_INHERIT);
-    }
-
     lastBlastTime = Time::get_singleton()->get_ticks_msec();
     wasOnWall = false;
     wasOnFloor = false;
     movementDirection.x = 1;
+    bounceVelocity = Vector2(0, 0);
 }
 
 /**
  * @brief Same as _process() in GDScript.
  * @param delta Delta time
  */
-void PlayerController::_process(double _delta) {
+void PlayerController::_physics_process(double _delta) {
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
@@ -214,7 +212,6 @@ void PlayerController::_process(double _delta) {
         if (velocity.y > maxFallSpeed)
             velocity.y = maxFallSpeed;
     } else {        // If on ground, do not apply gravity
-        fallSpeed = 0;
         velocity.y = 0;
     }
 
@@ -245,12 +242,6 @@ void PlayerController::_process(double _delta) {
             velocity.x = update_blast_velocity(blastDirection.x, velocity.x, maxLargeBlastSpeed);
             velocity.y = update_blast_velocity(blastDirection.y, velocity.y, maxLargeBlastSpeed, "vertical");
         }
-
-        // Clamp velocity and speed
-        velocity.x = Math::clamp(velocity.x, float(-trueMaxSpeed), float(trueMaxSpeed));
-        velocity.y = Math::clamp(velocity.y, float(-trueMaxSpeed), float(trueMaxSpeed));
-        speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
-        speed = Math::clamp(speed, float(-trueMaxSpeed), float(trueMaxSpeed));
         
         isAirborne = true;
         blastTime = 0;
@@ -261,6 +252,19 @@ void PlayerController::_process(double _delta) {
     /*-------------------------------------------------------------------------------------------------------------*/
 
 
+    if (bounceVelocity.length() > 0) {
+        velocity = bounceVelocity;
+        bounceVelocity.x = 0;
+        bounceVelocity.y = 0;
+    }
+
+    // Clamp velocity and speed
+    velocity.x = Math::clamp(velocity.x, float(-trueMaxSpeed), float(trueMaxSpeed));
+    velocity.y = Math::clamp(velocity.y, float(-trueMaxSpeed), float(trueMaxSpeed));
+    speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
+    speed = Math::clamp(speed, float(-trueMaxSpeed), float(trueMaxSpeed));
+
+
     // Update player velocity
     set_velocity(velocity);
     
@@ -269,6 +273,7 @@ void PlayerController::_process(double _delta) {
     Debug::get_singleton()->add_debug_property("speed", UtilityFunctions::snappedf(speed, 0.01));
     Debug::get_singleton()->add_debug_property("velocityX", UtilityFunctions::snappedf(get_velocity().x, 0.01));
     Debug::get_singleton()->add_debug_property("velocityY", UtilityFunctions::snappedf(velocity.y, 0.01));
+    Debug::get_singleton()->add_debug_property("movementDirection", UtilityFunctions::snappedf(movementDirection.x, 0.01));
     Debug::get_singleton()->add_debug_property("axis", axis);
     Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
     Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
@@ -314,4 +319,10 @@ float PlayerController::update_blast_velocity(float blastDir, float vel, int max
  */
 bool PlayerController::was_on_floor() {
     return wasOnFloor;
+}
+
+
+void PlayerController::_collide_with_enemy(Vector2 enemy_pos) {
+    bounceVelocity = (get_velocity().normalized() * -1) * enemyBounceStrength;
+    bounceVelocity = (get_position() - enemy_pos).normalized() * enemyBounceStrength;
 }

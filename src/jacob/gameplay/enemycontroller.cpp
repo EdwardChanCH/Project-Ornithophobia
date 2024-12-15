@@ -16,7 +16,7 @@ using namespace godot;
 void EnemyController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_player_controller_entered", "body"), &EnemyController::_on_player_controller_entered);
     ADD_SIGNAL(MethodInfo("enemy_died"));
-    ADD_SIGNAL(MethodInfo("kill_player"));
+    ADD_SIGNAL(MethodInfo("bounce_player", PropertyInfo(Variant::VECTOR2, "enemy_pos")));
 }
 
 /**
@@ -35,14 +35,17 @@ EnemyController::~EnemyController() {
 
 // Export instance variables to the Godot Editor
 _GDEXPORT_ADD_PREFIX(EnemyController)
+_GDEXPORT_ADD(PropertyInfo(Variant::INT, "minKillSpeed"))
 _GDEXPORT_ADD_SUFFIX
 
 // Getter(s) for exported instance variables in Godot Editor
 _GDEXPORT_GET_PREFIX(EnemyController)
+_GDEXPORT_GET(minKillSpeed)
 _GDEXPORT_GET_SUFFIX
 
 // Setter(s) for exported instance variables in Godot Editor
 _GDEXPORT_SET_PREFIX(EnemyController)
+_GDEXPORT_SET(minKillSpeed)
 _GDEXPORT_SET_SUFFIX
 
 
@@ -52,6 +55,18 @@ _GDEXPORT_SET_SUFFIX
 void EnemyController::_ready() {
     deathAnim = Node::cast_to<AnimatedSprite2D>(find_child("DeathAnimation"));
     deathAnim->stop();
+    // add connect to player to push them back
+    PlayerController *player = cast_to<PlayerController>(get_tree()->get_root()->find_child("PlayerController", true, false));
+    LevelController *level = cast_to<LevelController>(get_tree()->get_root()->find_child("LevelController", true, false));
+    Camera2D *camera = cast_to<Camera2D>(get_tree()->get_root()->find_child("Camera2D", true, false));
+    
+    if (player != nullptr)
+        connect("bounce_player", Callable(player, "_collide_with_enemy"));
+    
+    if (level != nullptr) {
+        connect("enemy_died", Callable(level, "_update_enemy_count"));
+        connect("enemy_died", Callable(camera, "apply_shake"));
+    }
 }
 
 
@@ -59,14 +74,17 @@ void EnemyController::_ready() {
  * @brief Receiver for detecting when the player controller enters this enemy's collider
  */
 void EnemyController::_on_player_controller_entered(Node2D *body) {
-    if (Node::cast_to<PlayerController>(body)->get_velocity().length() >= minKillSpeed) {
-        if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
-            deathAnim->set_visible(true);
-            deathAnim->play("death");
-            emit_signal("enemy_died");
+    if (body->get_class() == "PlayerController") {
+        if (Node::cast_to<PlayerController>(body)->get_velocity().length() >= minKillSpeed) {
+            if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
+                deathAnim->set_visible(true);
+                deathAnim->play("death");
+                emit_signal("enemy_died");
+                find_child("Area2D")->queue_free();
+            }
+        } else {
+            emit_signal("bounce_player", get_position());
         }
-    } else {
-        emit_signal("kill_player");
     }
 }
 
@@ -75,16 +93,16 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
  * @brief Same as Godot's _process() function
  */
 void EnemyController::_process(double delta) {
-    Debug::get_singleton()->add_debug_property("deathAnim", deathAnim->is_playing());
+    if (!Engine::get_singleton()->is_editor_hint()) {
+        // Hide enemy sprite at the peak of the explosion
+        if (deathAnim->is_playing() && deathAnim->get_frame() == 8) {
+            Node::cast_to<Sprite2D>(find_child("EnemySprite"))->set_visible(false);
+        }
 
-    // Hide enemy sprite at the peak of the explosion
-    if (deathAnim->is_playing() && deathAnim->get_frame() == 8) {
-        Node::cast_to<Sprite2D>(find_child("EnemySprite"))->set_visible(false);
-    }
-
-    // Stop animation when it reaches the last frame. Delete this enemy after
-    if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
-        deathAnim->stop();
-        queue_free();
+        // Stop animation when it reaches the last frame. Delete this enemy after
+        if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
+            deathAnim->stop();
+            queue_free(); // TODO This line would crash Godot Editor if the death animation is played in the animation timeline.
+        }
     }
 }

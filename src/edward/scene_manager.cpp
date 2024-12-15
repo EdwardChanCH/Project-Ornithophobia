@@ -25,7 +25,8 @@ using namespace godot;
  */
 void SceneManager::_bind_methods() {
     ClassDB::bind_static_method("SceneManager", D_METHOD("get_instance"), &SceneManager::get_instance);
-    ClassDB::bind_method(D_METHOD("load_new_packed_scene", "scene_tree", "packed_scene"), &SceneManager::load_new_packed_scene);
+    ClassDB::bind_method(D_METHOD("import_scene_tscn", "filepath"), &SceneManager::import_scene_tscn);
+    ClassDB::bind_method(D_METHOD("load_new_scene_node", "scene_tree", "filepath", "new_scene_node"), &SceneManager::load_new_scene_node);
     ClassDB::bind_method(D_METHOD("load_new_scene", "scene_tree", "filepath"), &SceneManager::load_new_scene);
     ClassDB::bind_method(D_METHOD("load_previous_scene", "scene_tree"), &SceneManager::load_previous_scene);
     ClassDB::bind_method(D_METHOD("_debug"), &SceneManager::_debug);
@@ -72,15 +73,33 @@ SceneManager * SceneManager::get_instance() {
 }
 
 /**
- * @brief Load a new packed scene, and track the unloaded scene. 
- * Useful for passing data to the next scene.
+ * @brief File import function for .tscn format.
+ * Return nullptr if filepath does not exist.
+ * 
+ * @param filepath Filepath
+ * @return Node* Scene Node
+ */
+Node * SceneManager::import_scene_tscn(String filepath) {
+    if (ResourceLoader::get_singleton()->exists(filepath, "PackedScene")) {
+        Ref<PackedScene> scene = ResourceLoader::get_singleton()->load(filepath, "PackedScene", ResourceLoader::CACHE_MODE_REUSE);
+        return scene.ptr()->instantiate();
+    } else {
+        return nullptr;
+    }
+}
+
+/**
+ * @brief Load a new scene node, and track the unloaded scene. 
+ * Use import_scene_tscn() to get a new_scene_node. 
+ * Note: Make all the function calls to new_scene_node BEFORE passing it into this function!
  * 
  * @param scene_tree Scene Tree
- * @param packed_scene Packed Scene (initialised)
+ * @param filepath Filepath
+ * @param new_scene_node New Scene Node (can be nullptr)
  * @return true 
  * @return false 
  */
-bool SceneManager::load_new_packed_scene(SceneTree *scene_tree, Ref<PackedScene> packed_scene) {
+bool SceneManager::load_new_scene_node(SceneTree *scene_tree, String filepath, Node *new_scene_node) {
     try {
         // Validate input
         if (scene_tree == nullptr) {
@@ -91,19 +110,34 @@ bool SceneManager::load_new_packed_scene(SceneTree *scene_tree, Ref<PackedScene>
         // Store current scene in stack
         scene_stack->push_back(scene_tree->get_current_scene()->get_scene_file_path());
 
-        // Switch to new scene
-        scene_tree->change_scene_to_packed(packed_scene);
-        return true;
+        // Switch to new scene using filepath (backward compatible)
+        if (!new_scene_node) {
+            scene_tree->change_scene_to_file(filepath);
+            return true;
+        }
 
+        // Switch to new scene using node (to pass information into the next scene)
+        Window *scene_root = scene_tree->get_root();
+        Node *old_scene_node = scene_tree->get_current_scene();
+        
+        old_scene_node->queue_free();
+        scene_root->remove_child(old_scene_node);
+        scene_root->call_deferred("add_child", new_scene_node);
+        scene_tree->call_deferred("set_current_scene", new_scene_node);
+        //scene_root->add_child(new_scene_node);
+        //scene_tree->set_current_scene(new_scene_node);
+
+        return true;
+        
     } catch (Error e) {
-        UtilityFunctions::print("Warning: Failed to load packed scene.");
+        UtilityFunctions::print("Warning: Failed to load scene from filepath.");
         return false;
     }
 }
 
 /**
  * @brief Load a new scene file, and track the unloaded scene. 
- * Note: Use load_new_packed_scene() if the next scene needs data passed.
+ * Note: Use load_new_scene_node() if the next scene needs data passed.
  * 
  * @param scene_tree Scene Tree
  * @param filepath Filepath
@@ -111,24 +145,8 @@ bool SceneManager::load_new_packed_scene(SceneTree *scene_tree, Ref<PackedScene>
  * @return false 
  */
 bool SceneManager::load_new_scene(SceneTree *scene_tree, String filepath) {
-    try {
-        // Validate input
-        if (scene_tree == nullptr) {
-            UtilityFunctions::print("Warning: Scene tree cannot be null.");
-            return false;
-        }
-
-        // Store current scene in stack
-        scene_stack->push_back(scene_tree->get_current_scene()->get_scene_file_path());
-
-        // Switch to new scene
-        scene_tree->change_scene_to_file(filepath);
-        return true;
-
-    } catch (Error e) {
-        UtilityFunctions::print("Warning: Failed to load scene from filepath.");
-        return false;
-    }
+    // For backward compatibility
+    return load_new_scene_node(scene_tree, filepath, nullptr);
 }
 
 /**

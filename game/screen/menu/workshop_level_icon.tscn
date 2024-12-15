@@ -1,0 +1,219 @@
+[gd_scene load_steps=19 format=3 uid="uid://dqg5ruy6jaubx"]
+
+[ext_resource type="Script" path="res://script/menu/level_select/workshop_level_icon.gd" id="1_n52tw"]
+[ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprite/default_texture.png" id="2_hwi28"]
+[ext_resource type="FontFile" uid="uid://itnd60n7qrsk" path="res://style/fonts/dogicabold.ttf" id="2_ltwxi"]
+[ext_resource type="Texture2D" uid="uid://dfyph267dikhk" path="res://asset/sprite/menu/user-solid.svg" id="4_fxfpi"]
+[ext_resource type="Texture2D" uid="uid://vbgs6xuinh7i" path="res://asset/sprite/menu/crown_icon_black.png" id="5_rspec"]
+[ext_resource type="Texture2D" uid="uid://coasakkkc5cwv" path="res://asset/sprite/menu/play-solid.svg" id="6_br2j0"]
+[ext_resource type="Texture2D" uid="uid://bfo21xarqesaw" path="res://asset/sprite/menu/wrench-solid.svg" id="7_o7xup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0hx"]
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.581033, 0.581033, 0.581033, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnh3p"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.411765, 0.411765, 0.411765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.796078)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t37d8"]
+border_color = Color(0.411765, 0.411765, 0.411765, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_u1s2y"]
+font = ExtResource("2_ltwxi")
+font_size = 28
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ydch"]
+font = ExtResource("2_ltwxi")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3d2vl"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(0.236731, 0.739581, 0.639447, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7kbaw"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(0.223529, 0.670588, 0.580392, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jch66"]
+content_margin_left = 24.0
+content_margin_right = 24.0
+bg_color = Color(0.197766, 0.606005, 0.523742, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_px8ee"]
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_3d2vl")
+Button/styles/normal = SubResource("StyleBoxFlat_7kbaw")
+Button/styles/pressed = SubResource("StyleBoxFlat_jch66")
+
+[sub_resource type="FontVariation" id="FontVariation_mxl23"]
+variation_embolden = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mqu0t"]
+
+[node name="WorkshopLevelIcon" type="Control"]
+custom_minimum_size = Vector2(1232, 128)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -688.0
+offset_bottom = -952.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n52tw")
+
+[node name="Banner" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1233.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uy0hx")
+
+[node name="LevelIconPanel" type="Panel" parent="Banner"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 11.0
+offset_right = 206.0
+offset_bottom = 117.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hnh3p")
+
+[node name="PanelContainer" type="PanelContainer" parent="Banner/LevelIconPanel"]
+clip_children = 2
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 178.0
+offset_bottom = 102.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t37d8")
+
+[node name="LevelIcon" type="TextureRect" parent="Banner/LevelIconPanel/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_hwi28")
+expand_mode = 1
+
+[node name="LevelDetails" type="Control" parent="Banner"]
+anchors_preset = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
+
+[node name="LevelName" type="Label" parent="Banner/LevelDetails"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 224.0
+offset_top = 16.0
+offset_right = 654.0
+offset_bottom = 64.0
+text = "Level Name"
+label_settings = SubResource("LabelSettings_u1s2y")
+vertical_alignment = 1
+
+[node name="AuthorIcon" type="TextureRect" parent="Banner/LevelDetails"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 72.0
+offset_right = 248.0
+offset_bottom = 100.0
+texture = ExtResource("4_fxfpi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AuthorName" type="Label" parent="Banner/LevelDetails"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 260.0
+offset_top = 75.0
+offset_right = 472.0
+offset_bottom = 98.0
+text = "Author Name
+"
+label_settings = SubResource("LabelSettings_6ydch")
+vertical_alignment = 1
+
+[node name="BestTimeIcon" type="TextureRect" parent="Banner/LevelDetails"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 72.0
+offset_right = 528.0
+offset_bottom = 100.0
+texture = ExtResource("5_rspec")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BestTime" type="Label" parent="Banner/LevelDetails"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 540.0
+offset_top = 75.0
+offset_right = 656.0
+offset_bottom = 98.0
+text = "00'00\"00"
+label_settings = SubResource("LabelSettings_6ydch")
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="Banner"]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 32.0
+offset_right = 961.0
+offset_bottom = 96.0
+focus_mode = 0
+theme = SubResource("Theme_px8ee")
+theme_override_fonts/font = SubResource("FontVariation_mxl23")
+theme_override_font_sizes/font_size = 36
+text = "PLAY"
+icon = ExtResource("6_br2j0")
+
+[node name="EditButton" type="Button" parent="Banner"]
+layout_mode = 0
+offset_left = 981.0
+offset_top = 32.0
+offset_right = 1209.0
+offset_bottom = 96.0
+focus_mode = 0
+theme = SubResource("Theme_px8ee")
+theme_override_fonts/font = SubResource("FontVariation_mxl23")
+theme_override_font_sizes/font_size = 36
+theme_override_icons/icon = SubResource("CompressedTexture2D_mqu0t")
+text = "EDIT"
+icon = ExtResource("7_o7xup")
+
+[connection signal="pressed" from="Banner/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Banner/EditButton" to="." method="_on_edit_button_pressed"]

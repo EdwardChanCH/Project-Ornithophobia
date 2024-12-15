@@ -13,6 +13,7 @@
 #include "globals.h" // Godot's built-in classes
 #include <godot_cpp/classes/audio_stream_player.hpp>
 #include "playercontroller.h"
+#include "level_controller.h"
 #include "debug.h"
 
 namespace godot {
@@ -24,7 +25,7 @@ namespace godot {
 
 	private:
 		AnimatedSprite2D *deathAnim;
-		const int minKillSpeed = 600;
+		int minKillSpeed = 600;
 
 	protected:
 		static void _bind_methods(); // Must be declared
@@ -38,6 +39,7 @@ namespace godot {
 
 		void _process(double delta) override;
 		void _on_player_controller_entered(Node2D *body);
+		
 	};
 
 } // namespace godot

@@ -36,7 +36,8 @@ namespace godot {
 		// void operator=(const SceneManager &) = delete; // No assigning (keep this for Godot to work)
 		
 		static SceneManager * get_instance();
-		bool load_new_packed_scene(SceneTree *scene_tree, Ref<PackedScene> packed_scene);
+		Node * import_scene_tscn(String filepath);
+		bool load_new_scene_node(SceneTree *scene_tree, String filepath, Node *new_scene_node);
 		bool load_new_scene(SceneTree *scene_tree, String filepath);
 		bool load_previous_scene(SceneTree *scene_tree);
 		void _debug();

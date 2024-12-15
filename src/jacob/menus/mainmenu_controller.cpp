@@ -35,15 +35,15 @@ MainMenuController::~MainMenuController() {
  * @brief Receiver for the play_button_pressed signal
  */
 void MainMenuController::on_play_button_pressed() {
-	get_tree()->change_scene_to_file("res://scenes/level_select.tscn");
+	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/level_select.tscn");
+	// get_tree()->change_scene_to_file("res://screen/menu/level_select.tscn");
 }
 
 /**
  * @brief Receiver for the workshop_button_pressed signal
  */
 void MainMenuController::on_workshop_button_pressed() {
-	UtilityFunctions::print("i wish there was a shop i could work in");
-	// get_tree()->change_scene_to_file("res://scenes/workshop.tscn");
+	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/workshop_level_select.tscn");
 }
 
 /**
@@ -52,7 +52,7 @@ void MainMenuController::on_workshop_button_pressed() {
 void MainMenuController::on_settings_button_pressed() {
 	UtilityFunctions::print("no settings yet teehee");
 	// No settings menu yet
-	// get_tree()->change_scene_to_file("res://scenes/settings.tscn");
+	// get_tree()->change_scene_to_file("res://screen/menu/settings.tscn");
 }
 
 /**

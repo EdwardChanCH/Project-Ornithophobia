@@ -19,13 +19,16 @@ void Debug::_bind_methods() {
     ClassDB::bind_method(D_METHOD("add_debug_property", "name", "value"), &Debug::add_debug_property);
     //TODO: Make this bind properly
     // ClassDB::bind_method(D_METHOD("get_debug_properties"), &Debug::get_debug_properties);
+    ClassDB::bind_method(D_METHOD("is_debug_mode_active"), &Debug::is_debug_mode_active);
+    ClassDB::bind_method(D_METHOD("set_debug_mode", "mode"), &Debug::set_debug_mode);
 }
 
 /**
  * @brief Constructor for Debug
  */
 Debug::Debug() {
-    debugProperties = memnew(Dictionary());
+    debugProperties = Dictionary();
+    isDebugModeActive = false;
 }
 
 /**
@@ -38,7 +41,7 @@ Debug::~Debug() {
         singleton = nullptr;
     }
 
-    memdelete(debugProperties);
+    // debugProperties.~Dictionary();
 }
 
 /**
@@ -60,16 +63,26 @@ Debug *Debug::get_singleton() {
  * @param value The value of the property to be tracked
  */
 void Debug::add_debug_property(String name, Variant value) {
-    if (!debugProperties->has(name)) {
-        debugProperties->get_or_add(name, value);
+    if (!debugProperties.has(name)) {
+        debugProperties.get_or_add(name, value);
     } else {
-        debugProperties->operator[](name) = value;
+        debugProperties.operator[](name) = value;
     }
 }
 
 /**
  * @brief Returns the dictionary of tracked debug properties
  */
-Dictionary *Debug::get_debug_properties() {
+Dictionary Debug::get_debug_properties() {
     return debugProperties;
+}
+
+
+bool Debug::is_debug_mode_active() {
+    return isDebugModeActive;
+}
+
+
+void Debug::set_debug_mode(bool mode) {
+    isDebugModeActive = mode;
 }
