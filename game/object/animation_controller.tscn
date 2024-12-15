@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnlbj7nrgsiqp"]
+[gd_scene load_steps=14 format=3 uid="uid://dnlbj7nrgsiqp"]
 
 [ext_resource type="Texture2D" uid="uid://cvq1imvn24c02" path="res://asset/sprite/gameplay/idle.png" id="1_eemjq"]
 [ext_resource type="Texture2D" uid="uid://cu1fobfu2ythv" path="res://asset/sprite/gameplay/idleAir.png" id="2_6fujs"]
@@ -16,21 +16,29 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("2_6fujs")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gi21f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw81w"]
 atlas = ExtResource("3_gwffm")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wdpok"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_10t8a"]
 atlas = ExtResource("3_gwffm")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_304rk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny2vv"]
 atlas = ExtResource("3_gwffm")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5m1u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxa30"]
 atlas = ExtResource("3_gwffm")
 region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc2em"]
+atlas = ExtResource("3_gwffm")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4gvm"]
+atlas = ExtResource("3_gwffm")
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wmckn"]
 animations = [{
@@ -55,24 +63,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gi21f")
+"texture": SubResource("AtlasTexture_iw81w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wdpok")
+"texture": SubResource("AtlasTexture_10t8a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_304rk")
+"texture": SubResource("AtlasTexture_ny2vv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l5m1u")
+"texture": SubResource("AtlasTexture_sxa30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc2em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4gvm")
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_wmckn")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame = 3
+frame_progress = 0.118628
