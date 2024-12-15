@@ -176,6 +176,7 @@ bool SceneManager::load_previous_scene(SceneTree *scene_tree) {
         }
 
         // Switch to previus scene
+        UtilityFunctions::print(filepath);
         scene_tree->change_scene_to_file(filepath);
         return true;
 

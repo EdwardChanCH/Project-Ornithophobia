@@ -15,7 +15,6 @@ using namespace godot;
 void MainMenuController::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("on_play_button_pressed"), &MainMenuController::on_play_button_pressed);
 	ClassDB::bind_method(D_METHOD("on_workshop_button_pressed"), &MainMenuController::on_workshop_button_pressed);
-	ClassDB::bind_method(D_METHOD("on_settings_button_pressed"), &MainMenuController::on_settings_button_pressed);
 	ClassDB::bind_method(D_METHOD("on_exit_button_pressed"), &MainMenuController::on_exit_button_pressed);
 }
 
@@ -44,15 +43,6 @@ void MainMenuController::on_play_button_pressed() {
  */
 void MainMenuController::on_workshop_button_pressed() {
 	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/workshop_level_select.tscn");
-}
-
-/**
- * @brief Receiver for the settings_button_pressed signal
- */
-void MainMenuController::on_settings_button_pressed() {
-	UtilityFunctions::print("no settings yet teehee");
-	// No settings menu yet
-	// get_tree()->change_scene_to_file("res://screen/menu/settings.tscn");
 }
 
 /**

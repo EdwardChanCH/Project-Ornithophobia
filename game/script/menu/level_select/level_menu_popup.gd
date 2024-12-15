@@ -3,6 +3,7 @@ extends Control
 
 @export var level_path = ""
 @export var dir_path = "res://level/story/"
+var level_controller_path = "res://level/level_controller.tscn"
 
 
 # Called when the node is ready in the scene tree.
@@ -20,14 +21,18 @@ func load_level(level):
 		var level_instance: Level = level_scene.instantiate()
 		if level_instance is Level:
 			var level_metadata: Dictionary = level_instance.get_level_info()
-			%LevelTitle.text = level_metadata.get("name", "null")
+			%LevelTitle.text = level_metadata.get("level_name", "null")
 			var rank_times = level_metadata.get("rank_times", null)
 			if (rank_times != null):
 				%GoldTime.text = rank_times[0]
 				%SilverTime.text = rank_times[1]
 				%BronzeTime.text = rank_times[2]
+			else:
+				%GoldTime.text = "--:--.--"
+				%SilverTime.text = "--:--.--"
+				%BronzeTime.text = "--:--.--"
 			%BestTime.text = level_metadata.get("best_time", "00:00.00")
-			%LevelIcon.texture = load(level_metadata.get("level_icon", "res://asset/sprite/default_texture.png"))
+			%LevelIcon.texture = load(level.replace(".tscn", ".png"))
 			%Rank.texture = load(level_metadata.get("rank_icon", "res://asset/sprite/default_texture.png"))
 			level_path = level
 		level_instance.queue_free()
@@ -35,7 +40,9 @@ func load_level(level):
 #
 func _on_play_button_pressed() -> void:
 	# get_tree().change_scene_to_file(level_path)
-	SceneManager.get_instance().load_new_scene(get_tree(), level_path)
+	var level_controller: LevelController = SceneManager.get_instance().import_scene_tscn(level_controller_path)
+	level_controller.set_level(level_path)
+	SceneManager.get_instance().load_new_scene_node(get_tree(), level_controller_path, level_controller)
 
 
 func _on_next_level_button_pressed() -> void:
