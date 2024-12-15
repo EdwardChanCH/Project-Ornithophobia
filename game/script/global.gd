@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Auto-load script for helper functions and mock data
+
 extends Node
 
 const MAIN_LEVELS_DIR_PATH = "res://level/story/"
@@ -7,6 +10,8 @@ const USER_LEVELS_DIR_PATH = "user://level/workshop/user_levels/"
 var level_data = []
 var data_index = 0
 
+
+# Creates duplicates of the main 3 levels as Custom Levels for testing
 func _ready() -> void:
 	create_dir(CUSTOM_LEVELS_DIR_PATH)
 	create_dir(USER_LEVELS_DIR_PATH)
@@ -26,6 +31,7 @@ func _ready() -> void:
 	c_level_3_scene.queue_free()
 
 
+# Helper function to create a new directory at a given filepath
 func create_dir(dir):
 	if (!DirAccess.dir_exists_absolute(dir)):
 		var error_code = DirAccess.make_dir_recursive_absolute(dir)
@@ -34,11 +40,14 @@ func create_dir(dir):
 			printerr(DIR_ERROR % [dir, error_code])
 
 
+# Helper function to convert a string representation of time of the format 00:00.00 to a numerical representation
 func read_formatted_time(time):
 	var units = multi_split(time, [":", "."])
 	var total_time = (int(units[0]) * 60) + (int(units[1])) + float(int(units[2])) * 0.01
 	return total_time
 
+
+# Helper function to split a string using multiple delimiters
 func multi_split(string, delimiters):
 	var tokens = [string]
 	
@@ -50,8 +59,3 @@ func multi_split(string, delimiters):
 		tokens = new_tokens
 	
 	return tokens
-
-
-func convert_to_file_name(string):
-	var file_name = string.replace(" ", "_")
-	return file_name.to_lower() + ".tres"

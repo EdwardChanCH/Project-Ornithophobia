@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Makes the Main Level Select level popup disappear when clicking the darkened background
+
 extends Panel
 
 

@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Controller for the collision of level icons on the Main Level Select screen
+
 extends Area2D
 
 
@@ -18,6 +21,7 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> vo
 		set_process_input(true)
 
 
+# Create a level popup when this level icon is clicked
 func _input(event: InputEvent) -> void:
 	if (event is InputEventMouseButton and event.is_action("left_click") and not event.is_pressed()):
 		var levelPopupScene = load("res://screen/menu/level_menu_popup.tscn")

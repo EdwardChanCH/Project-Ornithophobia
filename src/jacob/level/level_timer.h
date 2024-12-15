@@ -1,10 +1,7 @@
 /**
  * @file level_timer.h
- * @author
- * @brief
- * @version
- * @date
- * 
+ * @author Jacob Couture
+ * @brief Header file for the LevelTimer class.
  */
 
 #ifndef LEVEL_TIMER_H
@@ -23,7 +20,9 @@ namespace godot {
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
+		// The time this timer began
 		uint64_t start_time;
+		// The amount of time this timer has spent paused
 		uint64_t pause_time;
 
 	protected:

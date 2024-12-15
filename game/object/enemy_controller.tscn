@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://7a1f4lx35t14"]
+[gd_scene load_steps=24 format=3 uid="uid://7a1f4lx35t14"]
 
 [ext_resource type="Texture2D" uid="uid://v41xssxrwdta" path="res://asset/sprite/gameplay/jake scrunkle.png" id="1_f1bfd"]
-[ext_resource type="Script" path="res://script/enemy_controller.gd" id="1_lihbf"]
 [ext_resource type="Texture2D" uid="uid://bs7ge0v8bln3" path="res://asset/sprite/gameplay/explosione_spritesheet.png" id="2_6d0t4"]
 [ext_resource type="Script" path="res://script/sfx_player.gd" id="4_3l50r"]
 [ext_resource type="AudioStream" uid="uid://brb0iu0ywlo5d" path="res://asset/audio/hitHurt2.wav" id="4_plx1h"]
@@ -136,10 +135,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66uhf"]
 size = Vector2(16, 16)
 
-[node name="EnemyController" type="EnemyController" node_paths=PackedStringArray("sfx_player")]
+[node name="EnemyController" type="EnemyController"]
+minKillSpeed = 800
 scale = Vector2(3, 3)
-script = ExtResource("1_lihbf")
-sfx_player = NodePath("SFXPlayer")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 scale = Vector2(0.158, 0.232)

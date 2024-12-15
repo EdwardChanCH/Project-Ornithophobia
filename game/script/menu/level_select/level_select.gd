@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Controller for the Main Level Select screen
+
 extends Control
 
 @export var dir_path = "res://level/story/"
@@ -9,6 +12,7 @@ func _ready() -> void:
 	var regex = RegEx.new()
 	regex.compile(level_name_pattern_re)
 	
+	# Searches the level directory for levels. Creates a new level icon for each one found
 	for level_path in DirAccess.get_files_at(dir_path):
 		if (regex.search(level_path) and level_path.ends_with(".tscn")):
 			var levelIconScene = load("res://screen/menu/level_icon.tscn")
@@ -17,12 +21,17 @@ func _ready() -> void:
 			
 			var level_scene = load(dir_path + level_path)
 			var level_instance: Level = level_scene.instantiate()
+
+			# Initialize data on the level icon instance
 			var level_metadata: Dictionary = level_instance.get_level_info()
 			levelIconInstance.find_child("LevelTitle").text = level_metadata.get("level_name", "null")
 			levelIconInstance.find_child("LevelIcon").texture = load(dir_path + level_path.replace(".tscn", ".png"))
 			levelIconInstance.find_child("Rank").texture = load(level_metadata.get("rank_icon", "res://asset/sprite/default_texture.png"))
 			levelIconInstance.level_path = level_path
-			Global.level_data.append(level_path)
+
+			# Add the found level to the list of found levels
+			if (level_path not in Global.level_data):
+				Global.level_data.append(level_path)
 			
 			level_instance.queue_free()
 
