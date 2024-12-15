@@ -31,24 +31,22 @@ MainMenuController::~MainMenuController() {
 }
 
 /**
- * @brief Receiver for the play_button_pressed signal
+ * @brief Receiver for the play_button_pressed signal. Loads the Main Level Select screen
  */
 void MainMenuController::on_play_button_pressed() {
 	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/level_select.tscn");
-	// get_tree()->change_scene_to_file("res://screen/menu/level_select.tscn");
 }
 
 /**
- * @brief Receiver for the workshop_button_pressed signal
+ * @brief Receiver for the workshop_button_pressed signal. Loads the Workshop Level Select screen
  */
 void MainMenuController::on_workshop_button_pressed() {
 	SceneManager::get_instance()->load_new_scene(get_tree(), "res://screen/menu/workshop_level_select.tscn");
 }
 
 /**
- * @brief Receiver for the exit_button_pressed signal
+ * @brief Receiver for the exit_button_pressed signal. Closes the game
  */
 void MainMenuController::on_exit_button_pressed() {
-	// should probably also auto-save
 	get_tree()->quit();
 }

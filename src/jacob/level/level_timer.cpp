@@ -1,7 +1,7 @@
 /**
  * @file level_timer.cpp
  * @author Jacob Couture
- * @brief Acts as a pauseable level timer to display on-screen
+ * @brief Acts as a pauseable level timer to display on-screen.
  */
 
 #include "level_timer.h"
@@ -18,14 +18,14 @@ void LevelTimer::_bind_methods() {
 }
 
 /**
- * @brief Construct a new ___Class Name Here___:: ___Class Name Here___ object.
+ * @brief Construct a new LevelTimer object.
  * 
  */
 LevelTimer::LevelTimer() {
 }
 
 /**
- * @brief Destroy the ___Class Name Here___:: ___Class Name Here___ object.
+ * @brief Destroy the LevelTimer object.
  * 
  */
 LevelTimer::~LevelTimer() {
@@ -49,6 +49,10 @@ _GDEXPORT_SET(start_time)
 _GDEXPORT_SET(pause_time)
 _GDEXPORT_SET_SUFFIX
 
+
+/**
+ * @brief Same as Godot's _ready() function
+ */
 void LevelTimer::_ready() {
     if (!Engine::get_singleton()->is_editor_hint()) {
         set_process_mode(ProcessMode::PROCESS_MODE_INHERIT);
@@ -59,16 +63,22 @@ void LevelTimer::_ready() {
     pause_time = 0;
 }
 
+
 /**
  * @brief Same as _process() in GDScript.
- * 
- * @param delta Delta time
+ * @param delta The time passed since the last frame
  */
 void LevelTimer::_process(double delta) {
     start_time = float(start_time) + delta * 1000;
     set_text(format_time(start_time));
 }
 
+
+/**
+ * @brief Formats time from the Time.get_ticks_msec function to a string of the format 00:00.00
+ * @param time The given time from the Time.get_ticks_msec function
+ * @return A string of the format 00:00.00
+ */
 String LevelTimer::format_time(uint64_t time) {
     int minutes = time / 60000;
     int seconds = (time - (minutes * 60000)) / 1000;

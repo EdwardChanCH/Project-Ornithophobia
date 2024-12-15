@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=4 uid="uid://du0l3hov4uly0"]
+[gd_scene load_steps=5 format=4 uid="uid://du0l3hov4uly0"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_4pi0g"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_4do8d"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_lyi5j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aomqp"]
+font_size = 24
 
 [node name="Level" type="Level"]
 level_info = {
@@ -57,6 +60,17 @@ position = Vector2(744, 168)
 position = Vector2(1176, 168)
 
 [node name="EntityList" type="Node" parent="."]
+
+[node name="Tutorial2" type="Label" parent="."]
+offset_left = 792.0
+offset_top = 584.0
+offset_right = 1128.0
+offset_bottom = 692.0
+text = "Press ESCAPE to pause the
+game, where you can RETRY
+or return to the main menu."
+label_settings = SubResource("LabelSettings_aomqp")
+horizontal_alignment = 1
 
 [connection signal="enemy_died" from="EnemyList/EnemyController" to="EnemyList/EnemyController/SFXPlayer" method="_on_enemy_controller_enemy_died"]
 [connection signal="enemy_died" from="EnemyList/@EnemyController@222" to="EnemyList/@EnemyController@222/SFXPlayer" method="_on_enemy_controller_enemy_died"]

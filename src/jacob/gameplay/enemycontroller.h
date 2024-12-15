@@ -1,7 +1,7 @@
 /**
  * @file enemycontroller.h
  * @author Jacob Couture
- * @brief Header file for the enemy controller class
+ * @brief Header file for the EnemyController class.
  */
 
 #ifndef ENEMYCONTROLLER_H
@@ -24,7 +24,9 @@ namespace godot {
 		_GDEXPORT // A custom macro for exporting instance variables
 
 	private:
+		// Reference to the death animation node
 		AnimatedSprite2D *deathAnim;
+		// Minimum speed the player must be traveling to defeat the enemy
 		int minKillSpeed = 600;
 
 	protected:

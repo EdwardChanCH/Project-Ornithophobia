@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=4]
+[gd_scene load_steps=4 format=4 uid="uid://debl28o0utm2f"]
 
-[ext_resource type="TileSet" path="res://resource/tileset_terrain.tres" id="1_p45xf"]
-[ext_resource type="PackedScene" path="res://object/player_controller.tscn" id="2_vjwcn"]
-[ext_resource type="PackedScene" path="res://object/enemy_controller.tscn" id="3_iuo6m"]
+[ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_p45xf"]
+[ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_vjwcn"]
+[ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_iuo6m"]
 
 [node name="Level" type="Level"]
 process_mode = 4
@@ -17,29 +17,12 @@ navigation_enabled = false
 
 [node name="PlayerList" type="Node" parent="."]
 
-[node name="PlayerController" type="PlayerController" parent="PlayerList" instance=ExtResource("2_vjwcn")]
-maxGroundSpeed = 120
-groundAccel = 8.0
-groundDecel = 8.0
-groundFriction = 0.95
-gravity = 850.0
-maxAirSpeed = 200
-maxFallSpeed = 1500
-airFriction = 0.7
-trueMaxSpeed = 810
-smallBlastStrength = 500
-largeBlastStrength = 1300
-maxSmallBlastSpeed = 200
-maxLargeBlastSpeed = 800
-z_index = 1
+[node name="PlayerController" parent="PlayerList" instance=ExtResource("2_vjwcn")]
 position = Vector2(216, 960)
-velocity = Vector2(0, 750)
 
 [node name="EnemyList" type="Node" parent="."]
 
-[node name="EnemyController" type="EnemyController" parent="EnemyList" instance=ExtResource("3_iuo6m")]
+[node name="EnemyController" parent="EnemyList" instance=ExtResource("3_iuo6m")]
 position = Vector2(312, 984)
 
 [node name="EntityList" type="Node" parent="."]
-
-[node name="LevelController" type="LevelController" parent="."]

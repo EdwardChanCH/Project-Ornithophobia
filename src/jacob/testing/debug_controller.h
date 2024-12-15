@@ -1,7 +1,7 @@
 /**
  * @file debug_controller.h
  * @author Jacob Couture
- * @brief Header file for the DebugController class
+ * @brief Header file for the DebugController class.
  */
 
 #ifndef DEBUG_CONTROLLER_H
@@ -22,8 +22,9 @@ namespace godot {
 		static void _bind_methods(); // Must be declared.
 
     private:
+		// Reference to the container node that holds the property labels
         VBoxContainer *property_container;
-		Label *debugText;
+		// Dictionary containing all tracked debug properties
 		Dictionary properties;
 
 	public:

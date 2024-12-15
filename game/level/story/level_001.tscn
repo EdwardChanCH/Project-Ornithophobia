@@ -37,13 +37,13 @@ position = Vector2(216, 960)
 [node name="EnemyList" type="Node" parent="."]
 
 [node name="@EnemyController@207" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(816, 744)
+position = Vector2(840, 744)
 
 [node name="@EnemyController@208" parent="EnemyList" instance=ExtResource("3_bt444")]
 position = Vector2(1272, 504)
 
 [node name="@EnemyController@209" parent="EnemyList" instance=ExtResource("3_bt444")]
-position = Vector2(1608, 504)
+position = Vector2(1560, 504)
 
 [node name="EntityList" type="Node" parent="."]
 
@@ -53,8 +53,9 @@ offset_top = 640.0
 offset_right = 517.0
 offset_bottom = 748.0
 text = "Press A/D to move Left/Right
-Use Left Click for a Small Blast
-Use Right Click for a Large Blast"
+Use LEFT CLICK for a Small Blast
+Use RIGHT CLICK for a Large Blast
+Press SPACE to slow down time"
 label_settings = SubResource("LabelSettings_1t3xm")
 horizontal_alignment = 1
 
@@ -69,9 +70,9 @@ label_settings = SubResource("LabelSettings_1t3xm")
 horizontal_alignment = 1
 
 [node name="Tutorial3" type="Label" parent="."]
-offset_left = 1272.0
+offset_left = 1240.0
 offset_top = 280.0
-offset_right = 1617.0
+offset_right = 1592.0
 offset_bottom = 351.0
 text = "Defeat all enemies as fast as
 possible to complete the level"
