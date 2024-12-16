@@ -12,7 +12,7 @@ level_info = {
 "best_time": "00:02.20",
 "level_author": "null",
 "level_icon": "res://asset/sprite/default_texture.png",
-"level_name": "Level 1",
+"level_name": "Tutorial",
 "level_time": "00:04.69",
 "rank_flavour_text": "PERFECT!",
 "rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",

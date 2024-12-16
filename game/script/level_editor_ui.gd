@@ -341,6 +341,7 @@ func _on_load_example_level_button_pressed() -> void:
 
 func _on_load_level_button_pressed() -> void:
 	load_level_popup_node.access = FileDialog.ACCESS_USERDATA
+	load_level_popup_node.current_dir = Global.USER_LEVELS_DIR_PATH
 	load_level_popup_node.set_visible(true)
 	pass
 

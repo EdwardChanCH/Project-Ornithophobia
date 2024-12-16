@@ -136,7 +136,6 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="EnemyController" type="EnemyController"]
-minKillSpeed = 800
 scale = Vector2(3, 3)
 
 [node name="EnemySprite" type="Sprite2D" parent="."]

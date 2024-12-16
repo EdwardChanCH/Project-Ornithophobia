@@ -21,7 +21,7 @@ offset_top = 1000.0
 offset_right = 1912.0
 offset_bottom = 1072.0
 text = "Ornithophobia
-Beta v1.0.0"
+Beta v1.0.1"
 label_settings = SubResource("LabelSettings_cc0l7")
 horizontal_alignment = 2
 vertical_alignment = 2

@@ -9,7 +9,7 @@ level_info = {
 "best_time": "--:--.--",
 "level_author": "null",
 "level_icon": "res://asset/sprite/default_texture.png",
-"level_name": "Level 2",
+"level_name": "Snake Way",
 "level_time": "00:00.00",
 "rank_icon": "res://asset/sprite/menu/no_rank_icon.png",
 "rank_text": "rank text",
