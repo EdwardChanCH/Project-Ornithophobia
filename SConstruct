@@ -15,10 +15,38 @@ env = SConscript("godot-cpp/SConstruct")
 # env.Append(CPPPATH=["src/"])
 # sources = Glob("src/*.cpp")
 
+# - - - Custom C++ - - - #
 # Recursive search for subfolders in "src".
 subfolders = [os.path.relpath(root).replace("\\", "/") + "/" for (root, dirs, files) in os.walk("src")]
 if "src/gen/" in subfolders:
-    subfolders.remove("src/gen/") # exclude the folder of "doc_data.gen.cpp", or else SCons would crash
+    subfolders.remove("src/gen/") # Exclude the folder of "doc_data.gen.cpp", or else SCons would crash
+
+sources = []
+for d in subfolders:
+    sources.extend(Glob(d + "*.cpp"))
+# - - - Custom C++ - - - #
+
+# - - - Google Test - - - #
+googletest_root = "googletest"
+
+googletest_subfolders = [
+    googletest_root + "/googletest", 
+    googletest_root + "/googletest/include", 
+    googletest_root + "/googlemock", 
+    googletest_root + "/googlemock/include"
+]
+
+gtest_all = googletest_root + "/googletest/src/gtest-all.cc"
+gmock_all = googletest_root + "/googlemock/src/gmock-all.cc"
+
+subfolders.extend(googletest_subfolders)
+test_sources = sources + ["test/test_main.cpp", gtest_all, gmock_all]
+
+test_program = env.Program(
+    target='gtest', 
+    source=test_sources
+)
+# - - - Google Test - - - #
 
 # Specify compiler's source file path
 env.Append(CPPPATH=subfolders)
@@ -27,11 +55,7 @@ env.Append(CPPPATH=subfolders)
 # Specify compiler's object file format limit
 env.Append(CCFLAGS=["/EHsc", "/bigobj"])
 
-sources = []
-for d in subfolders:
-    sources.extend(Glob(d + "*.cpp"))
-
-# Link custom doc files to the Godot Editor.
+# Link custom doc files to the Godot Editor
 if env["target"] in ["editor", "template_debug"]:
     try:
         doc_data = env.GodotCPPDocData("src/gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
@@ -39,7 +63,7 @@ if env["target"] in ["editor", "template_debug"]:
     except AttributeError:
         print("Not including class reference as we're targeting a pre-4.3 baseline.")
 
-# Library formats.
+# GDExtension library formats
 if env["platform"] == "macos":
     library = env.SharedLibrary(
         "game/bin/libcs3307.{}.{}.framework/libcs3307.{}.{}".format(
@@ -64,4 +88,8 @@ else:
         source=sources,
     )
 
+# Build GDExtension library
 Default(library)
+
+# Build GoogleTest program
+Default(test_program)
