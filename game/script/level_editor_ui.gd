@@ -1,4 +1,11 @@
+class_name LevelEditorUI
 extends Control
+## This class represents the level editor's UI.
+##
+## This script aggregates all UI signals and updates all UI elements.
+##
+## Author: Chun Ho Chan (Edward)
+## Date:   2024-12-13
 
 
 signal physics_button_toggled(active: bool)
@@ -53,17 +60,19 @@ signal test_action_button_pressed(s:String, n: int)
 
 
 func _ready() -> void:
-	# Receiver parent signals
-	get_parent().get_parent().connect("level_loaded", Callable(self, "_on_level_loaded"))
-	get_parent().get_parent().connect("level_saved", Callable(self, "_on_level_saved"))
-	get_parent().get_parent().connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
-	get_parent().get_parent().connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
-	get_parent().get_parent().connect("debug_message", Callable(self, "_on_debug_message"))
-	get_parent().get_parent().connect("normal_message", Callable(self, "_on_normal_message"))
-	get_parent().get_parent().connect("warning_message", Callable(self, "_on_warning_message"))
-	get_parent().get_parent().connect("error_message", Callable(self, "_on_error_message"))
+	var controller_node: LevelEditorController = self.get_parent().get_parent()
 	
-	# Create directories
+	# Receive signals sent by controller
+	controller_node.connect("level_loaded", Callable(self, "_on_level_loaded"))
+	controller_node.connect("level_saved", Callable(self, "_on_level_saved"))
+	controller_node.connect("tile_type_changed", Callable(self, "_on_tile_type_changed"))
+	controller_node.connect("tile_alt_changed", Callable(self, "_on_tile_alt_changed"))
+	controller_node.connect("debug_message", Callable(self, "_on_debug_message"))
+	controller_node.connect("normal_message", Callable(self, "_on_normal_message"))
+	controller_node.connect("warning_message", Callable(self, "_on_warning_message"))
+	controller_node.connect("error_message", Callable(self, "_on_error_message"))
+	
+	# Create user directories
 	DirAccess.make_dir_recursive_absolute("user://level")
 	DirAccess.make_dir_recursive_absolute("user://level/story")
 	DirAccess.make_dir_recursive_absolute("user://level/user")
@@ -457,6 +466,13 @@ func _on_grid_button_toggled(toggled_on: bool) -> void:
 
 func _on_physics_button_toggled(toggled_on: bool) -> void:
 	physics_button_toggled.emit(toggled_on)
+	if (toggled_on):
+		edit_mode_node._select_int(0)
+		_on_edit_mode_button_item_selected(0)
+	else:
+		edit_mode_node._select_int(1)
+		_on_edit_mode_button_item_selected(1)
+	
 	pass
 
 
