@@ -53,7 +53,7 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * Doxygen (optional)  
   * version 1.12.0  
   * Note: This is used to generate the HTML, XML doc files.  
-* ~~Google Test (optional)~~  
+* ~~Google Test (optional)~~ (depricated)  
   * ~~version 1.15.2~~
   * ~~Note: This is used to test the C++ classes.~~  
   * Note: Incompatible with GDExtension.  
