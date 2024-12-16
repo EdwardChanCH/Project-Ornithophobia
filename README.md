@@ -53,12 +53,13 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * Doxygen (optional)  
   * version 1.12.0  
   * Note: This is used to generate the HTML, XML doc files.  
-* Godot Unit Test (GUT) Addon (optional)
-  * version 9.3.0
-  * Note: This is used to run unit tests for Godot and GDExtension classes.  
-* ~~Google Test~~  
+* ~~Google Test (optional)~~  
   * ~~version 1.15.2~~
   * ~~Note: This is used to test the C++ classes.~~  
+  * Note: Incompatible with GDExtension.  
+* Godot Unit Test (GUT) (optional)
+  * version 9.3.0
+  * Note: This is used to run unit tests for Godot and GDExtension classes.  
 
 
 ## 3. How To Compile (step-by-step guide)
