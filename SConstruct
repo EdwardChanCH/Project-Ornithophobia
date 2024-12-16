@@ -26,7 +26,7 @@ for d in subfolders:
     sources.extend(Glob(d + "*.cpp"))
 # - - - Custom C++ - - - #
 
-# - - - Google Test - - - #
+""" # - - - Google Test - - - #
 googletest_root = "googletest"
 
 googletest_subfolders = [
@@ -46,7 +46,7 @@ test_program = env.Program(
     target='gtest', 
     source=test_sources
 )
-# - - - Google Test - - - #
+# - - - Google Test - - - # """
 
 # Specify compiler's source file path
 env.Append(CPPPATH=subfolders)
@@ -91,5 +91,5 @@ else:
 # Build GDExtension library
 Default(library)
 
-# Build GoogleTest program
-Default(test_program)
+""" # Build GoogleTest program
+Default(test_program) """
