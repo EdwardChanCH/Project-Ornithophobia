@@ -1,7 +1,7 @@
 /**
  * @file debug.cpp
  * @author Jacob Couture
- * @brief This class is a singleton that holds a dictionary of properties that should appear on the debug menu in-game
+ * @brief This class is a singleton that holds a dictionary of properties that should appear on the debug menu in-game.
  */
 
 #include "debug.h"
@@ -24,7 +24,7 @@ void Debug::_bind_methods() {
 }
 
 /**
- * @brief Constructor for Debug
+ * @brief Constructor for the Debug class
  */
 Debug::Debug() {
     debugProperties = Dictionary();
@@ -32,7 +32,7 @@ Debug::Debug() {
 }
 
 /**
- * @brief Destructor for Debug
+ * @brief Destructor for the Debug class
  */
 Debug::~Debug() {
     if (singleton == this) {
@@ -40,8 +40,6 @@ Debug::~Debug() {
         memdelete(singleton);
         singleton = nullptr;
     }
-
-    // debugProperties.~Dictionary();
 }
 
 /**
@@ -71,18 +69,27 @@ void Debug::add_debug_property(String name, Variant value) {
 }
 
 /**
- * @brief Returns the dictionary of tracked debug properties
+ * @brief Getter for the dictionary of tracked debug properties
+ * @return The dictionary containing all tracked debug properties
  */
 Dictionary Debug::get_debug_properties() {
     return debugProperties;
 }
 
 
+/**
+ * @brief Getter for the isDebugModeActive flag
+ * @return The value of isDebugModeActive
+ */
 bool Debug::is_debug_mode_active() {
     return isDebugModeActive;
 }
 
 
+/**
+ * @brief Setter for the isDebugModeActive variable
+ * @param mode The new value for isDebugModeActive
+ */
 void Debug::set_debug_mode(bool mode) {
     isDebugModeActive = mode;
 }

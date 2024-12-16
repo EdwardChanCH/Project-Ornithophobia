@@ -1,7 +1,7 @@
 /**
  * @file playercontroller.cpp
  * @author Jacob Couture
- * @brief This class handles movement and physics for the player
+ * @brief This class handles movement and physics for the player.
  */
 
 #include "playercontroller.h"
@@ -115,6 +115,9 @@ void PlayerController::_ready() {
  * @param delta Delta time
  */
 void PlayerController::_physics_process(double _delta) {
+
+    /*-------------------- Controls for moving with A and D --------------------*/
+
     float delta = (float) _delta;
     float axis = input->get_axis("move_left", "move_right");
     float airDecel = 0;
@@ -164,7 +167,7 @@ void PlayerController::_physics_process(double _delta) {
     }
 
 
-    /*-------------------------------------------------------------------------------------------------------------*/
+    /*-------------------- Checks for handling gravity and collision --------------------*/
 
 
     // Velocities
@@ -216,7 +219,7 @@ void PlayerController::_physics_process(double _delta) {
     }
 
 
-    /*-------------------------------------------------------------------------------------------------------------*/
+    /*-------------------- Controls for handling blasts with Left and Right Click --------------------*/
 
 
     // Start timer when blast button just pressed
@@ -249,9 +252,9 @@ void PlayerController::_physics_process(double _delta) {
     }
 
 
-    /*-------------------------------------------------------------------------------------------------------------*/
+    /*-------------------- Apply final velocity calculations --------------------*/
 
-
+    // If the player has been bounced by the enemy, override the current velocity and reset the bounceVelocity
     if (bounceVelocity.length() > 0) {
         velocity = bounceVelocity;
         bounceVelocity.x = 0;
@@ -264,11 +267,15 @@ void PlayerController::_physics_process(double _delta) {
     speed = velocity.x > 0 ? velocity.x : velocity.x * -1;
     speed = Math::clamp(speed, float(-trueMaxSpeed), float(trueMaxSpeed));
 
-
     // Update player velocity
     set_velocity(velocity);
+    // Move the player
+    move_and_slide();
     
-    // Debug log
+    
+    /*-------------------- Debug Log --------------------*/
+
+
     Debug::get_singleton()->add_debug_property("FPS", UtilityFunctions::snappedf((1.0 / delta), 0.01));
     Debug::get_singleton()->add_debug_property("speed", UtilityFunctions::snappedf(speed, 0.01));
     Debug::get_singleton()->add_debug_property("velocityX", UtilityFunctions::snappedf(get_velocity().x, 0.01));
@@ -277,9 +284,6 @@ void PlayerController::_physics_process(double _delta) {
     Debug::get_singleton()->add_debug_property("axis", axis);
     Debug::get_singleton()->add_debug_property("isAirborne", isAirborne);
     Debug::get_singleton()->add_debug_property("airDecel", UtilityFunctions::snappedf(airDecel, 0.01));
-
-    // Move the player
-    move_and_slide();
     
 }
 
@@ -322,6 +326,10 @@ bool PlayerController::was_on_floor() {
 }
 
 
+/**
+ * @brief Signal receiver for the bounce_player signal. Calculates velocity to bounce away from the enemy at based on direction
+ * @param enemy_pos The position of the enemy being collided with
+ */
 void PlayerController::_collide_with_enemy(Vector2 enemy_pos) {
     bounceVelocity = (get_velocity().normalized() * -1) * enemyBounceStrength;
     bounceVelocity = (get_position() - enemy_pos).normalized() * enemyBounceStrength;

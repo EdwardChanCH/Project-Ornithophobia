@@ -72,7 +72,7 @@ void SlowMotionMeter::_ready() {
 
 /**
  * @brief Same as _process() in GDScript.
- * @param delta Delta time
+ * @param delta The time passed since the last frame
  */
 void SlowMotionMeter::_process(double delta) {
     value = get_value();
@@ -97,13 +97,14 @@ void SlowMotionMeter::_process(double delta) {
     // Prevent the slowing of time if the meter is empty
     can_slow_time = value > 0 ? true : false;
 
+    // Runs the main logic for updating the meter values
     update_meter();
 
     // Activate slow motion if it is able to be activated
 	if (Input::get_singleton()->is_action_pressed("action_button") && can_drain && can_slow_time) {
         float new_time_scale = Engine::get_singleton()->get_time_scale() - delta * time_slow_factor;
 		Engine::get_singleton()->set_time_scale(Math::clamp(new_time_scale, max_slow_time_value, 1.f));
-    } else if (!results_showing) {
+    } else {
         float new_time_scale = Engine::get_singleton()->get_time_scale() + delta * time_slow_factor;
 		Engine::get_singleton()->set_time_scale(Math::clamp(new_time_scale, max_slow_time_value, 1.f));
     }
@@ -117,13 +118,6 @@ void SlowMotionMeter::_process(double delta) {
         }
         set_value(value);
     }
-    // Debug::get_singleton()->add_debug_property("soft_max_value", soft_max_value);
-    // Debug::get_singleton()->add_debug_property("a", get_self_modulate().get_a8());
-    // Debug::get_singleton()->add_debug_property("can_fade_in", can_fade_in);
-    // Debug::get_singleton()->add_debug_property("can_fade_out", can_fade_out);
-    Debug::get_singleton()->add_debug_property("value", value);
-	// Debug::get_singleton()->add_debug_property("can_drain", can_drain);
-    // Debug::get_singleton()->add_debug_property("can_slow_time", can_slow_time);
 }
 
 
@@ -188,6 +182,10 @@ void SlowMotionMeter::_on_cooldown_timer_timeout() {
 }
 
 
+/**
+ * @brief Receiver for the results_slow_time signal indicating that the results sequence has begun.
+ * Disables the process function of this node to prevent tampering with the time scale of the engine.
+ */
 void SlowMotionMeter::_on_results_showing() {
-    results_showing = true;
+    set_process(false);
 }

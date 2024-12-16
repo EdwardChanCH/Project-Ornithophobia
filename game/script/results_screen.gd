@@ -1,3 +1,6 @@
+# Author: Jacob Couture
+# Description: Controller for the Results Screen.
+
 extends Control
 
 
@@ -7,6 +10,7 @@ func _ready() -> void:
 	hide_elements()
 
 
+# Receiver function for the show_results signal. Shows all the relevant information in the correct order
 func _on_results_screen_show(level_metadata: Dictionary):
 	get_tree().paused = true
 	hide_elements()

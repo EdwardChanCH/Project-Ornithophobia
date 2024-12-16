@@ -55,6 +55,8 @@ _GDEXPORT_SET_SUFFIX
 void EnemyController::_ready() {
     if (!is_connected("enemy_died", Callable(find_child("SFXPlayer"), "_on_enemy_died")))
         connect("enemy_died", Callable(find_child("SFXPlayer"), "_on_enemy_died"));
+    if (!is_connected("bounce_player", Callable(find_child("SFXPlayer"), "_on_bounce_player")))
+        connect("bounce_player", Callable(find_child("SFXPlayer"), "_on_bounce_player"));
     deathAnim = Node::cast_to<AnimatedSprite2D>(find_child("DeathAnimation"));
     deathAnim->stop();
 }
@@ -62,6 +64,7 @@ void EnemyController::_ready() {
 
 /**
  * @brief Receiver for detecting when the player controller enters this enemy's collider
+ * @param body The Node2D that entered the collision of this Enemy node
  */
 void EnemyController::_on_player_controller_entered(Node2D *body) {
     if (body->get_class() == "PlayerController") {
@@ -81,6 +84,7 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
 
 /**
  * @brief Same as Godot's _process() function
+ * @param delta The time passed since the last frame
  */
 void EnemyController::_process(double delta) {
     if (!Engine::get_singleton()->is_editor_hint()) {
@@ -92,7 +96,7 @@ void EnemyController::_process(double delta) {
         // Stop animation when it reaches the last frame. Delete this enemy after
         if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
             deathAnim->stop();
-            queue_free(); // TODO This line would crash Godot Editor if the death animation is played in the animation timeline.
+            queue_free();
         }
     }
 }
