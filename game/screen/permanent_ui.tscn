@@ -20,8 +20,8 @@ offset_left = 1640.0
 offset_top = 1000.0
 offset_right = 1912.0
 offset_bottom = 1072.0
-text = "UntitledShotgunGame
-Pre-Alpha - v0.4.1"
+text = "Ornithophobia
+Beta v1.0.0"
 label_settings = SubResource("LabelSettings_cc0l7")
 horizontal_alignment = 2
 vertical_alignment = 2
