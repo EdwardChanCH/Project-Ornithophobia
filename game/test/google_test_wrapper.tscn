@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfmka1t6e58f1"]
+
+[ext_resource type="Script" path="res://script/test/google_test_wrapper_ui.gd" id="1_p3vjk"]
+
+[node name="GoogleTestWrapper" type="GoogleTestWrapper"]
+
+[node name="GoogleTestWrapperUI" type="Control" parent="." node_paths=PackedStringArray("tester")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_p3vjk")
+tester = NodePath("..")
+
+[node name="Label" type="Label" parent="GoogleTestWrapperUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "google_test_wrapper.tscn"
+
+[node name="HBox1" type="HBoxContainer" parent="GoogleTestWrapperUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBox1" type="VBoxContainer" parent="GoogleTestWrapperUI/HBox1"]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="GoogleTestWrapperUI/HBox1/VBox1"]
+layout_mode = 2
+text = "Exit"
+
+[node name="RunTestButton" type="Button" parent="GoogleTestWrapperUI/HBox1/VBox1"]
+layout_mode = 2
+text = "Run Test"
+
+[connection signal="pressed" from="GoogleTestWrapperUI/HBox1/VBox1/ExitButton" to="GoogleTestWrapperUI" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="GoogleTestWrapperUI/HBox1/VBox1/RunTestButton" to="GoogleTestWrapperUI" method="_on_run_test_button_pressed"]
