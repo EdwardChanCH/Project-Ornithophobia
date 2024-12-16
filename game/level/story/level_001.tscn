@@ -17,7 +17,7 @@ level_info = {
 "rank_flavour_text": "PERFECT!",
 "rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
 "rank_text": "rank text",
-"rank_times": PackedStringArray("00:05.00", "00:10.00", "00:20.00")
+"rank_times": PackedStringArray("00:02.00", "00:05.00", "00:08.00")
 }
 process_mode = 4
 

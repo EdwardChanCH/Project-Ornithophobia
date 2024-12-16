@@ -13,7 +13,7 @@ level_info = {
 "level_time": "00:00.00",
 "rank_icon": "res://asset/sprite/menu/no_rank_icon.png",
 "rank_text": "rank text",
-"rank_times": PackedStringArray("00:10.00", "00:20.00", "00:25.00")
+"rank_times": PackedStringArray("00:08.00", "00:12.00", "00:16.00")
 }
 process_mode = 4
 
