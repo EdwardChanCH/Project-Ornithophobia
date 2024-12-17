@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds0cp5sibc8nq"
-path="res://.godot/imported/orniGameBG3.png-64b58632f8047c059ebed329fe250166.ctex"
+uid="uid://bkf2exw0r7oi8"
+path="res://.godot/imported/terrain2.png-b8aa054577312675af2af164e01fb544.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/orniGameBG3.png"
-dest_files=["res://.godot/imported/orniGameBG3.png-64b58632f8047c059ebed329fe250166.ctex"]
+source_file="res://asset/sprite/gameplay/terrain2.png"
+dest_files=["res://.godot/imported/terrain2.png-b8aa054577312675af2af164e01fb544.ctex"]
 
 [params]
 
