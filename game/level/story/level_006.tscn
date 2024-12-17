@@ -6,12 +6,12 @@
 
 [node name="Level" type="Level"]
 level_info = {
-"best_time": "--:--.--",
+"best_time": "00:04.17",
 "level_author": "null",
 "level_icon": "res://asset/sprite/default_texture.png",
 "level_name": "Spiralling",
 "level_time": "00:00.00",
-"rank_icon": "res://asset/sprite/menu/no_rank_icon.png",
+"rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
 "rank_text": "rank text",
 "rank_times": PackedStringArray("00:05.00", "00:07.00", "00:12.00")
 }
