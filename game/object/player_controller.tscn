@@ -287,7 +287,6 @@ shape = SubResource("RectangleShape2D_rxytu")
 max_slow_time = 3000.0
 max_slow_time_value = 0.25
 time_slow_factor = 8.0
-regen_rate = 100
 soft_max_value = 98
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 20.0

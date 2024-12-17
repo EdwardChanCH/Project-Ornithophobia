@@ -14,7 +14,6 @@ func _ready() -> void:
 func _on_results_screen_show(level_metadata: Dictionary):
 	get_tree().paused = true
 	hide_elements()
-	print(level_metadata)
 	%LevelComplete.text = level_metadata.get("level_name") + " COMPLETE!"
 	%LevelTime.text = level_metadata.get("level_time")
 	%RankIcon.texture = load(level_metadata.get("rank_icon"))
