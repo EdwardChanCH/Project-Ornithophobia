@@ -320,13 +320,10 @@ visible = false
 position = Vector2(-1.10269e-06, -2.95043e-06)
 sprite_frames = SubResource("SpriteFrames_srxqd")
 animation = &"death"
-frame = 35
-frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource("RectangleShape2D_66uhf")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
