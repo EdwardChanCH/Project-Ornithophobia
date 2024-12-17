@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3o311coewb6a"
-path="res://.godot/imported/orniGameBG1.png-4e024d2e29c70c09628a9a7764ec9a24.ctex"
+uid="uid://qx2us1fq8ydn"
+path="res://.godot/imported/enemyDeath.png-f48d6acb5bcf9c739c4ba9620262d9f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/images/orniGameBG1.png"
-dest_files=["res://.godot/imported/orniGameBG1.png-4e024d2e29c70c09628a9a7764ec9a24.ctex"]
+source_file="res://asset/sprite/gameplay/enemyDeath.png"
+dest_files=["res://.godot/imported/enemyDeath.png-f48d6acb5bcf9c739c4ba9620262d9f7.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfrr2dimqld76"
-path="res://.godot/imported/orniGameBG.png-47960a26933fd54b872378c53a1bccad.ctex"
+path="res://.godot/imported/orniGameBG.png-583603a3bd1752e4c1662e37920a1590.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/orniGameBG.png"
-dest_files=["res://.godot/imported/orniGameBG.png-47960a26933fd54b872378c53a1bccad.ctex"]
+source_file="res://asset/images/orniGameBG.png"
+dest_files=["res://.godot/imported/orniGameBG.png-583603a3bd1752e4c1662e37920a1590.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3o311coewb6a"
-path="res://.godot/imported/orniGameBG1.png-4e024d2e29c70c09628a9a7764ec9a24.ctex"
+uid="uid://drqqj6cgo7s1g"
+path="res://.godot/imported/tilesheet_v2.png-94f392e5837fe74e6fde6ec818139897.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/images/orniGameBG1.png"
-dest_files=["res://.godot/imported/orniGameBG1.png-4e024d2e29c70c09628a9a7764ec9a24.ctex"]
+source_file="res://asset/sprite/tile/tilesheet_v2.png"
+dest_files=["res://.godot/imported/tilesheet_v2.png-94f392e5837fe74e6fde6ec818139897.ctex"]
 
 [params]
 

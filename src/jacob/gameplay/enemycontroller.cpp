@@ -72,6 +72,7 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
             if (body->get_name() == UtilityFunctions::str("PlayerController") && !deathAnim->is_playing()) {
                 deathAnim->set_visible(true);
                 deathAnim->play("death");
+                Node::cast_to<AnimatedSprite2D>(find_child("EnemySprite"))->set_visible(false);
                 emit_signal("enemy_died");
                 find_child("Area2D")->queue_free();
             }
@@ -88,11 +89,6 @@ void EnemyController::_on_player_controller_entered(Node2D *body) {
  */
 void EnemyController::_process(double delta) {
     if (!Engine::get_singleton()->is_editor_hint()) {
-        // Hide enemy sprite at the peak of the explosion
-        if (deathAnim->is_playing() && deathAnim->get_frame() == 8) {
-            Node::cast_to<Sprite2D>(find_child("EnemySprite"))->set_visible(false);
-        }
-
         // Stop animation when it reaches the last frame. Delete this enemy after
         if (deathAnim->is_playing() && deathAnim->get_frame() == deathAnim->get_sprite_frames()->get_frame_count("death") - 1) {
             deathAnim->stop();
