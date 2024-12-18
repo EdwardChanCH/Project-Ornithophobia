@@ -89,3 +89,20 @@ func _on_refresh_levels_button_pressed() -> void:
 func _on_create_button_pressed() -> void:
 	SceneManager.get_instance().load_new_scene(get_tree(), "res://screen/level_editor.tscn")
 	pass
+
+
+func _on_upload_button_pressed() -> void:
+	$FileDialog.access = FileDialog.ACCESS_FILESYSTEM
+	$FileDialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
+	$FileDialog.add_filter("*.tscn, *.png", "Scene and Icon")
+	$FileDialog.title = "Select level(s) and level icon(s)"
+	$FileDialog.visible = true
+
+
+func _on_file_dialog_files_selected(paths: PackedStringArray) -> void:
+	for path in paths:
+		DirAccess.copy_absolute(path, Global.CUSTOM_LEVELS_DIR_PATH + path.get_file())
+	if (%CustomLevelsTab.is_active):
+		reload_levels(Global.CUSTOM_LEVELS_DIR_PATH)
+	else:
+		%CustomLevelsTab._on_custom_levels_collision_mouse_clicked()
