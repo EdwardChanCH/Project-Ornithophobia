@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://dlqy3of2mccn5"]
+[gd_scene load_steps=27 format=3 uid="uid://dlqy3of2mccn5"]
 
 [ext_resource type="Texture2D" uid="uid://cml3lsecbqp2a" path="res://asset/sprite/gameplay/lightVFX.png" id="1_qrsb4"]
 [ext_resource type="Texture2D" uid="uid://did5ley6iv00c" path="res://asset/sprite/gameplay/heavyVFX.png" id="2_ghnvb"]
+[ext_resource type="Script" path="res://script/vfx.gd" id="3_ngflx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asrb7"]
 atlas = ExtResource("1_qrsb4")
@@ -175,3 +176,6 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0e2db")
 animation = &"right"
 offset = Vector2(32, 0)
+script = ExtResource("3_ngflx")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
