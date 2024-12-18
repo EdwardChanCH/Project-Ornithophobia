@@ -26,6 +26,8 @@ namespace godot {
 	private:
         PlayerController *parent;	//grabs parent node for player characteristics
 		AnimatedSprite2D *arms;	//grabs child node for arm sprite
+		Input *input;	//grabs current input to check which VFX to display
+		Ref<PackedScene> tempVFX; //object of vfx scene to be instanced every click
 
 	protected:
 		static void _bind_methods(); // Must be declared
