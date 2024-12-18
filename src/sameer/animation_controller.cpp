@@ -49,6 +49,8 @@ _GDEXPORT_SET_SUFFIX
 void AnimationController::_ready() {
     parent = Node::cast_to<PlayerController>(get_parent());
     arms = Node::cast_to<AnimatedSprite2D>(find_child("Arms"));
+    input = Input::get_singleton();
+    tempVFX = ResourceLoader::get_singleton()->load("res://object/VFX.tscn");
 }
 
 /**
@@ -89,4 +91,16 @@ void AnimationController::_process(double delta) {  //constantly updating proces
         play("idleAir");    //play idling air animation for both body and arms
         arms->play("idleAir");
     }
+
+     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {
+        AnimatedSprite2D *vfx = Node::cast_to<AnimatedSprite2D>(tempVFX->instantiate());
+        get_tree()->get_root()->add_child(vfx);
+        vfx->set_position(parent->get_position());
+        vfx->look_at(mouse);
+        if (input->is_action_just_pressed("small_blast")) {
+            vfx->play("left");
+        } else {
+            vfx->play("right");
+        }
+     }
 }
