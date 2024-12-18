@@ -17,9 +17,9 @@ mouse_filter = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VersionText" type="Label" parent="CanvasLayer"]
-offset_left = 8.0
+offset_left = 1608.0
 offset_top = 1008.0
-offset_right = 312.0
+offset_right = 1912.0
 offset_bottom = 1080.0
 text = "Ornithophobia Beta v1.0.2"
 label_settings = SubResource("LabelSettings_cc0l7")
