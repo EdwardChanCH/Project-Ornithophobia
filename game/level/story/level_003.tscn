@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://du0l3hov4uly0"]
+[gd_scene load_steps=5 format=4 uid="uid://0gtd28tthlyb"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_4pi0g"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_4do8d"]
@@ -9,14 +9,14 @@ font_size = 24
 
 [node name="Level" type="Level"]
 level_info = {
-"best_time": "--:--.--",
+"best_time": "00:13.44",
 "level_author": "null",
 "level_icon": "res://asset/sprite/default_texture.png",
-"level_name": "Level 3",
+"level_name": "Pockets",
 "level_time": "00:00.00",
-"rank_icon": "res://asset/sprite/menu/no_rank_icon.png",
+"rank_icon": "res://asset/sprite/menu/gold_rank_icon.png",
 "rank_text": "rank text",
-"rank_times": PackedStringArray("00:15.00", "00:25.00", "00:40.00")
+"rank_times": PackedStringArray("00:15.00", "00:20.00", "00:25.00")
 }
 process_mode = 4
 
@@ -31,7 +31,7 @@ navigation_enabled = false
 [node name="PlayerList" type="Node" parent="."]
 
 [node name="PlayerController" parent="PlayerList" instance=ExtResource("2_4do8d")]
-position = Vector2(216, 960)
+position = Vector2(936, 960)
 
 [node name="EnemyList" type="Node" parent="."]
 

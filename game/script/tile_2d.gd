@@ -1,5 +1,11 @@
 class_name Tile2D
 extends Node2D
+## This class represents a tile as a Sprite2D.
+##
+## This script edits the tile type and orientation.
+##
+## Author: Chun Ho Chan (Edward)
+## Date:   2024-12-13
 
 
 @export var tile_sprite: Sprite2D

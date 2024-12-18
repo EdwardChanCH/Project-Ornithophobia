@@ -229,7 +229,7 @@ void PlayerController::_physics_process(double _delta) {
     }
 
     // When blast button released, blast player in direction opposite to the mouse cursor
-    if ((input->is_action_just_released("small_blast") && lastBlastTime >= 75) || (input->is_action_just_released("large_blast") && lastBlastTime >= 150)) {
+    if ((input->is_action_just_released("small_blast")) || (input->is_action_just_released("large_blast"))) {
         // Get the direction the player will move from the blast based on the position of the mouse
         Vector2 blastDirection = get_viewport()->get_mouse_position() - get_global_position();
         blastDirection *= -1;

@@ -229,7 +229,6 @@ void LevelController::_process(double delta) {
         levelNode->set_level_info(level_metadata);
         // Signal that the results screen should now appear
         emit_signal("show_results", level_metadata);
-        UtilityFunctions::print(Time::get_singleton()->get_ticks_msec() - slowLength);
         Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_VISIBLE);
     }
 }

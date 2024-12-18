@@ -6,7 +6,7 @@
 
 * Jacob Couture  
   * jcoutur9@uwo.ca  
-* Chun Ho Chan (Edward)  
+* Chun Ho Chan, Edward  
   * ccha232@uwo.ca  
 * Sameer Mehboob Bugti  
   * sbugti@uwo.ca  
@@ -53,6 +53,14 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * Doxygen (optional)  
   * version 1.12.0  
   * Note: This is used to generate the HTML, XML doc files.  
+* ~~Google Test (optional)~~ (depricated)  
+  * ~~version 1.15.2~~
+  * ~~Note: This is used to test the C++ classes.~~  
+  * Note: Incompatible with GDExtension.  
+* Godot Unit Test (GUT) (optional)
+  * version 9.3.0
+  * Note: This is used to run unit tests for Godot and GDExtension classes.  
+
 
 ## 3. How To Compile (step-by-step guide)
 
@@ -90,27 +98,11 @@ Alternatively:
 3. Reopen Godot, highlight the project "*UntitledShotgunProject*", and click "Run".  
   * (Note: If Godot fails to run, check the Godot executable path stored in the file ".../game/.godot/editor/*project_metadata.cfg*".)  
 
-## 5. User Guide
-
-All of the necessary information can be found within the game.  
-
-## 6. Account Usernames & Passwords
-
-This game does not use an account system. It behaves like an arcade game which only a username is required to play.  
-
-## 7. Cheat Mode Activation
-
-This game does not have a cheat mode (or does it?).  
-
-## 8. Developer Mode Activation
-
-Compile and run Godot in Debug mode.  
-
-## 9. Notes For TA
+## 5. Notes For TA
 
 **Thank you for playing our game!**  
 
-## 10. Miscellaneous
+## 6. Miscellaneous
 
 List of other README files:  
 * ".../3307GroupProject/README.md"  

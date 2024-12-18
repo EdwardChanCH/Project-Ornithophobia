@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="0" tests="2" >
+  <testsuite name="gut_test/edward/test_scene_manager.gd" tests="1" failures="0" skipped="0" time="0.000204" >
+      <testcase name="test_scene_manager_get_instance" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000204" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/test_example.gd" tests="1" failures="0" skipped="0" time="0.000159" >
+      <testcase name="test_assert_true" assertions="1" status="pass" classname="gut_test/test_example.gd" time="0.000159" >
+      </testcase>
+      </testsuite>
+  </testsuites>

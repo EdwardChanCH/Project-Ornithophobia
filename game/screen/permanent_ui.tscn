@@ -4,6 +4,7 @@
 line_spacing = 0.0
 font_size = 24
 font_color = Color(0.454902, 0.454902, 0.454902, 0.54902)
+shadow_size = 0
 shadow_color = Color(0.230315, 0.230315, 0.230315, 0.145098)
 
 [node name="PermanentUI" type="Control"]
@@ -16,12 +17,11 @@ mouse_filter = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VersionText" type="Label" parent="CanvasLayer"]
-offset_left = 1640.0
-offset_top = 1000.0
-offset_right = 1912.0
-offset_bottom = 1072.0
-text = "UntitledShotgunGame
-Pre-Alpha - v0.4.1"
+offset_left = 8.0
+offset_top = 1008.0
+offset_right = 312.0
+offset_bottom = 1080.0
+text = "Ornithophobia Beta v1.0.2"
 label_settings = SubResource("LabelSettings_cc0l7")
 horizontal_alignment = 2
 vertical_alignment = 2
