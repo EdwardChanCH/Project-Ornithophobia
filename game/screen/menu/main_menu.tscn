@@ -65,9 +65,9 @@ text = "ORNITHOPHOBIA"
 [node name="Credits" type="Label" parent="."]
 layout_mode = 0
 offset_left = 505.0
-offset_top = 298.667
+offset_top = 293.334
 offset_right = 661.0
-offset_bottom = 351.667
+offset_bottom = 346.334
 theme_override_colors/font_color = Color(0.666569, 0.666569, 0.666569, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_vpcuw")
