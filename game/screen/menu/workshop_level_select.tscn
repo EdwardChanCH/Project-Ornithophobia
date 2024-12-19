@@ -108,12 +108,14 @@ theme_override_constants/separation = 16
 [node name="NoLevelsFound" type="Label" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 654.0
-offset_top = 488.0
-offset_right = 1151.0
-offset_bottom = 576.0
-text = "No levels found"
+offset_left = 532.0
+offset_top = 440.0
+offset_right = 1240.0
+offset_bottom = 620.0
+text = "No levels found
+Upload or Create One!"
 label_settings = SubResource("LabelSettings_3s07k")
+horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0

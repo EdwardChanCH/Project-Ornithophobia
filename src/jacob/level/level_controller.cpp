@@ -13,11 +13,17 @@ using namespace godot;
  * @brief Binding function for exposing methods/properties to Godot.
  */
 void LevelController::_bind_methods() {
+    // BIND_VIRTUAL_METHOD(LevelController, _input);
+    // ClassDB::bind_("LevelController", "_input", )
+    ClassDB::bind_method(D_METHOD("_input", "event"), &LevelController::_input);
     ClassDB::bind_method(D_METHOD("_update_enemy_count"), &LevelController::_update_enemy_count);
     ClassDB::bind_method(D_METHOD("_results_slow_time"), &LevelController::_results_slow_time);
     ClassDB::bind_method(D_METHOD("_on_return_button_pressed"), &LevelController::_on_return_button_pressed);
     ClassDB::bind_method(D_METHOD("_on_retry_button_pressed"), &LevelController::_on_retry_button_pressed);
-    ClassDB::bind_method(D_METHOD("set_level"), &LevelController::set_level);
+    ClassDB::bind_method(D_METHOD("get_level"), &LevelController::get_level);
+    ClassDB::bind_method(D_METHOD("set_level", "level_path"), &LevelController::set_level);
+    ClassDB::bind_method(D_METHOD("read_formatted_time", "time"), &LevelController::read_formatted_time);
+
     ADD_SIGNAL(MethodInfo("results_slow_time"));
     ADD_SIGNAL(MethodInfo("show_results", PropertyInfo(Variant::DICTIONARY, "level_metadata")));
 }
@@ -72,16 +78,32 @@ _GDEXPORT_SET_SUFFIX
  * @brief Same as _ready() in GDScript.
  */
 void LevelController::_ready() {
-    get_tree()->set_pause(false);
+    if (!Engine::get_singleton()->is_editor_hint())
+        get_tree()->set_pause(false);
 }
 
 
 /**
- * @brief Sets the level path, pulls all level metadata from it, and then initializes the level
+ * @brief Returns the current level instance
+ * @return the current level instance
+ */
+Level* LevelController::get_level() {
+    return levelNode;
+}
+
+
+/**
+ * @brief Sets the level path, pulls all level metadata from it, and then initializes the level. Acts as a Facade.
  * @param level_path the given path to the current level
  */
 void LevelController::set_level(String level_path) {
-    levelNode = (Level*) SceneManager::get_instance()->import_scene_tscn(level_path);
+    Node* levelInstance = SceneManager::get_instance()->import_scene_tscn(level_path);
+
+    // Throw an error if the level instance is null
+    ERR_FAIL_COND_MSG(levelInstance == nullptr, "Level instance is null.");
+    
+    // Get values/set up default values for level metadata
+    levelNode = (Level*) levelInstance;
     level_metadata = levelNode->get_level_info();
     level_name = level_metadata.get_or_add("level_name", "null");
     level_author = level_metadata.get_or_add("level_author", "null");
@@ -91,8 +113,12 @@ void LevelController::set_level(String level_path) {
     rank_times = level_metadata.get_or_add("rank_times", PackedStringArray(Array({"00:00.00", "00:00.00", "00:00.00"})));
     rank_icon = level_metadata.get_or_add("rank_icon", "res://asset/sprite/menu/no_rank_icon.png");
     rank_flavour_text = level_metadata.get_or_add("rank_text", "rank text");
+    level_metadata.get_or_add("level_path", level_path);
     this->level_path = level_path;
+
+    // Add the Level node as a child of this LevelController
     add_child(levelNode);
+    // Facade to set up all level components not present in a Level scene
     initialize_level();
 }
 
@@ -148,8 +174,8 @@ void LevelController::initialize_level() {
         // UI signal connections
         if (!is_connected("results_slow_time", Callable(this, "_results_slow_time")))
             connect("results_slow_time", Callable(this, "_results_slow_time"));
-        pauseScreenNode->find_child("RestartButton", true, false)->connect("pressed", Callable(this, "_on_retry_button_pressed"));
         connect("show_results", Callable(resultsScreenNode, "_on_results_screen_show"));
+        pauseScreenNode->find_child("RestartButton", true, false)->connect("pressed", Callable(this, "_on_retry_button_pressed"));
         returnButton->connect("pressed", Callable(this, "_on_return_button_pressed"));
         retryButton->connect("pressed", Callable(this, "_on_retry_button_pressed"));
 

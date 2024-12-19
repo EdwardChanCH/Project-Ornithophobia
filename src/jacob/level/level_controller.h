@@ -45,7 +45,7 @@ namespace godot {
 		String level_path;
 
 		// References to all the different nodes that compose the level
-		Level* levelNode;
+		Level* levelNode = nullptr;
 		CanvasLayer* gameplayUI;
         Control* levelUINode;
 		Control* pauseScreenNode;
@@ -74,6 +74,7 @@ namespace godot {
 		void _on_return_button_pressed();
 		void _on_retry_button_pressed();
 
+		Level* get_level();
 		void set_level(String level_path);
 		void initialize_level();
 		void calculate_best_time();
