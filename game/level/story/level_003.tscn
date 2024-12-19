@@ -62,6 +62,7 @@ position = Vector2(1176, 168)
 [node name="EntityList" type="Node" parent="."]
 
 [node name="Tutorial2" type="Label" parent="."]
+visible = false
 offset_left = 792.0
 offset_top = 584.0
 offset_right = 1128.0
