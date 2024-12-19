@@ -13,9 +13,6 @@ using namespace godot;
  * @brief Binding function for exposing methods/properties to Godot.
  */
 void LevelController::_bind_methods() {
-    // BIND_VIRTUAL_METHOD(LevelController, _input);
-    // ClassDB::bind_("LevelController", "_input", )
-    ClassDB::bind_method(D_METHOD("_input", "event"), &LevelController::_input);
     ClassDB::bind_method(D_METHOD("_update_enemy_count"), &LevelController::_update_enemy_count);
     ClassDB::bind_method(D_METHOD("_results_slow_time"), &LevelController::_results_slow_time);
     ClassDB::bind_method(D_METHOD("_on_return_button_pressed"), &LevelController::_on_return_button_pressed);
