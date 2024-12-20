@@ -4,6 +4,8 @@
 
 ### a. Team Members:
 
+* *Full Name*  
+  * *Email Address*  
 * Jacob Couture  
   * jcoutur9@uwo.ca  
 * Chun Ho Chan, Edward  
@@ -21,12 +23,12 @@ This game project was created as part of CompSci 3307A at Western University.
 
 ### d. 3rd Party Resources
 
-* *Media Type (copyright license)*
-  * *"Source Title", creator*
-    * *Source URL*
-* Background Music (CC BY license)
-  * "東方 Piano - Green-Eyed Jealousy 『2』", made by -K.
-    * https://youtu.be/DizE73Ie3Ok
+* *Media Type (copyright license)*  
+  * *"Source Title", creator*  
+    * *Source URL*  
+* Background Music (CC BY license)  
+  * "東方 Piano - Green-Eyed Jealousy 『2』", made by -K.  
+    * https://youtu.be/DizE73Ie3Ok  
 
 ## 1. Short Description
 
@@ -57,8 +59,8 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
   * ~~version 1.15.2~~
   * ~~Note: This is used to test the C++ classes.~~  
   * Note: Incompatible with GDExtension.  
-* Godot Unit Test (GUT) (optional)
-  * version 9.3.0
+* Godot Unit Test (GUT) (optional)  
+  * version 9.3.0  
   * Note: This is used to run unit tests for Godot and GDExtension classes.  
 
 
@@ -76,13 +78,13 @@ Steps:
 2. Open a terminal in the ".../*3307GroupProject*/" directory, and then either:  
   * Run the command "scons platform=windows target=template_debug debug_symbols=yes" to compile debug builds (support hot-reload), OR,  
   * Run the command "scons platform=windows target=template_release" to compile release builds (more optimized).  
-  * (Note: Alternatively, you may run one of the included shell scripts for convenience.)  
+  * (Note: Alternatively, you may run one of the included shell scripts "recompile_windows_x64_release.sh" for convenience.)  
 3. Open the project in Godot editor.  
 4. (Project > Export) Export the project in Godot editor.  
   * (Note: You may need to download & install a template first.)  
 
 Note:  
-* The included build is compiled for 64-bit Windows, Godot's Debug Mode.  
+* The included build is compiled for 64-bit Windows, Godot's Release Mode.  
 * When renaming the directory ".../3307GroupProject/*game*/", be sure to also update its path stored in the file ".../*SConstruct*", and also re-import the project in Godot editor.  
 
 ## 4. How To Run (step-by-step guide)
@@ -99,6 +101,37 @@ Alternatively:
   * (Note: If Godot fails to run, check the Godot executable path stored in the file ".../game/.godot/editor/*project_metadata.cfg*".)  
 
 ## 5. Notes For TA
+
+Brief Description:  
+Our game project has two major systems: Gameplay, and Level Editor.  
+To win the game, use knockback (left-click, right-click) to gain speed, and slam the player into the enemies (at great speed) until all of them explode.  
+To edit a level, read the level editor's manual because there are too many features.  
+
+Invividual Contributions:  
+
+Jacob Couture:  
+* Player physics  
+* Eenemy physics  
+* UI screens (except level editor screen)  
+* Story levels 4-6  
+ 
+Chun Ho Chan, Edward:  
+* Level editor  
+* Level file loading/ saving  
+* Screen transition  
+* Story levels 1-3  
+
+Sameer Mehboob Bugti:  
+* Player animation  
+* Enemy animation  
+* Background  
+* Visual effects  
+
+Game Lore:  
+"In the year 1984, a tech company called "SKYNEST" started selling drones to governments across the globe. 
+Formally known as "Bipedal Intelligent Reconnaissance Devices", these drones actively monitor each citizen to deter terrorism, and to protect those in power. 
+One day, SKYNEST's system determined that the existence of lower-class citizens is too much risk for a protest, and indiscriminately pecked on the poor. 
+You, as a professionally broke window cleaner, fights for your life with your watery arsenal." -Chun Ho Chan, Edward
 
 **Thank you for playing our game!**  
 

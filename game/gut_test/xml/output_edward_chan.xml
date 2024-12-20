@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="0" tests="24" >
+  <testsuite name="gut_test/edward/test_edward_main.gd" tests="1" failures="0" skipped="0" time="0.069692" >
+      <testcase name="test_edward_main_constructor" assertions="1" status="pass" classname="gut_test/edward/test_edward_main.gd" time="0.069692" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_level.gd" tests="10" failures="0" skipped="0" time="0.481421" >
+      <testcase name="test_level_constructor" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.03508" >
+      </testcase>
+      <testcase name="test_level_constructor_copy" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.036268" >
+      </testcase>
+      <testcase name="test_level_set_get_level_info" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.033276" >
+      </testcase>
+      <testcase name="test_level_set_physics" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.032176" >
+      </testcase>
+      <testcase name="test_level_add_get_list" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.033796" >
+      </testcase>
+      <testcase name="test_level_add_node_to_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.064877" >
+      </testcase>
+      <testcase name="test_level_clear_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.064706" >
+      </testcase>
+      <testcase name="test_level_get_list_length" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.061937" >
+      </testcase>
+      <testcase name="test_level_get_node_in_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.060394" >
+      </testcase>
+      <testcase name="test_level_get_node_in_list_by_index" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.058911" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_level_editor_controller.gd" tests="7" failures="0" skipped="0" time="0.340598" >
+      <testcase name="test_level_editor_controller_constructor" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.038534" >
+      </testcase>
+      <testcase name="test_level_editor_controller_track_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.046263" >
+      </testcase>
+      <testcase name="test_level_editor_controller_undo_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.067208" >
+      </testcase>
+      <testcase name="test_level_editor_controller_redo_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.068761" >
+      </testcase>
+      <testcase name="test_level_editor_controller_clear_action" assertions="2" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.047623" >
+      </testcase>
+      <testcase name="test_level_editor_controller_can_undo" assertions="3" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.036623" >
+      </testcase>
+      <testcase name="test_level_editor_controller_can_redo" assertions="3" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.035586" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_scene_manager.gd" tests="5" failures="0" skipped="0" time="0.001405" >
+      <testcase name="test_scene_manager_get_instance" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000152" >
+      </testcase>
+      <testcase name="test_scene_manager_import_scene_tscn" assertions="2" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000994" >
+      </testcase>
+      <testcase name="test_scene_manager_load_new_scene_node" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000094" >
+      </testcase>
+      <testcase name="test_scene_manager_load_new_scene" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000075" >
+      </testcase>
+      <testcase name="test_scene_manager_load_previous_scene" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.00009" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/test_example.gd" tests="1" failures="0" skipped="0" time="0.000175" >
+      <testcase name="test_assert_true" assertions="1" status="pass" classname="gut_test/test_example.gd" time="0.000175" >
+      </testcase>
+      </testsuite>
+  </testsuites>

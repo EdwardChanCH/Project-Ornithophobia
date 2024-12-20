@@ -11,7 +11,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cupx8"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.784314)
 
-[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node", "help_popup_node", "message_popup_node", "camera_node", "menu_node", "grid_layer", "physics_button_node", "edit_mode_node", "bgm_player_node", "ghost_tile_node", "ghost_player_node", "ghost_enemy_node", "ghost_orb_node")]
+[node name="LevelEditorUI" type="Control" node_paths=PackedStringArray("load_level_popup_node", "save_level_popup_node", "help_popup_node", "message_popup_node", "camera_node", "menu_node", "grid_layer", "level_name_node", "author_name_node", "physics_button_node", "edit_mode_node", "bgm_player_node", "ghost_tile_node", "ghost_player_node", "ghost_enemy_node", "ghost_orb_node")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -26,6 +26,8 @@ message_popup_node = NodePath("MessagePopup")
 camera_node = NodePath("Camera")
 menu_node = NodePath("UIContainer/UIVBox/MenuPanel")
 grid_layer = NodePath("ParallaxBackground/GridLayer")
+level_name_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/LevelNameTextBox")
+author_name_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/AuthorNameTextBox")
 physics_button_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/PhysicsButton")
 edit_mode_node = NodePath("UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton")
 bgm_player_node = NodePath("BGMPlayer")
@@ -220,7 +222,7 @@ smallBlastStrength = 250
 largeBlastStrength = 750
 maxSmallBlastSpeed = 375
 maxLargeBlastSpeed = 500
-enemyBounceStrength = 0
+enemyBounceStrength = 47
 visible = false
 modulate = Color(0.313726, 1, 1, 0.313726)
 
@@ -487,6 +489,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Bouncy Ball"
 popup/item_4/id = 4
 
+[node name="LevelNameTextBox" type="TextEdit" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "Level Name"
+
+[node name="AuthorNameTextBox" type="TextEdit" parent="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "Author Name"
+
 [node name="Spacer1" type="Control" parent="UIContainer/UIVBox/MenuPanel/MenuHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -532,4 +544,6 @@ text = "Menu"
 [connection signal="toggled" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/GridButton" to="." method="_on_grid_button_toggled"]
 [connection signal="value_changed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="item_selected" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/EditModeButton" to="." method="_on_edit_mode_button_item_selected"]
+[connection signal="text_changed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/LevelNameTextBox" to="." method="_on_level_name_text_box_text_changed"]
+[connection signal="text_changed" from="UIContainer/UIVBox/MenuPanel/MenuHBox/VBox6/AuthorNameTextBox" to="." method="_on_author_name_text_box_text_changed"]
 [connection signal="pressed" from="UIContainer/UIVBox/HideUIButton" to="." method="_on_hide_ui_button_pressed"]
