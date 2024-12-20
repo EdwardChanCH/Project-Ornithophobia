@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://buo65exfuyhy8"]
 
-[ext_resource type="Script" path="res://workshop_button.gd" id="1_fiijd"]
+[ext_resource type="Script" path="res://script/menu/level_select/workshop_button.gd" id="1_fiijd"]
 [ext_resource type="Texture2D" uid="uid://b4dr8stjexbso" path="res://asset/sprite/default_texture.png" id="2_xmbfh"]
 [ext_resource type="FontFile" uid="uid://2875w5nf5vfb" path="res://style/fonts/OpenSans/OpenSans-Bold.ttf" id="3_1s35d"]
 

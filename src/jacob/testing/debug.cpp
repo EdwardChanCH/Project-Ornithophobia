@@ -18,7 +18,7 @@ void Debug::_bind_methods() {
     ClassDB::bind_static_method("Debug", D_METHOD("get_singleton"), &Debug::get_singleton);
     ClassDB::bind_method(D_METHOD("add_debug_property", "name", "value"), &Debug::add_debug_property);
     //TODO: Make this bind properly
-    // ClassDB::bind_method(D_METHOD("get_debug_properties"), &Debug::get_debug_properties);
+    ClassDB::bind_method(D_METHOD("get_debug_properties"), &Debug::get_debug_properties);
     ClassDB::bind_method(D_METHOD("is_debug_mode_active"), &Debug::is_debug_mode_active);
     ClassDB::bind_method(D_METHOD("set_debug_mode", "mode"), &Debug::set_debug_mode);
 }

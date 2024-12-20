@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfrr2dimqld76"
-path="res://.godot/imported/orniGameBG.png-47960a26933fd54b872378c53a1bccad.ctex"
+uid="uid://clo4p4j135dl0"
+path="res://.godot/imported/orniBG.png-d9cc0a77cdff3c7d3a369e86e4b53b56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/orniGameBG.png"
-dest_files=["res://.godot/imported/orniGameBG.png-47960a26933fd54b872378c53a1bccad.ctex"]
+source_file="res://asset/images/orniBG.png"
+dest_files=["res://.godot/imported/orniBG.png-d9cc0a77cdff3c7d3a369e86e4b53b56.ctex"]
 
 [params]
 
