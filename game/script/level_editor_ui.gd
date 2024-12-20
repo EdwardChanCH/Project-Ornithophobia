@@ -13,6 +13,8 @@ signal physics_button_toggled(active: bool)
 signal undo_button_pressed
 signal redo_button_pressed
 
+signal level_metadata_updated(metadata: Dictionary)
+
 signal load_level_path_selected(filepath: String)
 signal save_level_path_selected(filepath: String)
 signal quick_load_level_button_pressed
@@ -45,6 +47,8 @@ signal test_action_button_pressed(s:String, n: int)
 @export var camera_node: Camera2D
 @export var menu_node: Control
 @export var grid_layer: ParallaxLayer
+@export var level_name_node: TextEdit
+@export var author_name_node: TextEdit
 @export var physics_button_node: CheckButton
 @export var edit_mode_node: OptionButton
 @export var bgm_player_node: AudioStreamPlayer
@@ -56,11 +60,15 @@ signal test_action_button_pressed(s:String, n: int)
 @export var camera_movement_scale: float
 @export var camera_movement_multiplier: float
 
-@onready var camera_movement: Vector2 = Vector2(0, 0)
+static var controller_node: LevelEditorController
+var camera_movement: Vector2
+var level_metadata: Dictionary
+var primary_click_held: bool
+var secondary_click_held: bool
 
 
 func _ready() -> void:
-	var controller_node: LevelEditorController = self.get_parent().get_parent()
+	controller_node = self.get_parent().get_parent()
 	
 	# Receive signals sent by controller
 	controller_node.connect("level_loaded", Callable(self, "_on_level_loaded"))
@@ -81,6 +89,12 @@ func _ready() -> void:
 	# First-time setups
 	_on_edit_mode_button_item_selected(edit_mode_node.selected)
 	_on_help_button_pressed()
+	
+	# Initialize variables
+	camera_movement = Vector2(0, 0)
+	primary_click_held = false
+	secondary_click_held = false
+	
 	pass
 
 
@@ -206,6 +220,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Note: Must set this control node to "Mouse > Filter = Pass"
 	
 	if event.is_action_pressed("editor_primary_click"):
+		primary_click_held = true
+	
+	if event.is_action_released("editor_primary_click"):
+		primary_click_held = false
+	
+	if event.is_action_pressed("editor_secondary_click"):
+		secondary_click_held = true
+	
+	if event.is_action_released("editor_secondary_click"):
+		secondary_click_held = false
+	
+	if primary_click_held:
 		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
 		var edit_mode: int = edit_mode_node.selected
 		
@@ -218,7 +244,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif edit_mode == 4:
 			add_entity_button_pressed.emit(mouse_pos)
 	
-	if event.is_action_pressed("editor_secondary_click"):
+	if secondary_click_held:
 		var mouse_pos: Vector2 = self.get_global_mouse_position() + camera_node.get_position()
 		var edit_mode: int = edit_mode_node.selected
 		
@@ -264,6 +290,13 @@ func _on_error_message(message: String) -> void:
 
 func _on_level_loaded(_filepath: String) -> void:
 	physics_button_node.set_pressed(false)
+	
+	level_metadata = controller_node.get_level_metadata()
+	if level_metadata.has("level_name"):
+		level_name_node.set_text(level_metadata["level_name"])
+	if level_metadata.has("level_author"):
+		author_name_node.set_text(level_metadata["level_author"])
+	
 	pass
 
 
@@ -476,6 +509,23 @@ func _on_physics_button_toggled(toggled_on: bool) -> void:
 	pass
 
 
+func _on_level_metadata_updated() -> void:
+	level_metadata_updated.emit(level_metadata)
+	pass
+
+
+func _on_level_name_text_box_text_changed() -> void:
+	level_metadata["level_name"] = level_name_node.get_text()
+	_on_level_metadata_updated()
+	pass
+
+
+func _on_author_name_text_box_text_changed() -> void:
+	level_metadata["level_author"] = author_name_node.get_text()
+	_on_level_metadata_updated()
+	pass
+
+
 func _on_update_thumbnail_button_toggled(filepath: String) -> void:
 	# Set thumbnail filepath
 	filepath = filepath.replace(".tscn", ".png").replace("res://", "user://")
@@ -501,6 +551,7 @@ func _on_update_thumbnail_button_toggled(filepath: String) -> void:
 		)
 	
 	pass
+
 
 func _on_edit_mode_button_item_selected(index: int) -> void:
 	# Change visibility of edit mode indicators

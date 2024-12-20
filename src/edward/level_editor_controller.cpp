@@ -58,6 +58,8 @@ void LevelEditorController::_bind_methods() {
     ClassDB::bind_method(D_METHOD("can_redo"), &LevelEditorController::can_redo);
 
     ClassDB::bind_method(D_METHOD("set_level_filepath", "filepath"), &LevelEditorController::set_level_filepath);
+    ClassDB::bind_method(D_METHOD("get_level_metadata"), &LevelEditorController::get_level_metadata);
+    ClassDB::bind_method(D_METHOD("set_level_metadata", "metadata"), &LevelEditorController::set_level_metadata);
     ClassDB::bind_method(D_METHOD("load_new_level", "filepath"), &LevelEditorController::load_new_level);
     ClassDB::bind_method(D_METHOD("load_level", "filepath"), &LevelEditorController::load_level);
     ClassDB::bind_method(D_METHOD("save_level", "filepath"), &LevelEditorController::save_level);
@@ -101,6 +103,9 @@ void LevelEditorController::_bind_methods() {
 LevelEditorController::LevelEditorController() {
     level_node = nullptr;
     level_filepath = default_level_filepath;
+    level_metadata = Dictionary();
+    level_metadata["level_name"] = "Unnamed Level";
+    level_metadata["level_author"] = "Unnamed Author";
 
     undo_stack = memnew(TypedArray<Callable>);
     redo_stack = memnew(TypedArray<Callable>);
@@ -155,6 +160,8 @@ void LevelEditorController::_ready() {
         
         ui_node->connect("undo_button_pressed", Callable(this, "undo_action"));
         ui_node->connect("redo_button_pressed", Callable(this, "redo_action"));
+
+        ui_node->connect("level_metadata_updated", Callable(this, "set_level_metadata"));
 
         ui_node->connect("load_level_path_selected", Callable(this, "load_new_level"));
         ui_node->connect("save_level_path_selected", Callable(this, "save_level"));
@@ -316,6 +323,29 @@ void LevelEditorController::set_level_filepath(String filepath) {
 }
 
 /**
+ * @brief Get the level metadata.
+ * 
+ * @param metadata Metadata
+ */
+Dictionary LevelEditorController::get_level_metadata() {
+    if (is_level_loaded()) {
+        return level_node->get_level_info();
+    } else {
+        return level_metadata;
+    }
+}
+
+/**
+ * @brief Set the level metadata.
+ * i.e. Overwrite the default level metadata.
+ * 
+ * @param metadata Metadata
+ */
+void LevelEditorController::set_level_metadata(Dictionary metadata) {
+    level_metadata = metadata;
+}
+
+/**
  * @brief Load a new level. 
  * Reset action history and quicksave status. 
  * 
@@ -371,6 +401,7 @@ void LevelEditorController::save_level(String filepath) {
 
         // Save level as TSCN
         level_filepath = BASE_FILEPATH(filepath);
+        level_node->set_level_info(level_metadata);
         level_node->set_physics(false); // Disable physics simulation
         Level::export_level_tscn(filepath, level_node);
 
