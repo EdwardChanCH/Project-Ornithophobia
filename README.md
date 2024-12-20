@@ -1,5 +1,7 @@
 # README File
 
+![Thumbnail](game/asset/images/orniBG.png)
+
 ## 0. Copyright & Credits
 
 ### a. Team Members:
@@ -29,10 +31,17 @@ This game project was created as part of CompSci 3307A at Western University.
 * Background Music (CC BY license)  
   * "東方 Piano - Green-Eyed Jealousy 『2』", made by -K.  
     * https://youtu.be/DizE73Ie3Ok  
+* All sprites, background images, and sound effects are custom-made.  
 
 ## 1. Short Description
 
 This is a game project (combined individual assignments) of CompSci 3307A at Western University.  
+
+It has two major systems: Gameplay, and Level Editor.  
+
+To win the game, use knockback (left-click, right-click) to gain speed, and slam the player into the enemies (at great speed) until all of them explode!  
+
+To edit a level, read the level editor's manual popup because there are too many features!  
 
 ## 2. Required Libraries & 3rd Party Tools
 
@@ -55,10 +64,6 @@ This is a game project (combined individual assignments) of CompSci 3307A at Wes
 * Doxygen (optional)  
   * version 1.12.0  
   * Note: This is used to generate the HTML, XML doc files.  
-* ~~Google Test (optional)~~ (depricated)  
-  * ~~version 1.15.2~~
-  * ~~Note: This is used to test the C++ classes.~~  
-  * Note: Incompatible with GDExtension.  
 * Godot Unit Test (GUT) (optional)  
   * version 9.3.0  
   * Note: This is used to run unit tests for Godot and GDExtension classes.  
@@ -102,19 +107,14 @@ Alternatively:
 
 ## 5. Notes For TA
 
-Brief Description:  
-Our game project has two major systems: Gameplay, and Level Editor.  
-To win the game, use knockback (left-click, right-click) to gain speed, and slam the player into the enemies (at great speed) until all of them explode.  
-To edit a level, read the level editor's manual because there are too many features.  
-
 Invividual Contributions:  
 
 Jacob Couture:  
 * Player physics  
-* Eenemy physics  
+* Enemy physics  
 * UI screens (except level editor screen)  
 * Story levels 4-6  
- 
+
 Chun Ho Chan, Edward:  
 * Level editor  
 * Level file loading/ saving  
