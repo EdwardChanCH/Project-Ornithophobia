@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1adp7yb0xej8" path="res://asset/sprite/gameplay/run.png" id="5_myyve"]
 [ext_resource type="Texture2D" uid="uid://c8swskw4scmwd" path="res://asset/sprite/gameplay/idleArms.png" id="6_b8ksx"]
 [ext_resource type="Texture2D" uid="uid://cu68hrjd3u332" path="res://asset/sprite/gameplay/idleairArms.png" id="7_vwd3g"]
-[ext_resource type="AudioStream" uid="uid://cl6xbl5vj7mv" path="res://asset/audio/leftSFX.mp3" id="8_ppgo7"]
+[ext_resource type="AudioStream" uid="uid://b0ny1h7r3k7rp" path="res://asset/audio/rightSFX.mp3" id="8_m85l5"]
 [ext_resource type="Texture2D" uid="uid://d307ssje2iyn3" path="res://asset/sprite/gameplay/runArms.png" id="8_unw1c"]
 [ext_resource type="Script" path="res://script/clickSFX_player.gd" id="9_4osfs"]
 
@@ -323,8 +323,8 @@ animation = &"run"
 autoplay = "idle"
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="AnimationController"]
-stream = ExtResource("8_ppgo7")
-volume_db = -20.0
+stream = ExtResource("8_m85l5")
+volume_db = -10.0
 script = ExtResource("9_4osfs")
 
 [connection signal="timeout" from="SlowMotionMeter/CooldownTimer" to="SlowMotionMeter" method="_on_cooldown_timer_timeout"]
