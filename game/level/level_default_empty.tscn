@@ -9,6 +9,7 @@
 process_mode = 4
 
 [node name="BG" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(938.778, 552.5)
 scale = Vector2(3.06389, 3.06389)
 texture = ExtResource("1_867ll")
