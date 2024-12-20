@@ -7,7 +7,7 @@
 ### a. Team Members:
 
 * Jacob Couture  
-  * jcoutur9@uwo.ca  
+  * jacob.couture859@gmail.com
 * Chun Ho Chan, Edward  
   * ccha232@uwo.ca  
 * Sameer Mehboob Bugti  
