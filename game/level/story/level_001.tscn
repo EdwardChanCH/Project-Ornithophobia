@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://xenb6pofw6p3"]
+[gd_scene load_steps=6 format=4 uid="uid://xenb6pofw6p3"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_13eaf"]
+[ext_resource type="Texture2D" uid="uid://bfrr2dimqld76" path="res://asset/images/orniGameBG.png" id="1_ni1xh"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_fy7jx"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_bt444"]
 
@@ -20,6 +21,11 @@ level_info = {
 "rank_times": PackedStringArray("00:02.00", "00:05.00", "00:08.00")
 }
 process_mode = 4
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(938.778, 552.5)
+scale = Vector2(3.06389, 3.06389)
+texture = ExtResource("1_ni1xh")
 
 [node name="TileList" type="Node" parent="."]
 
