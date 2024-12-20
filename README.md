@@ -38,7 +38,7 @@ To win the game, use knockback (left-click, right-click) to gain speed, and slam
 
 To edit a level, read the level editor's manual popup because there are too many features!  
 
-The executable is located at "{project_folder}\export\windows\FinalGame_Release.exe".  
+The game executable is located at "{project_folder}\export\windows\FinalGame_Release.zip".  
 
 ## 2. Required Libraries & 3rd Party Tools
 
@@ -164,7 +164,7 @@ Steps:
 Generating C++ Doc By Doxygen (HTML):  
 Steps:  
 1. Document the code files in Doxygen syntax (put file description at the top)  
-2. Open a terminal in the ".../3307GroupProject/game/" directory, and then:  
+2. Open a terminal in the ".../3307GroupProject/" directory, and then:  
   * Run the command "doxygen"  
 
 Fixing Undetected C++ Header Files In VSCode:  

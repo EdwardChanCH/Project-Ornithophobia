@@ -1,0 +1,7 @@
+<map id="src/jacob/gameplay/slow_motion_meter.h" name="src/jacob/gameplay/slow_motion_meter.h">
+<area shape="rect" id="Node000001" title="Header file for the SlowMotionMeter class." alt="" coords="103,5,252,48"/>
+<area shape="rect" id="Node000002" href="$slow__motion__meter_8cpp.html" title="This class handles the player&#39;s ability to use slow motion. It controls when the player can use it an..." alt="" coords="5,96,169,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,61,110,98,106,94,144,57"/>
+<area shape="rect" id="Node000003" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="193,104,344,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,57,257,102,254,105,208,61"/>
+</map>

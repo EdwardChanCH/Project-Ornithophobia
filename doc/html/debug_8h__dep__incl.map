@@ -1,0 +1,42 @@
+<map id="src/jacob/testing/debug.h" name="src/jacob/testing/debug.h">
+<area shape="rect" id="Node000001" title="Header file for the Debug singleton." alt="" coords="489,5,656,32"/>
+<area shape="rect" id="Node000002" href="$enemycontroller_8h.html" title="Header file for the EnemyController class." alt="" coords="402,171,536,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="537,43,515,60,496,81,485,104,478,127,472,171,467,170,473,126,480,102,492,79,511,56,534,38"/>
+<area shape="rect" id="Node000004" href="$level__controller_8h.html" title="Header file for the LevelController class." alt="" coords="237,261,373,304"/>
+<area shape="poly" id="edge19_Node000001_Node000004" title=" " alt="" coords="529,41,486,62,437,92,388,128,347,172,333,194,323,218,311,262,306,260,318,216,329,192,343,169,385,125,434,87,483,58,527,36"/>
+<area shape="rect" id="Node000006" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="552,360,703,387"/>
+<area shape="poly" id="edge25_Node000001_Node000006" title=" " alt="" coords="672,24,878,44,975,59,1044,77,1087,94,1120,110,1147,132,1171,169,1183,202,1185,231,1177,257,1161,280,1137,299,1108,316,1035,342,950,359,861,369,703,376,703,370,860,364,949,353,1033,336,1105,311,1134,295,1157,276,1172,255,1180,231,1178,203,1166,172,1143,136,1117,114,1085,99,1043,83,974,65,877,50,672,30"/>
+<area shape="rect" id="Node000007" href="$playercontroller_8h.html" title="Header file for the PlayerController class." alt="" coords="506,80,640,123"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="576,48,576,80,570,80,570,48"/>
+<area shape="rect" id="Node000011" href="$slow__motion__meter_8h.html" title="Header file for the SlowMotionMeter class." alt="" coords="882,80,1032,123"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="649,33,882,82,881,87,647,38"/>
+<area shape="rect" id="Node000013" href="$debug_8cpp.html" title="This class is a singleton that holds a dictionary of properties that should appear on the debug menu ..." alt="" coords="1232,88,1413,115"/>
+<area shape="poly" id="edge20_Node000001_Node000013" title=" " alt="" coords="672,24,919,44,1213,77,1259,85,1258,90,1212,83,918,49,672,29"/>
+<area shape="rect" id="Node000014" href="$debug__controller_8h.html" title="Header file for the DebugController class." alt="" coords="120,171,276,213"/>
+<area shape="poly" id="edge21_Node000001_Node000014" title=" " alt="" coords="475,29,385,46,339,62,297,82,270,102,247,126,212,172,208,169,243,122,267,98,294,78,337,57,384,41,474,24"/>
+<area shape="rect" id="Node000003" href="$enemycontroller_8cpp.html" title="This class handles states and animations for an enemy." alt="" coords="398,261,540,304"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="472,229,472,261,466,261,466,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="410,223,337,263,334,258,408,219"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="511,221,553,260,595,313,623,358,618,361,590,316,550,263,508,225"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="363,252,437,212,439,216,366,256"/>
+<area shape="rect" id="Node000005" href="$level__controller_8cpp.html" title="This class handles the initialization and control of a level." alt="" coords="237,352,373,395"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="308,320,308,352,302,352,302,320"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="389,304,582,357,580,362,388,309"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="539,135,495,172,491,168,535,131"/>
+<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="492,125,440,145,392,173,368,194,348,217,318,262,314,259,344,214,365,190,389,169,438,140,490,120"/>
+<area shape="poly" id="edge12_Node000007_Node000006" title=" " alt="" coords="583,137,628,359,622,360,577,138"/>
+<area shape="rect" id="Node000008" href="$playercontroller_8cpp.html" title="This class handles movement and physics for the player." alt="" coords="610,171,749,213"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="611,130,656,168,653,172,607,135"/>
+<area shape="rect" id="Node000009" href="$animation__controller_8h.html" title=" " alt="" coords="773,171,919,213"/>
+<area shape="poly" id="edge13_Node000007_Node000009" title=" " alt="" coords="652,125,783,167,781,173,650,130"/>
+<area shape="poly" id="edge14_Node000009_Node000006" title=" " alt="" coords="850,230,844,269,837,288,826,306,799,329,769,346,736,358,704,366,703,361,734,353,766,341,796,325,821,302,832,286,839,267,845,229"/>
+<area shape="rect" id="Node000010" href="$animation__controller_8cpp.html" title=" " alt="" coords="665,261,811,304"/>
+<area shape="poly" id="edge15_Node000009_Node000010" title=" " alt="" coords="811,225,765,263,762,259,808,221"/>
+<area shape="poly" id="edge18_Node000011_Node000006" title=" " alt="" coords="956,139,948,176,934,214,917,245,901,267,881,286,853,306,817,326,778,342,704,362,702,357,777,337,815,321,850,302,878,282,897,264,913,242,929,212,943,175,951,138"/>
+<area shape="rect" id="Node000012" href="$slow__motion__meter_8cpp.html" title="This class handles the player&#39;s ability to use slow motion. It controls when the player can use it an..." alt="" coords="994,171,1157,213"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="998,130,1049,168,1046,172,995,134"/>
+<area shape="poly" id="edge22_Node000014_Node000004" title=" " alt="" coords="236,221,282,259,278,263,233,225"/>
+<area shape="poly" id="edge24_Node000014_Node000006" title=" " alt="" coords="200,229,206,268,214,286,227,302,242,310,271,318,356,335,552,361,552,366,356,340,270,323,240,315,223,306,210,289,201,269,195,230"/>
+<area shape="rect" id="Node000015" href="$debug__controller_8cpp.html" title="This class handles the creation and rendering of properties on the in&#45;game debug menu." alt="" coords="5,261,162,304"/>
+<area shape="poly" id="edge23_Node000014_Node000015" title=" " alt="" coords="161,225,112,263,109,259,158,221"/>
+</map>

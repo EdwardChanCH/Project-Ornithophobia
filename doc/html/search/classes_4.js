@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scenemanager_0',['SceneManager',['../classgodot_1_1_scene_manager.html',1,'godot']]]
+  ['iprototype_0',['IPrototype',['../classgodot_1_1_i_prototype.html',1,'godot']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['edwardmain_0',['EdwardMain',['../classgodot_1_1_edward_main.html#a880b3778a2cbf83df327ccc50fb9c6e3',1,'godot::EdwardMain']]],
-  ['export_5flevel_5ftscn_1',['export_level_tscn',['../classgodot_1_1_level.html#a48f18719c41cf2cc752afadb8e20b11e',1,'godot::Level']]]
+  ['debugcontroller_0',['DebugController',['../classgodot_1_1_debug_controller.html#a95ba2b636e5c6f7a272fba12bf9709f7',1,'godot::DebugController']]]
 ];
