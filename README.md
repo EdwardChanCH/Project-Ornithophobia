@@ -38,7 +38,7 @@ To win the game, use knockback (left-click, right-click) to gain speed, and slam
 
 To edit a level, read the level editor's manual popup because there are too many features!  
 
-The game executable is located at "{project_folder}\export\windows\FinalGame_Release.zip".  
+The game executable is located at GitHub's releases.  
 
 ## 2. Required Libraries & 3rd Party Tools
 
