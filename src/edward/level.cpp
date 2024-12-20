@@ -37,11 +37,12 @@ void Level::_bind_methods() {
     //ClassDB::bind_method(D_METHOD("clone"), &Level::clone);
     ClassDB::bind_static_method("Level", D_METHOD("import_level_tscn", "filepath"), &Level::import_level_tscn);
     ClassDB::bind_static_method("Level", D_METHOD("export_level_tscn", "filepath", "level_node"), &Level::export_level_tscn);
+    ClassDB::bind_method(D_METHOD("clone"), &Level::clone);
     ClassDB::bind_method(D_METHOD("get_level_info"), &Level::get_level_info);
     ClassDB::bind_method(D_METHOD("set_level_info", "value"), &Level::set_level_info);
     ClassDB::bind_method(D_METHOD("set_physics", "active"), &Level::set_physics);
     ClassDB::bind_method(D_METHOD("get_list", "list_name"), &Level::get_list);
-    ClassDB::bind_method(D_METHOD("add_list", "list_name"), &Level::get_list);
+    ClassDB::bind_method(D_METHOD("add_list", "list_name"), &Level::add_list);
     ClassDB::bind_method(D_METHOD("clear_list", "list_name"), &Level::clear_list);
     ClassDB::bind_method(D_METHOD("get_list_length", "list_name"), &Level::get_list_length);
     ClassDB::bind_method(D_METHOD("get_node_in_list", "list_name", "node_name"), &Level::get_node_in_list);
