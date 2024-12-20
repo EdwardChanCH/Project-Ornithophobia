@@ -31,10 +31,15 @@ DebugController::~DebugController() {
  * @brief Same as _ready() in GDScript.
  */
 void DebugController::_ready() {
-	// Initialize the pointer towards the dictionary of properties
-	properties = Debug::get_singleton()->get_debug_properties();
-	// Initialize the pointer towards the debug menu container
-	property_container = Node::cast_to<VBoxContainer>(find_child("VBoxContainer", true, false));
+	set_process(false);
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		// Initialize the pointer towards the dictionary of properties
+		properties = Debug::get_singleton()->get_debug_properties();
+		// Initialize the pointer towards the debug menu container
+		property_container = Node::cast_to<VBoxContainer>(find_child("VBoxContainer", true, false));
+
+		set_process(true);
+	}
 }
 
 /**
@@ -70,9 +75,11 @@ void DebugController::_process(double _delta) {
  * @brief Same as _exit_tree() in GDScript.
  */
 void DebugController::_exit_tree() {
-	// Deletes all children of the debug menu upon exiting the scene tree
-	for (int i = 0; i < property_container->get_child_count(); i++) {
-		property_container->get_child(i)->queue_free();
-		property_container->remove_child(property_container->get_child(i));
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		// Deletes all children of the debug menu upon exiting the scene tree
+		for (int i = 0; i < property_container->get_child_count(); i++) {
+			property_container->get_child(i)->queue_free();
+			property_container->remove_child(property_container->get_child(i));
+		}
 	}
 }
