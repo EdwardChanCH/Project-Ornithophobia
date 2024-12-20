@@ -17,6 +17,8 @@ using namespace godot;
  * 
  */
 void AnimationController::_bind_methods() {
+    ADD_SIGNAL(MethodInfo("left_click"));
+    ADD_SIGNAL(MethodInfo("right_click"));
 }
 
 /**
@@ -51,6 +53,11 @@ void AnimationController::_ready() {
     arms = Node::cast_to<AnimatedSprite2D>(find_child("Arms"));
     input = Input::get_singleton();
     tempVFX = ResourceLoader::get_singleton()->load("res://object/VFX.tscn");
+
+    if (!is_connected("left_click", Callable(find_child("SFXPlayer"), "_on_left_click")))
+        connect("left_click", Callable(find_child("SFXPlayer"), "_on_left_click"));
+    if (!is_connected("right_click", Callable(find_child("SFXPlayer"), "_on_right_click")))
+        connect("right_click", Callable(find_child("SFXPlayer"), "_on_right_click"));
 }
 
 /**
@@ -92,15 +99,17 @@ void AnimationController::_process(double delta) {  //constantly updating proces
         arms->play("idleAir");
     }
 
-     if (input->is_action_just_pressed("small_blast") || input->is_action_just_pressed("large_blast")) {    //checks if player has inputted any blast
+    if (input->is_action_just_released("small_blast") || input->is_action_just_released("large_blast")) {    //checks if player has inputted any blast
         AnimatedSprite2D *vfx = Node::cast_to<AnimatedSprite2D>(tempVFX->instantiate());    //creates instance and converts of vfx scene in godot to animatedsprite2d node
         get_tree()->get_root()->add_child(vfx); //places new instance into tree, making it a sibling of animation controller
         vfx->set_position(parent->get_position());  //places it as the same position as the player
         vfx->look_at(mouse);    //and makes it point at the mouse's position
-        if (input->is_action_just_pressed("small_blast")) { //if left click is pressed
+        if (input->is_action_just_released("small_blast")) { //if left click is pressed
             vfx->play("left");  //play corresponding animation
+            emit_signal("left_click");
         } else {    //if right click is pressed
             vfx->play("right"); //play corresponding animation
+            emit_signal("right_click");
         }
-     }
+    }
 }
