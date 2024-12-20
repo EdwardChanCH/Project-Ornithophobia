@@ -28,6 +28,8 @@ namespace godot {
 		AnimatedSprite2D *arms;	//grabs child node for arm sprite
 		Input *input;	//grabs current input to check which VFX to display
 		Ref<PackedScene> tempVFX; //object of vfx scene to be instanced every click
+		AudioStreamPlayer *leftSFX;	//left and rigth click sfx player PIVs
+		AudioStreamPlayer *rightSFX;
 
 	protected:
 		static void _bind_methods(); // Must be declared

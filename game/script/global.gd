@@ -16,19 +16,19 @@ func _ready() -> void:
 	create_dir(CUSTOM_LEVELS_DIR_PATH)
 	create_dir(USER_LEVELS_DIR_PATH)
 	
-	var c_level_1_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_001.tscn")
-	var c_level_2_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_002.tscn")
-	var c_level_3_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_003.tscn")
-	
-	var metadata = c_level_1_scene.get_level_info()
-	metadata["level_author"] = "Jacob"
-	metadata["best_time"] = "00:21.32"
-	Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_001.tscn", c_level_1_scene)
-	Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_002.tscn", c_level_2_scene)
-	Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_003.tscn", c_level_3_scene)
-	c_level_1_scene.queue_free()
-	c_level_2_scene.queue_free()
-	c_level_3_scene.queue_free()
+	#var c_level_1_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_001.tscn")
+	#var c_level_2_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_002.tscn")
+	#var c_level_3_scene = SceneManager.get_instance().import_scene_tscn("res://level/story/level_003.tscn")
+	#
+	#var metadata = c_level_1_scene.get_level_info()
+	#metadata["level_author"] = "Jacob"
+	#metadata["best_time"] = "00:21.32"
+	#Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_001.tscn", c_level_1_scene)
+	#Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_002.tscn", c_level_2_scene)
+	#Level.export_level_tscn(CUSTOM_LEVELS_DIR_PATH + "level_003.tscn", c_level_3_scene)
+	#c_level_1_scene.queue_free()
+	#c_level_2_scene.queue_free()
+	#c_level_3_scene.queue_free()
 
 
 # Helper function to create a new directory at a given filepath

@@ -174,7 +174,10 @@ animations = [{
 [node name="Vfx" type="AnimatedSprite2D"]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0e2db")
-animation = &"right"
+animation = &"left"
+frame = 9
+frame_progress = 1.0
+speed_scale = 1.5
 offset = Vector2(32, 0)
 script = ExtResource("3_ngflx")
 
