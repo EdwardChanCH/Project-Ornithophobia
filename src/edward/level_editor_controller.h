@@ -32,6 +32,7 @@ namespace godot {
 		Node * ui_node;
 		Level * level_node;
 		String level_filepath; // Filepath of the current loaded level
+		Dictionary level_metadata;
 
 		TypedArray<Callable> * undo_stack;
 		TypedArray<Callable> * redo_stack;
@@ -66,6 +67,8 @@ namespace godot {
 		bool can_redo();
 
 		void set_level_filepath(String filepath);
+		Dictionary get_level_metadata();
+		void set_level_metadata(Dictionary metadata);
 		void load_new_level(String filepath);
 		void load_level(String filepath);
 		void save_level(String filepath);
