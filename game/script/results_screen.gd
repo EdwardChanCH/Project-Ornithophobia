@@ -24,7 +24,7 @@ func _on_results_screen_show(level_metadata: Dictionary):
 	await get_tree().create_timer(0.8).timeout
 	
 	# If this is a custom level, move the Time nodes to the center of the screen
-	if (level_metadata.get("level_author") != "null"):
+	if (str(level_metadata.get("level_path")).begins_with("user://")):
 		%Time.position = Vector2(808, 456)
 	
 	show_result_attribute(%TimeLabel)
@@ -34,7 +34,7 @@ func _on_results_screen_show(level_metadata: Dictionary):
 		%BestTimeCrown.visible = true
 	
 	# If this is a story level, display the rank information
-	if (level_metadata.get("level_author") == "null"):
+	if (!str(level_metadata.get("level_path")).begins_with("user://")):
 		await get_tree().create_timer(0.8).timeout
 		show_result_attribute(%RankLabel)
 		await get_tree().create_timer(0.6).timeout
