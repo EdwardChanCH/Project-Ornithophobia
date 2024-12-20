@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Untitled Shotgun Project: README</title>
+<title>Untitled Shotgun Project: README File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,12 +85,336 @@ $(function(){ initResizable(false); });
 </div><!-- top -->
 <div id="doc-content">
 <div><div class="header">
-  <div class="headertitle"><div class="title">README</div></div>
+  <div class="headertitle"><div class="title">README File</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>/**</p><ul>
-<li></li>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2"></a></p>
+<p><img src="game/asset/images/orniBG.png" alt="Thumbnail" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+0. Copyright &amp; Credits</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+a. Team Members:</h2>
+<ul>
+<li>Jacob Couture <br  />
+<ul>
+<li><a href="#" onclick="location.href='mai'+'lto:'+'jco'+'ut'+'ur9'+'@u'+'wo.'+'ca'; return false;">jcout<span class="obfuscator">.nosp@m.</span>ur9@<span class="obfuscator">.nosp@m.</span>uwo.c<span class="obfuscator">.nosp@m.</span>a</a> <br  />
+</li>
 </ul>
+</li>
+<li>Chun Ho Chan, Edward <br  />
+<ul>
+<li><a href="#" onclick="location.href='mai'+'lto:'+'cch'+'a2'+'32@'+'uw'+'o.c'+'a'; return false;">ccha2<span class="obfuscator">.nosp@m.</span>32@u<span class="obfuscator">.nosp@m.</span>wo.ca</a> <br  />
+</li>
+</ul>
+</li>
+<li>Sameer Mehboob Bugti <br  />
+<ul>
+<li><a href="#" onclick="location.href='mai'+'lto:'+'sbu'+'gt'+'i@u'+'wo'+'.ca'; return false;">sbugt<span class="obfuscator">.nosp@m.</span>i@uw<span class="obfuscator">.nosp@m.</span>o.ca</a> <br  />
+</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
+b. Course Term:</h2>
+<p>Fall 2024 <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+c. Course Info:</h2>
+<p>This game project was created as part of CompSci 3307A at Western University. <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+d. 3rd Party Resources</h2>
+<ul>
+<li>Background Music (CC BY license) <br  />
+<ul>
+<li>"東方 Piano - Green-Eyed Jealousy 『2』", made by -K. <br  />
+<ul>
+<li><a href="https://youtu.be/DizE73Ie3Ok">https://youtu.be/DizE73Ie3Ok</a> <br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>All sprites, background images, and sound effects are custom-made. <br  />
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md8"></a>
+1. Short Description</h1>
+<p>This is a game project (combined individual assignments) of CompSci 3307A at Western University. <br  />
+</p>
+<p>It has two major systems: Gameplay, and Level Editor. <br  />
+</p>
+<p>To win the game, use knockback (left-click, right-click) to gain speed, and slam the player into the enemies (at great speed) until all of them explode! <br  />
+</p>
+<p>To edit a level, read the level editor's manual popup because there are too many features! <br  />
+</p>
+<p>The game executable is located at "{project_folder}\export\windows\FinalGame_Release.zip". <br  />
+</p>
+<h1><a class="anchor" id="autotoc_md9"></a>
+2. Required Libraries &amp; 3rd Party Tools</h1>
+<ul>
+<li>Godot <br  />
+<ul>
+<li>version 4.3 <br  />
+</li>
+<li>Note: Use the standard version of Godot instead of the .NET version. <br  />
+</li>
+</ul>
+</li>
+<li>GDExtension C++ (godot-cpp) <br  />
+<ul>
+<li>version 4.3 <br  />
+</li>
+<li>Note: Use the same version as Godot. <br  />
+</li>
+</ul>
+</li>
+<li>C++ Compiler (MinGW) <br  />
+<ul>
+<li>version 13.2.0+ <br  />
+</li>
+<li>Note: This compiler must be the same as the one that compiled Godot from source (MinGW for official releases). <br  />
+</li>
+<li>Note: If you self-compiled Godot from source using MSVC, then you must also use MSVC to compile this project. <br  />
+</li>
+</ul>
+</li>
+<li>Python <br  />
+<ul>
+<li>version 3.12.4+ <br  />
+</li>
+<li>Note: This is required for using SCons. <br  />
+</li>
+</ul>
+</li>
+<li>SCons <br  />
+<ul>
+<li>version 4.8.1+ (PyPI) <br  />
+</li>
+<li>Note: This is GDExtension's suggested build tool. <br  />
+</li>
+</ul>
+</li>
+<li>Doxygen (optional) <br  />
+<ul>
+<li>version 1.12.0 <br  />
+</li>
+<li>Note: This is used to generate the HTML, XML doc files. <br  />
+</li>
+</ul>
+</li>
+<li>Godot Unit Test (GUT) (optional) <br  />
+<ul>
+<li>version 9.3.0 <br  />
+</li>
+<li>Note: This is used to run unit tests for Godot and GDExtension classes. <br  />
+</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md10"></a>
+3. How To Compile (step-by-step guide)</h1>
+<p>Setting Up SCons (one-time setup): <br  />
+</p><ol type="1">
+<li>Open a terminal in the ".../3307GroupProject/*godot-cpp*/" directory, and then: <br  />
+<ul>
+<li>Run the command "scons platform=&lt;platform&gt; custom_api_file=&lt;PATH_TO_FILE&gt; &lt;bits=64&gt;". <br  />
+</li>
+<li>Example: scons platform=windows custom_api_file="./gdextension/extension_api.json" bits=64 <br  />
+</li>
+<li>(Full Documentation: <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html">https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html</a>) <br  />
+</li>
+</ul>
+</li>
+<li>Wait about 5 minutes for it to finish. <br  />
+</li>
+</ol>
+<p>Steps: <br  />
+</p><ol type="1">
+<li>(one-time setup) Check the "*SConstruct*" file to see if the build path is correct (in each <em>env.SharedLibrary(...)</em> function's parameter). <br  />
+</li>
+<li>Open a terminal in the ".../*3307GroupProject*/" directory, and then either: <br  />
+<ul>
+<li>Run the command "scons platform=windows target=template_debug debug_symbols=yes" to compile debug builds (support hot-reload), OR, <br  />
+</li>
+<li>Run the command "scons platform=windows target=template_release" to compile release builds (more optimized). <br  />
+</li>
+<li>(Note: Alternatively, you may run one of the included shell scripts "recompile_windows_x64_release.sh" for convenience.) <br  />
+</li>
+</ul>
+</li>
+<li>Open the project in Godot editor. <br  />
+</li>
+<li>(Project &gt; Export) Export the project in Godot editor. <br  />
+<ul>
+<li>(Note: You may need to download &amp; install a template first.) <br  />
+</li>
+</ul>
+</li>
+</ol>
+<p>Note: <br  />
+</p><ul>
+<li>The included build is compiled for 64-bit Windows, Godot's Release Mode. <br  />
+</li>
+<li>When renaming the directory ".../3307GroupProject/*game*/", be sure to also update its path stored in the file ".../*SConstruct*", and also re-import the project in Godot editor. <br  />
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md11"></a>
+4. How To Run (step-by-step guide)</h1>
+<p>Steps: <br  />
+</p><ol type="1">
+<li>Go to the ".../3307GroupProject/*export*/" directory. <br  />
+</li>
+<li>Depending on your operating system, go to one of the subdirectories: "*windows*", "*macos*", or "*linux*". <br  />
+</li>
+<li>Double click on the "*UntitledShotgunProject.exe*" executable to run it. <br  />
+</li>
+</ol>
+<p>Alternatively: <br  />
+</p><ol type="1">
+<li>Compile the game from source (refer to Section 3). <br  />
+</li>
+<li>Import the ".../3307GroupProject/*game*/" directory into Godot, and then exit Godot. <br  />
+</li>
+<li>Reopen Godot, highlight the project "*UntitledShotgunProject*", and click "Run". <br  />
+<ul>
+<li>(Note: If Godot fails to run, check the Godot executable path stored in the file ".../game/.godot/editor/*project_metadata.cfg*".) <br  />
+</li>
+</ul>
+</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md12"></a>
+5. Notes For TA</h1>
+<p>Invividual Contributions: <br  />
+</p>
+<p>Jacob Couture: <br  />
+</p><ul>
+<li>Player physics <br  />
+</li>
+<li>Enemy physics <br  />
+</li>
+<li>UI screens (except level editor screen) <br  />
+</li>
+<li>Story levels 4-6 <br  />
+</li>
+</ul>
+<p>Chun Ho Chan, Edward: <br  />
+</p><ul>
+<li>Level editor <br  />
+</li>
+<li>Level file loading/ saving <br  />
+</li>
+<li>Screen transition <br  />
+</li>
+<li>Story levels 1-3 <br  />
+</li>
+</ul>
+<p>Sameer Mehboob Bugti: <br  />
+</p><ul>
+<li>Player animation <br  />
+</li>
+<li>Enemy animation <br  />
+</li>
+<li>Background <br  />
+</li>
+<li>Visual effects <br  />
+</li>
+</ul>
+<p>Game Lore: <br  />
+ "In the year 1984, a tech company called "SKYNEST" started selling drones to governments across the globe. 
+Formally known as "Bipedal Intelligent Reconnaissance Devices", these drones actively monitor each citizen to deter terrorism, and to protect those in power. 
+One day, SKYNEST's system determined that the existence of lower-class citizens is too much risk for a protest, and indiscriminately pecked on the poor. 
+You, as a professionally broke window cleaner, fights for your life with your watery arsenal." -Chun Ho Chan, Edward</p>
+<p><b>Thank you for playing our game!</b> <br  />
+</p>
+<h1><a class="anchor" id="autotoc_md13"></a>
+6. Miscellaneous</h1>
+<p>List of other README files: <br  />
+</p><ul>
+<li>".../3307GroupProject/README.md" <br  />
+</li>
+<li>".../3307GroupProject/src/README.md" <br  />
+</li>
+<li>".../3307GroupProject/game/bin/README.md" <br  />
+</li>
+</ul>
+<p>This Godot project was created with these settings:</p><ul>
+<li>Renderer: "Compatibility" mode <br  />
+<ul>
+<li>Supports desktop, mobile + web platforms. <br  />
+</li>
+<li>Least advanced 3D graphics (currently WIP). <br  />
+</li>
+<li>Intended for low-end/ older devices. <br  />
+</li>
+<li>Uses OpenGL 3 backend (OpenGL 3.3/ ES 3.0/ WebGL2). <br  />
+</li>
+<li>Fastest rendering for simple scenes. <br  />
+</li>
+<li>(Note: The renderer can be changed later, but scenes may need to be adjusted.) <br  />
+</li>
+</ul>
+</li>
+<li>Version Control Metadata: Git <br  />
+</li>
+</ul>
+<p>Generating Godot Docs XML Templates (Empty XML): <br  />
+ Steps: <br  />
+</p><ol type="1">
+<li>Open a terminal in the ".../3307GroupProject/game/" directory, and then: <br  />
+<ul>
+<li>Run the command "&lt;path_to_godot&gt; --doctool ../ --gdextension-docs" <br  />
+</li>
+<li>Example: "C:/Program Files/Godot/Godot_v4.3-stable/Godot_v4.3-stable_win64.exe" &ndash;doctool ../ &ndash;gdextension-docs <br  />
+</li>
+<li>(Note: For PowerShell users, add an &amp; character at the front if your path to godot is surrounded by "".) <br  />
+</li>
+<li>(Full Documentation: <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_docs_system.html">https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_docs_system.html</a>) <br  />
+</li>
+</ul>
+</li>
+<li>Press Enter when the message "Deleting docs cache..." appears. <br  />
+<ul>
+<li>(Note: This does not delete/ overwrite any existing doc files.) <br  />
+</li>
+</ul>
+</li>
+<li>Manually edit the new .XML doc files are located in the ".../3307GroupProject/doc_classes/" directory. <br  />
+</li>
+<li>Recompile the game as a debug build (see Section 3). This links the doc files to the Godot Editor. <br  />
+</li>
+</ol>
+<p>Generating C++ Doc By Doxygen (HTML): <br  />
+ Steps: <br  />
+</p><ol type="1">
+<li>Document the code files in Doxygen syntax (put file description at the top) <br  />
+</li>
+<li>Open a terminal in the ".../3307GroupProject/game/" directory, and then: <br  />
+<ul>
+<li>Run the command "doxygen" <br  />
+</li>
+</ul>
+</li>
+</ol>
+<p>Fixing Undetected C++ Header Files In VSCode: <br  />
+ Steps: <br  />
+</p><ol type="1">
+<li>Open VSCode and open the Extension Settings page of "C/C++". <br  />
+</li>
+<li>Search for the "Include Path" setting, and then add item: <br  />
+ ${workspaceFolder}/** <br  />
+</li>
+<li>At the top navigation bar, click "File", and "Add Folder to Workplace". <br  />
+</li>
+<li>Select the ".../3307GroupProject/export/" directory. <br  />
+</li>
+<li>At the top navigation bar, click "File", and "Save Workplace As". <br  />
+</li>
+<li>Save the workplace file next to the ".../3307GroupProject/" directory. <br  />
+</li>
+<li>Restart VSCode and reopen the workplace. <br  />
+ </li>
+</ol>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

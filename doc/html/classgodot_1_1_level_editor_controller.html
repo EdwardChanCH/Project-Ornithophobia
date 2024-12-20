@@ -91,7 +91,6 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="classgodot_1_1_level_editor_controller-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">godot::LevelEditorController Class Reference</div></div>
@@ -132,8 +131,12 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_ready</b> ()</td></tr>
 <tr class="memdesc:a354bc3ed416f188cd1eaacfa980e53b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when this node is ready in Godot's scene tree. <br /></td></tr>
 <tr class="separator:a354bc3ed416f188cd1eaacfa980e53b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad102c29339cff049b80cba4e6b8b3917" id="r_ad102c29339cff049b80cba4e6b8b3917"><td class="memItemLeft" align="right" valign="top"><a id="ad102c29339cff049b80cba4e6b8b3917" name="ad102c29339cff049b80cba4e6b8b3917"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_physics</b> (bool active)</td></tr>
+<tr class="memdesc:ad102c29339cff049b80cba4e6b8b3917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle physics. <br /></td></tr>
+<tr class="separator:ad102c29339cff049b80cba4e6b8b3917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2843cb7e707ada502447139acbc6525a" id="r_a2843cb7e707ada502447139acbc6525a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2843cb7e707ada502447139acbc6525a">track_action</a> (Callable <a class="el" href="#a559cfc2a1e80879b547defa43f8be494">redo_action</a>, Callable <a class="el" href="#a21536468594e4754cf718a0f8ca47a9e">undo_action</a>)</td></tr>
-<tr class="memdesc:a2843cb7e707ada502447139acbc6525a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track a new action and its reverse action.  <br /></td></tr>
+<tr class="memdesc:a2843cb7e707ada502447139acbc6525a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track a redo action and an undo action.  <br /></td></tr>
 <tr class="separator:a2843cb7e707ada502447139acbc6525a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6c8feb9ff98ec5af90cdecec065145f" id="r_ab6c8feb9ff98ec5af90cdecec065145f"><td class="memItemLeft" align="right" valign="top"><a id="ab6c8feb9ff98ec5af90cdecec065145f" name="ab6c8feb9ff98ec5af90cdecec065145f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_action</b> ()</td></tr>
@@ -151,76 +154,107 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_action</b> ()</
 <tr class="memitem:a1c98f2fd77a3a765ec112be4909ff59b" id="r_a1c98f2fd77a3a765ec112be4909ff59b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c98f2fd77a3a765ec112be4909ff59b">can_redo</a> ()</td></tr>
 <tr class="memdesc:a1c98f2fd77a3a765ec112be4909ff59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any redoable action is available.  <br /></td></tr>
 <tr class="separator:a1c98f2fd77a3a765ec112be4909ff59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06d92e554b0436c2e49410b653c13f5b" id="r_a06d92e554b0436c2e49410b653c13f5b"><td class="memItemLeft" align="right" valign="top"><a id="a06d92e554b0436c2e49410b653c13f5b" name="a06d92e554b0436c2e49410b653c13f5b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_level_filepath</b> (String filepath)</td></tr>
+<tr class="memitem:a06d92e554b0436c2e49410b653c13f5b" id="r_a06d92e554b0436c2e49410b653c13f5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06d92e554b0436c2e49410b653c13f5b">set_level_filepath</a> (String filepath)</td></tr>
+<tr class="memdesc:a06d92e554b0436c2e49410b653c13f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a level filepath. i.e. Overwrite the default level filepath.  <br /></td></tr>
 <tr class="separator:a06d92e554b0436c2e49410b653c13f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55e840e108672993a75bd5584ee64592" id="r_a55e840e108672993a75bd5584ee64592"><td class="memItemLeft" align="right" valign="top"><a id="a55e840e108672993a75bd5584ee64592" name="a55e840e108672993a75bd5584ee64592"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_new_level</b> (String filepath)</td></tr>
+<tr class="memitem:a19331e581e58d74d6caa1b905b639b9f" id="r_a19331e581e58d74d6caa1b905b639b9f"><td class="memItemLeft" align="right" valign="top">Dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19331e581e58d74d6caa1b905b639b9f">get_level_metadata</a> ()</td></tr>
+<tr class="memdesc:a19331e581e58d74d6caa1b905b639b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the level metadata.  <br /></td></tr>
+<tr class="separator:a19331e581e58d74d6caa1b905b639b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b60b7c4e1d0bb0cf76a54301be846ba" id="r_a2b60b7c4e1d0bb0cf76a54301be846ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b60b7c4e1d0bb0cf76a54301be846ba">set_level_metadata</a> (Dictionary metadata)</td></tr>
+<tr class="memdesc:a2b60b7c4e1d0bb0cf76a54301be846ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the level metadata. i.e. Overwrite the default level metadata.  <br /></td></tr>
+<tr class="separator:a2b60b7c4e1d0bb0cf76a54301be846ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e840e108672993a75bd5584ee64592" id="r_a55e840e108672993a75bd5584ee64592"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55e840e108672993a75bd5584ee64592">load_new_level</a> (String filepath)</td></tr>
+<tr class="memdesc:a55e840e108672993a75bd5584ee64592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a new level. Reset action history and quicksave status.  <br /></td></tr>
 <tr class="separator:a55e840e108672993a75bd5584ee64592"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a843b215435082c0e70727ee8f28cd18b" id="r_a843b215435082c0e70727ee8f28cd18b"><td class="memItemLeft" align="right" valign="top"><a id="a843b215435082c0e70727ee8f28cd18b" name="a843b215435082c0e70727ee8f28cd18b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_level</b> (String filepath)</td></tr>
+<tr class="memitem:a843b215435082c0e70727ee8f28cd18b" id="r_a843b215435082c0e70727ee8f28cd18b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a843b215435082c0e70727ee8f28cd18b">load_level</a> (String filepath)</td></tr>
+<tr class="memdesc:a843b215435082c0e70727ee8f28cd18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a level from file.  <br /></td></tr>
 <tr class="separator:a843b215435082c0e70727ee8f28cd18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a94dd53e33d573699cffe9ecf2eb6f" id="r_af7a94dd53e33d573699cffe9ecf2eb6f"><td class="memItemLeft" align="right" valign="top"><a id="af7a94dd53e33d573699cffe9ecf2eb6f" name="af7a94dd53e33d573699cffe9ecf2eb6f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_level</b> (String filepath)</td></tr>
+<tr class="memitem:af7a94dd53e33d573699cffe9ecf2eb6f" id="r_af7a94dd53e33d573699cffe9ecf2eb6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7a94dd53e33d573699cffe9ecf2eb6f">save_level</a> (String filepath)</td></tr>
+<tr class="memdesc:af7a94dd53e33d573699cffe9ecf2eb6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save a level to file.  <br /></td></tr>
 <tr class="separator:af7a94dd53e33d573699cffe9ecf2eb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a509d6c1cd43473091c1f318edd35c15a" id="r_a509d6c1cd43473091c1f318edd35c15a"><td class="memItemLeft" align="right" valign="top"><a id="a509d6c1cd43473091c1f318edd35c15a" name="a509d6c1cd43473091c1f318edd35c15a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>quick_load_level</b> ()</td></tr>
+<tr class="memdesc:a509d6c1cd43473091c1f318edd35c15a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick load a level from file. <br /></td></tr>
 <tr class="separator:a509d6c1cd43473091c1f318edd35c15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a381de09ce9ca34933f141788a6f8f1c3" id="r_a381de09ce9ca34933f141788a6f8f1c3"><td class="memItemLeft" align="right" valign="top"><a id="a381de09ce9ca34933f141788a6f8f1c3" name="a381de09ce9ca34933f141788a6f8f1c3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>quick_save_level</b> ()</td></tr>
+<tr class="memdesc:a381de09ce9ca34933f141788a6f8f1c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick save a level to file. <br /></td></tr>
 <tr class="separator:a381de09ce9ca34933f141788a6f8f1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc96721919fe3d1d643f17385c58653f" id="r_acc96721919fe3d1d643f17385c58653f"><td class="memItemLeft" align="right" valign="top"><a id="acc96721919fe3d1d643f17385c58653f" name="acc96721919fe3d1d643f17385c58653f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unload_level</b> ()</td></tr>
+<tr class="memdesc:acc96721919fe3d1d643f17385c58653f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unload a level. <br /></td></tr>
 <tr class="separator:acc96721919fe3d1d643f17385c58653f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1050dfa3935ff84430abb888768cd962" id="r_a1050dfa3935ff84430abb888768cd962"><td class="memItemLeft" align="right" valign="top"><a id="a1050dfa3935ff84430abb888768cd962" name="a1050dfa3935ff84430abb888768cd962"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reload_level</b> ()</td></tr>
+<tr class="memdesc:a1050dfa3935ff84430abb888768cd962"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reload the last opened level from file. <br /></td></tr>
 <tr class="separator:a1050dfa3935ff84430abb888768cd962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50d668489b010d68239b8da321860d73" id="r_a50d668489b010d68239b8da321860d73"><td class="memItemLeft" align="right" valign="top"><a id="a50d668489b010d68239b8da321860d73" name="a50d668489b010d68239b8da321860d73"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_level_loaded</b> ()</td></tr>
+<tr class="memitem:a50d668489b010d68239b8da321860d73" id="r_a50d668489b010d68239b8da321860d73"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50d668489b010d68239b8da321860d73">is_level_loaded</a> ()</td></tr>
+<tr class="memdesc:a50d668489b010d68239b8da321860d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if any level is loaded.  <br /></td></tr>
 <tr class="separator:a50d668489b010d68239b8da321860d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f38dff2efa80cd00717836d93a7aef0" id="r_a3f38dff2efa80cd00717836d93a7aef0"><td class="memItemLeft" align="right" valign="top"><a id="a3f38dff2efa80cd00717836d93a7aef0" name="a3f38dff2efa80cd00717836d93a7aef0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>toggle_physics</b> ()</td></tr>
-<tr class="separator:a3f38dff2efa80cd00717836d93a7aef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff75fdcdd6685ff81d63d8bf217a79f1" id="r_aff75fdcdd6685ff81d63d8bf217a79f1"><td class="memItemLeft" align="right" valign="top"><a id="aff75fdcdd6685ff81d63d8bf217a79f1" name="aff75fdcdd6685ff81d63d8bf217a79f1"></a>
-Vector2i&#160;</td><td class="memItemRight" valign="bottom"><b>world_to_tile_pos</b> (Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="memitem:aff75fdcdd6685ff81d63d8bf217a79f1" id="r_aff75fdcdd6685ff81d63d8bf217a79f1"><td class="memItemLeft" align="right" valign="top">Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff75fdcdd6685ff81d63d8bf217a79f1">world_to_tile_pos</a> (Vector2 world_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="memdesc:aff75fdcdd6685ff81d63d8bf217a79f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a global position to a tile position.  <br /></td></tr>
 <tr class="separator:aff75fdcdd6685ff81d63d8bf217a79f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b64b2c9c25e9b5055ea5daa31bee4c" id="r_a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="memItemLeft" align="right" valign="top"><a id="a19b64b2c9c25e9b5055ea5daa31bee4c" name="a19b64b2c9c25e9b5055ea5daa31bee4c"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>tile_to_world_pos</b> (Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="memitem:a19b64b2c9c25e9b5055ea5daa31bee4c" id="r_a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b64b2c9c25e9b5055ea5daa31bee4c">tile_to_world_pos</a> (Vector2i tile_pos, Vector2 tile_map_scale, Vector2i tile_size)</td></tr>
+<tr class="memdesc:a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a tile position to a global position.  <br /></td></tr>
 <tr class="separator:a19b64b2c9c25e9b5055ea5daa31bee4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62e213f96151cd3c57d889c89f586c85" id="r_a62e213f96151cd3c57d889c89f586c85"><td class="memItemLeft" align="right" valign="top"><a id="a62e213f96151cd3c57d889c89f586c85" name="a62e213f96151cd3c57d889c89f586c85"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>to_tile_alt</b> (bool flip_h, bool flip_v, bool flip_d)</td></tr>
-<tr class="separator:a62e213f96151cd3c57d889c89f586c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0c5bb261190c1b6ab92e21206f149f1" id="r_ad0c5bb261190c1b6ab92e21206f149f1"><td class="memItemLeft" align="right" valign="top"><a id="ad0c5bb261190c1b6ab92e21206f149f1" name="ad0c5bb261190c1b6ab92e21206f149f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_tile</b> (Vector2 mouse_pos)</td></tr>
-<tr class="separator:ad0c5bb261190c1b6ab92e21206f149f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b5bbc4382ae3c551511b41d03f28085" id="r_a2b5bbc4382ae3c551511b41d03f28085"><td class="memItemLeft" align="right" valign="top"><a id="a2b5bbc4382ae3c551511b41d03f28085" name="a2b5bbc4382ae3c551511b41d03f28085"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>replace_tile</b> (Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags)</td></tr>
+<tr class="memitem:a48f714df3f3fa0b8042c04d7dc48e90b" id="r_a48f714df3f3fa0b8042c04d7dc48e90b"><td class="memItemLeft" align="right" valign="top">Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48f714df3f3fa0b8042c04d7dc48e90b">cursor_to_tile_pos</a> (Vector2 cursor_pos)</td></tr>
+<tr class="memdesc:a48f714df3f3fa0b8042c04d7dc48e90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a global cursor position to a tile position.  <br /></td></tr>
+<tr class="separator:a48f714df3f3fa0b8042c04d7dc48e90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcfc4e47d32406a43f7eb4e91412a0e" id="r_acbcfc4e47d32406a43f7eb4e91412a0e"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbcfc4e47d32406a43f7eb4e91412a0e">cursor_to_object_pos</a> (Vector2 cursor_pos, String list_name)</td></tr>
+<tr class="memdesc:acbcfc4e47d32406a43f7eb4e91412a0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a global cursor position to an global object position.  <br /></td></tr>
+<tr class="separator:acbcfc4e47d32406a43f7eb4e91412a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250558e8003f0f2d7d852000125cacbe" id="r_a250558e8003f0f2d7d852000125cacbe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a250558e8003f0f2d7d852000125cacbe">get_tile_alt</a> ()</td></tr>
+<tr class="memdesc:a250558e8003f0f2d7d852000125cacbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the alternative tile setting.  <br /></td></tr>
+<tr class="separator:a250558e8003f0f2d7d852000125cacbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07ce49c1b562780f5193c143cf4af587" id="r_a07ce49c1b562780f5193c143cf4af587"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07ce49c1b562780f5193c143cf4af587">flip_tile</a> (int mode)</td></tr>
+<tr class="memdesc:a07ce49c1b562780f5193c143cf4af587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip a tile.  <br /></td></tr>
+<tr class="separator:a07ce49c1b562780f5193c143cf4af587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe8c20f8c56d5745beb9900fe8f7b2d" id="r_a5fe8c20f8c56d5745beb9900fe8f7b2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fe8c20f8c56d5745beb9900fe8f7b2d">rotate_tile</a> (bool clockwise)</td></tr>
+<tr class="memdesc:a5fe8c20f8c56d5745beb9900fe8f7b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate a tile.  <br /></td></tr>
+<tr class="separator:a5fe8c20f8c56d5745beb9900fe8f7b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01b637160ddd74c63b3c242dac2536e5" id="r_a01b637160ddd74c63b3c242dac2536e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01b637160ddd74c63b3c242dac2536e5">cycle_tile</a> (bool next)</td></tr>
+<tr class="memdesc:a01b637160ddd74c63b3c242dac2536e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle tile type.  <br /></td></tr>
+<tr class="separator:a01b637160ddd74c63b3c242dac2536e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b5bbc4382ae3c551511b41d03f28085" id="r_a2b5bbc4382ae3c551511b41d03f28085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b5bbc4382ae3c551511b41d03f28085">replace_tile</a> (Vector2i tile_pos, int source_id, Vector2i tile_id, int tile_flags)</td></tr>
+<tr class="memdesc:a2b5bbc4382ae3c551511b41d03f28085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace a tile. Note: This action is reversible.  <br /></td></tr>
 <tr class="separator:a2b5bbc4382ae3c551511b41d03f28085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36fb16b8cb5480f965f3b21f459a1b69" id="r_a36fb16b8cb5480f965f3b21f459a1b69"><td class="memItemLeft" align="right" valign="top"><a id="a36fb16b8cb5480f965f3b21f459a1b69" name="a36fb16b8cb5480f965f3b21f459a1b69"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_scene_object</b> (Vector2 mouse_pos, String list_name, String scene_path)</td></tr>
-<tr class="separator:a36fb16b8cb5480f965f3b21f459a1b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fe3667fe5715900f8d5ad2742a2475" id="r_aa2fe3667fe5715900f8d5ad2742a2475"><td class="memItemLeft" align="right" valign="top"><a id="aa2fe3667fe5715900f8d5ad2742a2475" name="aa2fe3667fe5715900f8d5ad2742a2475"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_scene_object</b> (Vector2 object_pos, String list_name, String scene_path)</td></tr>
+<tr class="separator:aa2fe3667fe5715900f8d5ad2742a2475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de58378b166cc3b7da9cf276e7e4f98" id="r_a5de58378b166cc3b7da9cf276e7e4f98"><td class="memItemLeft" align="right" valign="top"><a id="a5de58378b166cc3b7da9cf276e7e4f98" name="a5de58378b166cc3b7da9cf276e7e4f98"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_scene_object</b> (Vector2 object_pos, String list_name, String scene_path)</td></tr>
+<tr class="separator:a5de58378b166cc3b7da9cf276e7e4f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c5bb261190c1b6ab92e21206f149f1" id="r_ad0c5bb261190c1b6ab92e21206f149f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0c5bb261190c1b6ab92e21206f149f1">add_tile</a> (Vector2 mouse_pos)</td></tr>
+<tr class="memdesc:ad0c5bb261190c1b6ab92e21206f149f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a tile.  <br /></td></tr>
+<tr class="separator:ad0c5bb261190c1b6ab92e21206f149f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72eaf7aabcc460c3eea892b91ff5ce73" id="r_a72eaf7aabcc460c3eea892b91ff5ce73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72eaf7aabcc460c3eea892b91ff5ce73">remove_tile</a> (Vector2 mouse_pos)</td></tr>
+<tr class="memdesc:a72eaf7aabcc460c3eea892b91ff5ce73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a tile.  <br /></td></tr>
+<tr class="separator:a72eaf7aabcc460c3eea892b91ff5ce73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9d78df873ee51263322eb05668ca6bb" id="r_ad9d78df873ee51263322eb05668ca6bb"><td class="memItemLeft" align="right" valign="top"><a id="ad9d78df873ee51263322eb05668ca6bb" name="ad9d78df873ee51263322eb05668ca6bb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add_player</b> (Vector2 mouse_pos)</td></tr>
 <tr class="separator:ad9d78df873ee51263322eb05668ca6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8009b29af3449aaf362bf497906fdd3c" id="r_a8009b29af3449aaf362bf497906fdd3c"><td class="memItemLeft" align="right" valign="top"><a id="a8009b29af3449aaf362bf497906fdd3c" name="a8009b29af3449aaf362bf497906fdd3c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_player</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:a8009b29af3449aaf362bf497906fdd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad846ee186a6046737ea304c0affeb29c" id="r_ad846ee186a6046737ea304c0affeb29c"><td class="memItemLeft" align="right" valign="top"><a id="ad846ee186a6046737ea304c0affeb29c" name="ad846ee186a6046737ea304c0affeb29c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add_enemy</b> (Vector2 mouse_pos)</td></tr>
 <tr class="separator:ad846ee186a6046737ea304c0affeb29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d6ac4e08c8ec0e05a7b4b723ed1d25" id="r_ae7d6ac4e08c8ec0e05a7b4b723ed1d25"><td class="memItemLeft" align="right" valign="top"><a id="ae7d6ac4e08c8ec0e05a7b4b723ed1d25" name="ae7d6ac4e08c8ec0e05a7b4b723ed1d25"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_enemy</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:ae7d6ac4e08c8ec0e05a7b4b723ed1d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40b821bd86fe6bb71a502587d1609a92" id="r_a40b821bd86fe6bb71a502587d1609a92"><td class="memItemLeft" align="right" valign="top"><a id="a40b821bd86fe6bb71a502587d1609a92" name="a40b821bd86fe6bb71a502587d1609a92"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add_entity</b> (Vector2 mouse_pos)</td></tr>
 <tr class="separator:a40b821bd86fe6bb71a502587d1609a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f1c5a33437d3d761cd0644ba8db3021" id="r_a8f1c5a33437d3d761cd0644ba8db3021"><td class="memItemLeft" align="right" valign="top"><a id="a8f1c5a33437d3d761cd0644ba8db3021" name="a8f1c5a33437d3d761cd0644ba8db3021"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_entity</b> (Vector2 mouse_pos)</td></tr>
+<tr class="separator:a8f1c5a33437d3d761cd0644ba8db3021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac49fa1676216fe9b6ca5b11280d930ee" id="r_ac49fa1676216fe9b6ca5b11280d930ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac49fa1676216fe9b6ca5b11280d930ee">_test_action</a> (String s, int n)</td></tr>
-<tr class="memdesc:ac49fa1676216fe9b6ca5b11280d930ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test function (reversible).  <br /></td></tr>
+<tr class="memdesc:ac49fa1676216fe9b6ca5b11280d930ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test function, prints a message with a number. Note: This action is reversible.  <br /></td></tr>
 <tr class="separator:ac49fa1676216fe9b6ca5b11280d930ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c822429285ec2800419f42b6493a2f3" id="r_a5c822429285ec2800419f42b6493a2f3"><td class="memItemLeft" align="right" valign="top"><a id="a5c822429285ec2800419f42b6493a2f3" name="a5c822429285ec2800419f42b6493a2f3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_debug</b> ()</td></tr>
-<tr class="memdesc:a5c822429285ec2800419f42b6493a2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug function. <br /></td></tr>
+<tr class="memdesc:a5c822429285ec2800419f42b6493a2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgodot_1_1_debug.html">Debug</a> function. <br /></td></tr>
 <tr class="separator:a5c822429285ec2800419f42b6493a2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a38ebd9764465054274969c089e3a47a8" id="r_a38ebd9764465054274969c089e3a47a8"><td class="memItemLeft" align="right" valign="top"><a id="a38ebd9764465054274969c089e3a47a8" name="a38ebd9764465054274969c089e3a47a8"></a>
-const String&#160;</td><td class="memItemRight" valign="bottom"><b>default_level_filepath</b> = &quot;res://level/level_title_screen.tscn&quot;</td></tr>
-<tr class="separator:a38ebd9764465054274969c089e3a47a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -249,10 +283,36 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods<
       </table>
 </div><div class="memdoc">
 
-<p>Test function (reversible). </p>
+<p>Test function, prints a message with a number. Note: This action is reversible. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>Integer </td></tr>
+    <tr><td class="paramname">s</td><td>Message </td></tr>
+    <tr><td class="paramname">n</td><td>Number </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad0c5bb261190c1b6ab92e21206f149f1" name="ad0c5bb261190c1b6ab92e21206f149f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c5bb261190c1b6ab92e21206f149f1">&#9670;&#160;</a></span>add_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::add_tile </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>mouse_pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a tile. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mouse_pos</td><td>Global Cursor Position </td></tr>
   </table>
   </dd>
 </dl>
@@ -303,6 +363,229 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="acbcfc4e47d32406a43f7eb4e91412a0e" name="acbcfc4e47d32406a43f7eb4e91412a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbcfc4e47d32406a43f7eb4e91412a0e">&#9670;&#160;</a></span>cursor_to_object_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2 LevelEditorController::cursor_to_object_pos </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>cursor_pos</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>list_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a global cursor position to an global object position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cursor_pos</td><td>Cursor Position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector2 Object Position </dd></dl>
+
+</div>
+</div>
+<a id="a48f714df3f3fa0b8042c04d7dc48e90b" name="a48f714df3f3fa0b8042c04d7dc48e90b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48f714df3f3fa0b8042c04d7dc48e90b">&#9670;&#160;</a></span>cursor_to_tile_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2i LevelEditorController::cursor_to_tile_pos </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>cursor_pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a global cursor position to a tile position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cursor_pos</td><td>Cursor Position </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector2i Tile Position </dd></dl>
+
+</div>
+</div>
+<a id="a01b637160ddd74c63b3c242dac2536e5" name="a01b637160ddd74c63b3c242dac2536e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01b637160ddd74c63b3c242dac2536e5">&#9670;&#160;</a></span>cycle_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::cycle_tile </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>next</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cycle tile type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">next</td><td>Next/ Previous </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a07ce49c1b562780f5193c143cf4af587" name="a07ce49c1b562780f5193c143cf4af587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07ce49c1b562780f5193c143cf4af587">&#9670;&#160;</a></span>flip_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::flip_tile </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flip a tile. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>Mode: 0 = Horizontal, 1 = Vertical, 2 = Diagonal </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a19331e581e58d74d6caa1b905b639b9f" name="a19331e581e58d74d6caa1b905b639b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19331e581e58d74d6caa1b905b639b9f">&#9670;&#160;</a></span>get_level_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dictionary LevelEditorController::get_level_metadata </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the level metadata. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metadata</td><td>Metadata </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a250558e8003f0f2d7d852000125cacbe" name="a250558e8003f0f2d7d852000125cacbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a250558e8003f0f2d7d852000125cacbe">&#9670;&#160;</a></span>get_tile_alt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int LevelEditorController::get_tile_alt </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the alternative tile setting. </p>
+<dl class="section return"><dt>Returns</dt><dd>int Alternative Tile Setting </dd></dl>
+
+</div>
+</div>
+<a id="a50d668489b010d68239b8da321860d73" name="a50d668489b010d68239b8da321860d73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50d668489b010d68239b8da321860d73">&#9670;&#160;</a></span>is_level_loaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LevelEditorController::is_level_loaded </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if any level is loaded. </p>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a843b215435082c0e70727ee8f28cd18b" name="a843b215435082c0e70727ee8f28cd18b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a843b215435082c0e70727ee8f28cd18b">&#9670;&#160;</a></span>load_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::load_level </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load a level from file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a55e840e108672993a75bd5584ee64592" name="a55e840e108672993a75bd5584ee64592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e840e108672993a75bd5584ee64592">&#9670;&#160;</a></span>load_new_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::load_new_level </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load a new level. Reset action history and quicksave status. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a559cfc2a1e80879b547defa43f8be494" name="a559cfc2a1e80879b547defa43f8be494"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a559cfc2a1e80879b547defa43f8be494">&#9670;&#160;</a></span>redo_action()</h2>
 
@@ -320,6 +603,210 @@ false </dd></dl>
 
 <p>Execute the last redo-able action. </p>
 <dl class="section return"><dt>Returns</dt><dd>Variant Output of the last redo-able action </dd></dl>
+
+</div>
+</div>
+<a id="a72eaf7aabcc460c3eea892b91ff5ce73" name="a72eaf7aabcc460c3eea892b91ff5ce73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72eaf7aabcc460c3eea892b91ff5ce73">&#9670;&#160;</a></span>remove_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::remove_tile </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>mouse_pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a tile. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mouse_pos</td><td>Global Cursor Position </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2b5bbc4382ae3c551511b41d03f28085" name="a2b5bbc4382ae3c551511b41d03f28085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b5bbc4382ae3c551511b41d03f28085">&#9670;&#160;</a></span>replace_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::replace_tile </td>
+          <td>(</td>
+          <td class="paramtype">Vector2i</td>          <td class="paramname"><span class="paramname"><em>tile_pos</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>source_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2i</td>          <td class="paramname"><span class="paramname"><em>tile_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>tile_alt</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replace a tile. Note: This action is reversible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tile_pos</td><td>Tile Position </td></tr>
+    <tr><td class="paramname">source_id</td><td>Source ID (usually 0) </td></tr>
+    <tr><td class="paramname">tile_id</td><td>Tile ID </td></tr>
+    <tr><td class="paramname">tile_alt</td><td>Alternative Tile Setting </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5fe8c20f8c56d5745beb9900fe8f7b2d" name="a5fe8c20f8c56d5745beb9900fe8f7b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe8c20f8c56d5745beb9900fe8f7b2d">&#9670;&#160;</a></span>rotate_tile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::rotate_tile </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>clockwise</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rotate a tile. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clockwise</td><td>Clockwise/ Counter-Clockwise </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af7a94dd53e33d573699cffe9ecf2eb6f" name="af7a94dd53e33d573699cffe9ecf2eb6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a94dd53e33d573699cffe9ecf2eb6f">&#9670;&#160;</a></span>save_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::save_level </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save a level to file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a06d92e554b0436c2e49410b653c13f5b" name="a06d92e554b0436c2e49410b653c13f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06d92e554b0436c2e49410b653c13f5b">&#9670;&#160;</a></span>set_level_filepath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::set_level_filepath </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set a level filepath. i.e. Overwrite the default level filepath. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2b60b7c4e1d0bb0cf76a54301be846ba" name="a2b60b7c4e1d0bb0cf76a54301be846ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b60b7c4e1d0bb0cf76a54301be846ba">&#9670;&#160;</a></span>set_level_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelEditorController::set_level_metadata </td>
+          <td>(</td>
+          <td class="paramtype">Dictionary</td>          <td class="paramname"><span class="paramname"><em>metadata</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the level metadata. i.e. Overwrite the default level metadata. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metadata</td><td>Metadata </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a19b64b2c9c25e9b5055ea5daa31bee4c" name="a19b64b2c9c25e9b5055ea5daa31bee4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b64b2c9c25e9b5055ea5daa31bee4c">&#9670;&#160;</a></span>tile_to_world_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2 LevelEditorController::tile_to_world_pos </td>
+          <td>(</td>
+          <td class="paramtype">Vector2i</td>          <td class="paramname"><span class="paramname"><em>tile_pos</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>tile_map_scale</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2i</td>          <td class="paramname"><span class="paramname"><em>tile_size</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a tile position to a global position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tile_pos</td><td>Tile Position </td></tr>
+    <tr><td class="paramname">tile_map_scale</td><td>Tile Map Scale </td></tr>
+    <tr><td class="paramname">tile_size</td><td>Tile Size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector2 Tile Position </dd></dl>
 
 </div>
 </div>
@@ -342,15 +829,14 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Track a new action and its reverse action. </p>
+<p>Track a redo action and an undo action. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">new_action</td><td>New action </td></tr>
-    <tr><td class="paramname">reverse_action</td><td>Reserse action </td></tr>
+    <tr><td class="paramname">redo_action</td><td>Redo action </td></tr>
+    <tr><td class="paramname">undo_action</td><td>Undo action </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Variant Output of calling new_action </dd></dl>
 
 </div>
 </div>
@@ -371,6 +857,43 @@ false </dd></dl>
 
 <p>Execute the last undo-able action. </p>
 <dl class="section return"><dt>Returns</dt><dd>Variant Output of the last undo-able action </dd></dl>
+
+</div>
+</div>
+<a id="aff75fdcdd6685ff81d63d8bf217a79f1" name="aff75fdcdd6685ff81d63d8bf217a79f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff75fdcdd6685ff81d63d8bf217a79f1">&#9670;&#160;</a></span>world_to_tile_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2i LevelEditorController::world_to_tile_pos </td>
+          <td>(</td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>world_pos</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2</td>          <td class="paramname"><span class="paramname"><em>tile_map_scale</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2i</td>          <td class="paramname"><span class="paramname"><em>tile_size</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a global position to a tile position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world_pos</td><td>Global Position </td></tr>
+    <tr><td class="paramname">tile_map_scale</td><td>Tile Map Scale </td></tr>
+    <tr><td class="paramname">tile_size</td><td>Tile Size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector2i Tile Position </dd></dl>
 
 </div>
 </div>

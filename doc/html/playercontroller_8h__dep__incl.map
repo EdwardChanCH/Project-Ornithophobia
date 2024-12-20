@@ -1,0 +1,24 @@
+<map id="src/jacob/gameplay/playercontroller.h" name="src/jacob/gameplay/playercontroller.h">
+<area shape="rect" id="Node000001" title="Header file for the PlayerController class." alt="" coords="329,5,463,48"/>
+<area shape="rect" id="Node000002" href="$enemycontroller_8h.html" title="Header file for the EnemyController class." alt="" coords="170,96,305,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="347,58,276,98,273,93,345,54"/>
+<area shape="rect" id="Node000004" href="$level__controller_8h.html" title="Header file for the LevelController class." alt="" coords="5,187,142,229"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="315,41,236,61,197,77,160,98,136,118,116,142,86,188,82,185,111,139,133,115,157,94,195,73,235,56,313,36"/>
+<area shape="rect" id="Node000006" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="296,285,446,312"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="395,64,375,285,369,285,390,63"/>
+<area shape="rect" id="Node000007" href="$playercontroller_8cpp.html" title="This class handles movement and physics for the player." alt="" coords="434,96,572,139"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="434,56,480,93,476,97,431,60"/>
+<area shape="rect" id="Node000008" href="$animation__controller_8h.html" title=" " alt="" coords="596,96,743,139"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="475,51,606,93,605,98,474,56"/>
+<area shape="rect" id="Node000003" href="$enemycontroller_8cpp.html" title="This class handles states and animations for an enemy." alt="" coords="166,187,309,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,154,240,186,235,186,235,154"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="179,149,105,189,103,184,176,144"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="283,146,322,185,339,211,353,238,370,284,365,286,348,240,334,214,318,188,279,150"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="132,177,206,137,208,142,134,182"/>
+<area shape="rect" id="Node000005" href="$level__controller_8cpp.html" title="This class handles the initialization and control of a level." alt="" coords="5,277,142,320"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="76,245,76,277,71,277,71,245"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="157,231,329,282,328,287,156,237"/>
+<area shape="poly" id="edge12_Node000008_Node000006" title=" " alt="" coords="624,149,393,287,390,283,621,145"/>
+<area shape="rect" id="Node000009" href="$animation__controller_8cpp.html" title=" " alt="" coords="596,187,743,229"/>
+<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="672,154,672,186,667,186,667,154"/>
+</map>

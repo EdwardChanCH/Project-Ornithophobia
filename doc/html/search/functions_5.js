@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['import_5flevel_5ftscn_0',['import_level_tscn',['../classgodot_1_1_level.html#ad936053754d4ee4c94e4b5a9d232587b',1,'godot::Level']]],
-  ['initialize_5fcustom_5fmodule_1',['initialize_custom_module',['../register__types_8cpp.html#aa6f95bfdc015348fbfdd52d49b9f662b',1,'initialize_custom_module(ModuleInitializationLevel p_level):&#160;register_types.cpp'],['../register__types_8h.html#aa6f95bfdc015348fbfdd52d49b9f662b',1,'initialize_custom_module(ModuleInitializationLevel p_level):&#160;register_types.cpp']]]
+  ['flip_5ftile_0',['flip_tile',['../classgodot_1_1_level_editor_controller.html#a07ce49c1b562780f5193c143cf4af587',1,'godot::LevelEditorController']]],
+  ['format_5ftime_1',['format_time',['../classgodot_1_1_level_timer.html#a22d2d3522d5b3ce8d1497015e4a705ea',1,'godot::LevelTimer']]]
 ];

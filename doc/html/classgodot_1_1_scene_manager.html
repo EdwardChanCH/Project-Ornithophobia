@@ -123,18 +123,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a802a64a786b73bb3f8eb87ef229236d2" id="r_a802a64a786b73bb3f8eb87ef229236d2"><td class="memItemLeft" align="right" valign="top"><a id="a802a64a786b73bb3f8eb87ef229236d2" name="a802a64a786b73bb3f8eb87ef229236d2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SceneManager</b> (<a class="el" href="classgodot_1_1_scene_manager.html">SceneManager</a> &amp;other)=delete</td></tr>
 <tr class="separator:a802a64a786b73bb3f8eb87ef229236d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9da3d99214264e4fdb1b412788621c1" id="r_ad9da3d99214264e4fdb1b412788621c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9da3d99214264e4fdb1b412788621c1">load_new_packed_scene</a> (SceneTree *scene_tree, Ref&lt; PackedScene &gt; packed_scene)</td></tr>
-<tr class="memdesc:ad9da3d99214264e4fdb1b412788621c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a new packed scene, and track the unloaded scene. Useful for passing data to the next scene.  <br /></td></tr>
-<tr class="separator:ad9da3d99214264e4fdb1b412788621c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b10c3661e6bfd4b00502bbbcb0ba08" id="r_a87b10c3661e6bfd4b00502bbbcb0ba08"><td class="memItemLeft" align="right" valign="top">Node *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b10c3661e6bfd4b00502bbbcb0ba08">import_scene_tscn</a> (String filepath)</td></tr>
+<tr class="memdesc:a87b10c3661e6bfd4b00502bbbcb0ba08"><td class="mdescLeft">&#160;</td><td class="mdescRight">File import function for .tscn format. Return nullptr if filepath does not exist.  <br /></td></tr>
+<tr class="separator:a87b10c3661e6bfd4b00502bbbcb0ba08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a877361fd73875cf30ed00f3a45acb24d" id="r_a877361fd73875cf30ed00f3a45acb24d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a877361fd73875cf30ed00f3a45acb24d">load_new_scene_node</a> (SceneTree *scene_tree, String filepath, Node *new_scene_node)</td></tr>
+<tr class="memdesc:a877361fd73875cf30ed00f3a45acb24d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a new scene node, and track the unloaded scene. Use <a class="el" href="#a87b10c3661e6bfd4b00502bbbcb0ba08" title="File import function for .tscn format. Return nullptr if filepath does not exist.">import_scene_tscn()</a> to get a new_scene_node. Note: Make all the function calls to new_scene_node BEFORE passing it into this function!  <br /></td></tr>
+<tr class="separator:a877361fd73875cf30ed00f3a45acb24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f29068440cc4c4f4bd8723104138117" id="r_a9f29068440cc4c4f4bd8723104138117"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f29068440cc4c4f4bd8723104138117">load_new_scene</a> (SceneTree *scene_tree, String filepath)</td></tr>
-<tr class="memdesc:a9f29068440cc4c4f4bd8723104138117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a new scene file, and track the unloaded scene. Note: Use <a class="el" href="#ad9da3d99214264e4fdb1b412788621c1" title="Load a new packed scene, and track the unloaded scene. Useful for passing data to the next scene.">load_new_packed_scene()</a> if the next scene needs data passed.  <br /></td></tr>
+<tr class="memdesc:a9f29068440cc4c4f4bd8723104138117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a new scene file, and track the unloaded scene. Note: Use <a class="el" href="#a877361fd73875cf30ed00f3a45acb24d" title="Load a new scene node, and track the unloaded scene. Use import_scene_tscn() to get a new_scene_node....">load_new_scene_node()</a> if the next scene needs data passed.  <br /></td></tr>
 <tr class="separator:a9f29068440cc4c4f4bd8723104138117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a448d79127fd762922255f4283458a11a" id="r_a448d79127fd762922255f4283458a11a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a448d79127fd762922255f4283458a11a">load_previous_scene</a> (SceneTree *scene_tree)</td></tr>
 <tr class="memdesc:a448d79127fd762922255f4283458a11a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the previous scene, and unload the current scene.  <br /></td></tr>
 <tr class="separator:a448d79127fd762922255f4283458a11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb3918363bcf86ee6902d30562a25db1" id="r_abb3918363bcf86ee6902d30562a25db1"><td class="memItemLeft" align="right" valign="top"><a id="abb3918363bcf86ee6902d30562a25db1" name="abb3918363bcf86ee6902d30562a25db1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_debug</b> ()</td></tr>
-<tr class="memdesc:abb3918363bcf86ee6902d30562a25db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug function. <br /></td></tr>
+<tr class="memdesc:abb3918363bcf86ee6902d30562a25db1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgodot_1_1_debug.html">Debug</a> function. <br /></td></tr>
 <tr class="separator:abb3918363bcf86ee6902d30562a25db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -179,36 +182,29 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>_bind_methods<
 
 </div>
 </div>
-<a id="ad9da3d99214264e4fdb1b412788621c1" name="ad9da3d99214264e4fdb1b412788621c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9da3d99214264e4fdb1b412788621c1">&#9670;&#160;</a></span>load_new_packed_scene()</h2>
+<a id="a87b10c3661e6bfd4b00502bbbcb0ba08" name="a87b10c3661e6bfd4b00502bbbcb0ba08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b10c3661e6bfd4b00502bbbcb0ba08">&#9670;&#160;</a></span>import_scene_tscn()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SceneManager::load_new_packed_scene </td>
+          <td class="memname">Node * SceneManager::import_scene_tscn </td>
           <td>(</td>
-          <td class="paramtype">SceneTree *</td>          <td class="paramname"><span class="paramname"><em>scene_tree</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">Ref&lt; PackedScene &gt;</td>          <td class="paramname"><span class="paramname"><em>packed_scene</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Load a new packed scene, and track the unloaded scene. Useful for passing data to the next scene. </p>
+<p>File import function for .tscn format. Return nullptr if filepath does not exist. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scene_tree</td><td>Scene Tree </td></tr>
-    <tr><td class="paramname">packed_scene</td><td>Packed Scene (initialised) </td></tr>
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Node* Scene Node </dd></dl>
 
 </div>
 </div>
@@ -231,11 +227,50 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Load a new scene file, and track the unloaded scene. Note: Use <a class="el" href="#ad9da3d99214264e4fdb1b412788621c1" title="Load a new packed scene, and track the unloaded scene. Useful for passing data to the next scene.">load_new_packed_scene()</a> if the next scene needs data passed. </p>
+<p>Load a new scene file, and track the unloaded scene. Note: Use <a class="el" href="#a877361fd73875cf30ed00f3a45acb24d" title="Load a new scene node, and track the unloaded scene. Use import_scene_tscn() to get a new_scene_node....">load_new_scene_node()</a> if the next scene needs data passed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">scene_tree</td><td>Scene Tree </td></tr>
     <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a877361fd73875cf30ed00f3a45acb24d" name="a877361fd73875cf30ed00f3a45acb24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a877361fd73875cf30ed00f3a45acb24d">&#9670;&#160;</a></span>load_new_scene_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SceneManager::load_new_scene_node </td>
+          <td>(</td>
+          <td class="paramtype">SceneTree *</td>          <td class="paramname"><span class="paramname"><em>scene_tree</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filepath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Node *</td>          <td class="paramname"><span class="paramname"><em>new_scene_node</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load a new scene node, and track the unloaded scene. Use <a class="el" href="#a87b10c3661e6bfd4b00502bbbcb0ba08" title="File import function for .tscn format. Return nullptr if filepath does not exist.">import_scene_tscn()</a> to get a new_scene_node. Note: Make all the function calls to new_scene_node BEFORE passing it into this function! </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene_tree</td><td>Scene Tree </td></tr>
+    <tr><td class="paramname">filepath</td><td>Filepath </td></tr>
+    <tr><td class="paramname">new_scene_node</td><td>New Scene Node (can be nullptr) </td></tr>
   </table>
   </dd>
 </dl>

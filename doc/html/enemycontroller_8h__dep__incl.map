@@ -1,0 +1,13 @@
+<map id="src/jacob/gameplay/enemycontroller.h" name="src/jacob/gameplay/enemycontroller.h">
+<area shape="rect" id="Node000001" title="Header file for the EnemyController class." alt="" coords="173,5,308,48"/>
+<area shape="rect" id="Node000002" href="$enemycontroller_8cpp.html" title="This class handles states and animations for an enemy." alt="" coords="5,96,148,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,58,116,98,113,93,188,53"/>
+<area shape="rect" id="Node000003" href="$level__controller_8h.html" title="Header file for the LevelController class." alt="" coords="172,96,309,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="234,63,235,96,230,96,229,64"/>
+<area shape="rect" id="Node000005" href="$register__types_8cpp.html" title="This file registers all the classes contained in GDExtension&#39;s &quot;custom&quot; module with Godot...." alt="" coords="271,195,421,221"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="287,56,306,73,323,95,335,121,342,148,348,194,343,194,337,149,330,123,318,97,303,77,283,60"/>
+<area shape="poly" id="edge3_Node000003_Node000001" title=" " alt="" coords="247,81,246,49,251,48,252,80"/>
+<area shape="rect" id="Node000004" href="$level__controller_8cpp.html" title="This class handles the initialization and control of a level." alt="" coords="110,187,246,229"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="219,153,194,188,190,185,215,150"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="278,147,333,192,329,196,275,151"/>
+</map>

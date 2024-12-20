@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['6_20account_20usernames_20passwords_0',['6. Account Usernames &amp; Passwords',['../index.html#autotoc_md13',1,'']]]
+  ['6_20miscellaneous_0',['6. Miscellaneous',['../md__r_e_a_d_m_e.html#autotoc_md13',1,'']]]
 ];
