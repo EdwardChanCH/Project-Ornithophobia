@@ -7,6 +7,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_aomqp"]
 font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Level" type="Level"]
 level_info = {
@@ -67,7 +69,7 @@ position = Vector2(1176, 168)
 
 [node name="EntityList" type="Node" parent="."]
 
-[node name="Tutorial2" type="Label" parent="."]
+[node name="Tutorial4" type="Label" parent="."]
 visible = false
 offset_left = 792.0
 offset_top = 584.0
