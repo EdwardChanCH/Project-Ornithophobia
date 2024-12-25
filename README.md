@@ -12,7 +12,7 @@
 * Chun Ho Chan, Edward  
   * edwardchanchunho@gmail.com  
 * Sameer Mehboob Bugti  
-  * sbugti@uwo.ca  
+  * sbugti04@gmail.com
 
 ### b. Course Term:
 
