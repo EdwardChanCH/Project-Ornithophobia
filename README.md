@@ -9,7 +9,7 @@
 
 * Jacob Couture  
   * jacob.couture859@gmail.com
-* Chun Ho Chan, Edward  
+* Chun Ho Chan (Edward)  
   * edwardchanchunho@gmail.com  
 * Sameer Mehboob Bugti  
   * sbugti04@gmail.com  
