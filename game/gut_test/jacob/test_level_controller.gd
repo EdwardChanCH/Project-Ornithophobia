@@ -1,17 +1,9 @@
 extends GutTest
 
 
-var level_controller_scene = load("res://level/level_controller.tscn")
-var doubled_level_controller: LevelController
-
-
-func before_all():
-	set_double_strategy(DOUBLE_STRATEGY.INCLUDE_NATIVE)
-
-
 func test_level_controller_set_empty_level():
 	var test_level_path = "res://level/level_default_box.tscn"
-	doubled_level_controller = partial_double(level_controller_scene).instantiate()
+	var doubled_level_controller: LevelController = partial_double(LevelController).new()
 	
 	# Initialize the level controller's level
 	doubled_level_controller.set_level(test_level_path)
@@ -28,7 +20,7 @@ func test_level_controller_set_empty_level():
 
 func test_level_controller_set_invalid_level():
 	var test_level_path = "res://level/not_a_valid_level.tscn"
-	doubled_level_controller = partial_double(level_controller_scene).instantiate()
+	var doubled_level_controller: LevelController = partial_double(LevelController).new()
 	
 	# Initialize the level controller's level
 	doubled_level_controller.set_level(test_level_path)
@@ -39,7 +31,7 @@ func test_level_controller_set_invalid_level():
 
 func test_level_controller_results_sequence():
 	var test_level_path = "res://level/level_default_box.tscn"
-	doubled_level_controller = partial_double(level_controller_scene).instantiate()
+	var doubled_level_controller: LevelController = LevelController.new()
 
 	# Begin watching signal emissions from the level controller node
 	watch_signals(doubled_level_controller)
@@ -53,6 +45,8 @@ func test_level_controller_results_sequence():
 	
 	# Ensure the results sequence begins after defeating all enemies
 	assert_signal_emitted(doubled_level_controller, "results_slow_time")
+	
+	doubled_level_controller.queue_free()
 
 
 # --------------------------------------------------------------------------- #
@@ -87,7 +81,7 @@ func test_level_controller_results_sequence():
 
 
 func test_level_controller_read_formatted_time():
-	doubled_level_controller = partial_double(level_controller_scene).instantiate()
+	var doubled_level_controller: LevelController = partial_double(LevelController).new()
 	var test_time = "99:99.99"
 	
 	# Ensure that the C++ implementation of read_formatted_time works the same as the GDScript implementation (with a precision error of 0.005)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://vkvs2gtr8dpu"]
 
-[ext_resource type="Texture2D" uid="uid://clo4p4j135dl0" path="res://asset/images/orniBG.png" id="1_aupdj"]
+[ext_resource type="Texture2D" uid="uid://clo4p4j135dl0" path="res://asset/background/orniBG.png" id="1_aupdj"]
 [ext_resource type="FontFile" uid="uid://bnttly05mq616" path="res://style/fonts/dogicapixelbold.ttf" id="2_43qrv"]
 [ext_resource type="FontFile" uid="uid://cqlpjv0eaequ" path="res://style/fonts/dogicapixel.ttf" id="3_vpcuw"]
 

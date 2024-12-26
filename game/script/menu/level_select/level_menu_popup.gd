@@ -6,7 +6,7 @@ extends Control
 
 @export var level_path = ""
 @export var dir_path = "res://level/story/"
-var level_controller_path = "res://level/level_controller.tscn"
+var level_controller_path = "res://screen/level_controller.tscn"
 
 
 # Called when the node is ready in the scene tree.

@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=4 uid="uid://bw10ubmc81cx3"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_6mudw"]
-[ext_resource type="Texture2D" uid="uid://ds0cp5sibc8nq" path="res://asset/images/orniGameBG3.png" id="1_ua0o8"]
+[ext_resource type="Texture2D" uid="uid://ds0cp5sibc8nq" path="res://asset/background/orniGameBG3.png" id="1_ua0o8"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_8f7b3"]
-[ext_resource type="Texture2D" uid="uid://byb82xqdtbo6p" path="res://asset/images/orniGameBG2.png" id="2_txiaa"]
+[ext_resource type="Texture2D" uid="uid://byb82xqdtbo6p" path="res://asset/background/orniGameBG2.png" id="2_txiaa"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_1euc4"]
-[ext_resource type="Texture2D" uid="uid://c3o311coewb6a" path="res://asset/images/orniGameBG1.png" id="3_n0mi8"]
+[ext_resource type="Texture2D" uid="uid://c3o311coewb6a" path="res://asset/background/orniGameBG1.png" id="3_n0mi8"]
 
 [node name="Level" type="Level"]
 level_info = {

@@ -12,7 +12,7 @@ func _on_enemy_died() -> void:
 	play_death()
 
 
-func _on_bounce_player(enemy_pos: Vector2) -> void:
+func _on_bounce_player(_enemy_pos: Vector2) -> void:
 	play_hit()
 
 

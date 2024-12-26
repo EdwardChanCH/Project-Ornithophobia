@@ -5,7 +5,7 @@ extends Control
 
 
 @export var level_path = ""
-const LEVEL_CONTROLLER_PATH = "res://level/level_controller.tscn"
+const LEVEL_CONTROLLER_PATH = "res://screen/level_controller.tscn"
 
 
 # Play associated level when play button pressed

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://script/level_editor_ui.gd" id="1_f5a73"]
 [ext_resource type="Texture2D" uid="uid://dtxpkm1olj4pn" path="res://asset/sprite/level_editor/grid.png" id="2_hcpxa"]
 [ext_resource type="AudioStream" uid="uid://d0u7dva45i6cf" path="res://asset/audio/bgm_looped_reverb_touhou_green_eyed_jealousy_remix.wav" id="2_jom34"]
-[ext_resource type="PackedScene" uid="uid://cmfakw1vdd0vl" path="res://entity/tile_2d.tscn" id="2_ryqqs"]
-[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="4_8txvr"]
+[ext_resource type="PackedScene" uid="uid://cmfakw1vdd0vl" path="res://object/tile_2d.tscn" id="2_ryqqs"]
+[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://object/yinyang_orb.tscn" id="4_8txvr"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="4_gek1a"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="7_k5yv3"]
 

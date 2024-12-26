@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=4 uid="uid://envlr1j2mmp3"]
 
 [ext_resource type="TileSet" uid="uid://b8vqrsukiwtx0" path="res://resource/tileset_terrain.tres" id="1_hmkdb"]
-[ext_resource type="Texture2D" uid="uid://ds0cp5sibc8nq" path="res://asset/images/orniGameBG3.png" id="1_uiitg"]
-[ext_resource type="Texture2D" uid="uid://byb82xqdtbo6p" path="res://asset/images/orniGameBG2.png" id="2_hjdej"]
+[ext_resource type="Texture2D" uid="uid://ds0cp5sibc8nq" path="res://asset/background/orniGameBG3.png" id="1_uiitg"]
+[ext_resource type="Texture2D" uid="uid://byb82xqdtbo6p" path="res://asset/background/orniGameBG2.png" id="2_hjdej"]
 [ext_resource type="PackedScene" uid="uid://cmcgj8vwugx0i" path="res://object/player_controller.tscn" id="2_ws8rl"]
 [ext_resource type="PackedScene" uid="uid://7a1f4lx35t14" path="res://object/enemy_controller.tscn" id="3_rocvi"]
-[ext_resource type="Texture2D" uid="uid://c3o311coewb6a" path="res://asset/images/orniGameBG1.png" id="3_yjkbs"]
-[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://entity/yinyang_orb.tscn" id="4_vubgi"]
+[ext_resource type="Texture2D" uid="uid://c3o311coewb6a" path="res://asset/background/orniGameBG1.png" id="3_yjkbs"]
+[ext_resource type="PackedScene" uid="uid://ch3gt5suqivw2" path="res://object/yinyang_orb.tscn" id="4_vubgi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grotq"]
 bounce = 1.0

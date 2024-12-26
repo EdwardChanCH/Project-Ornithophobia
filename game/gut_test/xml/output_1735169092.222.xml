@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="0" tests="30" >
+  <testsuite name="gut_test/edward/test_edward_main.gd" tests="1" failures="0" skipped="0" time="0.05602" >
+      <testcase name="test_edward_main_constructor" assertions="1" status="pass" classname="gut_test/edward/test_edward_main.gd" time="0.05602" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_level.gd" tests="10" failures="0" skipped="0" time="0.393928" >
+      <testcase name="test_level_constructor" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.02896" >
+      </testcase>
+      <testcase name="test_level_constructor_copy" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.027516" >
+      </testcase>
+      <testcase name="test_level_set_get_level_info" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.028134" >
+      </testcase>
+      <testcase name="test_level_set_physics" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.027797" >
+      </testcase>
+      <testcase name="test_level_add_get_list" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.027844" >
+      </testcase>
+      <testcase name="test_level_add_node_to_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.054529" >
+      </testcase>
+      <testcase name="test_level_clear_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.053561" >
+      </testcase>
+      <testcase name="test_level_get_list_length" assertions="2" status="pass" classname="gut_test/edward/test_level.gd" time="0.047851" >
+      </testcase>
+      <testcase name="test_level_get_node_in_list" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.049841" >
+      </testcase>
+      <testcase name="test_level_get_node_in_list_by_index" assertions="1" status="pass" classname="gut_test/edward/test_level.gd" time="0.047895" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_level_editor_controller.gd" tests="7" failures="0" skipped="0" time="0.264161" >
+      <testcase name="test_level_editor_controller_constructor" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.032638" >
+      </testcase>
+      <testcase name="test_level_editor_controller_track_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.02996" >
+      </testcase>
+      <testcase name="test_level_editor_controller_undo_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.054381" >
+      </testcase>
+      <testcase name="test_level_editor_controller_redo_action" assertions="1" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.057882" >
+      </testcase>
+      <testcase name="test_level_editor_controller_clear_action" assertions="2" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.029929" >
+      </testcase>
+      <testcase name="test_level_editor_controller_can_undo" assertions="3" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.029059" >
+      </testcase>
+      <testcase name="test_level_editor_controller_can_redo" assertions="3" status="pass" classname="gut_test/edward/test_level_editor_controller.gd" time="0.030312" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/edward/test_scene_manager.gd" tests="5" failures="0" skipped="0" time="0.001044" >
+      <testcase name="test_scene_manager_get_instance" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000134" >
+      </testcase>
+      <testcase name="test_scene_manager_import_scene_tscn" assertions="2" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000679" >
+      </testcase>
+      <testcase name="test_scene_manager_load_new_scene_node" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.0001" >
+      </testcase>
+      <testcase name="test_scene_manager_load_new_scene" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000068" >
+      </testcase>
+      <testcase name="test_scene_manager_load_previous_scene" assertions="1" status="pass" classname="gut_test/edward/test_scene_manager.gd" time="0.000063" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/jacob/test_debug.gd" tests="2" failures="0" skipped="0" time="0.000346" >
+      <testcase name="test_debug_get_singleton" assertions="1" status="pass" classname="gut_test/jacob/test_debug.gd" time="0.000132" >
+      </testcase>
+      <testcase name="test_debug_add_property" assertions="3" status="pass" classname="gut_test/jacob/test_debug.gd" time="0.000214" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/jacob/test_level_controller.gd" tests="4" failures="0" skipped="0" time="0.093749" >
+      <testcase name="test_level_controller_set_empty_level" assertions="10" status="pass" classname="gut_test/jacob/test_level_controller.gd" time="0.082795" >
+      </testcase>
+      <testcase name="test_level_controller_set_invalid_level" assertions="1" status="pass" classname="gut_test/jacob/test_level_controller.gd" time="0.000724" >
+      </testcase>
+      <testcase name="test_level_controller_results_sequence" assertions="1" status="pass" classname="gut_test/jacob/test_level_controller.gd" time="0.009893" >
+      </testcase>
+      <testcase name="test_level_controller_read_formatted_time" assertions="1" status="pass" classname="gut_test/jacob/test_level_controller.gd" time="0.000337" >
+      </testcase>
+      </testsuite>
+  <testsuite name="gut_test/test_example.gd" tests="1" failures="0" skipped="0" time="0.00014" >
+      <testcase name="test_assert_true" assertions="1" status="pass" classname="gut_test/test_example.gd" time="0.00014" >
+      </testcase>
+      </testsuite>
+  </testsuites>

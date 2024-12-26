@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_0ipon"]
 [ext_resource type="Texture2D" uid="uid://54yyv5op0q2a" path="res://asset/sprite/gameplay/jacob_v2.png" id="2_hhhf0"]
-[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://asset/sprite/tile/tilesheet.png" id="3_wwl5u"]
+[ext_resource type="Texture2D" uid="uid://dmmj3ou7ru1fa" path="res://asset/sprite/tilesheet/tilesheet_v0.png" id="3_wwl5u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjkly"]
 font_size = 12
