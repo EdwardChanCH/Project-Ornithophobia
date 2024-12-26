@@ -1,7 +1,7 @@
 # README File
 
 ## Project Ornithophobia
-![Thumbnail](game/asset/images/orniBG.png)
+![Thumbnail](project_documentation/_thumbnail.png)
 
 ## 0. Copyright & Credits
 
