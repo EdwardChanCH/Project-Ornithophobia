@@ -43,7 +43,7 @@ To win the game, use knockback (left-click, right-click) to gain speed, and slam
 
 To edit a level, read the level editor's manual popup because there are too many features!  
 
-The compiled game is available on GitHub's releases.  
+The compiled game is available in the GitHub Releases section.  
 
 ## 2. Required Libraries & 3rd Party Tools
 
@@ -75,7 +75,7 @@ The compiled game is available on GitHub's releases.
 (one-time setup) Setting Up SCons:  
 1. Open a terminal in the "{root}/*godot-cpp*/" directory, and then:  
   * Run the command "scons platform=<platform> custom_api_file=<PATH_TO_FILE> <bits=64>".  
-  * Example: scons platform=windows custom_api_file="./gdextension/extension_api.json" bits=64  
+  * Example: "scons platform=windows custom_api_file="./gdextension/extension_api.json" bits=64"  
   * (Full Documentation: https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/gdextension_cpp_example.html)  
 2. Wait about 5 minutes for it to finish.  
 3. Check the "{root}/*SConstruct*" file to see if the build path is correct (in each *env.SharedLibrary(...)* function's parameter).  
@@ -96,19 +96,19 @@ Note:
 ## 4. How To Run (step-by-step guide)
 
 Steps:  
-1. Go to the "{root}/*export*/" directory.  
-2. Depending on your operating system, go to one of the subdirectories: "*windows*", "*macos*", or "*linux*".  
-3. Double click on the "*FinalGame_Release.exe*" executable to run it.  
-
-Alternatively:  
 1. Compile the game from source (refer to Section 3).  
 2. Import the "{root}/*game*/" directory into Godot, and then exit Godot.  
 3. Reopen Godot, highlight the project "*UntitledShotgunProject*", and click "Run".  
   * (Note: If Godot fails to run, check the Godot executable path stored in the file "{root}/game/.godot/editor/*project_metadata.cfg*".)  
 
+Alternatively:  
+1. Download the latest compressed game (.zip) from the GitHub Releases section.  
+2. Extract the compressed game.  
+3. Double click "*FinalGame_Release.exe*" to run the game.  
+
 ## 5. Notes For TA
 
-Invividual Contributions:  
+Individual Contributions:  
 
 Jacob Couture:  
 * Player physics  
@@ -129,11 +129,11 @@ Sameer Mehboob Bugti:
 * Visual effects  
 
 Game Lore:  
-"In the year 1984, a tech company called "SKYNEST" started selling drones to governments across the globe. 
-Formally known as "Bipedal Intelligent Reconnaissance Devices", these drones actively monitor each citizen to deter terrorism, and to protect those in power. 
-One day, SKYNEST's system determined that the existence of lower-class citizens is too much risk for a protest, and indiscriminately pecked on the poor. 
-You, as a professionally broke window cleaner, fights for your life with your watery arsenal." 
--Chun Ho Chan, Edward  
+> "In the year 1984, a tech company called "SKYNEST" started selling drones to governments across the globe. 
+> Formally known as "Bipedal Intelligent Reconnaissance Devices", these drones actively monitor each citizen to deter terrorism, and to protect those in power. 
+> One day, SKYNEST's system determined that the existence of lower-class citizens was too much risk for a protest, and indiscriminately pecked on the poor. 
+> You, as a professionally broke window cleaner, fight for your life with your watery arsenal." 
+> -Chun Ho Chan, Edward  
 
 **Thank you for playing our game!**  
 
